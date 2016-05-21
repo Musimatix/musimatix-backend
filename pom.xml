@@ -12,8 +12,8 @@
     </modules>
 
     <properties>
-        <scala.version>2.10.4</scala.version>
-        <scala.major.version>2.10</scala.major.version>
+        <scala.version>2.11.1</scala.version>
+        <scala.major.version>2.11</scala.major.version>
         <java.source>1.7</java.source>
         <encoding>UTF-8</encoding>
     </properties>
