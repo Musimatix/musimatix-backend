@@ -1,7 +1,7 @@
 {
   "object": "frontend.byid.request",
   "version": "1.0",
-  "byid": {
+  "byId": {
     "lang": "rus",
     "ids": [ 1234, 987 ]
   }
