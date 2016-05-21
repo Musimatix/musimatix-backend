@@ -1,3 +1,39 @@
 {
-
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Tags list",
+  "self": {
+    "vendor": "com.musimatix",
+    "name": "keywords_request",
+    "format": "jsonschema",
+    "version": "1-0-0"
+  },
+  "type": "object",
+  "properties": {
+    "object": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "byKeywords": {
+      "type": "object",
+      "properties": {
+        "lang": {
+          "type": "string"
+        },
+        "keywords": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "required": ["keywords"],
+      "additionalProperties": false
+    }
+  },
+  "required": ["object", "byKeywords"],
+  "additionalProperties": false
 }

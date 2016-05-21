@@ -1,0 +1,27 @@
+{
+  "object": "frontend.tags.response",
+  "version": "1.0",
+  "lang": "eng",
+  "tags": [
+    {
+      "id": 1,
+      "name": "rock"
+    },
+    {
+      "id": 2,
+      "name": "funny"
+    },
+    {
+      "id": 3,
+      "name": "jazz"
+    },
+    {
+      "id": 4,
+      "name": "moody"
+    },
+    {
+      "id": 77,
+      "name": "punk"
+    }
+  ]
+}

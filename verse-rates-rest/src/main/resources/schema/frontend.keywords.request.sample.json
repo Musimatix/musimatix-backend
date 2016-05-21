@@ -1,3 +1,8 @@
 {
-
+  "object": "frontend.keywords.request",
+  "version": "1.0",
+  "byKeywords": {
+    "lang": "rus",
+    "keywords": [ "Hello", "Bye" ]
+  }
 }
