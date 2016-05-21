@@ -1,0 +1,8 @@
+{
+  "object": "frontend.byid.request",
+  "version": "1.0",
+  "byid": {
+    "lang": "rus",
+    "ids": [ 1234, 987 ]
+  }
+}

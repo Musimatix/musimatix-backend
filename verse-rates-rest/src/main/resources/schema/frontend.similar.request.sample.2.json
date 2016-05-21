@@ -1,0 +1,16 @@
+{
+  "object": "frontend.similar.request",
+  "version": "1.0",
+  "similar": {
+    "lang": "rus",
+    "rows": [
+      "When we're winning",
+      "We'll be singing",
+      "I get knocked down",
+      "But I get up again"
+    ],
+    "keywords": [ "hello", "bye" ],
+    "tags": [ 11, 5, 8 ]
+  }
+
+}

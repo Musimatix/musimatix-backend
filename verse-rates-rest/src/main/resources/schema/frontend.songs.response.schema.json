@@ -1,3 +1,105 @@
 {
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Full songs' info",
+  "self": {
+    "vendor": "com.musimatix",
+    "name": "songs_response",
+    "format": "jsonschema",
+    "version": "1-0-0"
+  },
+  "definitions": {
+    "vector": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 0,
+      "uniqueItems": false
+    },
+    "rows": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "uniqueItems": false
+    },
+    "tag": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Tag's id in database"
+        },
+        "name": {
+          "type": "string",
+          "description": "Tag's readable name corresponded to current lang property"
+        }
 
+      }
+    },
+    "author": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "properties": {
+    "object": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "lang":  {
+      "type": "string"
+    },
+    "song": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id":  {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "authors": {
+            "type": "array",
+            "items" : {
+              "$ref": "#/definitions/author"
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          },
+          "rowsPlain": {
+            "$ref": "#/definitions/vector",
+            "description": "Song rows as a plain text"
+          },
+          "rowsTagged": {
+            "$ref": "#/definitions/vector",
+            "description": "Song rows where accented syllables are marked with {}"
+          },
+          "tags": {
+            "type": "array",
+            "items" : {
+              "$ref": "#/definitions/tag"
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          }
+        },
+        "required": ["id"],
+        "additionalProperties": false
+      }
+    }
+  }
 }

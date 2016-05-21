@@ -1,3 +1,90 @@
 {
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Full songs' info",
+  "self": {
+    "vendor": "com.musimatix",
+    "name": "similar_request",
+    "format": "jsonschema",
+    "version": "1-0-0"
+  },
+  "definitions": {
+    "rows": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "uniqueItems": false
+    },
+    "tagIds": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "minItems": 1,
+      "uniqueItems": false
+    },
+    "keywords": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "uniqueItems": false
+    }
+  },
+  "type": "object",
+  "properties": {
+    "object": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "similar": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "lang":  {
+              "type": "string"
+            },
+            "id": {
+              "type": "integer"
+            },
+            "tags": {
+              "$ref": "#/definitions/tagIds"
+            },
+            "keywords": {
+              "$ref": "#/definitions/keywords"
+            }
+          },
+          "required": ["id"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "lang":  {
+              "type": "string"
+            },
+            "rows": {
+              "$ref": "#/definitions/rows"
+            },
+            "tags": {
+              "$ref": "#/definitions/tagIds"
+            },
+            "keywords": {
+              "$ref": "#/definitions/keywords"
+            }
+          },
+          "required": ["rows"],
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+  "required": ["object", "similar"],
+  "additionalProperties": false
 
 }

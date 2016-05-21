@@ -1,0 +1,11 @@
+{
+  "object": "frontend.similar.request",
+  "version": "1.0",
+  "similar": {
+    "lang": "rus",
+    "id": 1234,
+    "keywords": [ "hello", "bye" ],
+    "tags": [ 11, 5, 8 ]
+  }
+
+}
