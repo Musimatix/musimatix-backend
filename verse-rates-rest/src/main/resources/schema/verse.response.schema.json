@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Verse vectors response",
+  "self": {
+    "vendor": "com.musimatix",
+    "name": "verse_vec_resp",
+    "format": "jsonschema",
+    "version": "1-0-0"
+  },
+  "definitions": {
+    "vector": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 0,
+      "uniqueItems": false
+    }
+  },
+  "type": "object",
+  "properties": {
+    "verse": {
+      "type": "object",
+      "properties": {
+        "rates": {
+          "type": "object",
+          "properties": {
+            "rows": {
+              "type": "array",
+              "description": "Rates of rows",
+              "items" : {
+                "$ref": "#/definitions/vector"
+              },
+              "minItems": 1,
+              "uniqueItems": false
+            },
+            "total": {
+              "$ref": "#/definitions/vector",
+              "description": "Rate of whole verse"
+            }
+          },
+          "required": ["rows", "total"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["rates"],
+      "additionalProperties": false
+    }
+  },
+  "required": ["verse"],
+  "additionalProperties": false
+}

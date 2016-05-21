@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Verse vectors request",
+  "self": {
+    "vendor": "com.musimatix",
+    "name": "verse_vec_req",
+    "format": "jsonschema",
+    "version": "1-0-0"
+  },
+  "type": "object",
+  "properties": {
+    "verse" : {
+      "type": "object",
+      "properties": {
+        "rows": {
+          "type": "array",
+          "description": "Rows of verse",
+          "items" : {
+            "type" : "string"
+          },
+          "minItems": 1,
+          "uniqueItems": false
+        }
+      },
+      "required": ["rows"],
+      "additionalProperties": false
+    }
+  },
+  "required": ["verse"],
+  "additionalProperties": false
+}
