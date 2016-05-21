@@ -21,13 +21,12 @@
         "lang": {
           "type": "string"
         },
+        "limit": {
+          "type": "integer",
+          "minimum": 1
+        },
         "keywords": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "minItems": 1,
-          "uniqueItems": true
+          "type": "string"
         }
       },
       "required": ["keywords"],

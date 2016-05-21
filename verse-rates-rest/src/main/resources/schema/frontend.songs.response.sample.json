@@ -47,7 +47,45 @@
           "name": "punk"
         }
       ]
-
+    },
+    {
+      "id": 5678,
+      "group": "Steely Dan",
+      "authors": [
+        {
+          "id": 764,
+          "name": "Donald Fagen"
+        },
+        {
+          "id": 988,
+          "name": "Walter Becker"
+        }
+      ],
+      "title": "Black Friday",
+      "rowsPlain": [
+        "When Black Friday comes",
+        "I'll stand down by the door",
+        "And catch the grey men when they",
+        "Dive from the fourteenth floor",
+        "When Black Friday comes"
+      ],
+      "rowsTagged": [
+        "{When} Black {Fri}day {co}mes",
+        "I'll stand down by the door",
+        "And {catch} {the} {grey} men when they",
+        "Dive from the fourteenth floor",
+        "When Black Friday comes"
+      ],
+      "tags": [
+        {
+          "id": 2,
+          "name": "rock"
+        },
+        {
+          "id": 12,
+          "name": "jazz"
+        }
+      ]
     }
   ]
 }

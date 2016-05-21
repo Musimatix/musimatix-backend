@@ -3,6 +3,7 @@
   "version": "1.0",
   "byKeywords": {
     "lang": "rus",
-    "keywords": [ "Hello", "Bye" ]
+    "limit": 10,
+    "keywords": "Hello Bye"
   }
 }

@@ -37,6 +37,6 @@
       "additionalProperties": false
     }
   },
-  "required": ["object", "byid"],
+  "required": ["object", "byId"],
   "additionalProperties": false
 }

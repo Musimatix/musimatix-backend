@@ -4,7 +4,8 @@
   "similar": {
     "lang": "rus",
     "id": 1234,
-    "keywords": [ "hello", "bye" ],
+    "limit": 5,
+    "keywords": "hello bye",
     "tags": [ 11, 5, 8 ]
   }
 

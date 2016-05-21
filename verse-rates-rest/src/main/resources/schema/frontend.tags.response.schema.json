@@ -36,5 +36,7 @@
         "additionalProperties": false
       }
     }
-  }
+  },
+  "required": ["object", "tags"],
+  "additionalProperties": false
 }

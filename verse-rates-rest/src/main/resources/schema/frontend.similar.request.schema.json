@@ -23,14 +23,6 @@
       },
       "minItems": 1,
       "uniqueItems": false
-    },
-    "keywords": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "minItems": 1,
-      "uniqueItems": false
     }
   },
   "type": "object",
@@ -49,6 +41,10 @@
             "lang":  {
               "type": "string"
             },
+            "limit": {
+              "type": "integer",
+              "minimum": 1
+            },
             "id": {
               "type": "integer"
             },
@@ -56,7 +52,7 @@
               "$ref": "#/definitions/tagIds"
             },
             "keywords": {
-              "$ref": "#/definitions/keywords"
+              "type": "string"
             }
           },
           "required": ["id"],
@@ -68,6 +64,10 @@
             "lang":  {
               "type": "string"
             },
+            "limit": {
+              "type": "integer",
+              "minimum": 1
+            },
             "rows": {
               "$ref": "#/definitions/rows"
             },
@@ -75,7 +75,7 @@
               "$ref": "#/definitions/tagIds"
             },
             "keywords": {
-              "$ref": "#/definitions/keywords"
+              "type": "string"
             }
           },
           "required": ["rows"],
