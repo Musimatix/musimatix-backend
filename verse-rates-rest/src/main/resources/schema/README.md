@@ -4,8 +4,8 @@ Each JSON file has name with follwing structure:
     `{scope}`.`{symbolic id}`.`{direction}`.`{kind}`.`{variant}`.json
 - `{scope}`
 
-  __frontend__ -- means that it is browser-server message  
-  __backend__ means that it is inner serverside message  
+  > __frontend__ -- means that it is browser-server message  
+  > __backend__ means that it is inner serverside message  
 - `{symbolic id}` -- message unique id or name -- can contain dots inside as word delimiter
 - `{direction}` -- __request__ or __response__
 - `{kind}`
