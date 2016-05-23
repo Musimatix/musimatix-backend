@@ -15,7 +15,7 @@ Each JSON file has name with follwing structure:
 `{symbolic id}` and `{direction}` parts only. 
 - `byid.request` -- get songs by exact song id. Ids array is allowed.
 - `keywords.request` -- search by keywords.
-- `similar.request` -- search songs by rhythmic pattern, keywords and tags. Message `songs.response` returns.
+- `similar.request` -- search songs by rhythmic pattern, keywords and tags. Message `songs.response` will be returned.
 - `songs.response` -- songs list. Each song with all attributes. It is response for `byid.request`, `keywords.request`, `similar.request`.
 - `tags.request.get.url` -- this file contains URL for GET request for all tags list.
 - `tags.response` -- tags list.
