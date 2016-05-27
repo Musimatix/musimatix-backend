@@ -1,7 +1,7 @@
 # JSON schemas
 ## Name convention
 Each JSON file has name with follwing structure:  
-    `{scope}`.`{symbolic id}`.`{direction}`.`{kind}`.`{variant}`.json
+    `{scope}`.`{symbolic id}`.`{direction}`.`{kind}`.`[variant]`.json
 - `{scope}`
  
   > __frontend__ -- means that it is browser-server message  
@@ -12,7 +12,7 @@ Each JSON file has name with follwing structure:
 
   > __schema__ -- it is JSON schema (see: http://json-schema.org)  
   > __sample__ -- it is sample of message in accordance with its schema  
-- `{variant}` -- variant of sample -- has the meaning for samples only.
+- `{variant}` -- variant name or number of sample (optional) -- has the meaning for samples only.
 
 ## Frontend messages
 `{symbolic id}` and `{direction}` parts only. 
