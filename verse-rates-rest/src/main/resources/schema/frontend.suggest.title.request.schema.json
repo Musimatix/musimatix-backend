@@ -18,6 +18,10 @@
     "suggestTitle": {
       "type": "object",
       "properties": {
+        "lang":  {
+          "type": "string",
+          "description": "Language for display multilingual properties - tags, for example"
+        },
         "limit": {
           "type": "integer",
           "minimum": 1

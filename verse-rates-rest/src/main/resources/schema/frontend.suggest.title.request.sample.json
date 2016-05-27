@@ -2,6 +2,7 @@
   "object": "frontend.suggest.title.request",
   "version": "1.0",
   "suggestTitle": {
+    "lang": "eng",
     "limit": 10,
     "keywords": "Hello Bye"
   }

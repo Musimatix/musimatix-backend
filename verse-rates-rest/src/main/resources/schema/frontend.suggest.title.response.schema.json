@@ -8,6 +8,17 @@
     "version": "1-0-0"
   },
   "definitions": {
+    "author": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
     "title": {
       "type": "object",
       "properties": {
@@ -18,6 +29,14 @@
         "title": {
           "type": "string",
           "description": "Song's title"
+        },
+        "authors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/author"
+          },
+          "minItems": 1,
+          "uniqueItems": true
         }
       },
       "required": ["id", "title"],
@@ -31,6 +50,10 @@
     },
     "version": {
       "type": "string"
+    },
+    "lang":  {
+      "type": "string",
+      "description": "Language for display multilingual properties - tags, for example"
     },
     "titles": {
       "type": "array",

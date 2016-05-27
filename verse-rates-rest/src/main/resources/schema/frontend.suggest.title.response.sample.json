@@ -1,6 +1,7 @@
 {
   "object": "frontend.suggest.title.response",
   "version": "1.0",
+  "lang": "eng",
   "titles": [
     {
       "id": 1234,
@@ -8,7 +9,13 @@
     },
     {
       "id": 4321,
-      "title": "I Shot the Sheriff"
+      "title": "I Shot the Sheriff",
+      "authors": [
+        {
+          "id": 123,
+          "name": "Bob Marley"
+        }
+      ]
     },
     {
       "id": 9753,
