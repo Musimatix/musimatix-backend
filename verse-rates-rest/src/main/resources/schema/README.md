@@ -22,6 +22,7 @@ Each JSON file has name with follwing structure:
 - `songs.response` -- songs list. Each song with all attributes.  
 It is response for `byid.request`, `keywords.request`, `similar.request`.
 - `tags.request.get.url` -- this file contains URL for GET request for all tags list.
-- `tags.response` -- tags list.
+- `suggest.title.request` -- suggest titles by first letters.
+- `suggest.title.response` -- suggested titles.
 
 Schemas and samples can be validated at: http://www.jsonschemavalidator.net

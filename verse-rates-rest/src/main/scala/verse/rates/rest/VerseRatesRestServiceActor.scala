@@ -5,6 +5,7 @@ import org.json4s.JsonAST.{JString, JField, JObject}
 import org.json4s._
 import org.json4s.jackson.Serialization
 import org.json4s.jackson.Serialization.writePretty
+import spray.http.HttpHeaders.RawHeader
 import verse.rates.processor.VerseProcessor
 import verse.rates.rest.VerseRatesRestService._
 import spray.http.MediaTypes._
@@ -27,11 +28,13 @@ class VerseRatesRestServiceActor (override val verseProcessor: VerseProcessor)
 object VerseRatesRestService {
   val msgUnknown = "Unknown request: %s"
 
-  val schemaPath = "/conf/schema/"
+  val schemaPath = "/schema/"
 
   val metaResourceName = schemaPath + "meta.json"
-  val scoringResourceName = schemaPath + "scoring.json"
   val errorResourceName = schemaPath + "error.json"
+  val songsResourceName = schemaPath + "frontend.songs.response.sample.json"
+  val tagsResourceName = schemaPath + "frontend.tags.response.sample.json"
+  val suggestTitleResourceName = schemaPath + "frontend.suggest.title.response.sample.json"
 
   def respResource(ctx: RequestContext, resourceName: String) =
     ctx.complete(HttpResponse(StatusCodes.OK,
@@ -63,6 +66,18 @@ abstract class VerseRatesRestService
         )))
     }
 
+  def respResourceExt(resourceName: String) =
+    respondWithMediaType(`application/json`) {
+      respondWithHeader(RawHeader("Access-Control-Allow-Origin", "*")) {
+        complete(HttpResponse(StatusCodes.OK,
+          HttpEntity(ContentType(MediaTypes.`application/json`, HttpCharsets.`UTF-8`),
+            Source.fromInputStream(getClass.getResourceAsStream(resourceName))
+              .getLines
+              .mkString("\n")
+          )))
+      }
+    }
+
   case class VerseRows(rows: Seq[String])
 
   case class Verse(verse: VerseRows)
@@ -76,7 +91,7 @@ abstract class VerseRatesRestService
 
   val ciRoute =
     post {
-      pathPrefix("verse" / "rates") {
+      pathPrefix("songs" / "rates") {
         path("invoke") {
           entity(as[Verse]) { verse =>
             respondWithMediaType(`application/json`) { ctx =>
@@ -121,18 +136,35 @@ abstract class VerseRatesRestService
             }
           }
         }
+      } ~
+      pathPrefix("songs" / "search") {
+        path("similar") {
+          respResourceExt(songsResourceName)
+        } ~
+        path("byid") {
+          respResourceExt(songsResourceName)
+        } ~
+        path("keywords") {
+          respResourceExt(songsResourceName)
+        } ~
+        path("suggest_title") {
+          respResourceExt(suggestTitleResourceName)
+        }
       }
     } ~
     get {
+      pathPrefix("songs" / "env" / "tags") {
+        respResourceExt(tagsResourceName)
+      } ~
       pathEndOrSingleSlash {
         respondWithMediaType(`text/html`) {
           complete {
             val httpPrefix = s"http://host:port/"
-            val pathPrefix = s"verse/rates/invoke"
+            val pathPrefix = s"songs/rates/invoke"
             <html>
               <body>
                 <p>
-                  <b>Request format:</b>
+                  <b>Requests format:</b>
                 </p>
                 <pre>
                   {s"""
@@ -192,7 +224,7 @@ abstract class VerseRatesRestService
       path(Rest) { s =>
         respondWithMediaType(`application/json`) { ctx =>
           ctx.complete(HttpResponse(StatusCodes.BadRequest, HttpEntity(ContentType(MediaTypes.`application/json`, HttpCharsets.`UTF-8`),
-            writePretty(List(EM(EM.badRequest, Some("Запрос содержит синтаксическую ошибку")))))))
+            writePretty(List(EM(EM.badRequest, Some("Illegal request URL")))))))
         }
       }
   }

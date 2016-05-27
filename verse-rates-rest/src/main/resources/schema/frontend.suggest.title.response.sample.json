@@ -1,0 +1,18 @@
+{
+  "object": "frontend.suggest.title.response",
+  "version": "1.0",
+  "titles": [
+    {
+      "id": 1234,
+      "title": "Across the Universe"
+    },
+    {
+      "id": 4321,
+      "title": "I Shot the Sheriff"
+    },
+    {
+      "id": 9753,
+      "title": "All You Need Is Love"
+    }
+  ]
+}

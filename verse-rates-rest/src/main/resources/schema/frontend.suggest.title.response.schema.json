@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Songs' suggested titles",
+  "self": {
+    "vendor": "com.musimatix",
+    "name": "suggest_title_request",
+    "format": "jsonschema",
+    "version": "1-0-0"
+  },
+  "definitions": {
+    "title": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Song's id in database"
+        },
+        "title": {
+          "type": "string",
+          "description": "Song's title"
+        }
+      },
+      "required": ["id", "title"],
+      "additionalProperties": false
+    }
+  },
+  "type": "object",
+  "properties": {
+    "object": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "titles": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/title"
+      }
+    }
+  },
+  "required": ["object", "titles"],
+  "additionalProperties": false
+}
