@@ -1,1 +1,1 @@
-"C:\Program Files (x86)\Java\jdk1.8.0_11\bin\java.exe" -cp prosody.jar treeton.prosody.musimatix.VerseProcessingExample
+"C:\Program Files (x86)\Java\jdk1.8.0_11\bin\java.exe" -cp prosody.jar treeton.prosody.musimatix.VerseProcessingExample .\domains\Russian.Prosody\resources\meteranalyzer\first.mdl 
