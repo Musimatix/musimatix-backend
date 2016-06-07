@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ontos/OntosMiner" xsi:schemaLocation="http://ontos/OntosMiner http://ontos/OntosMiner/morphConfigSchema.xsd">
+  <MORPHRU_PROPERTIES_URL>../domains/Russian/resources/morph/morph_ru.properties</MORPHRU_PROPERTIES_URL>
+</Document>
