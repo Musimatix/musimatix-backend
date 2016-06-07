@@ -1,0 +1,46 @@
+package starling;
+
+phase	PredMorph {
+  input Token,SpaceToken,DEFAULT_TOKEN;
+  output Gramm;
+
+  /*rule r1 {
+   {Token: kind=punctuation, subkind=dashpunct}{Token: kind=word, lang=cyr}
+   ->
+  } */
+
+  rule r2 {
+   {Token: kind=word, lang=cyr}
+   ->
+  }
+
+  rule r3 {
+   {Token: kind=word, lang=cyr}{Token: kind=punctuation, subkind=dashpunct}{Token: kind=word, lang=cyr}
+   ->
+  }
+
+  rule r4 {
+   {Token: kind=word, lang=cyr}{Token: kind=punctuation, subkind=dashpunct}{Token: kind=word, lang=cyr}{Token: kind=punctuation, subkind=dashpunct}{Token: kind=word, lang=cyr}
+   ->
+  }
+
+  rule r5 {
+   {Token: kind=word, lang=cyr}{Token: kind=punctuation, subkind=dashpunct}{Token: kind=word, lang=cyr}{Token: kind=punctuation, subkind=dashpunct}{Token: kind=word, lang=cyr}{Token: kind=punctuation, string="."}
+   ->
+  }
+
+  rule r6 {
+   {Token: kind=word, lang=cyr}{Token: kind=punctuation, subkind=dashpunct}{Token: kind=word, lang=cyr}{Token: kind=punctuation, string="."}
+   ->
+  }
+
+  rule r7 {
+   {Token: kind=word, lang=cyr}{Token: kind=punctuation, string="."}
+   ->
+  }
+
+  /*rule r8 {
+   {Token: kind=punctuation, subkind=dashpunct}{Token: kind=word, lang=cyr}{Token: kind=punctuation, string="."}
+   ->
+  } */
+}

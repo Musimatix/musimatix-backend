@@ -1,0 +1,80 @@
+meter trocheus {
+  priority 0;
+  threshold 90;
+  name "Хорей";
+
+  (s u)* (S) (U)?(U)?
+}
+
+meter iambus {
+  priority 0;
+  threshold 90;
+  name "Ямб";
+
+  (u s)* (u S) (U)?(U)?
+}
+
+meter iambus4_7 {
+  priority 0;
+  threshold 90;
+  name "Ямб 4 7";
+
+  (u S)(u U)(u U)(u S) (U)?(U)?
+}
+
+
+meter dactilus {
+  priority 0;
+  threshold 90;
+  name "Дактиль";
+
+  (s u u)* (S) (U)?(U)?
+}
+
+meter amphibracheus {
+  priority 0;
+  threshold 90;
+  name "Амфибрахий";
+
+  (u s u)* (u S) (U)?(U)?
+}
+
+meter anapaestus {
+  priority 0;
+  threshold 90;
+  name "Анапест";
+
+  (u u s)* (u u S) (U)?(U)?
+}
+
+meter dolnik3 {
+  priority 1;
+  threshold 80;
+  name "Дольник на трехсложной основе";
+
+  (U)?(U)? (s u (u)?)* (S) (U)?(U)?
+}
+
+meter dolnik2 {
+  priority 1;
+  threshold 80;
+  name "Дольник на двухсложной основе";
+
+  (U)?(U)? (s (u)?)* (S) (U)?(U)?
+}
+
+meter taktovik3 {
+  priority 2;
+  threshold 80;
+  name "Тактовик на трехсложной основе";
+
+  (U)?(U)? (s u (u)?(u)?)* (S)(U)?(U)?
+}
+
+meter taktovik2 {
+  priority 2;
+  threshold 80;
+  name "Тактовик на двухсложной основе";
+
+  (U)?(U)? (s (u)?(u)?)* (S)(U)?(U)?
+}

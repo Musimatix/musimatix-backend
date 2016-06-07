@@ -1,0 +1,12 @@
+package p; 
+
+phase	Name {
+  input Morph;
+  output Phrase;
+  control brill;
+
+  rule r1 {
+   {Morph}{Morph}?
+   -> create Phrase[all,all](TYPE:="x";)
+  }
+}

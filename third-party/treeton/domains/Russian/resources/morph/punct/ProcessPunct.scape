@@ -1,0 +1,13 @@
+package russian.morph.punct;
+
+phase ProcessPunct {
+  input Token;
+  output Gramm;
+
+  rule r1 {
+   {Token: kind=punctuation}:b
+   ->
+   create Gramm[b,b](TYPE:=Punct;kind:=punctuation;)
+  }
+
+}

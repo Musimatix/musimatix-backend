@@ -1,0 +1,72 @@
+analyzer SyntaxRuShallow {
+  input {Gramm,Token}
+
+  repRelations {adv,delim,modif}
+  uniRelations {appos,auxil,conjunct,coord_conj,coordin,explic,elect,genet,infin,objA,objD,objG,objI,predic,preposit}
+
+  goal {
+    @type == "Syntax" && PGROUP == "clause" : ()
+    @type == "Gramm" && POS == "N" : (0,0,50)
+  }
+
+  delimiter {@type == "Token" && kind == "punctuation"}
+
+  gapPenalty e0*100
+  repPenalty e1*500 // (gap,rep,0,0,50)
+  compactnessPenalty  e3*10
+
+  projectivityPenalty {
+     {} : e2*50
+     {@parentRel=="coordin"} : e2*100000
+  }
+
+  //создание клаузы
+
+  rule Clause_create {
+    {@type == "Gramm" && (POS == "V" && REPR == "fin" || POS == "PRED")}
+    -->
+    C[A]{@type="Syntax";PGROUP="clause";}
+  }
+
+  //ср. "мальчик спал"
+
+  rule predicPast {
+    {@type == "Gramm" && POS == "V" && REPR == "fin" && TNS == "past"}
+    ~
+    {@type == "Gramm" && POS == "N" && CAS == "nom"}
+
+    ::
+
+    A.NMB == B.NMB && (
+        A.NMB == "pl" ||
+        (
+          A.NMB == "sg" && (
+             B.GEND == null ||
+             A.GEND == B.GEND ||
+             B.GEND == "mf" && A.GEND != "n"
+             )
+        )
+    )
+
+    -->
+    (A,B){predic}
+  }
+
+  rule hendrix {
+  {@type== "Gramm" && POS == "ADV"}
+   +
+   {@type== "Gramm" && POS == "V"}
+
+   ::
+
+   B.NMB == "sg" && (B.REPR != "fin" || B.GEND == "m")
+
+  -->
+
+  C[A,B] {@type="Syntax";PGROUP="clause";}
+   ::
+
+   B.GEND == "m" : (90,60,90)
+ }
+
+}

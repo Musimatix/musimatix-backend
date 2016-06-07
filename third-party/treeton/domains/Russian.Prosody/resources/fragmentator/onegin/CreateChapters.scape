@@ -1,0 +1,12 @@
+package prosody.onegin;
+
+phase CreateChapters {
+  input Split,Verse;
+  output Fragment;
+  control brill;
+
+  rule r1 {
+    {Split: type=chapterCaption}:b({Verse}+):v{Split}
+    ->create Fragment[b,v](caption:=b.name;type:=chapter;), remove b
+  }
+}

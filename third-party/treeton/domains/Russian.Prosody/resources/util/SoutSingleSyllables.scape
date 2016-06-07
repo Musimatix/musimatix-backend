@@ -1,0 +1,28 @@
+package prosody.util;
+
+phase SoutSingleSyllables {
+  input Atom;
+  output Atom;
+  control first;
+
+  rule r1 {
+    {Atom: start=0}
+    ->
+    java {
+        final Map<String,String> map = (Map<String,String>)env.getProperty("SingleSyllablesTable");
+        if (map != null) {
+            String[] arr = map.keySet().toArray(new String[map.size()]);
+
+            Arrays.sort(arr, new Comparator<String>() {
+                public int compare(String o1, String o2) {
+                    return map.get(o1).compareTo(map.get(o2));
+                }
+            });
+            for (String s : arr) {
+                System.out.print(map.get(s)+" ");
+                System.out.println(s);
+            }
+        }
+    }
+  }
+}

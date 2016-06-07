@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://starling.rinet.ru/treeton" targetNamespace="http://starling.rinet.ru/treeton" elementFormDefault="qualified">
+  <xs:element name="Document">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="RELATION" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:attribute name="NAME" type="xs:string" use="required"/>
+            <xs:attribute name="DESCRIPTION" type="xs:string" use="required"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="DOMAIN" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

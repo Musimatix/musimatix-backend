@@ -1,0 +1,1364 @@
+будучи base=быть,POS=V,ASP=ipf,REPR=gern,TNS=pres
+
+буду base=быть,POS=V, NMB=sg, REPR=fin, MD=ind, TNS=fut, PRS=1, ASP=ipf, AUXIL=auxil
+будешь base=быть,POS=V, NMB=sg, REPR=fin, MD=ind, TNS=fut, PRS=2; ASP=ipf, AUXIL=auxil
+будет base=быть,POS=V, NMB=sg, REPR=fin, MD=ind, TNS=fut, PRS=3, ASP=ipf, AUXIL=auxil
+будем base=быть,POS=V, NMB=pl, REPR=fin, MD=ind, TNS=fut, PRS=1, ASP=ipf, AUXIL=auxil
+будете base=быть,POS=V, NMB=pl, REPR=fin, MD=ind, TNS=fut, PRS=2, ASP=ipf, AUXIL=auxil
+будут base=быть,POS=V, NMB=pl, REPR=fin, MD=ind, TNS=fut, PRS=3, ASP=ipf, AUXIL=auxil
+
+г-н base=г-н,POS=N,CAS=nom,ANIM=anim,GEND=n,NMB=sg
+г-на base=г-н,POS=N,CAS=gen,ANIM=anim,GEND=n,NMB=sg
+г-на base=г-н,POS=N,CAS=acc,ANIM=anim,GEND=n,NMB=sg
+г-ну base=г-н,POS=N,CAS=dat,ANIM=anim,GEND=n,NMB=sg
+г-ном base=г-н,POS=N,CAS=inst,ANIM=anim,GEND=n,NMB=sg
+г-не base=г-н,POS=N,CAS=prp,ANIM=anim,GEND=n,NMB=sg
+
+гр-н base=гр-н,POS=N,CAS=nom,ANIM=anim,GEND=n,NMB=sg
+гр-на base=гр-н,POS=N,CAS=gen,ANIM=anim,GEND=n,NMB=sg
+гр-на base=гр-н,POS=N,CAS=acc,ANIM=anim,GEND=n,NMB=sg
+гр-ну base=гр-н,POS=N,CAS=dat,ANIM=anim,GEND=n,NMB=sg
+гр-ном base=гр-н,POS=N,CAS=inst,ANIM=anim,GEND=n,NMB=sg
+гр-не base=гр-н,POS=N,CAS=prp,ANIM=anim,GEND=n,NMB=sg
+
+дитя base=дитя,POS=N,CAS=nom,ANIM=anim,GEND=n,NMB=sg
+дитя base=дитя,POS=N,CAS=acc,ANIM=anim,GEND=n,NMB=sg
+дитяти base=дитя,POS=N,CAS=gen,ANIM=anim,GEND=n,NMB=sg
+дитяти base=дитя,POS=N,CAS=dat,ANIM=anim,GEND=n,NMB=sg
+дитяти base=дитя,POS=N,CAS=prp,ANIM=anim,GEND=n,NMB=sg
+дитятей base=дитя,POS=N,CAS=inst,ANIM=anim,GEND=n,NMB=sg
+дитятею base=дитя,POS=N,CAS=inst,ANIM=anim,GEND=n,NMB=sg
+
+полуночи base=полночь,POS=N,CAS=gen,ANIM=inan,GEND=f,NMB=sg
+полуночи base=полночь,POS=N,CAS=dat,ANIM=inan,GEND=f,NMB=sg
+полуночи base=полночь,POS=N,CAS=prp,ANIM=inan,GEND=f,NMB=sg
+полуночью base=полночь,POS=N,CAS=inst,ANIM=inan,GEND=f,NMB=sg
+
+ваш -> ваш (A, prn) sg, acc, m, inan
+ваш -> ваш (A, prn) sg, nom, m
+ваша -> ваш (A, prn) sg, nom, f
+ваше -> ваш (A, prn) sg, acc, n
+ваше -> ваш (A, prn) sg, nom, n
+вашего -> ваш (A, prn) sg, acc, m, anim
+вашего -> ваш (A, prn) sg, gen, m
+вашего -> ваш (A, prn) sg, gen, n
+вашей -> ваш (A, prn) sg, dat, f
+вашей -> ваш (A, prn) sg, gen, f
+вашей -> ваш (A, prn) sg, inst, f
+вашей -> ваш (A, prn) sg, prp, f
+вашем -> ваш (A, prn) sg, prp, m
+вашем -> ваш (A, prn) sg, prp, n
+вашему -> ваш (A, prn) sg, dat, m
+вашему -> ваш (A, prn) sg, dat, n
+вашею -> ваш (A, prn) sg, inst, f
+ваши -> ваш (A, prn) pl, acc, inan
+ваши -> ваш (A, prn) pl, nom
+вашим -> ваш (A, prn) pl, dat
+вашим -> ваш (A, prn) sg, inst, m
+вашим -> ваш (A, prn) sg, inst, n
+вашими -> ваш (A, prn) pl, inst
+ваших -> ваш (A, prn) pl, acc, anim
+ваших -> ваш (A, prn) pl, gen
+ваших -> ваш (A, prn) pl, prp
+вашу -> ваш (A, prn) sg, acc, f
+
+весь -> весь (A, prn) sg, nom, m
+весь -> весь (A, prn) sg, acc, m, inan
+все -> весь (A, prn) pl, acc, inan
+все -> весь (A, prn) pl, nom
+все -> весь (A, prn) sg, acc, n
+все -> весь (A, prn) sg, nom, n
+всего -> весь (A, prn) sg, acc, m, anim
+всего -> весь (A, prn) sg, gen, m
+всего -> весь (A, prn) sg, gen, n
+всей -> весь (A, prn) sg, dat, f
+всей -> весь (A, prn) sg, gen, f
+всей -> весь (A, prn) sg, inst, f
+всей -> весь (A, prn) sg, prp, f
+всем -> весь (A, prn) pl, dat
+всем -> весь (A, prn) sg, inst, m
+всем -> весь (A, prn) sg, inst, n
+всем -> весь (A, prn) sg, prp, m
+всем -> весь (A, prn) sg, prp, n
+всеми -> весь (A, prn) pl, inst
+всему -> весь (A, prn) sg, dat, m
+всему -> весь (A, prn) sg, dat, n
+всех -> весь (A, prn) pl, acc, anim
+всех -> весь (A, prn) pl, gen
+всех -> весь (A, prn) pl, prp
+всею -> весь (A, prn) sg, inst, f
+всю -> весь (A, prn) sg, acc, f
+вся -> весь (A, prn) sg, nom, f
+
+восемнадцати -> восемнадцать (NUM, large) dat
+восемнадцати -> восемнадцать (NUM, large) gen
+восемнадцати -> восемнадцать (NUM, large) prp
+восемнадцать -> восемнадцать (NUM, large) acc
+восемнадцать -> восемнадцать (NUM, large) nom
+восемнадцатью -> восемнадцать (NUM, large) inst
+
+восемь -> восемь (NUM, large) acc
+восемь -> восемь (NUM, large) nom
+восемью -> восемь (NUM, large) inst
+восьми -> восемь (NUM, large) dat
+восьми -> восемь (NUM, large) gen
+восьми -> восемь (NUM, large) prp
+восьмью -> восемь (NUM, large) inst
+
+восемьдесят -> восемьдесят (NUM, large, tenhun) acc
+восемьдесят -> восемьдесят (NUM, large, tenhun) nom
+восемьюдесятью -> восемьдесят (NUM, large, tenhun) inst
+восьмидесяти -> восемьдесят (NUM, large, tenhun) dat
+восьмидесяти -> восемьдесят (NUM, large, tenhun) gen
+восьмидесяти -> восемьдесят (NUM, large, tenhun) prp
+восьмьюдесятью -> восемьдесят (NUM, large, tenhun) inst
+
+восемьсот -> восемьсот (NUM, large, tenhun) acc
+восемьсот -> восемьсот (NUM, large, tenhun) nom
+восемьюстами -> восемьсот (NUM, large, tenhun) inst
+восьмисот -> восемьсот (NUM, large, tenhun) gen
+восьмистам -> восемьсот (NUM, large, tenhun) dat
+восьмистах -> восемьсот (NUM, large, tenhun) prp
+восьмьюстами -> восемьсот (NUM, large, tenhun) inst
+
+восьмеро -> восьмеро (NUM, coll) acc, inan
+восьмеро -> восьмеро (NUM, coll) nom
+восьмерым -> восьмеро (NUM, coll) dat
+восьмерыми -> восьмеро (NUM, coll) inst
+восьмерых -> восьмеро (NUM, coll) acc, anim
+восьмерых -> восьмеро (NUM, coll) gen
+восьмерых -> восьмеро (NUM, coll) prp
+
+вам -> вы (N, prn, anim ) pl, dat
+вами -> вы (N, prn, anim) pl, inst
+вас -> вы (N, prn, anim) pl, acc
+вас -> вы (N, prn, anim) pl, gen
+вас -> вы (N, prn, anim) pl, prp
+вы -> вы (N, prn, anim) pl, nom
+
+господень -> господень (A) sg, nom, m
+господень -> господень (A) sg, acc, m, inan
+господне -> господень (A) sg, nom, n
+господне -> господень (A) sg, acc, n
+господни -> господень (A) pl, nom
+господни -> господень (A) pl, acc, inan
+господних -> господень (A) pl, gen
+господних -> господень (A) pl, acc, anim
+господних -> господень (A) pl, prp
+господню -> господень (A) sg, acc, f, anim
+господню -> господень (A) sg, dat, m
+господню -> господень (A) sg, dat, n
+господня -> господень (A) sg, acc, m, anim
+господня -> господень (A) sg, gen, m
+господня -> господень (A) sg, gen, n
+господня -> господень (A) sg, nom, f
+господним -> господень (A) sg, inst, m
+господним -> господень (A) sg, inst, n
+господним -> господень (A) pl, dat
+господними -> господень (A) pl, inst
+господнем -> господень (A) sg, prp, m
+господнем -> господень (A) sg, prp, n
+господней -> господень (A) sg, gen, f
+господней -> господень (A) sg, dat, f
+господней -> господень (A) sg, inst, f
+господней -> господень (A) sg, prp, f
+
+господ -> господин (N, m, anim) pl, gen
+господ -> господин (N, m, anim) pl, acc
+господа -> господин (N, m, anim) pl, nom
+господам -> господин (N, m, anim) pl, dat
+господами -> господин (N, m, anim) pl, inst
+господах -> господин (N, m, anim) pl, prp
+господин -> господин (N, m, anim) sg, nom
+господина -> господин (N, m, anim) sg, acc
+господина -> господин (N, m, anim) sg, gen
+господине -> господин (N, m, anim) sg, prp
+господином -> господин (N, m, anim) sg, inst
+господину -> господин (N, m, anim) sg, dat
+господа -> господь (N, m, anim) sg, acc
+господа -> господь (N, m, anim) sg, gen
+господе -> господь (N, m, anim) sg, prp
+господи -> господь (N, m, anim) sg
+господом -> господь (N, m, anim) sg, inst
+господу -> господь (N, m, anim) sg, dat
+господь -> господь (N, m, anim) sg, nom
+
+два -> два (NUM, small, hasgend) nom, m
+два -> два (NUM, small, hasgend) nom, n
+две -> два (NUM, small, hasgend) nom, f
+
+два -> два (NUM, small, hasgend) acc, m, inan
+два -> два (NUM, small, hasgend) acc, n, inan
+две -> два (NUM, small, hasgend) acc, f, inan
+
+двух -> два (NUM, small, hasgend) acc, m, anim
+двух -> два (NUM, small, hasgend) acc, f, anim
+двух -> два (NUM, small, hasgend) acc, n, anim
+
+
+двум -> два (NUM, small, hasgend) dat, m
+двум -> два (NUM, small, hasgend) dat, f
+двум -> два (NUM, small, hasgend) dat, n
+
+двумя -> два (NUM, small, hasgend) inst, m
+двумя -> два (NUM, small, hasgend) inst, f
+двумя -> два (NUM, small, hasgend) inst, n
+
+двух -> два (NUM, small, hasgend) gen, m
+двух -> два (NUM, small, hasgend) gen, f
+двух -> два (NUM, small, hasgend) gen, n
+
+двух -> два (NUM, small, hasgend) prp, m
+двух -> два (NUM, small, hasgend) prp, f
+двух -> два (NUM, small, hasgend) prp, n
+
+двадцати -> двадцать (NUM, large, tenhun) dat
+двадцати -> двадцать (NUM, large, tenhun) gen
+двадцати -> двадцать (NUM, large, tenhun) prp
+двадцать -> двадцать (NUM, large, tenhun) acc
+двадцать -> двадцать (NUM, large, tenhun) nom
+двадцатью -> двадцать (NUM, large, tenhun) inst
+
+двенадцати -> двенадцать (NUM, large) dat
+двенадцати -> двенадцать (NUM, large) gen
+двенадцати -> двенадцать (NUM, large) prp
+двенадцать -> двенадцать (NUM, large) acc
+двенадцать -> двенадцать (NUM, large) nom
+двенадцатью -> двенадцать (NUM, large) inst
+
+двести -> двести (NUM, large, tenhun) acc
+двести -> двести (NUM, large, tenhun) nom
+двумстам -> двести (NUM, large, tenhun) dat
+двумястами -> двести (NUM, large, tenhun) inst
+двухсот -> двести (NUM, large, tenhun) gen
+двухстах -> двести (NUM, large, tenhun) prp
+
+двое -> двое (NUM, coll) acc, inan
+двое -> двое (NUM, coll) nom
+двоим -> двое (NUM, coll) dat
+двоими -> двое (NUM, coll) inst
+двоих -> двое (NUM, coll) acc, anim
+двоих -> двое (NUM, coll) gen
+двоих -> двое (NUM, coll) prp
+
+девяноста -> девяносто (NUM, large, tenhun) dat
+девяноста -> девяносто (NUM, large, tenhun) gen
+девяноста -> девяносто (NUM, large, tenhun) inst
+девяноста -> девяносто (NUM, large, tenhun) prp
+девяносто -> девяносто (NUM, large, tenhun) acc
+девяносто -> девяносто (NUM, large, tenhun) nom
+
+девятеро -> девятеро (NUM, coll) acc, inan
+девятеро -> девятеро (NUM, coll) nom
+девятерым -> девятеро (NUM, coll) dat
+девятерыми -> девятеро (NUM, coll) inst
+девятерых -> девятеро (NUM, coll) acc, anim
+девятерых -> девятеро (NUM, coll) gen
+девятерых -> девятеро (NUM, coll) prp
+
+девятнадцати -> девятнадцать (NUM, large) dat
+девятнадцати -> девятнадцать (NUM, large) gen
+девятнадцати -> девятнадцать (NUM, large) prp
+девятнадцать -> девятнадцать (NUM, large) acc
+девятнадцать -> девятнадцать (NUM, large) nom
+девятнадцатью -> девятнадцать (NUM, large) inst
+
+девяти -> девять (NUM, large) dat
+девяти -> девять (NUM, large) gen
+девяти -> девять (NUM, large) prp
+девять -> девять (NUM, large) acc
+девять -> девять (NUM, large) nom
+девятью -> девять (NUM, large) inst
+
+девятисот -> девятьсот (NUM, large, tenhun) gen
+девятистам -> девятьсот (NUM, large, tenhun) dat
+девятистах -> девятьсот (NUM, large, tenhun) prp
+девятьсот -> девятьсот (NUM, large, tenhun) acc
+девятьсот -> девятьсот (NUM, large, tenhun) nom
+девятьюстами -> девятьсот (NUM, large, tenhun) inst
+
+десятеро -> десятеро (NUM, coll) acc, inan
+десятеро -> десятеро (NUM, coll) nom
+десятерым -> десятеро (NUM, coll) dat
+десятерыми -> десятеро (NUM, coll) inst
+десятерых -> десятеро (NUM, coll) acc, anim
+десятерых -> десятеро (NUM, coll) gen
+десятерых -> десятеро (NUM, coll) prp
+
+десяти -> десять (NUM, large) dat
+десяти -> десять (NUM, large) gen
+десяти -> десять (NUM, large) prp
+десять -> десять (NUM, large) acc
+десять -> десять (NUM, large) nom
+десятью -> десять (NUM, large) inst
+
+должен -> должен (A) sg, m, sh
+должна -> должен (A) sg, f, sh
+должно -> должен (A) sg, n, sh
+должны -> должен (A) pl, sh
+
+дочерей -> дочь (N, f, anim) pl, acc
+дочерей -> дочь (N, f, anim) pl, gen
+дочери -> дочь (N, f, anim) pl, nom
+дочери -> дочь (N, f, anim) sg, dat
+дочери -> дочь (N, f, anim) sg, gen
+дочери -> дочь (N, f, anim) sg, prp
+дочерьми -> дочь (N, f, anim) pl, inst
+дочерью -> дочь (N, f, anim) sg, inst
+дочерям -> дочь (N, f, anim) pl, dat
+дочерями -> дочь (N, f, anim) pl, inst
+дочерях -> дочь (N, f, anim) pl, prp
+дочь -> дочь (N, f, anim) sg, acc
+дочь -> дочь (N, f, anim) sg, nom
+
+кое -> кой (A, prn) sg, acc, n
+кое -> кой (A, prn) sg, nom, n
+коего -> кой (A, prn) sg, acc, m, anim
+коего -> кой (A, prn) sg, gen, m
+коего -> кой (A, prn) sg, gen, n
+коей -> кой (A, prn) sg, dat, f
+коей -> кой (A, prn) sg, gen, f
+коей -> кой (A, prn) sg, inst, f
+коей -> кой (A, prn) sg, prp, f
+коем -> кой (A, prn) sg, prp, m
+коем -> кой (A, prn) sg, prp, n
+коему -> кой (A, prn) sg, dat, m
+коему -> кой (A, prn) sg, dat, n
+коею -> кой (A, prn) sg, inst, f
+кои -> кой (A, prn) pl, acc, inan
+кои -> кой (A, prn) pl, nom
+коим -> кой (A, prn) pl, dat
+коим -> кой (A, prn) sg, inst, m
+коим -> кой (A, prn) sg, inst, n
+коими -> кой (A, prn) pl, inst
+коих -> кой (A, prn) pl, acc, anim
+коих -> кой (A, prn) pl, gen
+коих -> кой (A, prn) pl, prp
+кой -> кой (A, prn) sg, acc, m, inan
+кой -> кой (A, prn) sg, nom, m
+кою -> кой (A, prn) sg, acc, f
+коя -> кой (A, prn) sg, nom, f
+
+кем -> кто (N, prn, irel, anim) sg, inst
+кого -> кто (N, prn, irel, anim) sg, acc
+кого -> кто (N, prn, irel, anim) sg, gen
+ком -> кто (N, prn, irel, anim) sg, prp
+кому -> кто (N, prn, irel, anim) sg, dat
+кто -> кто (N, prn, irel, anim) sg, nom
+
+кем-то -> кто-то (N, prn, irel, anim) sg, inst
+кого-то -> кто-то (N, prn, irel, anim) sg, acc
+кого-то -> кто-то (N, prn, irel, anim) sg, gen
+ком-то -> кто-то (N, prn, irel, anim) sg, prp
+кому-то -> кто-то (N, prn, irel, anim) sg, dat
+кто-то -> кто-то (N, prn, irel, anim) sg, nom
+
+кем-либо -> кто-либо (N, prn, irel, anim) sg, inst
+кого-либо -> кто-либо (N, prn, irel, anim) sg, acc
+кого-либо -> кто-либо (N, prn, irel, anim) sg, gen
+ком-либо -> кто-либо (N, prn, irel, anim) sg, prp
+кому-либо -> кто-либо (N, prn, irel, anim) sg, dat
+кто-либо -> кто-либо (N, prn, irel, anim) sg, nom
+
+кем-нибудь -> кто-нибудь (N, prn, irel, anim) sg, inst
+кого-нибудь -> кто-нибудь (N, prn, irel, anim) sg, acc
+кого-нибудь -> кто-нибудь (N, prn, irel, anim) sg, gen
+ком-нибудь -> кто-нибудь (N, prn, irel, anim) sg, prp
+кому-нибудь -> кто-нибудь (N, prn, irel, anim) sg, dat
+кто-нибудь -> кто-нибудь (N, prn, irel, anim) sg, nom
+
+какой-то -> какой-то (A, m, prn, irel) sg, nom
+какой-то -> какой-то (A, m, prn, irel) sg, acc, inan
+какая-то -> какой-то (A, f, prn, irel) sg, nom
+какое-то -> какой-то (A, n, prn, irel) sg, nom
+какое-то -> какой-то (A, n, prn, irel) sg, acc
+какого-то -> какой-то (A, m, prn, irel) sg, gen
+какого-то -> какой-то (A, m, prn, irel) sg, acc, anim
+какого-то -> какой-то (A, n, prn, irel) sg, gen
+какому-то -> какой-то (A, m, prn, irel) sg, dat
+какому-то -> какой-то (A, n, prn, irel) sg, dat
+каким-то -> какой-то (A, m, prn, irel) sg, inst
+каким-то -> какой-то (A, n, prn, irel) sg, inst
+каким-то -> какой-то (A, prn, irel) pl, dat
+каком-то -> какой-то (A, m, prn, irel) sg, prp
+каком-то -> какой-то (A, n, prn, irel) sg, prp
+какой-то -> какой-то (A, f, prn, irel) sg, gen
+какой-то -> какой-то (A, f, prn, irel) sg, dat
+какой-то -> какой-то (A, f, prn, irel) sg, inst
+какой-то -> какой-то (A, f, prn, irel) sg, prp
+какую-то -> какой-то (A, f, prn, irel) sg, acc
+какие-то -> какой-то (A, prn, irel) pl, nom
+какие-то -> какой-то (A, prn, irel) pl, acc, inan
+каких-то -> какой-то (A, prn, irel) pl, gen
+каких-то -> какой-то (A, prn, irel) pl, acc, anim
+каких-то -> какой-то (A, prn, irel) pl, prp
+какими-то -> какой-то (A, prn, irel) pl, inst
+
+который -> который (N, m, prn,  adji) sg, nom
+который -> который (N, m, prn,  adji) sg, acc, inan
+которого -> который (N, m, prn,  adji) sg, gen
+которого -> который (N, m, prn,  adji) sg, acc, anim
+которому -> который (N, m, prn,  adji) sg, dat
+которым -> который (N, m, prn,  adji) sg, inst
+котором -> который (N, m, prn,  adji) sg, prp
+которым -> который (N, prn,  adji) pl, dat
+которые -> который (N, prn,  adji) pl, nom
+которые -> который (N, prn,  adji) pl, acc, inan
+которых -> который (N, prn,  adji) pl, gen
+которых -> который (N, prn,  adji) pl, acc, anim
+которых -> который (N, prn,  adji) pl, prp
+которыми -> который (N, prn,  adji) pl, inst
+
+которая -> которая (N, f, prn,  adji) sg, nom
+которой -> которая (N, f, prn,  adji) sg, gen
+которой -> которая (N, f, prn,  adji) sg, dat
+которой -> которая (N, f, prn,  adji) sg, inst
+которой -> которая (N, f, prn,  adji) sg, prp
+которую -> которая (N, f, prn,  adji) sg, acc
+
+которое -> которое (N, n, prn,  adji) sg, nom
+которое -> которое (N, n, prn,  adji) sg, acc
+которого -> которое (N, n, prn,  adji) sg, gen
+которому -> которое (N, n, prn,  adji) sg, dat
+которым -> которое (N, n, prn,  adji) sg, inst
+котором -> которое (N, n, prn,  adji) sg, prp
+
+
+лет -> год (N, m, inan) pl, gen
+
+ль base=ль,POS=PCL
+
+матерей -> мать (N, f, anim) pl, acc
+матерей -> мать (N, f, anim) pl, gen
+матери -> мать (N, f, anim) pl, nom
+матери -> мать (N, f, anim) sg, dat
+матери -> мать (N, f, anim) sg, gen
+матери -> мать (N, f, anim) sg, prp
+матерью -> мать (N, f, anim) sg, inst
+матерям -> мать (N, f, anim) pl, dat
+матерями -> мать (N, f, anim) pl, inst
+матерях -> мать (N, f, anim) pl, prp
+мать -> мать (N, f, anim) sg, acc
+мать -> мать (N, f, anim) sg, nom
+
+многими -> многий (A, prn) pl, inst
+многих -> многий (A, prn) pl, acc, anim
+многих -> многий (A, prn) pl, gen
+многих -> многий (A, prn) pl, prp
+
+мое -> мой (A, prn) sg, acc, n
+мое -> мой (A, prn) sg, nom, n
+моего -> мой (A, prn) sg, acc, m, anim
+моего -> мой (A, prn) sg, gen, m
+моего -> мой (A, prn) sg, gen, n
+моей -> мой (A, prn) sg, dat, f
+моей -> мой (A, prn) sg, gen, f
+моей -> мой (A, prn) sg, inst, f
+моей -> мой (A, prn) sg, prp, f
+моем -> мой (A, prn) sg, prp, m
+моем -> мой (A, prn) sg, prp, n
+моему -> мой (A, prn) sg, dat, m
+моему -> мой (A, prn) sg, dat, n
+моею -> мой (A, prn) sg, inst, f
+мои -> мой (A, prn) pl, acc, inan
+мои -> мой (A, prn) pl, nom
+моим -> мой (A, prn) pl, dat
+моим -> мой (A, prn) sg, inst, m
+моим -> мой (A, prn) sg, inst, n
+моими -> мой (A, prn) pl, inst
+моих -> мой (A, prn) pl, acc, anim
+моих -> мой (A, prn) pl, gen
+моих -> мой (A, prn) pl, prp
+мой -> мой (A, prn) sg, acc, m, inan
+мой -> мой (A, prn) sg, nom, m
+мою -> мой (A, prn) sg, acc, f
+моя -> мой (A, prn) sg, nom, f
+
+мы -> мы (N, prn, anim) pl, nom
+нам -> мы (N, prn, anim) pl, dat
+нами -> мы (N, prn, anim) pl, inst
+нас -> мы (N, prn, anim) pl, acc
+нас -> мы (N, prn, anim) pl, gen
+нас -> мы (N, prn, anim) pl, prp
+
+наш -> наш (A, prn) sg, acc, m, inan
+наш -> наш (A, prn) sg, nom, m
+наша -> наш (A, prn) sg, nom, f
+наше -> наш (A, prn) sg, acc, n
+наше -> наш (A, prn) sg, nom, n
+нашего -> наш (A, prn) sg, acc, m, anim
+нашего -> наш (A, prn) sg, gen, m
+нашего -> наш (A, prn) sg, gen, n
+нашей -> наш (A, prn) sg, dat, f
+нашей -> наш (A, prn) sg, gen, f
+нашей -> наш (A, prn) sg, inst, f
+нашей -> наш (A, prn) sg, prp, f
+нашем -> наш (A, prn) sg, prp, m
+нашем -> наш (A, prn) sg, prp, n
+нашему -> наш (A, prn) sg, dat, m
+нашему -> наш (A, prn) sg, dat, n
+нашею -> наш (A, prn) sg, inst, f
+наши -> наш (A, prn) pl, acc, inan
+наши -> наш (A, prn) pl, nom
+нашим -> наш (A, prn) pl, dat
+нашим -> наш (A, prn) sg, inst, m
+нашим -> наш (A, prn) sg, inst, n
+нашими -> наш (A, prn) pl, inst
+наших -> наш (A, prn) pl, acc, anim
+наших -> наш (A, prn) pl, gen
+наших -> наш (A, prn) pl, prp
+нашу -> наш (A, prn) sg, acc, f
+
+некем -> некого (N, prn, anim) sg, inst
+некого -> некого (N, prn, anim) sg, acc
+некого -> некого (N, prn, anim) sg, gen
+некому -> некого (N, prn, anim) sg, dat
+
+некоего -> некий (A, prn) sg, gen, m
+некоего -> некий (A, prn) sg, gen, n
+некоего -> некий (A, prn) sg, acc, m, anim
+некоей -> некий (A, prn) sg, gen, f
+некоей -> некий (A, prn) sg, dat, f
+некоей -> некий (A, prn) sg, inst, f
+некоей -> некий (A, prn) sg, prp, f
+некоему -> некий (A, prn) sg, dat, m
+некоему -> некий (A, prn) sg, dat, n
+некоим -> некий (A, prn) sg, inst, m
+некоим -> некий (A, prn) sg, inst, n
+некоим -> некий (A, prn) pl, dat
+некоем -> некий (A, prn) sg, prp, m
+некоем -> некий (A, prn) sg, prp, n
+некоих -> некий (A, prn) pl, gen
+некоих -> некий (A, prn) pl, acc, anim
+некоих -> некий (A, prn) pl, prp
+некоими -> некий (A, prn) pl, inst
+некое -> некий (A, prn) sg, nom, n
+некая -> некий (A, prn) sg, nom, f
+
+некто -> некто (N, prn, anim) sg, nom
+
+немногими -> немногий (A, prn) pl, inst
+немногих -> немногий (A, prn) pl, acc, anim
+немногих -> немногий (A, prn) pl, gen
+немногих -> немногий (A, prn) pl, prp
+немногим -> немногий (A, prn) dat
+
+нескольким -> несколько (NUM, large, prn) dat
+несколькими -> несколько (NUM, large, prn) inst
+нескольких -> несколько (NUM, large, prn) acc, anim
+нескольких -> несколько (NUM, large, prn) gen
+нескольких -> несколько (NUM, large, prn) prp
+несколько -> несколько (NUM, large, prn) acc, inan
+несколько -> несколько (NUM, large, prn) nom
+нескольку -> несколько (NUM, large, prn) dat
+
+нечего -> нечего (N, prn, inan) sg, acc
+нечего -> нечего (N, prn, inan) sg, gen
+нечем -> нечего (N, prn, inan) sg, inst
+нечему -> нечего (N, prn, inan) sg, dat
+
+нечто -> нечто (N, prn, inan) sg, acc
+нечто -> нечто (N, prn, inan) sg, nom
+
+ни -> ни (PCL)
+ни -> ни (CONJ)
+
+никем -> никто (N, prn, anim) sg, inst
+никого -> никто (N, prn, anim) sg, acc
+никого -> никто (N, prn, anim) sg, gen
+никому -> никто (N, prn, anim) sg, dat
+никто -> никто (N, prn, anim) sg, nom
+
+ничей -> ничей (A, prn) sg, acc, m, inan
+ничей -> ничей (A, prn) sg, nom, m
+ничье -> ничей (A, prn) sg, acc, n
+ничье -> ничей (A, prn) sg, nom, n
+ничьего -> ничей (A, prn) sg, acc, m, anim
+ничьего -> ничей (A, prn) sg, gen, m
+ничьего -> ничей (A, prn) sg, gen, n
+ничьей -> ничей (A, prn) sg, dat, f
+ничьей -> ничей (A, prn) sg, gen, f
+ничьей -> ничей (A, prn) sg, inst, f
+ничьей -> ничей (A, prn) sg, prp, f
+ничьем -> ничей (A, prn) sg, prp, m
+ничьем -> ничей (A, prn) sg, prp, n
+ничьему -> ничей (A, prn) sg, dat, m
+ничьему -> ничей (A, prn) sg, dat, n
+ничьею -> ничей (A, prn) sg, inst, f
+ничьи -> ничей (A, prn) pl, acc, inan
+ничьи -> ничей (A, prn) pl, nom
+ничьим -> ничей (A, prn) pl, dat
+ничьим -> ничей (A, prn) sg, inst, m
+ничьим -> ничей (A, prn) sg, inst, n
+ничьими -> ничей (A, prn) pl, inst
+ничьих -> ничей (A, prn) pl, acc, anim
+ничьих -> ничей (A, prn) pl, gen
+ничьих -> ничей (A, prn) pl, prp
+ничью -> ничей (A, prn) sg, acc, f
+ничья -> ничей (A, prn) sg, nom, f
+
+ничего -> ничто (N, prn, inan) sg, gen
+ничем -> ничто (N, prn, inan) sg, inst
+ничему -> ничто (N, prn, inan) sg, dat
+ничто -> ничто (N, prn, inan) sg, acc
+ничто -> ничто (N, prn, inan) sg, nom
+
+оба -> оба (NUM, small, hasgend) acc, m, inan
+оба -> оба (NUM, small, hasgend) acc, n, inan
+обе -> оба (NUM, small, hasgend) acc, f, inan
+
+обоих -> оба (NUM, small, hasgend) acc, m, anim
+обеих -> оба (NUM, small, hasgend) acc, f, anim
+обоих -> оба (NUM, small, hasgend) acc, n, inan
+
+оба -> оба (NUM, small, hasgend) nom, m
+оба -> оба (NUM, small, hasgend) nom, n
+обе -> оба (NUM, small, hasgend) nom, f
+
+обеим -> оба (NUM, small, hasgend) dat, f
+обоим -> оба (NUM, small, hasgend) dat, m
+обоим -> оба (NUM, small, hasgend) dat, n
+
+обеими -> оба (NUM, small, hasgend) inst, f
+обоими -> оба (NUM, small, hasgend) inst, m
+обоими -> оба (NUM, small, hasgend) inst, n
+
+обеих -> оба (NUM, small, hasgend) gen, f
+обоих -> оба (NUM, small, hasgend) gen, m
+обоих -> оба (NUM, small, hasgend) gen, n
+
+обеих -> оба (NUM, small, hasgend) prp, f
+обоих -> оба (NUM, small, hasgend) prp, m
+обоих -> оба (NUM, small, hasgend) prp, n
+
+
+один -> один (A) sg, acc, m, inan
+один -> один (A) sg, nom, m
+одна -> один (A) sg, nom, f
+одни -> один (A) pl, acc, inan
+одни -> один (A) pl, nom
+одним -> один (A) pl, dat
+одним -> один (A) sg, inst, m
+одним -> один (A) sg, inst, n
+одними -> один (A) pl, inst
+одних -> один (A) pl, acc, anim
+одних -> один (A) pl, gen
+одних -> один (A) pl, prp
+одно -> один (A) sg, acc, n
+одно -> один (A) sg, nom, n
+одного -> один (A) sg, acc, m, anim
+одного -> один (A) sg, gen, m
+одного -> один (A) sg, gen, n
+одной -> один (A) sg, dat, f
+одной -> один (A) sg, gen, f
+одной -> один (A) sg, inst, f
+одной -> один (A) sg, prp, f
+одном -> один (A) sg, prp, m
+одном -> один (A) sg, prp, n
+одному -> один (A) sg, dat, m
+одному -> один (A) sg, dat, n
+одною -> один (A) sg, inst, f
+одну -> один (A) sg, acc, f
+
+один -> один (NUM, 1ended, hasgend) sg, nom, m
+одно -> один (NUM, 1ended, hasgend) sg, nom, n
+одна -> один (NUM, 1ended, hasgend) sg, nom, f
+
+
+один -> один (NUM, 1ended, hasgend) sg, acc, m, inan
+
+одно -> один (NUM, 1ended, hasgend) sg, acc, n, inan
+одну -> один (NUM, 1ended, hasgend) sg, acc, f, inan
+
+одного -> один (NUM, 1ended, hasgend) sg, acc, m, anim
+одно -> один (NUM, 1ended, hasgend) sg, acc, n, anim
+одну -> один (NUM, 1ended, hasgend) sg, acc, f, anim
+
+
+одним -> один (NUM, 1ended, hasgend) sg, inst, m
+одним -> один (NUM, 1ended, hasgend) sg, inst, n
+одной -> один (NUM, 1ended, hasgend) sg, inst, f
+одною -> один (NUM, 1ended, hasgend) sg, inst, f
+
+одного -> один (NUM, 1ended, hasgend) sg, gen, m
+одного -> один (NUM, 1ended, hasgend) sg, gen, n
+одной -> один (NUM, 1ended, hasgend) sg, gen, f
+
+одной -> один (NUM, 1ended, hasgend) sg, dat, f
+одному -> один (NUM, 1ended, hasgend) sg, dat, m
+одному -> один (NUM, 1ended, hasgend) sg, dat, n
+
+одной -> один (NUM, 1ended, hasgend) sg, prp, f
+одном -> один (NUM, 1ended, hasgend) sg, prp, m
+одном -> один (NUM, 1ended, hasgend) sg, prp, n
+
+одиннадцати -> одиннадцать (NUM, large) dat
+одиннадцати -> одиннадцать (NUM, large) gen
+одиннадцати -> одиннадцать (NUM, large) prp
+одиннадцать -> одиннадцать (NUM, large) acc
+одиннадцать -> одиннадцать (NUM, large) nom
+одиннадцатью -> одиннадцать (NUM, large) inst
+
+однако -> однако (ADV)
+
+его -> он (N, prn, anim) mn, sg, acc
+его -> он (N, prn, anim) mn, sg, gen
+ее -> он (N, prn, anim) f, sg, acc
+ее -> он (N, prn, anim) f, sg, gen
+ей -> он (N, prn, anim) f, sg, dat
+ей -> он (N, prn, anim) f, sg, inst
+ему -> он (N, prn, anim) mn, sg, dat
+ею -> он (N, prn, anim) f, sg, inst
+им -> он (N, prn, anim) mn, sg, inst
+им -> он (N, prn, anim) pl, dat
+ими -> он (N, prn, anim) pl, inst
+их -> он (N, prn, anim) pl, acc
+их -> он (N, prn, anim) pl, gen
+него -> он (N, prn, anim) mn, sg, acc, adprep
+него -> он (N, prn, anim) mn, sg, gen, adprep
+нее -> он (N, prn, anim) f, sg, acc, adprep
+нее -> он (N, prn, anim) f, sg, gen, adprep
+ней -> он (N, prn, anim) f, sg, dat, adprep
+ней -> он (N, prn, anim) f, sg, prp, adprep
+ней -> он (N, prn, anim) f, sg, inst, adprep
+нем -> он (N, prn, anim) mn, sg, prp, adprep
+нему -> он (N, prn, anim) mn, sg, dat, adprep
+нею -> он (N, prn, anim) f, sg, inst, adprep
+ним -> он (N, prn, anim) mn, sg, inst, adprep
+ним -> он (N, prn, anim) pl, dat, adprep
+ними -> он (N, prn, anim) pl, inst, adprep
+них -> он (N, prn, anim) pl, acc, adprep
+них -> он (N, prn, anim) pl, gen, adprep
+них -> он (N, prn, anim) pl, prp, adprep
+он -> он (N, prn, anim) m, sg, nom
+она -> он (N, prn, anim) f, sg, nom
+оно -> он (N, prn, anim) n, sg, nom
+они -> он (N, prn, anim) pl, nom
+
+перед -> перед (N, m, inan) sg, acc
+перед -> перед (N, m, inan) sg, nom
+переда -> перед (N, m, inan) sg, gen
+переда -> перед (N, m, inan) pl, nom
+переда -> перед (N, m, inan) pl, acc
+передам -> перед (N, m, inan) pl, dat
+передами -> перед (N, m, inan) pl, inst
+передах -> перед (N, m, inan) pl, prp
+переде -> перед (N, m, inan) sg, prp
+передов -> перед (N, m, inan) pl, gen
+передом -> перед (N, m, inan) sg, inst
+переду -> перед (N, m, inan) sg, dat
+переду -> перед (N, m, inan) sg, prp2
+
+полгода base=полгода,POS=N,ANIM=inan,GEND=plt,NMB=pl,CAS=nom
+полгода base=полгода,POS=N,ANIM=inan,GEND=plt,NMB=pl,CAS=acc
+
+полтора -> полтора (NUM, small, hasgend) acc, m, inan
+полтора -> полтора (NUM, small, hasgend) acc, n, inan
+полторы -> полтора (NUM, small, hasgend) acc, f, inan
+
+полтора -> полтора (NUM, small, hasgend) acc, m, anim
+полтора -> полтора (NUM, small, hasgend) acc, n, anim
+полторы -> полтора (NUM, small, hasgend) acc, f, anim
+
+полтора -> полтора (NUM, small, hasgend) nom, m
+полтора -> полтора (NUM, small, hasgend) nom, n
+полторы -> полтора (NUM, small, hasgend) nom, f
+
+полутора -> полтора (NUM, small, hasgend) dat, m
+полутора -> полтора (NUM, small, hasgend) dat, f
+полутора -> полтора (NUM, small, hasgend) dat, n
+
+полутора -> полтора (NUM, small, hasgend) gen, m
+полутора -> полтора (NUM, small, hasgend) gen, f
+полутора -> полтора (NUM, small, hasgend) gen, n
+
+полутора -> полтора (NUM, small, hasgend) inst, m
+полутора -> полтора (NUM, small, hasgend) inst, f
+полутора -> полтора (NUM, small, hasgend) inst, n
+
+полутора -> полтора (NUM, small, hasgend) prp, m
+полутора -> полтора (NUM, small, hasgend) prp, f
+полутора -> полтора (NUM, small, hasgend) prp, n
+
+полугода -> полугода (N,inan) gen
+
+полтораста -> полтораста (NUM, large) acc
+полтораста -> полтораста (NUM, large) nom
+полутораста -> полтораста (NUM, large) dat
+полутораста -> полтораста (NUM, large) gen
+полутораста -> полтораста (NUM, large) inst
+полутораста -> полтораста (NUM, large) prp
+
+при -> при (PREP)
+
+путей -> путь (N, m, inan) pl, gen
+путем -> путь (N, m, inan) sg, inst
+пути -> путь (N, m, inan) pl, acc
+пути -> путь (N, m, inan) pl, nom
+пути -> путь (N, m, inan) sg, dat
+пути -> путь (N, m, inan) sg, gen
+пути -> путь (N, m, inan) sg, prp
+путь -> путь (N, m, inan) sg, acc
+путь -> путь (N, m, inan) sg, nom
+путям -> путь (N, m, inan) pl, dat
+путями -> путь (N, m, inan) pl, inst
+путях -> путь (N, m, inan) pl, prp
+
+пятеро -> пятеро (NUM, coll) acc, inan
+пятеро -> пятеро (NUM, coll) nom
+пятерым -> пятеро (NUM, coll) dat
+пятерыми -> пятеро (NUM, coll) inst
+пятерых -> пятеро (NUM, coll) acc, anim
+пятерых -> пятеро (NUM, coll) gen
+пятерых -> пятеро (NUM, coll) prp
+
+пятнадцати -> пятнадцать (NUM, large) dat
+пятнадцати -> пятнадцать (NUM, large) gen
+пятнадцати -> пятнадцать (NUM, large) prp
+пятнадцать -> пятнадцать (NUM, large) acc
+пятнадцать -> пятнадцать (NUM, large) nom
+пятнадцатью -> пятнадцать (NUM, large) inst
+
+пяти -> пять (NUM, large) dat
+пяти -> пять (NUM, large) gen
+пяти -> пять (NUM, large) prp
+пять -> пять (NUM, large) acc
+пять -> пять (NUM, large) nom
+пятью -> пять (NUM, large) inst
+
+пятидесяти -> пятьдесят (NUM, large, tenhun) dat
+пятидесяти -> пятьдесят (NUM, large, tenhun) gen
+пятидесяти -> пятьдесят (NUM, large, tenhun) prp
+пятьдесят -> пятьдесят (NUM, large, tenhun) acc
+пятьдесят -> пятьдесят (NUM, large, tenhun) nom
+пятьюдесятью -> пятьдесят (NUM, large, tenhun) inst
+
+пятисот -> пятьсот (NUM, large, tenhun) gen
+пятистам -> пятьсот (NUM, large, tenhun) dat
+пятистах -> пятьсот (NUM, large, tenhun) prp
+пятьсот -> пятьсот (NUM, large, tenhun) acc
+пятьсот -> пятьсот (NUM, large, tenhun) nom
+пятьюстами -> пятьсот (NUM, large, tenhun) inst
+
+сам -> сам (A, prn) sg, acc, m, inan
+сам -> сам (A, prn) sg, nom, m
+сама -> сам (A, prn) sg, nom, f
+сами -> сам (A, prn) pl, acc, inan
+сами -> сам (A, prn) pl, nom
+самим -> сам (A, prn) pl, dat
+самим -> сам (A, prn) sg, inst, m
+самим -> сам (A, prn) sg, inst, n
+самими -> сам (A, prn) pl, inst
+самих -> сам (A, prn) pl, acc, anim
+самих -> сам (A, prn) pl, gen
+самих -> сам (A, prn) pl, prp
+само -> сам (A, prn) sg, acc, n
+само -> сам (A, prn) sg, nom, n
+самого -> сам (A, prn) sg, acc, m, anim
+самого -> сам (A, prn) sg, gen, m
+самого -> сам (A, prn) sg, gen, n
+самое -> сам (A, prn) sg, acc, f
+самой -> сам (A, prn) sg, dat, f
+самой -> сам (A, prn) sg, gen, f
+самой -> сам (A, prn) sg, inst, f
+самой -> сам (A, prn) sg, prp, f
+самом -> сам (A, prn) sg, prp, m
+самом -> сам (A, prn) sg, prp, n
+самому -> сам (A, prn) sg, dat, m
+самому -> сам (A, prn) sg, dat, n
+самою -> сам (A, prn) sg, inst, f
+саму -> сам (A, prn) sg, acc, f
+
+
+
+свое -> свой (A, prn) sg, acc, n
+свое -> свой (A, prn) sg, nom, n
+своего -> свой (A, prn) sg, acc, m, anim
+своего -> свой (A, prn) sg, gen, m
+своего -> свой (A, prn) sg, gen, n
+своей -> свой (A, prn) sg, dat, f
+своей -> свой (A, prn) sg, gen, f
+своей -> свой (A, prn) sg, inst, f
+своей -> свой (A, prn) sg, prp, f
+своем -> свой (A, prn) sg, prp, m
+своем -> свой (A, prn) sg, prp, n
+своему -> свой (A, prn) sg, dat, m
+своему -> свой (A, prn) sg, dat, n
+своею -> свой (A, prn) sg, inst, f
+свои -> свой (A, prn) pl, acc, inan
+свои -> свой (A, prn) pl, nom
+своим -> свой (A, prn) pl, dat
+своим -> свой (A, prn) sg, inst, m
+своим -> свой (A, prn) sg, inst, n
+своими -> свой (A, prn) pl, inst
+своих -> свой (A, prn) pl, acc, anim
+своих -> свой (A, prn) pl, gen
+своих -> свой (A, prn) pl, prp
+свой -> свой (A, prn) sg, acc, m, inan
+свой -> свой (A, prn) sg, nom, m
+свою -> свой (A, prn) sg, acc, f
+своя -> свой (A, prn) sg, nom, f
+
+себе -> себя (N, prn) sg, dat
+себе -> себя (N, prn) sg, prp
+себя -> себя (N, prn) sg, acc
+себя -> себя (N, prn) sg, gen
+собой -> себя (N, prn) sg, inst
+собою -> себя (N, prn) sg, inst
+
+сего -> сей (A, prn) sg, acc, m, anim
+сего -> сей (A, prn) sg, gen, m
+сего -> сей (A, prn) sg, gen, n
+сей -> сей (A, prn) sg, acc, m, inan
+сей -> сей (A, prn) sg, dat, f
+сей -> сей (A, prn) sg, gen, f
+сей -> сей (A, prn) sg, inst, f
+сей -> сей (A, prn) sg, nom, m
+сей -> сей (A, prn) sg, prp, f
+сем -> сей (A, prn) sg, prp, m
+сем -> сей (A, prn) sg, prp, n
+сему -> сей (A, prn) sg, dat, m
+сему -> сей (A, prn) sg, dat, n
+сею -> сей (A, prn) sg, inst, f
+сие -> сей (A, prn) sg, acc, n
+сие -> сей (A, prn) sg, nom, n
+сии -> сей (A, prn) pl, acc, inan
+сии -> сей (A, prn) pl, nom
+сим -> сей (A, prn) pl, dat
+сим -> сей (A, prn) sg, inst, m
+сим -> сей (A, prn) sg, inst, n
+сими -> сей (A, prn) pl, inst
+сих -> сей (A, prn) pl, acc, anim
+сих -> сей (A, prn) pl, gen
+сих -> сей (A, prn) pl, prp
+сию -> сей (A, prn) sg, acc, f
+сия -> сей (A, prn) sg, nom, f
+
+семеро -> семеро (NUM, coll) acc, inan
+семеро -> семеро (NUM, coll) nom
+семерым -> семеро (NUM, coll) dat
+семерыми -> семеро (NUM, coll) inst
+семерых -> семеро (NUM, coll) acc, anim
+семерых -> семеро (NUM, coll) gen
+семерых -> семеро (NUM, coll) prp
+
+семнадцати -> семнадцать (NUM, large) dat
+семнадцати -> семнадцать (NUM, large) gen
+семнадцати -> семнадцать (NUM, large) prp
+семнадцать -> семнадцать (NUM, large) acc
+семнадцать -> семнадцать (NUM, large) nom
+семнадцатью -> семнадцать (NUM, large) inst
+
+семи -> семь (NUM, large) dat
+семи -> семь (NUM, large) gen
+семи -> семь (NUM, large) prp
+семь -> семь (NUM, large) acc
+семь -> семь (NUM, large) nom
+семью -> семь (NUM, large) inst
+
+семидесяти -> семьдесят (NUM, large, tenhun) dat
+семидесяти -> семьдесят (NUM, large, tenhun) gen
+семидесяти -> семьдесят (NUM, large, tenhun) prp
+семьдесят -> семьдесят (NUM, large, tenhun) acc
+семьдесят -> семьдесят (NUM, large, tenhun) nom
+семьюдесятью -> семьдесят (NUM, large, tenhun) inst
+
+семисот -> семьсот (NUM, large, tenhun) gen
+семистам -> семьсот (NUM, large, tenhun) dat
+семистах -> семьсот (NUM, large, tenhun) prp
+семьсот -> семьсот (NUM, large, tenhun) acc
+семьсот -> семьсот (NUM, large, tenhun) nom
+семьюстами -> семьсот (NUM, large, tenhun) inst
+
+скольким -> сколько (NUM, large, prn, irel) dat
+сколькими -> сколько (NUM, large, prn, irel) inst
+скольких -> сколько (NUM, large, prn, irel) acc, anim
+скольких -> сколько (NUM, large, prn, irel) gen
+скольких -> сколько (NUM, large, prn, irel) prp
+сколько -> сколько (NUM, large, prn, irel) acc, inan
+сколько -> сколько (NUM, large, prn, irel) nom
+
+сорок -> сорок (NUM, large, tenhun) acc
+сорок -> сорок (NUM, large, tenhun) nom
+сорока -> сорок (NUM, large, tenhun) dat
+сорока -> сорок (NUM, large, tenhun) gen
+сорока -> сорок (NUM, large, tenhun) inst
+сорока -> сорок (NUM, large, tenhun) prp
+
+ста -> сто (NUM, large, tenhun) dat
+ста -> сто (NUM, large, tenhun) gen
+ста -> сто (NUM, large, tenhun) inst
+ста -> сто (NUM, large, tenhun) prp
+сто -> сто (NUM, large, tenhun) acc
+сто -> сто (NUM, large, tenhun) nom
+
+стольким -> столько (NUM, large, prn) dat
+столькими -> столько (NUM, large, prn) inst
+стольких -> столько (NUM, large, prn) acc, anim
+стольких -> столько (NUM, large, prn) gen
+стольких -> столько (NUM, large, prn) prp
+столько -> столько (NUM, large, prn) acc, inan
+столько -> столько (NUM, large, prn) nom
+
+твое -> твой (A, prn) sg, acc, n
+твое -> твой (A, prn) sg, nom, n
+твоего -> твой (A, prn) sg, acc, m, anim
+твоего -> твой (A, prn) sg, gen, m
+твоего -> твой (A, prn) sg, gen, n
+твоей -> твой (A, prn) sg, dat, f
+твоей -> твой (A, prn) sg, gen, f
+твоей -> твой (A, prn) sg, inst, f
+твоей -> твой (A, prn) sg, prp, f
+твоем -> твой (A, prn) sg, prp, m
+твоем -> твой (A, prn) sg, prp, n
+твоему -> твой (A, prn) sg, dat, m
+твоему -> твой (A, prn) sg, dat, n
+твоею -> твой (A, prn) sg, inst, f
+твои -> твой (A, prn) pl, acc, inan
+твои -> твой (A, prn) pl, nom
+твоим -> твой (A, prn) pl, dat
+твоим -> твой (A, prn) sg, inst, m
+твоим -> твой (A, prn) sg, inst, n
+твоими -> твой (A, prn) pl, inst
+твоих -> твой (A, prn) pl, acc, anim
+твоих -> твой (A, prn) pl, gen
+твоих -> твой (A, prn) pl, prp
+твой -> твой (A, prn) sg, acc, m, inan
+твой -> твой (A, prn) sg, nom, m
+твою -> твой (A, prn) sg, acc, f
+твоя -> твой (A, prn) sg, nom, f
+
+та -> тот (A, prn) sg, nom, f
+те -> тот (A, prn) pl, acc, inan
+те -> тот (A, prn) pl, nom
+тем -> тот (A, prn) pl, dat
+тем -> тот (A, prn) sg, inst, m
+тем -> тот (A, prn) sg, inst, n
+теми -> тот (A, prn) pl, inst
+тех -> тот (A, prn) pl, acc, anim
+тех -> тот (A, prn) pl, gen
+тех -> тот (A, prn) pl, prp
+то -> тот (A, prn) sg, acc, n
+то -> тот (A, prn) sg, nom, n
+того -> тот (A, prn) sg, acc, m, anim
+того -> тот (A, prn) sg, gen, m
+того -> тот (A, prn) sg, gen, n
+той -> тот (A, prn) sg, dat, f
+той -> тот (A, prn) sg, gen, f
+той -> тот (A, prn) sg, inst, f
+той -> тот (A, prn) sg, prp, f
+том -> тот (A, prn) sg, prp, m
+том -> тот (A, prn) sg, prp, n
+тому -> тот (A, prn) sg, dat, m
+тому -> тот (A, prn) sg, dat, n
+тот -> тот (A, prn) sg, acc, m, inan
+тот -> тот (A, prn) sg, nom, m
+тою -> тот (A, prn) sg, inst, f
+ту -> тот (A, prn) sg, acc, f
+
+трем -> три (NUM, small) dat
+тремя -> три (NUM, small) inst
+трех -> три (NUM, small) sg, acc, anim
+трех -> три (NUM, small) sg, gen
+трех -> три (NUM, small) sg, prp
+три -> три (NUM, small) sg, acc, inan
+три -> три (NUM, small) sg, nom
+
+тридцати -> тридцать (NUM, large, tenhun) dat
+тридцати -> тридцать (NUM, large, tenhun) gen
+тридцати -> тридцать (NUM, large, tenhun) prp
+тридцать -> тридцать (NUM, large, tenhun) acc
+тридцать -> тридцать (NUM, large, tenhun) nom
+тридцатью -> тридцать (NUM, large, tenhun) inst
+
+тринадцати -> тринадцать (NUM, large) dat
+тринадцати -> тринадцать (NUM, large) gen
+тринадцати -> тринадцать (NUM, large) prp
+тринадцать -> тринадцать (NUM, large) acc
+тринадцать -> тринадцать (NUM, large) nom
+тринадцатью -> тринадцать (NUM, large) inst
+
+тремстам -> триста (NUM, large, tenhun) dat
+тремястами -> триста (NUM, large, tenhun) inst
+трехсот -> триста (NUM, large, tenhun) gen
+трехстах -> триста (NUM, large, tenhun) prp
+триста -> триста (NUM, large, tenhun) acc
+триста -> триста (NUM, large, tenhun) nom
+
+трое -> трое (NUM, coll) acc, inan
+трое -> трое (NUM, coll) nom
+троим -> трое (NUM, coll) dat
+троими -> трое (NUM, coll) inst
+троих -> трое (NUM, coll) acc, anim
+троих -> трое (NUM, coll) gen
+троих -> трое (NUM, coll) prp
+
+тебе -> ты (N, prn, anim) sg, dat
+тебе -> ты (N, prn, anim) sg, prp
+тебя -> ты (N, prn, anim) sg, acc
+тебя -> ты (N, prn, anim) sg, gen
+тобой -> ты (N, prn, anim) sg, inst
+тобою -> ты (N, prn, anim) sg, inst
+ты -> ты (N, prn, anim) sg, nom
+
+христа -> христос (N, m, anim, capf) sg, acc
+христа -> христос (N, m, anim, capf) sg, gen
+христе -> христос (N, m, anim, capf) sg, prp
+христом -> христос (N, m, anim, capf) sg, inst
+христос -> христос (N, m, anim, capf) sg, nom
+христу -> христос (N, m, anim, capf) sg, dat
+
+чей -> чей (A, prn, irel) sg, acc, m, inan
+чей -> чей (A, prn, irel) sg, nom, m
+чье -> чей (A, prn, irel) sg, acc, n
+чье -> чей (A, prn, irel) sg, nom, n
+чьего -> чей (A, prn, irel) sg, acc, m, anim
+чьего -> чей (A, prn, irel) sg, gen, m
+чьего -> чей (A, prn, irel) sg, gen, n
+чьей -> чей (A, prn, irel) sg, dat, f
+чьей -> чей (A, prn, irel) sg, gen, f
+чьей -> чей (A, prn, irel) sg, inst, f
+чьей -> чей (A, prn, irel) sg, prp, f
+чьем -> чей (A, prn, irel) sg, prp, m
+чьем -> чей (A, prn, irel) sg, prp, n
+чьему -> чей (A, prn, irel) sg, dat, m
+чьему -> чей (A, prn, irel) sg, dat, n
+чьею -> чей (A, prn, irel) sg, inst, f
+чьи -> чей (A, prn, irel) pl, acc, inan
+чьи -> чей (A, prn, irel) pl, nom
+чьим -> чей (A, prn, irel) pl, dat
+чьим -> чей (A, prn, irel) sg, inst, m
+чьим -> чей (A, prn, irel) sg, inst, n
+чьими -> чей (A, prn, irel) pl, inst
+чьих -> чей (A, prn, irel) pl, acc, anim
+чьих -> чей (A, prn, irel) pl, gen
+чьих -> чей (A, prn, irel) pl, prp
+чью -> чей (A, prn, irel) sg, acc, f
+чья -> чей (A, prn, irel) sg, nom, f
+
+чей-то -> чей-то (A, prn, irel) sg, acc, m, inan
+чей-то -> чей-то (A, prn, irel) sg, nom, m
+чье-то -> чей-то (A, prn, irel) sg, acc, n
+чье-то -> чей-то (A, prn, irel) sg, nom, n
+чьего-то -> чей-то (A, prn, irel) sg, acc, m, anim
+чьего-то -> чей-то (A, prn, irel) sg, gen, m
+чьего-то -> чей-то (A, prn, irel) sg, gen, n
+чьей-то -> чей-то (A, prn, irel) sg, dat, f
+чьей-то -> чей-то (A, prn, irel) sg, gen, f
+чьей-то -> чей-то (A, prn, irel) sg, inst, f
+чьей-то -> чей-то (A, prn, irel) sg, prp, f
+чьем-то -> чей-то (A, prn, irel) sg, prp, m
+чьем-то -> чей-то (A, prn, irel) sg, prp, n
+чьему-то -> чей-то (A, prn, irel) sg, dat, m
+чьему-то -> чей-то (A, prn, irel) sg, dat, n
+чьею-то -> чей-то (A, prn, irel) sg, inst, f
+чьи-то -> чей-то (A, prn, irel) pl, acc, inan
+чьи-то -> чей-то (A, prn, irel) pl, nom
+чьим-то -> чей-то (A, prn, irel) pl, dat
+чьим-то -> чей-то (A, prn, irel) sg, inst, m
+чьим-то -> чей-то (A, prn, irel) sg, inst, n
+чьими-то -> чей-то (A, prn, irel) pl, inst
+чьих-то -> чей-то (A, prn, irel) pl, acc, anim
+чьих-то -> чей-то (A, prn, irel) pl, gen
+чьих-то -> чей-то (A, prn, irel) pl, prp
+чью-то -> чей-то (A, prn, irel) sg, acc, f
+чья-то -> чей-то (A, prn, irel) sg, nom, f
+
+чей-либо -> чей-либо (A, prn, irel) sg, acc, m, inan
+чей-либо -> чей-либо (A, prn, irel) sg, nom, m
+чье-либо -> чей-либо (A, prn, irel) sg, acc, n
+чье-либо -> чей-либо (A, prn, irel) sg, nom, n
+чьего-либо -> чей-либо (A, prn, irel) sg, acc, m, anim
+чьего-либо -> чей-либо (A, prn, irel) sg, gen, m
+чьего-либо -> чей-либо (A, prn, irel) sg, gen, n
+чьей-либо -> чей-либо (A, prn, irel) sg, dat, f
+чьей-либо -> чей-либо (A, prn, irel) sg, gen, f
+чьей-либо -> чей-либо (A, prn, irel) sg, inst, f
+чьей-либо -> чей-либо (A, prn, irel) sg, prp, f
+чьем-либо -> чей-либо (A, prn, irel) sg, prp, m
+чьем-либо -> чей-либо (A, prn, irel) sg, prp, n
+чьему-либо -> чей-либо (A, prn, irel) sg, dat, m
+чьему-либо -> чей-либо (A, prn, irel) sg, dat, n
+чьею-либо -> чей-либо (A, prn, irel) sg, inst, f
+чьи-либо -> чей-либо (A, prn, irel) pl, acc, inan
+чьи-либо -> чей-либо (A, prn, irel) pl, nom
+чьим-либо -> чей-либо (A, prn, irel) pl, dat
+чьим-либо -> чей-либо (A, prn, irel) sg, inst, m
+чьим-либо -> чей-либо (A, prn, irel) sg, inst, n
+чьими-либо -> чей-либо (A, prn, irel) pl, inst
+чьих-либо -> чей-либо (A, prn, irel) pl, acc, anim
+чьих-либо -> чей-либо (A, prn, irel) pl, gen
+чьих-либо -> чей-либо (A, prn, irel) pl, prp
+чью-либо -> чей-либо (A, prn, irel) sg, acc, f
+чья-либо -> чей-либо (A, prn, irel) sg, nom, f
+
+чей-нибудь -> чей-нибудь (A, prn, irel) sg, acc, m, inan
+чей-нибудь -> чей-нибудь (A, prn, irel) sg, nom, m
+чье-нибудь -> чей-нибудь (A, prn, irel) sg, acc, n
+чье-нибудь -> чей-нибудь (A, prn, irel) sg, nom, n
+чьего-нибудь -> чей-нибудь (A, prn, irel) sg, acc, m, anim
+чьего-нибудь -> чей-нибудь (A, prn, irel) sg, gen, m
+чьего-нибудь -> чей-нибудь (A, prn, irel) sg, gen, n
+чьей-нибудь -> чей-нибудь (A, prn, irel) sg, dat, f
+чьей-нибудь -> чей-нибудь (A, prn, irel) sg, gen, f
+чьей-нибудь -> чей-нибудь (A, prn, irel) sg, inst, f
+чьей-нибудь -> чей-нибудь (A, prn, irel) sg, prp, f
+чьем-нибудь -> чей-нибудь (A, prn, irel) sg, prp, m
+чьем-нибудь -> чей-нибудь (A, prn, irel) sg, prp, n
+чьему-нибудь -> чей-нибудь (A, prn, irel) sg, dat, m
+чьему-нибудь -> чей-нибудь (A, prn, irel) sg, dat, n
+чьею-нибудь -> чей-нибудь (A, prn, irel) sg, inst, f
+чьи-нибудь -> чей-нибудь (A, prn, irel) pl, acc, inan
+чьи-нибудь -> чей-нибудь (A, prn, irel) pl, nom
+чьим-нибудь -> чей-нибудь (A, prn, irel) pl, dat
+чьим-нибудь -> чей-нибудь (A, prn, irel) sg, inst, m
+чьим-нибудь -> чей-нибудь (A, prn, irel) sg, inst, n
+чьими-нибудь -> чей-нибудь (A, prn, irel) pl, inst
+чьих-нибудь -> чей-нибудь (A, prn, irel) pl, acc, anim
+чьих-нибудь -> чей-нибудь (A, prn, irel) pl, gen
+чьих-нибудь -> чей-нибудь (A, prn, irel) pl, prp
+чью-нибудь -> чей-нибудь (A, prn, irel) sg, acc, f
+чья-нибудь -> чей-нибудь (A, prn, irel) sg, nom, f
+
+человек -> человек (N, m, anim) pl, gen
+человекам -> человек (N, m, anim) pl, dat
+человеками -> человек (N, m, anim) pl, inst
+человеках -> человек (N, m, anim) pl, prp
+
+четверо -> четверо (NUM, coll) acc, inan
+четверо -> четверо (NUM, coll) nom
+четверым -> четверо (NUM, coll) dat
+четверыми -> четверо (NUM, coll) inst
+четверых -> четверо (NUM, coll) acc, anim
+четверых -> четверо (NUM, coll) gen
+четверых -> четверо (NUM, coll) prp
+
+четыре -> четыре (NUM, small) acc, inan
+четыре -> четыре (NUM, small) nom
+четырем -> четыре (NUM, small) dat
+четырех -> четыре (NUM, small) acc, anim
+четырех -> четыре (NUM, small) gen
+четырех -> четыре (NUM, small) prp
+четырьмя -> четыре (NUM, small) inst
+
+четыремстам -> четыреста (NUM, large, tenhun) dat
+четыреста -> четыреста (NUM, large, tenhun) acc
+четыреста -> четыреста (NUM, large, tenhun) nom
+четырехсот -> четыреста (NUM, large, tenhun) gen
+четырехстах -> четыреста (NUM, large, tenhun) prp
+четырьмястами -> четыреста (NUM, large, tenhun) inst
+
+четырнадцати -> четырнадцать (NUM, large) dat
+четырнадцати -> четырнадцать (NUM, large) gen
+четырнадцати -> четырнадцать (NUM, large) prp
+четырнадцать -> четырнадцать (NUM, large) acc
+четырнадцать -> четырнадцать (NUM, large) nom
+четырнадцатью -> четырнадцать (NUM, large) inst
+
+что -> что (N, prn, n, inan, irel) sg, nom
+что -> что (N, prn, n, inan, irel) sg, acc
+чего -> что (N, prn, n, inan, irel) sg, gen
+чем -> что (N, prn, n, inan, irel) sg, inst
+чем -> что (N, prn, n, inan, irel) sg, prp
+чему -> что (N, prn, n, inan, irel) sg, dat
+
+что-то -> что-то (N, prn, n, inan, irel) sg, nom
+что-то -> что-то (N, prn, n, inan, irel) sg, acc
+чего-то -> что-то (N, prn, n, inan, irel) sg, gen
+чем-то -> что-то (N, prn, n, inan, irel) sg, inst
+чем-то -> что-то (N, prn, n, inan, irel) sg, prp
+чему-то -> что-то (N, prn, n, inan, irel) sg, dat
+
+что-либо -> что-либо (N, prn, n, inan, irel) sg, nom
+что-либо -> что-либо (N, prn, n, inan, irel) sg, acc
+чего-либо -> что-либо (N, prn, n, inan, irel) sg, gen
+чем-либо -> что-либо (N, prn, n, inan, irel) sg, inst
+чем-либо -> что-либо (N, prn, n, inan, irel) sg, prp
+чему-либо -> что-либо (N, prn, n, inan, irel) sg, dat
+
+что-нибудь -> что-нибудь (N, prn, n, inan, irel) sg, nom
+что-нибудь -> что-нибудь (N, prn, n, inan, irel) sg, acc
+чего-нибудь -> что-нибудь (N, prn, n, inan, irel) sg, gen
+чем-нибудь -> что-нибудь (N, prn, n, inan, irel) sg, inst
+чем-нибудь -> что-нибудь (N, prn, n, inan, irel) sg, prp
+чему-нибудь -> что-нибудь (N, prn, n, inan, irel) sg, dat
+
+шестеро -> шестеро (NUM, coll) acc, inan
+шестеро -> шестеро (NUM, coll) nom
+шестерым -> шестеро (NUM, coll) dat
+шестерыми -> шестеро (NUM, coll) inst
+шестерых -> шестеро (NUM, coll) acc, anim
+шестерых -> шестеро (NUM, coll) gen
+шестерых -> шестеро (NUM, coll) prp
+
+шестнадцати -> шестнадцать (NUM, large) dat
+шестнадцати -> шестнадцать (NUM, large) gen
+шестнадцати -> шестнадцать (NUM, large) prp
+шестнадцать -> шестнадцать (NUM, large) acc
+шестнадцать -> шестнадцать (NUM, large) nom
+шестнадцатью -> шестнадцать (NUM, large) inst
+
+шести -> шесть (NUM, large) dat
+шести -> шесть (NUM, large) gen
+шести -> шесть (NUM, large) prp
+шесть -> шесть (NUM, large) acc
+шесть -> шесть (NUM, large) nom
+шестью -> шесть (NUM, large) inst
+
+шестидесяти -> шестьдесят (NUM, large, tenhun) dat
+шестидесяти -> шестьдесят (NUM, large, tenhun) gen
+шестидесяти -> шестьдесят (NUM, large, tenhun) prp
+шестьдесят -> шестьдесят (NUM, large, tenhun) acc
+шестьдесят -> шестьдесят (NUM, large, tenhun) nom
+шестьюдесятью -> шестьдесят (NUM, large, tenhun) inst
+
+шестисот -> шестьсот (NUM, large, tenhun) gen
+шестистам -> шестьсот (NUM, large, tenhun) dat
+шестистах -> шестьсот (NUM, large, tenhun) prp
+шестьсот -> шестьсот (NUM, large, tenhun) acc
+шестьсот -> шестьсот (NUM, large, tenhun) nom
+шестьюстами -> шестьсот (NUM, large, tenhun) inst
+
+эта -> этот (A, prn) sg, nom, f
+эти -> этот (A, prn) pl, acc, inan
+эти -> этот (A, prn) pl, nom
+этим -> этот (A, prn) pl, dat
+этим -> этот (A, prn) sg, inst, m
+этим -> этот (A, prn) sg, inst, n
+этим -> это (N, prn, n, inan) sg, inst
+этими -> этот (A, prn) pl, inst
+этих -> этот (A, prn) pl, acc, anim
+этих -> этот (A, prn) pl, gen
+этих -> этот (A, prn) pl, prp
+это -> этот (A, prn) sg, acc, n
+это -> этот (A, prn) sg, nom, n
+это -> это (N, prn, n, inan) sg, nom
+это -> это (N, prn, n, inan) sg, acc
+этого -> этот (A, prn) sg, acc, m, anim
+этого -> этот (A, prn) sg, gen, m
+этого -> этот (A, prn) sg, gen, n
+этого -> это (N, prn, n, inan) sg, gen
+этой -> этот (A, prn) sg, dat, f
+этой -> этот (A, prn) sg, gen, f
+этой -> этот (A, prn) sg, inst, f
+этой -> этот (A, prn) sg, prp, f
+этом -> этот (A, prn) sg, prp, m
+этом -> этот (A, prn) sg, prp, n
+этом -> это (N, prn, n, inan) sg, prp
+этому -> этот (A, prn) sg, dat, m
+этому -> этот (A, prn) sg, dat, n
+этому -> это (N, prn, n, inan) sg, dat
+этот -> этот (A, prn) sg, acc, m, inan
+этот -> этот (A, prn) sg, nom, m
+этою -> этот (A, prn) sg, inst, f
+эту -> этот (A, prn) sg, acc, f
+
+меня -> я (N, prn) sg, acc
+меня -> я (N, prn) sg, gen
+мне -> я (N, prn) sg, dat
+мне -> я (N, prn) sg, prp
+мной -> я (N, prn) sg, inst
+мною -> я (N, prn) sg, inst
+я -> я (N, prn) sg, nom
+
+

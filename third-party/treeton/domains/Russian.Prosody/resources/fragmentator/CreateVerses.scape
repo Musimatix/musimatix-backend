@@ -1,0 +1,12 @@
+package prosody;
+
+phase CreateVerses {
+  input SpaceToken,Token;
+  output Verse;
+  control brill;
+
+  rule r1 {
+    {SpaceToken: kind=control}(({Token} | {SpaceToken:kind=space})+):b{SpaceToken: kind=control}
+    ->create Verse[b,b]()
+  }
+}

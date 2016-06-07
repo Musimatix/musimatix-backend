@@ -1,0 +1,357 @@
+/*
+ * $:$:$ $:$:$[
+ * 
+ * Copyright © ЗАО Авикомп Сервисез
+ * 
+ * пр.Вернадского, 84/2, Москва, Россия, 119606
+ * тел.: (+7 495) 436 09 45, (+ 7 495) 436 07 49
+ * e-mail: avicomp@avicomp.ru
+ * www.avicomp.ru
+ * 
+ * ]$:$:$ $:$:$
+ */
+/*
+*  post_morph.jape
+*
+* Copyright (c) 1998-2001, The University of Sheffield.
+*
+*  This file is part of GATE (see http://gate.ac.uk/), and is free
+*  software, licenced under the GNU Library General Public License,
+*  Version 2, June 1991 (in the distribution as file licence.html,
+*  and also available at http://gate.ac.uk/gate/licence.html).
+*
+*  Nikolay Рertsov, Anatoly Starostin, July 2004
+*/
+
+
+Phase: PostMorph
+Input: Token SpaceToken Morph SuperMorph Split
+Options: control = brill
+
+Rule: NonMorph_hyphen_adj
+// Урус-Мартановский
+(
+    ( { Token.kind == "word" } ):ante
+    { Token.string == "-" }
+    ( { Morph.POS == "A" } | { SuperMorph.POS == "A" }):core
+):phrase
+-->
+{
+    AnnotationSet anteSet = (AnnotationSet) bindings.get("ante");
+    AnnotationSet coreSet = (AnnotationSet) bindings.get("core");
+    Annotation anteAnn = (Annotation) anteSet.iterator().next();
+    Annotation coreAnn = (Annotation) coreSet.iterator().next();
+
+    String anteSTR =  (String) anteAnn.getFeatures().get("string");
+    String coreSTR =  (String) coreAnn.getFeatures().get("string");
+    String anteORTH =  (String) anteAnn.getFeatures().get("orth");
+    String coreBASE =  (String) coreAnn.getFeatures().get("base");
+
+    if ( "кое".equals(anteSTR) ) { return; }
+
+    AnnotationSet phraseSet = (AnnotationSet) bindings.get("phrase");
+
+    FeatureMap f1 = coreAnn.getFeatures();
+
+    FeatureMap f2 = Factory.newFeatureMap();
+    f2.putAll (f1);
+    f2.put ("base", anteSTR+"-"+coreBASE);
+    f2.put ("string", anteSTR+"-"+coreSTR);
+    f2.put ("length", (anteSTR+"-"+coreSTR).length());
+    f2.put ("orth", treeton.core.util.sut.detectOrth(anteSTR+"-"+coreSTR));
+    f2.put ("kind", treeton.core.util.sut.detectKind(anteSTR+"-"+coreSTR));
+    f2.put ("lang", treeton.core.util.sut.detectLang(anteSTR+"-"+coreSTR));
+
+    annotations.add(phraseSet.firstNode(), phraseSet.lastNode(), "SuperMorph", f2);
+}
+
+
+Rule: Morph_hyphen_adj
+// 67-летний, Юго-Западный, Тверская-Ямская, колото-резанный
+(
+    ( { Morph } | { SuperMorph }):ante
+    { Token.string == "-" }
+    (
+      { Morph.POS == "A" } | { Morph.REPR == "part" } |
+      { SuperMorph.POS == "A" } | { SuperMorph.REPR == "part" }
+    ):core
+):phrase
+-->
+{
+    AnnotationSet anteSet = (AnnotationSet) bindings.get("ante");
+    AnnotationSet coreSet = (AnnotationSet) bindings.get("core");
+    Annotation anteAnn = (Annotation) anteSet.iterator().next();
+    Annotation coreAnn = (Annotation) coreSet.iterator().next();
+
+    String anteSTR =  (String) anteAnn.getFeatures().get("string");
+    String anteORTH =  (String) anteAnn.getFeatures().get("orth");
+    String antePOS =  (String) anteAnn.getFeatures().get("POS");
+    String anteCAS =  (String) anteAnn.getFeatures().get("CAS");
+    String antePNT =  (String) anteAnn.getFeatures().get("PNT");
+    String coreBASE =  (String) coreAnn.getFeatures().get("base");
+    String coreString =  (String) coreAnn.getFeatures().get("string");
+
+    if ( "по".equals(anteSTR) || "в".equals(anteSTR) ||
+         "во".equals(anteSTR) ) { return; }
+
+    if ( "A".equals(antePOS) && anteCAS!=null &&
+         !com.avicomp.gate.util.AnnotationSpecial.agreeAdjAdj(anteAnn,coreAnn) ) {
+                return; }
+
+    if ( "N".equals(antePOS) && ( antePNT!=null || !"nom".equals(anteCAS) ) ) {
+                return; }
+
+    AnnotationSet phraseSet = (AnnotationSet) bindings.get("phrase");
+
+    FeatureMap f1 = coreAnn.getFeatures();
+
+    FeatureMap f2 = Factory.newFeatureMap();
+    f2.putAll (f1);
+    f2.put ("base", anteSTR+"-"+coreBASE);
+    f2.put ("string", anteSTR+"-"+coreString);
+    f2.put ("length", (anteSTR+"-"+coreString).length());
+    f2.put ("orth", treeton.core.util.sut.detectOrth(anteSTR+"-"+coreString));
+    f2.put ("kind", treeton.core.util.sut.detectKind(anteSTR+"-"+coreString));
+    f2.put ("lang", treeton.core.util.sut.detectLang(anteSTR+"-"+coreString));
+
+    annotations.add(phraseSet.firstNode(), phraseSet.lastNode(), "SuperMorph", f2);
+}
+
+
+Rule: adv_po_adj_mu
+// по-прежнему, по-новому, по-зимнему
+(
+  { Token.string == "по" }
+  { Token.string == "-" }
+  (
+    { Morph.POS == "A", Morph.NMB == "sg", Morph.CAS == "dat", Morph.GEND == "n" } |
+    { SuperMorph.POS == "A", SuperMorph.NMB == "sg", SuperMorph.CAS == "dat", SuperMorph.GEND == "n" }
+  ):adj
+):phrase
+-->
+{
+    AnnotationSet adjSet = (AnnotationSet) bindings.get("adj");
+    String adjString = "";
+    String adjType = "";
+
+    if (adjSet != null && adjSet.size() > 0) {
+      Annotation adjAnn = (Annotation) adjSet.iterator().next();
+      adjString = (String) adjAnn.getFeatures().get("string");
+      adjType = (String) adjAnn.getType();
+    }
+
+    AnnotationSet phraseSet = (AnnotationSet) bindings.get("phrase");
+    FeatureMap features = Factory.newFeatureMap();
+    features.put("POS", "ADV");
+    features.put("base", "по-" + adjString);
+    features.put ("string", "по-" + adjString);
+    features.put ("length", ("по-" + adjString).length());
+    features.put ("orth", treeton.core.util.sut.detectOrth("по-" + adjString));
+    features.put ("kind", treeton.core.util.sut.detectKind("по-" + adjString));
+    features.put ("lang", treeton.core.util.sut.detectLang("по-" + adjString));
+
+    annotations.add(phraseSet.firstNode(), phraseSet.lastNode(), "SuperMorph", features);
+}
+
+Rule: adv_po_adj_ski
+// по-французски
+(
+  { Token.string == "по" }
+  { Token.string == "-" }
+  (
+    { Morph.POS == "A", Morph.ATTR == "sh", Morph.NMB == "pl" } |
+    { SuperMorph.POS == "A", SuperMorph.ATTR == "sh", SuperMorph.NMB == "pl" }
+  ):adj
+):phrase
+-->
+{
+    AnnotationSet adjSet = (AnnotationSet) bindings.get("adj");
+    String adjString = "";
+    String adjType = "";
+
+    if (adjSet != null && adjSet.size() > 0) {
+      Annotation adjAnn = (Annotation) adjSet.iterator().next();
+      adjString = (String) adjAnn.getFeatures().get("string");
+      adjType = (String) adjAnn.getType();
+    }
+
+    AnnotationSet phraseSet = (AnnotationSet) bindings.get("phrase");
+    FeatureMap features = Factory.newFeatureMap();
+    features.put("POS", "ADV");
+    features.put("base", "по-" + adjString);
+    features.put ("string", "по-" + adjString);
+    features.put ("length", ("по-" + adjString).length());
+    features.put ("orth", treeton.core.util.sut.detectOrth("по-" + adjString));
+    features.put ("kind", treeton.core.util.sut.detectKind("по-" + adjString));
+    features.put ("lang", treeton.core.util.sut.detectLang("по-" + adjString));
+
+    annotations.add(phraseSet.firstNode(), phraseSet.lastNode(), "SuperMorph", features);
+}
+
+Rule: pref_fig_noun
+// 60-летие
+(
+    ( { Token.kind == "number" } ):ante
+    { Token.string == "-" }
+    (
+      { Morph.POS == "N", Morph.PR == "pr1"} |
+      { SuperMorph.POS == "N" }
+    ):core
+):phrase
+-->
+{
+    AnnotationSet anteSet = (AnnotationSet) bindings.get("ante");
+    AnnotationSet coreSet = (AnnotationSet) bindings.get("core");
+    Annotation anteAnn = (Annotation) anteSet.iterator().next();
+    Annotation coreAnn = (Annotation) coreSet.iterator().next();
+
+    String anteSTR =  (String) anteAnn.getFeatures().get("string");
+    String coreBASE =  (String) coreAnn.getFeatures().get("base");
+    String coreString =  (String) coreAnn.getFeatures().get("string");
+
+    AnnotationSet phraseSet = (AnnotationSet) bindings.get("phrase");
+
+    FeatureMap f1 = coreAnn.getFeatures();
+
+    FeatureMap f2 = Factory.newFeatureMap();
+    f2.putAll (f1);
+    f2.put ("base", anteSTR+"-"+coreBASE);
+    f2.put ("string", anteSTR+"-"+coreString);
+    f2.put ("length", (anteSTR+"-"+coreString).length());
+    f2.put ("orth", treeton.core.util.sut.detectOrth(anteSTR+"-"+coreString));
+    f2.put ("kind", treeton.core.util.sut.detectKind(anteSTR+"-"+coreString));
+    f2.put ("lang", treeton.core.util.sut.detectLang(anteSTR+"-"+coreString));
+
+    annotations.add(phraseSet.firstNode(), phraseSet.lastNode(), "SuperMorph", f2);
+}
+
+
+Rule: pref_dash_noun
+// вице-президент, экс-чемпион
+(
+    ( { Token.string == "вице" } | { Token.string == "экс" } |
+      { Token.string == "Вице" } | { Token.string == "Экс" } |
+      { Token.string == "ВИЦЕ" } | { Token.string == "ЭКС" } ):pref
+    { Token.string == "-" }
+    (
+      { Morph.POS == "N"} | { Morph.POS == "A" } |
+      { SuperMorph.POS == "N"} | { SuperMorph.POS == "A" }
+    ):core
+):phrase
+-->
+{
+    AnnotationSet prefSet = (AnnotationSet) bindings.get("pref");
+    Annotation prefAnn = (Annotation) prefSet.iterator().next();
+    AnnotationSet coreSet = (AnnotationSet) bindings.get("core");
+    Annotation coreAnn = (Annotation) coreSet.iterator().next();
+
+    String prefSTR = (String) prefAnn.getFeatures().get("string");
+    String prefORTH = (String) prefAnn.getFeatures().get("orth");
+    String coreBASE = (String) coreAnn.getFeatures().get("base");
+    String coreSTR = (String) coreAnn.getFeatures().get("string");
+    String corePOS = (String) coreAnn.getFeatures().get("POS");
+    String coreNMB = (String) coreAnn.getFeatures().get("NMB");
+    String coreCAS = (String) coreAnn.getFeatures().get("CAS");
+    String coreGEND = (String) coreAnn.getFeatures().get("GEND");
+    String coreANIM = (String) coreAnn.getFeatures().get("ANIM");
+    String coreADJI = (String) coreAnn.getFeatures().get("ADJI");
+    String coreATTR = (String) coreAnn.getFeatures().get("ATTR");
+    String coreINVAR = (String) coreAnn.getFeatures().get("INVAR");
+    String corePNT = (String) coreAnn.getFeatures().get("PNT");
+
+    AnnotationSet phraseSet = (AnnotationSet) bindings.get("phrase");
+    FeatureMap features = Factory.newFeatureMap();
+    features.put ("base", prefSTR + "-" + coreBASE);
+    features.put ("string", prefSTR + "-" + coreSTR);
+    features.put ("length", (prefSTR + "-" + coreSTR).length());
+    features.put ("orth", treeton.core.util.sut.detectOrth(prefSTR + "-" + coreSTR));
+    features.put ("kind", treeton.core.util.sut.detectKind(prefSTR + "-" + coreSTR));
+    features.put ("lang", treeton.core.util.sut.detectLang(prefSTR + "-" + coreSTR));
+    features.put ("POS", corePOS);
+    if (null != coreNMB) { features.put ("NMB", coreNMB); }
+    if (null != coreCAS) { features.put ("CAS", coreCAS); }
+    if (null != coreGEND) { features.put ("GEND", coreGEND); }
+    if (null != coreANIM) { features.put ("ANIM", coreANIM); }
+    if (null != coreADJI) { features.put ("ADJI", coreADJI); }
+    if (null != coreATTR) { features.put ("ATTR", coreATTR); }
+    if (null != coreINVAR) { features.put ("INVAR", coreINVAR); }
+    if (null != corePNT) { features.put ("INVAR", corePNT); }
+
+    annotations.add(phraseSet.firstNode(), phraseSet.lastNode(), "SuperMorph", features);
+}
+
+Rule: pref_dash_capall
+// МДК-банк
+(
+    (  { Token.orth == "allCaps" } ):ante
+    { Token.string == "-" }
+    (
+      { Morph.POS == "N" } | { SuperMorph.POS == "N" }
+    ):core
+):phrase
+-->
+{
+    AnnotationSet anteSet = (AnnotationSet) bindings.get("ante");
+    AnnotationSet coreSet = (AnnotationSet) bindings.get("core");
+    Annotation anteAnn = (Annotation) anteSet.iterator().next();
+    Annotation coreAnn = (Annotation) coreSet.iterator().next();
+
+    String anteSTR =  (String) anteAnn.getFeatures().get("string");
+    String coreSTR =  (String) coreAnn.getFeatures().get("string");
+    String anteORTH =  (String) anteAnn.getFeatures().get("orth");
+    String coreBASE =  (String) coreAnn.getFeatures().get("base");
+
+    AnnotationSet phraseSet = (AnnotationSet) bindings.get("phrase");
+
+    FeatureMap f1 = coreAnn.getFeatures();
+
+    FeatureMap f2 = Factory.newFeatureMap();
+    f2.putAll (f1);
+    f2.put ("base", anteSTR+"-"+coreBASE);
+    f2.put ("string", anteSTR+"-"+coreSTR);
+    f2.put ("length", (anteSTR+"-"+coreSTR).length());
+    f2.put ("orth", treeton.core.util.sut.detectOrth(anteSTR+"-"+coreSTR));
+    f2.put ("kind", treeton.core.util.sut.detectKind(anteSTR+"-"+coreSTR));
+    f2.put ("lang", treeton.core.util.sut.detectLang(anteSTR+"-"+coreSTR));
+
+    annotations.add(phraseSet.firstNode(), phraseSet.lastNode(), "SuperMorph", f2);
+}
+
+Rule: adjtoadv
+(
+    (
+      { Morph.POS == "A", Morph.NMB == "sg", Morph.GEND == "n", Morph.ATTR == "sh" }
+    ):core
+)
+-->
+{
+    AnnotationSet coreSet = (AnnotationSet) bindings.get("core");
+    Annotation coreAnn = (Annotation) coreSet.iterator().next();
+
+    String coreString = (String) coreAnn.getFeatures().get("string");
+    String coreKind = (String) coreAnn.getFeatures().get("kind");
+    String coreOrth = (String) coreAnn.getFeatures().get("orth");
+    String coreLang = (String) coreAnn.getFeatures().get("lang");
+    Integer coreLength = (Integer) coreAnn.getFeatures().get("length");
+
+    FeatureMap features = Factory.newFeatureMap();
+    features.put ("POS", "ADV");
+    if (null != coreString) {
+      features.put ("string", coreString);
+      features.put ("base", coreString);
+    }
+    if (null != coreKind) {
+      features.put ("kind", coreKind);
+    }
+    if (null != coreOrth) {
+      features.put ("orth", coreOrth);
+    }
+    if (null != coreLang) {
+      features.put ("lang", coreLang);
+    }
+    if (null != coreLength) {
+      features.put ("length", coreLength);
+    }
+
+    annotations.add(coreSet.firstNode(), coreSet.lastNode(), "SuperMorph", features);
+}

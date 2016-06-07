@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Document xmlns="http://starling.rinet.ru/treeton" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" domain="Common.Russian" name="ShallowSyntax" outputType="System" viewName="Русский синтаксис (поверхностный)" xsi:schemaLocation="http://starling.rinet.ru/treeton http://starling.rinet.ru/treeton/SyntaxRulesSchema.xsd">
+  <rule comments="присказуимостные прилагательные" name="adjpredic" wellFormed="ok">
+    <template end="15" name="root" start="0"/>
+    <template end="10" name="B" start="5">Morph|Phrase:POS=V,REPR=fin,TNS=past</template>
+    <template end="5" name="A" start="0">Morph|Phrase:POS=N, CAS=nom</template>
+    <template end="15" name="C" start="10">Morph|Phrase: POS=A | POS=V,REPR=part, CAS=inst</template>
+    <structure template="root">
+      <rel from="root" to="C" type="path"/>
+      <rel from="root" to="B" type="path"/>
+      <rel from="B" name="predic" to="A" type="simple"/>
+    </structure>
+    <constraints>A.NMB == C.NMB &amp;&amp; (A.NMB == pl ? true : (A.GEND == C.GEND || (A.GEND == mf &amp;&amp; C.GEND != n)))</constraints>
+    <transformation relType="adv" trn1="B" trn2="C" type="TRANSFORM_LINK"/>
+    <vector target="root"></vector>
+  </rule>
+  <rule comments="" name="appos" wellFormed="ok">
+    <template end="10" name="root" start="0"/>
+    <template end="10" name="B" start="5">Morph: POS=N</template>
+    <template end="5" name="A" start="0">Morph: POS=N</template>
+    <structure template="root">
+      <rel from="root" to="B" type="path"/>
+      <rel from="root" to="A" type="path"/>
+    </structure>
+    <constraints>A.CAS == B.CAS &amp;&amp; A.start &lt; B.start</constraints>
+    <penalties>true -&gt; (300)</penalties>
+    <transformation relType="appos" trn1="A" trn2="B" type="TRANSFORM_LINK"/>
+    <vector target="root"/>
+  </rule>
+  <rule comments="аналитическое будущее время" name="auxil_fut" wellFormed="ok">
+    <template end="10" name="root" start="0"/>
+    <template end="5" name="A" start="0">Morph:base=быть,TNS=fut, AUXIL=auxil</template>
+    <template end="10" name="B" start="5">Morph:POS=V,REPR=inf,ASP=ipf|pf_ipf</template>
+    <structure template="root">
+      <rel from="root" to="B" type="path"/>
+      <rel from="root" to="A" type="path"/>
+    </structure>
+    <transformation relType="auxil" trn1="A" trn2="B" type="TRANSFORM_LINK"/>
+    <transformation trn1="A" trn2="D" type="TRANSFORM_AGGREGATE_STRONG"/>
+    <vector target="root"/>
+    <vector target="D">Phrase(*:=A.*;TYPE:=auxGroup;base:=null;AUXIL:=null;)</vector>
+  </rule>
+  <rule comments="" name="circumst_adv" wellFormed="ok">
+    <template end="10" name="root" start="0"/>
+    <template end="10" name="B" start="5">Morph:POS=ADV|(POS=A,ATTR=sh)</template>
+    <template end="5" name="A" start="0">Morph|Phrase:POS=V|PRED,AUXIL=null</template>
+    <structure template="root">
+      <rel from="root" to="B" type="path"/>
+      <rel from="root" to="A" type="path"/>
+    </structure>
+    <transformation relType="adv" trn1="A" trn2="B" type="TRANSFORM_LINK"/>
+    <vector target="root"/>
+  </rule>
+  <rule comments="" name="circumst_cmp" wellFormed="ok">
+    <template end="10" name="root" start="0"/>
+    <template end="10" name="B" start="5">Morph:POS=A,DGR=cmp</template>
+    <template end="5" name="A" start="0">Morph|Phrase:POS=V,AUXIL=null</template>
+    <structure template="root">
+      <rel from="root" to="B" type="path"/>
+      <rel from="root" to="A" type="path"/>
+    </structure>
+    <transformation relType="adv" trn1="A" trn2="B" type="TRANSFORM_LINK"/>
+    <vector target="root"/>
+  </rule>
+  <rule comments="" name="circumst_prepg" wellFormed="ok">
+    <template end="10" name="root" start="0"/>
+    <template end="5" name="A" start="0">Morph|Phrase:POS=V|PRED|N,AUXIL=null</template>
+    <template end="10" name="B" start="5">Phrase:TYPE=PREPG</template>
+    <structure template="root">
+      <rel from="root" to="A" type="path"/>
+      <rel from="root" to="B" type="path"/>
+    </structure>
+    <penalties>A.POS==N -&gt; (0)</penalties>
+    <transformation relType="adv" trn1="A" trn2="B" type="TRANSFORM_LINK"/>
+    <vector target="root"/>
+  </rule>
+  <rule comments="ср. &quot;(человек и кошка)(и стол)&quot;" name="ConjEx" wellFormed="ok">
+    <template end="10" name="root" start="0"/>
+    <template end="10" name="B" start="5">Phrase: TYPE=ConjN,SINGLE=single</template>
+    <template end="5" name="A" start="0">Phrase: SINGLE=null,TYPE=ConjN</template>
+    <structure template="root">
+      <rel from="root" to="B" type="path"/>
+      <rel from="root" to="A" type="path"/>
+    </structure>
+    <constraints>A.CAS == B.CAS, A.start &lt; B.start </constraints>
+    <transformation trn1="A" trn2="B" type="TRANSFORM_ADDMEMBER_STRONG"/>
+    <vector target="root"/>
+  </rule>
+  <rule comments="ср. &quot;(человек)(и кошка)&quot;" name="ConjNplMorph" wellFormed="ok">
+    <template end="10" name="root" start="0"/>
+    <template end="10" name="B" start="5">Phrase: TYPE=ConjN,SINGLE=single</template>
+    <template end="5" name="A" start="0">Morph: POS=N</template>
+    <structure template="root">
+      <rel from="root" to="B" type="path"/>
+      <rel from="root" to="A" type="path"/>
+    </structure>
+    <constraints>A.CAS == B.CAS &amp;&amp; A.start &lt; B.start </constraints>
+    <transformation trn1="A" trn2="C" type="TRANSFORM_AGGREGATE_STRONG"/>
+    <transformation trn1="C" trn2="B" type="TRANSFORM_ADDMEMBER_STRONG"/>
+    <vector target="root"/>
+    <vector target="C">Phrase(POS:=N;CAS:=A.CAS;TYPE:=ConjN;NMB:=pl;SINGLE:=null;)</vector>
+  </rule>
+  <rule comments="ср. &quot;(и человек)(и кошка)&quot;" name="ConjNplPhrase" wellFormed="ok">
+    <template end="10" name="root" start="0"/>
+    <template end="10" name="B" start="5">Phrase: TYPE=ConjN,SINGLE=single</template>
+    <template end="5" name="A" start="0">Phrase: TYPE=ConjN,SINGLE=single</template>
+    <structure template="root">
+      <rel from="root" to="B" type="path"/>
+      <rel from="root" to="A" type="path"/>
+    </structure>
+    <constraints>A.CAS == B.CAS &amp;&amp; A.start &lt; B.start </constraints>
+    <transformation trn1="A" trn2="C" type="TRANSFORM_AGGREGATE_STRONG"/>
+    <transformation relType="coord_conj" trn1="A" trn2="B" type="TRANSFORM_LINK"/>
+    <vector target="root"/>
+    <vector target="C">Phrase(POS:=N;CAS:=A.CAS;TYPE:=ConjN;NMB:=pl;SINGLE:=null;)</vector>
+  </rule>
+  <rule comments="ср. &quot;(и)( кошка)&quot;" name="ConjNplSingle" wellFormed="ok">
+    <template end="10" name="root" start="0"/>
+    <template end="10" name="B" start="5">Morph:POS=N</template>
+    <template end="5" name="A" start="0">Morph: POS=CONJ</template>
+    <structure template="root">
+      <rel from="root" to="B" type="path"/>
+      <rel from="root" to="A" type="path"/>
+    </structure>
+    <constraints>A.start &lt; B.start</constraints>
+    <transformation relType="coord_conj" trn1="A" trn2="B" type="TRANSFORM_LINK"/>
+    <transformation trn1="A" trn2="D" type="TRANSFORM_AGGREGATE_STRONG"/>
+    <vector target="root"/>
+    <vector target="D">Phrase(CAS:=B.CAS;NMB:=B.NMB;TYPE:=ConjN;SINGLE:=single;) </vector>
+  </rule>
+  <rule comments="ср. &quot;(адресуется)(и включает)&quot;" name="ConjVMorph" wellFormed="ok">
+    <template end="10" name="root" start="0"/>
+    <template end="5" name="A" start="0">Morph: POS=V,REPR=inf|fin|gern</template>
+    <template end="10" name="B" start="5">Phrase: TYPE=ConjV,SINGLE=single</template>
+    <structure template="root">
+      <rel from="root" to="B" type="path"/>
+      <rel from="root" to="A" type="path"/>
+    </structure>
+    <constraints>       A.REPR==B.REPR,       (A.NMB==null || B.NMB==null) ? true: A.NMB==B.NMB,       (A.GEND==null || B.GEND==null) ? true: A.GEND==B.GEND,       (A.PRS==null || B.PRS==null) ? true: A.PRS==B.PRS &amp;&amp; A.start &lt; B.start </constraints>
+    <transformation trn1="A" trn2="E" type="TRANSFORM_AGGREGATE_STRONG"/>
+    <transformation relType="coord_conj" trn1="A" trn2="B" type="TRANSFORM_LINK"/>
+    <vector target="root"/>
+    <vector target="E">Phrase(REPR:=B.REPR;NMB:=B.NMB;POS:=B.POS;GEND:=B.GEND;PRS:=B.PRS;TYPE:=ConjV;SINGLE:=null;) </vector>
+  </rule>
+  <rule comments="ср. &quot;(и)( включает)&quot;" name="ConjVSingle" wellFormed="ok">
+    <template end="10" name="root" start="0"/>
+    <template end="5" name="A" start="0">Morph: POS=CONJ|TYPE=COMMA</template>
+    <template end="10" name="B" start="5">Morph:POS=V,REPR=fin|inf|gern</template>
+    <structure template="root">
+      <rel from="root" to="A" type="path"/>
+      <rel from="root" to="B" type="path"/>
+    </structure>
+    <constraints>A.start &lt; B.start</constraints>
+    <transformation trn1="A" trn2="C" type="TRANSFORM_AGGREGATE_STRONG"/>
+    <transformation relType="coord_conj" trn1="A" trn2="B" type="TRANSFORM_LINK"/>
+    <vector target="root"/>
+    <vector target="C">Phrase(REPR:=B.REPR;NMB:=B.NMB;POS:=B.POS;GEND:=B.GEND;PRS:=B.PRS;TYPE:=ConjV;SINGLE:=single;) </vector>
+  </rule>
+  <rule comments="Связь между прилагательным и предшествующим наречием" name="delim_adv_adj" wellFormed="ok">
+    <template end="10" name="root" start="0"/>
+    <template end="10" name="B" start="5">Morph:POS=ADV,PRN=null</template>
+    <template end="5" name="A" start="0">Morph:POS=A,PRN=null</template>
+    <structure template="root">
+      <rel from="root" to="B" type="path"/>
+      <rel from="root" to="A" type="path"/>
+    </structure>
+    <constraints>A.start &gt; B.start</constraints>
+    <transformation relType="delim" trn1="A" trn2="B" type="TRANSFORM_LINK"/>
+    <vector target="root"/>
+  </rule>
+  <rule comments="Связь с отрицательной частицей" name="delim_neg" wellFormed="ok">
+    <template end="10" name="root" start="0"/>
+    <template end="10" name="B" start="5">Morph:POS=PCL,base=не</template>
+    <template end="5" name="A" start="0">Morph|Phrase:POS=V,AUXIL=null</template>
+    <structure template="root">
+      <rel from="root" to="A" type="path"/>
+      <rel from="root" to="B" type="path"/>
+    </structure>
+    <constraints>A.start &gt; B.start</constraints>
+    <transformation relType="delim" trn1="B" trn2="A" type="TRANSFORM_LINK"/>
+    <transformation trn1="B" trn2="E" type="TRANSFORM_AGGREGATE_STRONG"/>
+    <vector target="root"/>
+    <vector target="E">Phrase(*:=A.*; base:=null;)</vector>
+  </rule>
+  <rule commented="true" comments="" name="genet" wellFormed="ok">
+    <template end="10" name="root" start="0"/>
+    <template end="5" name="A" start="0">Morph:POS=N</template>
+    <template end="10" name="B" start="5">Morph:POS=N,CAS=gen</template>
+    <structure template="root">
+      <rel from="root" to="A" type="path"/>
+      <rel from="root" to="B" type="path"/>
+    </structure>
+    <transformation relType="genet" trn1="A" trn2="B" type="TRANSFORM_LINK"/>
+    <vector target="root"/>
+  </rule>
+  <rule comments="" name="genet1" wellFormed="ok">
+    <template end="10" name="root" start="0"/>
+    <template end="5" name="A" start="0">Morph:POS=N,PRN=null,ADJI=null,PNT=null</template>
+    <template end="10" name="B" start="5">Morph:POS=N,CAS=gen,PRN=null</template>
+    <structure template="root">
+      <rel from="root" to="B" type="path"/>
+      <rel from="root" to="A" type="path"/>
+    </structure>
+    <constraints>A.start &lt; B.start</constraints>
+    <transformation relType="genet" trn1="A" trn2="B" type="TRANSFORM_LINK"/>
+    <vector target="root"/>
+  </rule>
+  <rule comments="" name="inf_val1" wellFormed="ok">
+    <template end="10" name="root" start="0"/>
+    <template end="10" name="B" start="5">Morph:POS=V,REPR=inf</template>
+    <template end="5" name="A" start="0">Morph:POS=PRED</template>
+    <structure template="root">
+      <rel from="root" to="B" type="path"/>
+      <rel from="root" to="A" type="path"/>
+    </structure>
+    <transformation relType="infin" trn1="A" trn2="B" type="TRANSFORM_LINK"/>
+    <vector target="root"/>
+  </rule>
+  <rule comments="" name="infin" wellFormed="ok">
+    <template end="10" name="root" start="0"/>
+    <template end="10" name="B" start="5">Morph:POS=V,REPR=inf</template>
+    <template end="5" name="A" start="0">Morph:POS=V</template>
+    <structure template="root">
+      <rel from="root" to="B" type="path"/>
+      <rel from="root" to="A" type="path"/>
+    </structure>
+    <constraints>B.VOX==null &amp;&amp; A.base!=быть</constraints>
+    <transformation relType="infin" trn1="A" trn2="B" type="TRANSFORM_LINK"/>
+    <vector target="root"/>
+  </rule>
+  <rule comments="ср. &quot;(красный)( стол)&quot;" name="Modif_aggr" wellFormed="ok">
+    <template end="10" name="root" start="0"/>
+    <template end="10" name="B" start="5">Morph|Phrase: POS=A | POS=V,REPR=part</template>
+    <template end="5" name="A" start="0">Morph|Phrase: POS=N</template>
+    <structure template="root">
+      <rel from="root" to="B" type="path"/>
+      <rel from="root" to="A" type="path"/>
+    </structure>
+    <constraints>(A.CAS == prp2 &amp;&amp; B.CAS == prp || A.CAS == B.CAS) &amp;&amp; A.NMB == B.NMB &amp;&amp; (B.ANIM == null || A.ANIM==null || A.ANIM == B.ANIM) &amp;&amp; (A.NMB == pl ? true : (A.GEND == B.GEND || (A.GEND == mf &amp;&amp; B.GEND != n)))</constraints>
+    <transformation relType="modif" trn1="A" trn2="B" type="TRANSFORM_LINK"/>
+    <vector target="root"/>
+  </rule>
+  <rule comments="Связь глагола с прямым дополнением в вин. падеже" name="objA" wellFormed="ok">
+    <template end="10" name="root" start="0"/>
+    <template end="5" name="A" start="0">Morph|Phrase:POS=V, VOX=null</template>
+    <template end="10" name="B" start="5">Morph|Phrase:POS=N, CAS = acc</template>
+    <structure template="root">
+      <rel from="root" to="A" type="path"/>
+      <rel from="root" to="B" type="path"/>
+    </structure>
+    <penalties>A.TRANS!=vt -&gt; (40)</penalties>
+    <transformation relType="objA" trn1="A" trn2="B" type="TRANSFORM_LINK"/>
+    <vector target="root"/>
+  </rule>
+  <rule commented="true" comments="" name="objA_vi" wellFormed="ok">
+    <template end="10" name="root" start="0"/>
+    <template end="10" name="B" start="5">Morph:POS=N, CAS = acc</template>
+    <template end="5" name="A" start="0">Morph:POS=V, VOX=null</template>
+    <structure template="root">
+      <rel from="root" to="B" type="path"/>
+      <rel from="root" to="A" type="path"/>
+    </structure>
+    <penalties>true -&gt; (10)</penalties>
+    <transformation relType="objA" trn1="A" trn2="B" type="TRANSFORM_LINK"/>
+    <vector target="root"/>
+  </rule>
+  <rule comments="" name="objA_vt_neg" wellFormed="ok">
+    <template end="15" name="root" start="0"/>
+    <template end="5" name="A" start="0">Morph:base=не</template>
+    <template end="15" name="C" start="10">Morph:POS=N, CAS=gen</template>
+    <template end="10" name="B" start="5">Morph:POS=V, TRANS=vt, VOX=null</template>
+    <structure template="root">
+      <rel from="root" to="C" type="path"/>
+      <rel from="root" to="A" type="path"/>
+      <rel from="A" name="delim" to="B" type="simple"/>
+    </structure>
+    <constraints> A.start &gt; C.start</constraints>
+    <transformation relType="objG" trn1="B" trn2="C" type="TRANSFORM_LINK"/>
+    <vector target="root"/>
+  </rule>
+  <rule comments="" name="objD" wellFormed="ok">
+    <template end="10" name="root" start="0"/>
+    <template end="10" name="B" start="5">Morph:POS=N, CAS=dat</template>
+    <template end="5" name="A" start="0">Morph:POS=V</template>
+    <structure template="root">
+      <rel from="root" to="B" type="path"/>
+      <rel from="root" to="A" type="path"/>
+    </structure>
+    <transformation relType="objD" trn1="A" trn2="B" type="TRANSFORM_LINK"/>
+    <vector target="root"/>
+  </rule>
+  <rule comments="" name="objI" wellFormed="ok">
+    <template end="10" name="root" start="0"/>
+    <template end="5" name="A" start="0">Morph:POS=V</template>
+    <template end="10" name="B" start="5">Morph|Phrase:POS=N, CAS=inst</template>
+    <structure template="root">
+      <rel from="root" to="A" type="path"/>
+      <rel from="root" to="B" type="path"/>
+    </structure>
+    <transformation relType="objI" trn1="A" trn2="B" type="TRANSFORM_LINK"/>
+    <vector target="root"/>
+  </rule>
+  <rule comments="" name="predic_net" wellFormed="ok">
+    <template end="10" name="root" start="0"/>
+    <template end="5" name="A" start="0">Morph:POS=PRED,base=нет</template>
+    <template end="10" name="B" start="5">Morph:POS=N, CAS=gen</template>
+    <structure template="root">
+      <rel from="root" to="B" type="path"/>
+      <rel from="root" to="A" type="path"/>
+    </structure>
+    <transformation relType="predic" trn1="A" trn2="B" type="TRANSFORM_LINK"/>
+    <vector target="root"/>
+  </rule>
+  <rule comments="" name="predicPast" wellFormed="ok">
+    <template end="10" name="root" start="0"/>
+    <template end="5" name="A" start="0">Morph|Phrase:POS=V,REPR=fin,TNS=past</template>
+    <template end="10" name="B" start="5">Morph|Phrase:POS=N, CAS=nom</template>
+    <structure template="root">
+      <rel from="root" to="B" type="path"/>
+      <rel from="root" to="A" type="path"/>
+    </structure>
+    <constraints>A.NMB == B.NMB &amp;&amp; (A.NMB == pl || A.NMB == sg &amp;&amp; (B.GEND == null || A.GEND == B.GEND || B.GEND==mf &amp;&amp; A.GEND!=n))</constraints>
+    <transformation relType="predic" trn1="A" trn2="B" type="TRANSFORM_LINK"/>
+    <vector target="root"/>
+  </rule>
+  <rule comments="" name="predicPrs1" wellFormed="ok">
+    <template end="10" name="root" start="0"/>
+    <template end="10" name="B" start="5">Morph:POS=N,base=я|мы,CAS=nom</template>
+    <template end="5" name="A" start="0">Morph|Phrase:POS=V,REPR=fin,TNS=pres|fut,PRS=1,AUXIL=null</template>
+    <structure template="root">
+      <rel from="root" to="A" type="path"/>
+      <rel from="root" to="B" type="path"/>
+    </structure>
+    <constraints>A.NMB == B.NMB</constraints>
+    <transformation relType="predic" trn1="A" trn2="B" type="TRANSFORM_LINK"/>
+    <vector target="root"/>
+  </rule>
+  <rule comments="" name="predicPrs2" wellFormed="ok">
+    <template end="10" name="root" start="0"/>
+    <template end="5" name="A" start="0">Morph|Phrase:POS=V,REPR=fin,TNS=pres|fut,PRS=2,AUXIL=null</template>
+    <template end="10" name="B" start="5">Morph:POS=N,base=ты|вы,CAS=nom</template>
+    <structure template="root">
+      <rel from="root" to="A" type="path"/>
+      <rel from="root" to="B" type="path"/>
+    </structure>
+    <constraints>A.NMB == B.NMB</constraints>
+    <transformation relType="predic" trn1="A" trn2="B" type="TRANSFORM_LINK"/>
+    <vector target="root"/>
+  </rule>
+  <rule comments="" name="predicPrs3" wellFormed="ok">
+    <template end="10" name="root" start="0"/>
+    <template end="10" name="B" start="5">Morph|Phrase:POS=N,CAS=nom</template>
+    <template end="5" name="A" start="0">Morph|Phrase:POS=V,REPR=fin,TNS=pres|fut,PRS=3,AUXIL=null</template>
+    <structure template="root">
+      <rel from="root" to="B" type="path"/>
+      <rel from="root" to="A" type="path"/>
+    </structure>
+    <constraints>B.base != я &amp;&amp; B.base!=мы &amp;&amp; B.base!=ты &amp;&amp; B.base!=вы &amp;&amp; A.NMB == B.NMB</constraints>
+    <transformation relType="predic" trn1="A" trn2="B" type="TRANSFORM_LINK"/>
+    <vector target="root"/>
+  </rule>
+  <rule commented="true" comments="ср. &quot;(в)(столе)&quot;" name="PREP" wellFormed="ok">
+    <template end="15" name="root" start="0"/>
+    <template end="15" name="C" start="10">Morph: POS=N</template>
+    <template end="10" name="B" start="5">Morph: POS=PREP</template>
+    <template end="5" name="A" start="0">Morph|Phrase:POS=V|PRED|N,AUXIL=null</template>
+    <structure template="root">
+      <rel from="root" to="B" type="path"/>
+      <rel from="root" to="A" type="path"/>
+      <rel from="root" to="C" type="path"/>
+    </structure>
+    <constraints>B.GCAS == C.CAS, C.base != он || C.ADPREP == adprep &amp;&amp; B.GPRON == n || C.ADPREP == null &amp;&amp; B.GPRON == j,  B.start &lt; C.start</constraints>
+    <transformation relType="adv" trn1="A" trn2="B" type="TRANSFORM_LINK"/>
+    <transformation relType="preposit" trn1="B" trn2="C" type="TRANSFORM_LINK"/>
+    <vector target="root"/>
+  </rule>
+  <rule comments="ср. &quot;(в)(столе)&quot;" name="PREPG_create" wellFormed="ok">
+    <template end="10" name="root" start="0"/>
+    <template end="5" name="A" start="0">Morph: POS=PREP</template>
+    <template end="10" name="B" start="5">Morph: POS=N</template>
+    <structure template="root">
+      <rel from="root" to="B" type="path"/>
+      <rel from="root" to="A" type="path"/>
+    </structure>
+    <constraints> A.GCAS == B.CAS, B.base != он || B.ADPREP == adprep &amp;&amp; A.GPRON == n || B.ADPREP == null &amp;&amp; A.GPRON == j,  A.start &lt; B.start</constraints>
+    <transformation trn1="A" trn2="D" type="TRANSFORM_AGGREGATE_STRONG"/>
+    <transformation relType="preposit" trn1="A" trn2="B" type="TRANSFORM_LINK"/>
+    <vector target="root"/>
+    <vector target="D">Phrase(TYPE:=PREPG;)</vector>
+  </rule>
+  <rule commented="true" comments="" name="test" wellFormed="ok">
+    <template end="15" name="root" start="0"/>
+    <template end="5" name="A" start="0">Morph: POS=N</template>
+    <template end="15" name="C" start="10">Morph: POS=A</template>
+    <template end="10" name="B" start="5">Morph: POS=V</template>
+    <structure template="root">
+      <rel from="root" to="B" type="path"/>
+      <rel from="B" name="objA" to="A" type="simple"/>
+      <rel from="root" to="C" type="path"/>
+    </structure>
+    <constraints>A.CAS==C.CAS</constraints>
+    <penalties>A.start &lt; B.start -&gt; (10)</penalties>
+    <transformation trn1="B" trn2="D" type="TRANSFORM_AGGREGATE_STRONG"/>
+    <transformation relType="radicalA" trn1="B" trn2="C" type="TRANSFORM_LINK"/>
+    <vector target="root"/>
+    <vector target="D">Phrase(*:=B.*;TYPE:=ConjV;)</vector>
+  </rule>
+</Document>

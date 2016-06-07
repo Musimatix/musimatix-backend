@@ -1,0 +1,47 @@
+package prosody.onegin;
+
+phase CreateSplits {
+  input Verse,SpaceToken;
+  output Fragment;
+  control first;
+
+  rule r1 {
+    {SpaceToken:kind=control}{Verse: string=< *([XVIL][XVIL]*)[^XVIL].*>:r}:b
+    ->create Split[b,b](name:=r.$1;type:=stropheCaption;), remove b
+  }
+
+  rule r11 {
+    {SpaceToken:kind=control}{Verse: string=< *[*] *>}:b
+    ->create Split[b,b](name:="*";type:=stropheCaption;), remove b
+  }
+
+  rule r2 {
+    {SpaceToken:kind=control}{Verse: string=< *(ГЛАВА u*)[^u]*>:r}:b
+    ->create Split[b,b](name:=r.$1;type:=chapterCaption;), remove b
+  }
+
+  rule r21 {
+    {SpaceToken:kind=control}{Verse: string=< *(ОТРЫВКИ *ИЗ *ПУТЕШЕСТВИЯ *ОНЕГИНА).*>:r}:b
+    ->create Split[b,b](name:=r.$1;type:=chapterCaption;), remove b
+  }
+
+  rule r22 {
+    {SpaceToken:kind=control}{Verse: string=< *(ПРИМЕЧАНИЯ *К *ЕВГЕНИЮ *ОНЕГИНУ).*>:r}:b
+    ->create Split[b,b](name:=r.$1;type:=chapterCaption;), remove b
+  }
+
+  rule r23 {
+    {SpaceToken:kind=control}{Verse: string=< *КОНЕЦ.*>}:b
+    ->create Split[b,b](name:="";type:=justSplit;), remove b
+  }
+
+  rule r24 {
+    {SpaceToken:kind=control}{Verse: string=< *__*.*>:r}:b
+    ->create Split[b,b](name:="";type:=justSplit;), remove b
+  }
+
+  rule r3 {
+    {Verse: string=< *(ЕВГЕНИЙ *ОНЕГИН) *>:r1}:b1{SpaceToken:kind=control}*{Verse: string=< *(РОМАН *В *СТИХАХ) *>:r2}:b2
+    ->create Split[b1,b2](name:=r1.$1/*+"."+r2.$1*/;type:=piece_of_artCaption;), remove b1, remove b2
+  }
+}

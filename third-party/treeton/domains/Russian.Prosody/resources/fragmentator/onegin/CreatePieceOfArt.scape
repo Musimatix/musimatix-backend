@@ -1,0 +1,12 @@
+package prosody.onegin;
+
+phase CreatePieceOfArt {
+  input Split,Fragment;
+  output Fragment;
+  control appelt;
+
+  rule r1 {
+    {Split: type=piece_of_artCaption}:b(({Fragment: type=chapter}|{Split})+):v
+    ->create Fragment[b,v](caption:=b.name;type:=piece_of_art;), remove b
+  }
+}

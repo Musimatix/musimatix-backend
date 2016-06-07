@@ -1,0 +1,49 @@
+analyzer SyntaxRuShallow {
+  input {Gramm,Token}
+
+  repRelations {adv,delim,modif,unknown,circumst}
+  uniRelations {appos,auxil,conjunct,coord_conj,coordin,explic,elect,genet,infin,objA,objD,objG,objI,predic,preposit}
+
+  goal {
+    @type == "Syntax" && PGROUP == "clause" : ()
+    POS == "N" : e6*50
+    PHRASE == "prepg" : e6*60
+  }
+
+  delimiter {@type == "Token" && (kind == "punctuation" || @string == "и")}
+
+  gapPenalty          e0*500
+  repPenalty          e1*50000
+  compactnessPenalty  e3*2
+  unreasonableDelimPenalty e4*300
+
+  delimReasoning {
+    {@type == "Syntax" && PGROUP != null}+{@type == "Token" && @string==","} : ()
+    {@type == "Token"  && @string==","}+{CONJ == "conjelem"} ^ : ()
+    {@type == "Syntax" && PGROUP == "clause"}+{@type == "Token" && @string == "."} ^ : ()
+  }
+
+  projectivityPenalty {
+     {} : e2*30
+     {@parentRel=="coordin","coord_conj"} : e2*100000
+     {@parentRel=="preposit"} : e2*10000
+     //{PGROUP=="clause"} : e2*10000
+  }
+
+  rule Modif_aggr {
+    {POS == "N"}
+    ~
+    {POS == "A" || PGROUP == "partg"}
+    ::
+    (A.CAS == "prp2" && B.CAS == "prp" || A.CAS == B.CAS) && A.NMB == B.NMB &&
+    (B.ANIM == null || A.ANIM == null || A.ANIM == B.ANIM) &&
+    (A.NMB == "pl" ? true : (A.GEND == B.GEND || (A.GEND == "mf" && B.GEND != "n")))
+    -->
+    (A,B){modif}
+    ::
+    B.PGROUP != "partg" && A.@start < B.@start : e8*30
+    B.PGROUP == "partg" && B.@rDelim == null : e8*200
+  }
+
+
+}

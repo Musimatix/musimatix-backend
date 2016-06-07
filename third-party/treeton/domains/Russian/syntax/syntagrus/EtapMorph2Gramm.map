@@ -1,0 +1,28 @@
+{EtapMorph} -> Gramm(
+               base:=@.lemma;
+               ZINDEX:="-";
+               POS := @.pos == "S" ? "N" :
+                      @.pos == "PR" ? "PREP" :
+                      @.pos == "PART" ? "PCL" :
+                      @.pos == "P" ? "PRED" :
+                      @.pos;
+               /*CAS := @.case == "ins" ? "inst" :
+                      @.case == "loc" ? "prp" :
+                      @.case == "loc2" ? "prp2" :
+                      @.case == "voc2" ? "voc" :
+                      @.case;
+               ANIM := @.anim;
+               GEND := @.gend == "m_f" ? "mf" : @.gend;
+               NMB  := @.numb;
+               DGR  := @.grad;
+               ATTR := @.pred == "predic" ? "sh" : null;
+               REPR := @.repr == "cvb" ? "gern" :
+                       @.repr == "ptcp" ? "part" :
+                       @.repr;
+               MD   := @.mood;
+               TNS  := @.tens;
+               PRS  := @.pers;
+               VOX  := @.voice; //как быть с медиальным (на ся)
+               ASP  := @.perf;*/
+           )
+

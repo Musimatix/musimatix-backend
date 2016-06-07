@@ -1,0 +1,5 @@
+package russian.morph.punct;
+
+program Main {
+  exec ProcessPunct;
+}

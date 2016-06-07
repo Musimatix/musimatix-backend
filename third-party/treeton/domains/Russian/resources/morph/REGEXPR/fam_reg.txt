@@ -1,0 +1,84 @@
+#CASE_SENSITIVE
+@@@@@
+@@@@@
+@([А-Я][а-я]+(ов|ев|ин))(а|у|ым|е|ой|ы|ых|ыми)?@$1@LEXTYPE=propnoun,freqOrthm=u*,POS=N,PNT=fam,ANIM=anim,VER=low@_REQS=FL-prn_1@Петров, Никитин
+@([А-Я][а-я]+(ын))(а|у|ым|е|ой|ы|ых|ыми)?@$1@LEXTYPE=propnoun,freqOrthm=u*,POS=N,PNT=fam,ANIM=anim,VER=high@_REQS=FL-prn_1@Петров, Никитин
+@([А-Я][а-я]+[сц]к)(ий|ого|ому|им|ом|ая|ой|ую|ие|их|ими)@$1ий@LEXTYPE=propnoun,freqOrthm=u*,POS=N,PNT=fam,ANIM=anim,VER=low@_REQS=FL-adj_3@Чайковский, Радецкий
+@([А-Я][а-я]+(ян))(а|у|ом|е|ы|ов|ам|ами|ах)?@$1@LEXTYPE=propnoun,freqOrthm=u*,POS=N,PNT=fam,ANIM=anim,VER=middle@_REQS=FL-sbs_1@Петросян [мужск.]
+@([А-Я][а-я]+(штейн))(а|у|ом|е|ы|ов|ам|ами|ах)?@$1@LEXTYPE=propnoun,freqOrthm=u*,POS=N,PNT=fam,ANIM=anim,VER=high@_REQS=FL-sbs_1@Петросян [мужск.]
+@([А-Я][а-я]+(ук|юк|як))(а|у|ом|е|и|ов|ам|ами|ах)?@$1@LEXTYPE=propnoun,freqOrthm=u*,POS=N,PNT=fam,ANIM=anim,VER=middle@_REQS=FL-sbs_3@Мельчук [мужск.]
+@([А-Я][а-я]+(берг))(а|у|ом|е|и|ов|ам|ами|ах)?@$1@LEXTYPE=propnoun,freqOrthm=u*,POS=N,PNT=fam,ANIM=anim,VER=high@_REQS=FL-sbs_3@Мельчук [мужск.]
+@([А-Я][а-я]+(ос))(а|у|ом|е|и|ов|ам|ами|ах)?@$1@LEXTYPE=propnoun,freqOrthm=u*,POS=N,PNT=fam,ANIM=anim,VER=middle@_REQS=FL-sbs_3@Папандопулос [мужск.]
+@([А-Я][а-я]+(ян|ук|юк|як|ич|ыч))@$1@LEXTYPE=propnoun,freqOrthm=u*,POS=N,PNT=fam,GEND=f,ANIM=anim,INVAR=invar,VER=middle@@Петросян, Мельчук, Демидович, Свитыч [женск. неизм.]
+@([А-Я][а-я]+(штейн|берг|oc))@$1@LEXTYPE=propnoun,freqOrthm=u*,POS=N,PNT=fam,GEND=f,ANIM=anim,INVAR=invar,VER=high@@Петросян, Мельчук, Демидович, Свитыч [женск. неизм.]
+@([А-Я][а-я]+(швили|дзе))@$1@LEXTYPE=propnoun,freqOrthm=u*,POS=N,PNT=fam,GEND=mf,ANIM=anim,INVAR=invar,VER=high@@Гаприндашвили, Джорбенадзе, Шевченко, Забисиани
+@([А-Я][а-я]+(нко|ани|иди|ади))@$1@LEXTYPE=propnoun,freqOrthm=u*,POS=N,PNT=fam,GEND=mf,ANIM=anim,INVAR=invar,VER=middle@@Гаприндашвили, Джорбенадзе, Шевченко, Забисиани, Грегориади, Ставрианиди
+@@@@@
+@@@@@
+FL-prn_1@([А-Я][а-я]+[вн])@@GEND=m,NMB=sg,CAS=nom@@Петров, Никитин
+FL-prn_1@([А-Я][а-я]+)а@@GEND=m,NMB=sg,CAS=gen@@[нет] Петрова, Никитина
+FL-prn_1@([А-Я][а-я]+)а@@GEND=m,NMB=sg,CAS=acc@@[позвал] Петрова, Никитина
+FL-prn_1@([А-Я][а-я]+)а@@GEND=f,NMB=sg,CAS=nom@@[пришла] Петрова, Никитина
+FL-prn_1@([А-Я][а-я]+)у@@GEND=m,NMB=sg,CAS=dat@@[дал что-то] Петрову, Никитину
+FL-prn_1@([А-Я][а-я]+)у@@GEND=f,NMB=sg,CAS=acc@@[встретил] Петрову, Никитину
+FL-prn_1@([А-Я][а-я]+)ым@@GEND=m,NMB=sg,CAS=inst@@[разговаривал с] Петровым, Никитиным
+FL-prn_1@([А-Я][а-я]+)ым@@NMB=pl,CAS=dat@@[дал] Петровым, Никитиным
+FL-prn_1@([А-Я][а-я]+)е@@GEND=m,NMB=sg,CAS=prp@@[о] Петрове, Никитине
+FL-prn_1@([А-Я][а-я]+)ой@@GEND=f,NMB=sg,CAS=gen@@[нет] Петровой, Никитиной
+FL-prn_1@([А-Я][а-я]+)ой@@GEND=f,NMB=sg,CAS=dat@@[дал] Петровой, Никитиной
+FL-prn_1@([А-Я][а-я]+)ой@@GEND=f,NMB=sg,CAS=inst@@[разговаривал с] Петровой, Никитиной
+FL-prn_1@([А-Я][а-я]+)ой@@GEND=f,NMB=sg,CAS=prp@@[о] Петровой, Никитиной
+FL-prn_1@([А-Я][а-я]+)ы@@NMB=pl,CAS=nom@@[пришли] Петровы, Никитины
+FL-prn_1@([А-Я][а-я]+)ых@@NMB=pl,CAS=gen@@[нет] Петровых, Никитиных
+FL-prn_1@([А-Я][а-я]+)ых@@NMB=pl,CAS=acc@@[встретил] Петровых, Никитиных
+FL-prn_1@([А-Я][а-я]+)ых@@NMB=pl,CAS=prp@@[о] Петровых, Никитиных
+FL-prn_1@([А-Я][а-я]+)ыми@@NMB=pl,CAS=inst@@[разговаривал с] Петровыми, Никитиными
+@@@@@
+@@@@@
+FL-adj_3@([А-Я][а-я]+)ий@ий@GEND=m,NMB=sg,CAS=nom@@Чайковский, Радецкий
+FL-adj_3@([А-Я][а-я]+)ого@ий@GEND=m,NMB=sg,CAS=gen@@[нет] Чайковского, Радецкого
+FL-adj_3@([А-Я][а-я]+)ого@ий@GEND=m,NMB=sg,CAS=acc@@[позвал] Чайковского, Радецкого
+FL-adj_3@([А-Я][а-я]+)ому@ий@GEND=m,NMB=sg,CAS=dat@@[дал] Чайковскому, Радецкому
+FL-adj_3@([А-Я][а-я]+)им@ий@GEND=m,NMB=sg,CAS=inst@@[разговаривал с] Чайковским, Радецким
+FL-adj_3@([А-Я][а-я]+)им@ий@NMB=pl,CAS=dat@@[дал] Чайковским, Радецким
+FL-adj_3@([А-Я][а-я]+)ом@ий@GEND=m,NMB=sg,CAS=prp@@[о] Чайковском, Радецком
+FL-adj_3@([А-Я][а-я]+)ая@ая@GEND=f,NMB=sg,CAS=nom@@Чайковская, Радецкая
+FL-adj_3@([А-Я][а-я]+)ой@ая@GEND=f,NMB=sg,CAS=gen@@[нет] Чайковской, Радецкой
+FL-adj_3@([А-Я][а-я]+)ой@ая@GEND=f,NMB=sg,CAS=dat@@[дал] Чайковской, Радецкой
+FL-adj_3@([А-Я][а-я]+)ой@ая@GEND=f,NMB=sg,CAS=inst@@[разговаривал с] Чайковской, Радецкой
+FL-adj_3@([А-Я][а-я]+)ой@ая@GEND=f,NMB=sg,CAS=prp@@[о] Чайковской, Радецкой
+FL-adj_3@([А-Я][а-я]+)ую@ая@GEND=f,NMB=sg,CAS=aсс@@[видел] Чайковскую, Радецкую
+FL-adj_3@([А-Я][а-я]+)ие@ий@NMB=pl,CAS=nom@@Чайковские, Радецкие
+FL-adj_3@([А-Я][а-я]+)их@ий@NMB=pl,CAS=gen@@[нет] Чайковских, Радецких
+FL-adj_3@([А-Я][а-я]+)их@ий@NMB=pl,CAS=acc@@[видел] Чайковских, Радецких
+FL-adj_3@([А-Я][а-я]+)их@ий@NMB=pl,CAS=prp@@[о] Чайковских, Радецких
+FL-adj_3@([А-Я][а-я]+)ими@ий@NMB=pl,CAS=inst@@[говорил с] Чайковскими, Радецкими
+@@@@@
+@@@@@
+FL-sbs_1@[А-Я][А-я]+н@@GEND=m,NMB=sg,CAS=nom@@Петросян
+FL-sbs_1@[А-Я][А-я]+а@@GEND=m,NMB=sg,CAS=gen@@[нет] Петросяна
+FL-sbs_1@[А-Я][А-я]+а@@GEND=m,NMB=sg,CAS=acc@@[видел] Петросяна
+FL-sbs_1@[А-Я][А-я]+у@@GEND=m,NMB=sg,CAS=dat@@[дал] Петросяну
+FL-sbs_1@[А-Я][А-я]+ом@@GEND=m,NMB=sg,CAS=inst@@[говорил с] Петросяном
+FL-sbs_1@[А-Я][А-я]+е@@GEND=m,NMB=sg,CAS=prp@@[о] Петросяне
+FL-sbs_1@[А-Я][А-я]+ы@@NMB=pl,CAS=nom@@[пришли] Петросяны
+FL-sbs_1@[А-Я][А-я]+ов@@NMB=pl,CAS=gen@@[нет] Петросянов
+FL-sbs_1@[А-Я][А-я]+ов@@NMB=pl,CAS=acc@@[видел] Петросянов
+FL-sbs_1@[А-Я][А-я]+ам@@NMB=pl,CAS=dat@@[дал] Петросянам
+FL-sbs_1@[А-Я][А-я]+ами@@NMB=pl,CAS=inst@@[говорил с] Петросянами
+FL-sbs_1@[А-Я][а-я]+ах@@NMB=pl,CAS=prp@@[о] Петросянах
+@@@@@
+@@@@@
+FL-sbs_3@[А-Я][А-я]+(к|г|с)@@GEND=m,NMB=sg,CAS=nom@@Мельчук
+FL-sbs_3@[А-Я][А-я]+а@@GEND=m,NMB=sg,CAS=gen@@[нет] Мельчука
+FL-sbs_3@[А-Я][А-я]+а@@GEND=m,NMB=sg,CAS=acc@@[видел] Мельчука
+FL-sbs_3@[А-Я][А-я]+у@@GEND=m,NMB=sg,CAS=dat@@[дал] Мельчуку
+FL-sbs_3@[А-Я][А-я]+ом@@GEND=m,NMB=sg,CAS=inst@@[говорил с] Мельчуком
+FL-sbs_3@[А-Я][А-я]+е@@GEND=m,NMB=sg,CAS=prp@@[о] Мельчуке
+FL-sbs_3@[А-Я][А-я]+ки@@NMB=pl,CAS=nom@@[пришли] Мельчуки
+FL-sbs_3@[А-Я][А-я]+ов@@NMB=pl,CAS=gen@@[нет] Мельчуков
+FL-sbs_3@[А-Я][А-я]+ов@@NMB=pl,CAS=acc@@[видел] Мельчуков
+FL-sbs_3@[А-Я][А-я]+ам@@NMB=pl,CAS=dat@@[дал] Мельчукам
+FL-sbs_3@[А-Я][А-я]+ами@@NMB=pl,CAS=inst@@[говорил с] Мельчуками
+FL-sbs_3@[А-Я][а-я]+ах@@NMB=pl,CAS=prp@@[о] Мельчуках
+@@@@@

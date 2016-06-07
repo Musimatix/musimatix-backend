@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://starling.rinet.ru/treeton/config" targetNamespace="http://starling.rinet.ru/treeton/config" elementFormDefault="qualified">
+    <xs:element name="Document">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="DOMAIN" minOccurs="1" maxOccurs="1" type="domainType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="chainType">
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:choice minOccurs="1" maxOccurs="1">
+                <xs:element type="xs:string" name="COMMENT"/>
+                <xs:element name="REF">
+                    <xs:complexType>
+                        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                            <xs:choice minOccurs="1" maxOccurs="1">
+                                <xs:element name="PARAM" minOccurs="0" maxOccurs="unbounded">
+                                    <xs:complexType>
+                                        <xs:sequence minOccurs="1" maxOccurs="unbounded">
+                                            <xs:element type="xs:string" name="VALUE"/>
+                                        </xs:sequence>
+                                        <xs:attribute name="NAME" type="xs:string" use="required"/>
+                                    </xs:complexType>
+                                </xs:element>
+                                <xs:element name="PASSPARAMS">
+                                    <xs:complexType/>
+                                </xs:element>
+                            </xs:choice>
+                        </xs:sequence>
+                        <xs:attribute name="RESOURCE" type="xs:string" use="optional"/>
+                        <xs:attribute name="CHAIN" type="xs:string" use="optional"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="RESOURCE">
+                    <xs:complexType>
+                        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                            <xs:choice minOccurs="1" maxOccurs="1">
+                                <xs:element type="xs:string" name="COMMENT"/>
+                                <xs:element type="xs:string" name="CLASS" minOccurs="0"/>
+                                <xs:element name="PARAM" minOccurs="0" maxOccurs="unbounded">
+                                    <xs:complexType>
+                                        <xs:sequence minOccurs="1" maxOccurs="unbounded">
+                                            <xs:element type="xs:string" name="VALUE"/>
+                                        </xs:sequence>
+                                        <xs:attribute name="NAME" type="xs:string" use="required"/>
+                                    </xs:complexType>
+                                </xs:element>
+                                <xs:element name="PASSPARAMS">
+                                    <xs:complexType/>
+                                </xs:element>
+                            </xs:choice>
+                        </xs:sequence>
+                        <xs:attribute name="TYPE" type="xs:string" use="required"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:choice>
+        </xs:sequence>
+        <xs:attribute name="NAME" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="domainType">
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:choice minOccurs="1" maxOccurs="1">
+                <xs:element type="xs:string" name="TYPESDCL"/>
+                <xs:element type="xs:string" name="RELSXML"/>
+
+                <xs:element name="MAINCHAIN">
+                    <xs:complexType>
+                        <xs:attribute name="CHAIN" type="xs:string" use="required"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="SYNTAX_RULES">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element type="xs:string" name="RULESPATH"/>
+                        </xs:sequence>
+                        <xs:attribute name="NAME" type="xs:string" use="required"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="SYNTAX_PENALTIES">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element type="xs:string" name="RULESPATH"/>
+                        </xs:sequence>
+                        <xs:attribute name="NAME" type="xs:string" use="required"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="RESOURCETYPE">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element type="xs:string" name="CLASS" minOccurs="1"/>
+                            <xs:choice minOccurs="1" maxOccurs="1">
+                                <xs:element type="xs:string" name="COMMENT" minOccurs="1"/>
+                                <xs:element name="PARAMDESCRIPTION" minOccurs="0" maxOccurs="unbounded">
+                                    <xs:complexType>
+                                        <xs:attribute name="NAME" type="xs:string" use="required"/>
+                                        <xs:attribute name="TYPE" type="xs:string" use="required"/>
+                                        <xs:attribute name="MANYVALUED" type="xs:boolean" use="optional"/>
+                                        <xs:attribute name="OPTIONAL" type="xs:boolean" use="optional"/>
+                                    </xs:complexType>
+                                </xs:element>
+                            </xs:choice>
+                        </xs:sequence>
+                        <xs:attribute name="NAME" type="xs:string" use="required"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="RESOURCE">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element type="xs:string" name="COMMENT" minOccurs="0"/>
+                            <xs:element name="PARAM" minOccurs="0" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence minOccurs="1" maxOccurs="unbounded">
+                                        <xs:element type="xs:string" name="VALUE"/>
+                                    </xs:sequence>
+                                    <xs:attribute name="NAME" type="xs:string" use="required"/>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="NAME" type="xs:string" use="required"/>
+                        <xs:attribute name="TYPE" type="xs:string" use="required"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="CHAIN" type="chainType"/>
+                <xs:element name="DOMAIN" type="domainType"/>
+            </xs:choice>
+        </xs:sequence>
+        <xs:attribute name="NAME" type="xs:string" use="required"/>
+        <xs:attribute name="SHORTNAME" type="xs:string" use="required"/>
+        <xs:attribute name="DIR" type="xs:string" use="required"/>
+    </xs:complexType>
+</xs:schema>

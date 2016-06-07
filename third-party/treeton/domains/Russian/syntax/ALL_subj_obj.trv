@@ -1,0 +1,177 @@
+analyzer SyntaxRuShallow {
+  input {Gramm,Token}
+  repRelations {modif,circumst}
+  uniRelations {infin,objA,objD,objG,objI,predic,preposit,genet}
+
+  goal {
+    @type == "Syntax" && PGROUP == "clause" : ()
+    POS == "N" : e6*50
+    PHRASE == "prepg" : e6*60
+  }
+
+  delimiter {@type == "Token" && (kind == "punctuation")}
+
+  gapPenalty          e0*500
+  repPenalty          e1*50000
+  compactnessPenalty  e3*2
+  unreasonableDelimPenalty e4*300
+
+  delimReasoning {
+    {@type == "Syntax" && PGROUP != null,"clause" }+{@type == "Token" && @string==","} : ()
+    {@type == "Token"  && @string==","}+{CONJ == "conjelem"} ^ : ()
+    {@type == "Syntax" && PGROUP == "clause"}+{@type == "Token" && @string == "."} ^ : ()
+  }
+
+  projectivityPenalty {
+     {@type != "Syntax"} : e2*30
+     {@parentRel=="coordin","coord_conj"} : e2*100000
+     {@parentRel=="preposit"} : e2*10000
+     //{PGROUP=="clause"} : e2*10000
+  }
+
+  rule infin {
+    {POS == "V","PRED"}
+    ~
+    {POS == "V" && REPR == "inf" && VOX == null}
+    -->
+    (A,B){infin}
+  }
+
+  rule predicPast {
+    {POS == "N" && CAS == "nom"}
+    ~
+    {POS == "V" && REPR == "fin" && TNS == "past"}^
+    ::
+    B.NMB == A.NMB && (B.NMB == "pl" || B.NMB == "sg" &&
+    (A.GEND == null || B.GEND == A.GEND || A.GEND == "mf" && B.GEND!="n"))
+    -->
+    (B,A){predic}
+  }
+
+  rule predicPRED {
+    {POS == "N" && CAS == "nom"}
+    ~
+    {POS == "PRED"}^
+    -->
+    (B,A){predic}
+  }
+
+  rule predicPrs {
+    {POS == "N" && CAS == "nom"}
+    ~
+    {POS == "V" && REPR == "fin" && TNS == "pres","fut" && AUXIL == null}^
+    ::
+    B.NMB == A.NMB && (
+        B.PRS == "1" && (A.base == "я"  || A.base == "мы") ||
+        B.PRS == "2" && (A.base == "ты" || A.base == "вы") ||
+        B.PRS == "3" && (A.base != "ты" && A.base != "вы" && A.base != "мы" && A.base != "я")
+    )
+    -->
+    (B,A){predic}
+  }
+
+  rule objA {
+    {POS == "V" && VOX != "pass" && REPR != "part"}
+    ~
+    {POS == "N" && CAS == "acc"}^
+    -->
+    (A,B){objA}
+
+    ::
+
+    A.TRANS == "vi" : e7*140
+    A.TRANS == null : e7*140
+
+  }
+
+  // испеченный пирог, пирог испекается,был испечен пирог
+  rule predic_pass {
+    {POS == "V" && VOX == "pass"}
+    ~
+    {POS == "N" && CAS == "nom"}
+    -->
+    (A,B){predicPass}
+
+  }
+
+  //ср. "остров сокровищ"
+
+  rule genet {
+    {POS == "N" && PRN == null && ADJI == null && PNT == null}
+    ~
+    {POS == "N" && CAS == "gen" && PRN == null}^
+    -->
+    (A,B){genet}
+  }
+
+rule compar_gen {
+    {POS == "A" && DGR == "comp"}
+    ~
+    {POS == "N" && CAS == "gen" }
+    -->
+    (A,B){genet}
+}
+
+  //ср. "красный стол"
+
+  rule modif {
+    {POS == "N"}
+    ~
+    {POS == "A" || POS == "V" && REPR == "part"}
+    ::
+    (A.CAS == "prp2" && B.CAS == "prp" || A.CAS == B.CAS) && A.NMB == B.NMB &&
+    (B.ANIM == null || A.ANIM == null || A.ANIM == B.ANIM) &&
+    (A.NMB == "pl" ? true : (A.GEND == B.GEND || (A.GEND == "mf" && B.GEND != "n")))
+    -->
+    (A,B){modif}
+  }
+
+  rule preposit {
+    {POS == "PREP"}
+    ~
+    {POS == "N"}^
+    ::
+    A.GCAS == B.CAS &&
+    (B.base != "он" || B.ADPREP == "adprep" && A.GPRON == "n" || B.ADPREP == null && A.GPRON == "j")
+    -->
+    (A,B){preposit}
+  }
+
+  rule circumst {
+    {@type != "Syntax" && POS == "V","PRED","N"}
+    ~
+    {POS == "PREP"}
+    ::
+    A.POS != "N" ||  A.@start < B.@start || A.CAS != B.GCAS
+    -->
+    (A,B){circumst}
+  }
+
+  rule objI {
+    {POS == "V"}
+    ~
+    {POS == "N" && CAS == "inst"}
+    -->
+    (A,B){objI}
+
+  }
+
+  rule objD {
+    {POS == "V","A"}
+    ~
+    {POS == "N" && CAS == "dat"}
+    -->
+    (A,B){objD}
+  }
+
+  rule objG {
+    {POS == "V"}
+    ~
+    {POS == "N" && CAS == "gen"}
+    -->
+    (A,B){objG}
+  }
+
+}
+
+

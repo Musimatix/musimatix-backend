@@ -1,0 +1,359 @@
+analyzer SyntaxRuShallow {
+  input {Gramm,Token}
+  repRelations {adv,delim,modif,unknown,circumst,prep_attr}
+  uniRelations {appos,auxil,conjunct,coord_conj,coordin,explic,elect,infin,objA,objD,objG,objI,predic,preposit,genet,subord_conj,obj_clause,compar}
+
+  goal {
+    @type == "Syntax" && PGROUP == "clause" : ()
+    POS == "N" : e6*50
+    PHRASE == "prepg" : e6*60
+  }
+
+  delimiter {@type == "Token" && (kind == "punctuation")}
+
+  gapPenalty          e0*500
+  repPenalty          e1*50000
+  compactnessPenalty  e3*2
+  unreasonableDelimPenalty e4*300
+
+  delimReasoning {
+    {@type == "Syntax" && PGROUP != null,"clause" }+{@type == "Token" && @string==","} : ()
+    {@type == "Token"  && @string==","}+{CONJ == "conjelem"} ^ : ()
+    {@type == "Syntax" && PGROUP == "clause"}+{@type == "Token" && @string == "."} ^ : ()
+  }
+
+  projectivityPenalty {
+     {@type != "Syntax"} : e2*30
+     {@parentRel=="coordin","coord_conj"} : e2*100000
+     {@parentRel=="preposit"} : e2*10000
+     //{PGROUP=="clause"} : e2*10000
+  }
+
+
+  /*comPenalty {
+     {objA}{infin} : e4*70000
+  }*/
+
+  /*projectivity {
+      {@parentRel == "conj"}  {@type != null} : (100000)
+
+  } */
+
+  //создание клаузы
+
+  rule Clause_create {
+    {POS == "V" && REPR == "fin" && AUXIL == null || POS == "PRED"}
+    -->
+    C[A]{@type="Syntax";PGROUP="clause";base=A.base;}
+//    C[A]{@type="Syntax";PGROUP="clause";base=A.base;POS=A.POS;}
+  }
+
+
+  rule Gerund_create {
+    {POS == "V" && REPR == "gern"}
+    -->
+    C[A]{@type="Syntax";PGROUP="gerg";}
+  }
+
+  //создание группы причастного оборота
+
+  rule PARTG_create {
+    {POS == "V" && REPR == "part"}
+    -->
+    C[A]{@type="Syntax";CAS=A.CAS;NMB=A.NMB;ANIM=A.ANIM;GEND=A.GEND;PGROUP="partg";}
+  }
+
+  //создание инфинитивной группы
+
+  /*rule INFG_create {
+    {POS == "V" && REPR == "inf" && VOX == null}
+    -->
+    C[A]{@type="Syntax";PGROUP="infg";}
+  } */
+
+  //ср. "в столе"
+
+  rule PREPG_create {
+    {POS == "PREP"}
+    +
+    [{POS == "N"}] ^
+    ::
+    A.GCAS == B.CAS &&
+    (B.base != "он" || B.ADPREP == "adprep" && A.GPRON == "n" || B.ADPREP == null && A.GPRON == "j")
+    -->
+    (A,B){preposit}
+    C[A]{@type="Syntax";PHRASE="prepg";GCAS=A.GCAS;base=A.base;}
+  }
+
+  rule infin {  //нетерпение увидеть?? вопрос
+    {POS == "V","PRED"}
+    ~
+    //{@type == "Syntax" && PGROUP == "infg"}
+    {POS == "V" && REPR == "inf" && VOX == null}
+    -->
+    (A,B){infin}
+  }
+
+  //ср. "мальчик спал"
+
+  rule predicPast {
+    {POS == "V" && REPR == "fin" && TNS == "past"}
+    ~
+    {POS == "N" && CAS == "nom"}
+    ::
+    A.NMB == B.NMB && (A.NMB == "pl" || A.NMB == "sg" &&
+    (B.GEND == null || A.GEND == B.GEND || B.GEND == "mf" && A.GEND!="n"))
+    -->
+    (A,B){predic}
+  }
+
+  //обработка предикативов
+
+  rule predicPRED {
+    {POS == "PRED"}
+    ~
+    {POS == "N" && CAS == "nom"}
+    -->
+    (A,B){predic}
+  }
+
+  //ср. "я читаю"
+
+  rule predicPrs {
+    {POS == "V" && REPR == "fin" && TNS == "pres","fut" && AUXIL == null}
+    ~
+    {POS == "N" && CAS == "nom"}
+    ::
+    A.NMB == B.NMB && (
+        A.PRS == "1" && (B.base == "я"  || B.base == "мы") ||
+        A.PRS == "2" && (B.base == "ты" || B.base == "вы") ||
+        A.PRS == "3" && (B.base != "ты" && B.base != "вы" && B.base != "мы" && B.base != "я")
+    )
+    -->
+    (A,B){predic}
+  }
+
+  //Связь глагола с существительным в вин. падеже
+
+  rule objA {
+    {POS == "V" && VOX != "pass"}
+    ~
+    {POS == "N" && CAS == "acc"}
+    -->
+    (A,B){objA}
+
+    ::
+
+    A.TRANS == "vi" : e7*140
+    A.TRANS == null : e7*140
+
+  }
+
+  //ср. "остров сокровищ"
+
+  rule genet {
+    {POS == "N" && PRN == null && ADJI == null && PNT == null}
+    ~
+    {POS == "N" && CAS == "gen" && PRN == null}
+    -->
+    (A,B){genet}
+    ::
+    B.@end <= A.@start : e8*70
+  }
+
+
+
+  //ср. "красный стол"
+
+  rule Modif_aggr {
+    {POS == "N"}
+    ~
+    {POS == "A" || PGROUP == "partg"}
+    ::
+    (A.CAS == "prp2" && B.CAS == "prp" || A.CAS == B.CAS) && A.NMB == B.NMB &&
+    (B.ANIM == null || A.ANIM == null || A.ANIM == B.ANIM) &&
+    (A.NMB == "pl" ? true : (A.GEND == B.GEND || (A.GEND == "mf" && B.GEND != "n")))
+    -->
+    (A,B){modif}
+    ::
+    B.PGROUP != "partg" && A.@start < B.@start : e8*30
+    B.PGROUP == "partg" && B.@rDelim == null : e8*200
+  }
+
+  //ср. "плыть (в сторону)"
+
+  /*rule circumst_prepg {
+    {@type == "Syntax" && PGROUP != null}
+    ~
+    {@type == "Syntax" && PHRASE == "prepg"}
+    -->
+    A[B]
+
+    ::
+    true : ()
+  } */
+
+  rule circumst_prepg {
+    {@type != "Syntax" && POS == "V","PRED","N","A"}
+    ~
+    {@type == "Syntax" && PHRASE == "prepg"}
+    -->
+    (A,B){circumst}
+    ::
+    A.POS == "N" || A.POS == "A" : e9*20
+  }
+
+  //ср. "плыть, дыша в воду"
+
+  rule circumst_gerg {
+    {POS == "V","PRED" && AUXIL == null}
+    ~
+    {@type == "Syntax" && PGROUP == "gerg"}
+    -->
+    (A,B){circumst}
+    ::
+    B.@rDelim == null : e8*200
+  }
+
+  //ср. "медленно плыть"
+
+  rule circumst_adv {
+    {POS == "V","PRED","A" && AUXIL == null}
+    ~
+    {POS == "ADV" || POS == "A" && ATTR == "sh"}
+    -->
+    (A,B){circumst}
+  }
+
+  rule Clause_from_short_Adj {
+    {POS == "N" && CAS == "nom"}
+    ~
+    {POS == "A" && ATTR == "sh"}
+    ::
+    A.NMB == B.NMB && (A.NMB == "pl" ? true : (A.GEND == B.GEND || (A.GEND == "mf" && B.GEND != "n")))
+    -->
+    (B,A){predic}
+    C[B]{@type="Syntax";PGROUP="clause";}
+  }
+
+
+  //ср. "работал топором"
+
+  rule objI {
+    {POS == "V"}
+    ~
+    {POS == "N" && CAS == "inst"}
+    -->
+    (A,B){objI}
+
+  }
+
+  rule objD {
+    {POS == "V","A"}
+    ~
+    {POS == "N" && CAS == "dat"}
+    -->
+    (A,B){objD}
+  }
+
+  rule objG {
+    {POS == "V"}
+    ~
+    {POS == "N" && CAS == "gen"}
+    -->
+    (A,B){objG}
+  }
+
+  /*rule unknown {
+    {@type != null}+{@type != null} ^
+    -->
+    (A,B){unknown}
+    ::
+    true : e6*1000
+  } */
+
+
+  //сочинение существительных
+
+  rule conjN {
+    {POS == "CONJ" && base=="и","или" || @type=="Token" && @string==","}+[{@type=="Gramm" && POS=="N"}] ^
+    -->
+    C[B,A]{@type="Syntax";CAS=B.CAS;CONJ="conjelem_N";}
+    (B,A){unknown}
+  }
+
+  rule conjN_conjN {
+    {@type=="Syntax" && CONJ=="conjelem_N"}+{@type=="Syntax" && CONJ=="conjelem_N"} ^
+    ::
+    A.CAS == B.CAS
+    -->
+    C[A]{@type="Syntax";CONJ="conjgroup";POS="N";CAS=B.CAS;NMB="pl";ANIM=A.ANIM;}
+    (A,B){coord_conj}
+  }
+
+  rule N_conjN {
+    [{@type=="Gramm" && POS=="N"}]+{@type=="Syntax" && CONJ=="conjelem_N"} ^
+    ::
+    A.CAS == B.CAS
+    -->
+    C[A]{@type="Syntax";CONJ="conjgroup";POS="N";CAS=B.CAS;NMB="pl";ANIM=A.ANIM;}
+    (A,B){coord_conj}
+  }
+
+  rule conjg_conjN {
+    {@type=="Syntax" && CONJ=="conjgroup" && POS=="N"}+{@type=="Syntax" && CONJ=="conjelem_N"} ^
+    ::
+    A.CAS == B.CAS
+    -->
+    A[B]
+  }
+
+  //сочинение предложных групп
+
+  rule conjPREPG {
+    {POS == "CONJ" && base=="и","или" || @type=="Token" && @string==","}+{@type=="Syntax" && PHRASE=="prepg" && CONJ == null} ^
+    -->
+    C[A]{@type="Syntax";CONJ="conjelem_prepg";}
+    (A,B){coordin}
+  }
+
+  rule conjPREPG_conjPREPG {
+    {@type=="Syntax" && CONJ=="conjelem_prepg"}+{@type=="Syntax" && CONJ=="conjelem_prepg"} ^
+    -->
+    C[B]{@type="Syntax";CONJ="conjgroup";PHRASE="prepg";}
+    (B,A){coord_conj}
+  }
+
+  rule PREPG_conjPREPG {
+    {@type=="Syntax" && PHRASE=="prepg" && CONJ == null}+{@type=="Syntax" && CONJ=="conjelem_prepg"} ^
+    -->
+    C[B]{@type="Syntax";CONJ="conjgroup";PHRASE="prepg";}
+    (B,A){coord_conj}
+  }
+
+  rule conjg_conjPREPG {
+    {@type=="Syntax" && CONJ=="conjgroup" && PHRASE=="prepg"}+{@type=="Syntax" && CONJ=="conjelem_prepg"} ^
+    -->
+    A[B]
+  }
+
+
+  // http://slashzone.ru
+
+  //сочинение клауз через союз 'a'
+
+  rule conjClause {
+    {POS == "CONJ" && base=="а","и"}+{@type=="Syntax" && PGROUP == "clause"}^
+    -->
+    C[A]{@type="Syntax";PGROUP="a_clause";}
+    (A,B){coordin}
+  }
+
+  rule Clause_conjClause {
+    {@type=="Syntax" && PGROUP == "clause"}+{@type == "Syntax" && PGROUP=="a_clause"}
+    -->
+    C[A,B]{@type="Syntax";PGROUP="clause";}
+  }
+}
+
+

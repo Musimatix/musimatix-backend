@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?><Document xmlns="http://starling.rinet.ru/treeton" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" label="Тестовый корпус Есенина" xsi:schemaLocation="http://starling.rinet.ru/treeton http://starling.rinet.ru/treeton/corpusGlobalSettingsSchema.xsd">
+  <globalProperties mdlMeterAnalyzerGrammarPath="./meters.mdl"/>
+</Document>

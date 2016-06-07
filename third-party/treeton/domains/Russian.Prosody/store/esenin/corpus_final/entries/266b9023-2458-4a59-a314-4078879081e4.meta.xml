@@ -1,0 +1,1309 @@
+<?xml version="1.0" encoding="UTF-8"?><Document xmlns="http://starling.rinet.ru/treeton" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" storageURI="" xsi:schemaLocation="http://starling.rinet.ru/treeton http://starling.rinet.ru/treeton/TrnStorageSchema.xsd">
+  <tok length="1" text="&#13;" type="Atom" uri="0"/>
+  <tok length="1" text="&#10;" type="Atom" uri="2"/>
+  <tok length="2" text="Го" type="Atom" uri="4"/>
+  <tok length="2" text="лу" type="Atom" uri="266"/>
+  <tok length="2" text="ба" type="Atom" uri="268"/>
+  <tok length="1" text="я" type="Atom" uri="270"/>
+  <tok length="1" text=" " type="Atom" uri="6"/>
+  <tok length="3" text="коф" type="Atom" uri="8"/>
+  <tok length="2" text="та" type="Atom" uri="273"/>
+  <tok length="1" text="." type="Atom" uri="10"/>
+  <tok length="1" text=" " type="Atom" uri="12"/>
+  <tok length="2" text="Си" type="Atom" uri="14"/>
+  <tok length="2" text="ни" type="Atom" uri="276"/>
+  <tok length="1" text="е" type="Atom" uri="278"/>
+  <tok length="1" text=" " type="Atom" uri="16"/>
+  <tok length="3" text="гла" type="Atom" uri="18"/>
+  <tok length="2" text="за" type="Atom" uri="281"/>
+  <tok length="1" text="." type="Atom" uri="20"/>
+  <tok length="1" text="&#13;" type="Atom" uri="22"/>
+  <tok length="1" text="&#10;" type="Atom" uri="24"/>
+  <tok length="2" text="Ни" type="Atom" uri="26"/>
+  <tok length="2" text="ка" type="Atom" uri="284"/>
+  <tok length="3" text="кой" type="Atom" uri="286"/>
+  <tok length="1" text=" " type="Atom" uri="28"/>
+  <tok length="1" text="я" type="Atom" uri="30"/>
+  <tok length="1" text=" " type="Atom" uri="32"/>
+  <tok length="4" text="прав" type="Atom" uri="34"/>
+  <tok length="2" text="ды" type="Atom" uri="290"/>
+  <tok length="1" text=" " type="Atom" uri="36"/>
+  <tok length="2" text="ми" type="Atom" uri="38"/>
+  <tok length="3" text="лой" type="Atom" uri="293"/>
+  <tok length="1" text=" " type="Atom" uri="40"/>
+  <tok length="2" text="не" type="Atom" uri="42"/>
+  <tok length="1" text=" " type="Atom" uri="44"/>
+  <tok length="3" text="ска" type="Atom" uri="46"/>
+  <tok length="3" text="зал" type="Atom" uri="297"/>
+  <tok length="1" text="." type="Atom" uri="48"/>
+  <tok length="1" text=" " type="Atom" uri="50"/>
+  <tok length="1" text="&#13;" type="Atom" uri="52"/>
+  <tok length="1" text="&#10;" type="Atom" uri="54"/>
+  <tok length="1" text="&#13;" type="Atom" uri="56"/>
+  <tok length="1" text="&#10;" type="Atom" uri="58"/>
+  <tok length="2" text="Ми" type="Atom" uri="60"/>
+  <tok length="2" text="ла" type="Atom" uri="300"/>
+  <tok length="1" text="я" type="Atom" uri="302"/>
+  <tok length="1" text=" " type="Atom" uri="62"/>
+  <tok length="4" text="спро" type="Atom" uri="64"/>
+  <tok length="2" text="си" type="Atom" uri="305"/>
+  <tok length="2" text="ла" type="Atom" uri="307"/>
+  <tok length="1" text=":" type="Atom" uri="66"/>
+  <tok length="1" text=" " type="Atom" uri="68"/>
+  <tok length="1" text="«" type="Atom" uri="70"/>
+  <tok length="3" text="Кру" type="Atom" uri="72"/>
+  <tok length="3" text="тит" type="Atom" uri="310"/>
+  <tok length="1" text=" " type="Atom" uri="74"/>
+  <tok length="2" text="ли" type="Atom" uri="76"/>
+  <tok length="1" text=" " type="Atom" uri="78"/>
+  <tok length="2" text="ме" type="Atom" uri="80"/>
+  <tok length="4" text="тель" type="Atom" uri="314"/>
+  <tok length="1" text="?" type="Atom" uri="82"/>
+  <tok length="1" text="&#13;" type="Atom" uri="84"/>
+  <tok length="1" text="&#10;" type="Atom" uri="86"/>
+  <tok length="2" text="За" type="Atom" uri="88"/>
+  <tok length="2" text="то" type="Atom" uri="317"/>
+  <tok length="4" text="пить" type="Atom" uri="319"/>
+  <tok length="1" text=" " type="Atom" uri="90"/>
+  <tok length="2" text="бы" type="Atom" uri="92"/>
+  <tok length="1" text=" " type="Atom" uri="94"/>
+  <tok length="3" text="печ" type="Atom" uri="96"/>
+  <tok length="2" text="ку" type="Atom" uri="323"/>
+  <tok length="1" text="," type="Atom" uri="98"/>
+  <tok length="1" text=" " type="Atom" uri="100"/>
+  <tok length="3" text="пос" type="Atom" uri="102"/>
+  <tok length="2" text="те" type="Atom" uri="326"/>
+  <tok length="4" text="лить" type="Atom" uri="328"/>
+  <tok length="1" text=" " type="Atom" uri="104"/>
+  <tok length="3" text="пос" type="Atom" uri="106"/>
+  <tok length="4" text="тель" type="Atom" uri="331"/>
+  <tok length="1" text="»" type="Atom" uri="108"/>
+  <tok length="1" text="." type="Atom" uri="110"/>
+  <tok length="1" text=" " type="Atom" uri="112"/>
+  <tok length="1" text="&#13;" type="Atom" uri="114"/>
+  <tok length="1" text="&#10;" type="Atom" uri="116"/>
+  <tok length="1" text="&#13;" type="Atom" uri="118"/>
+  <tok length="1" text="&#10;" type="Atom" uri="120"/>
+  <tok length="1" text="Я" type="Atom" uri="122"/>
+  <tok length="1" text=" " type="Atom" uri="124"/>
+  <tok length="2" text="от" type="Atom" uri="126"/>
+  <tok length="2" text="ве" type="Atom" uri="335"/>
+  <tok length="3" text="тил" type="Atom" uri="337"/>
+  <tok length="1" text=" " type="Atom" uri="128"/>
+  <tok length="2" text="ми" type="Atom" uri="130"/>
+  <tok length="3" text="лой" type="Atom" uri="340"/>
+  <tok length="1" text=":" type="Atom" uri="132"/>
+  <tok length="1" text=" " type="Atom" uri="134"/>
+  <tok length="1" text="«" type="Atom" uri="136"/>
+  <tok length="3" text="Нын" type="Atom" uri="138"/>
+  <tok length="2" text="че" type="Atom" uri="343"/>
+  <tok length="1" text=" " type="Atom" uri="140"/>
+  <tok length="1" text="с" type="Atom" uri="142"/>
+  <tok length="1" text=" " type="Atom" uri="144"/>
+  <tok length="2" text="вы" type="Atom" uri="146"/>
+  <tok length="2" text="со" type="Atom" uri="346"/>
+  <tok length="2" text="ты" type="Atom" uri="348"/>
+  <tok length="1" text="&#13;" type="Atom" uri="148"/>
+  <tok length="1" text="&#10;" type="Atom" uri="150"/>
+  <tok length="3" text="Кто" type="Atom" uri="152"/>
+  <tok length="1" text="-" type="Atom" uri="154"/>
+  <tok length="2" text="то" type="Atom" uri="156"/>
+  <tok length="1" text=" " type="Atom" uri="158"/>
+  <tok length="1" text="о" type="Atom" uri="160"/>
+  <tok length="2" text="сы" type="Atom" uri="353"/>
+  <tok length="2" text="па" type="Atom" uri="355"/>
+  <tok length="2" text="ет" type="Atom" uri="357"/>
+  <tok length="1" text=" " type="Atom" uri="162"/>
+  <tok length="2" text="бе" type="Atom" uri="164"/>
+  <tok length="2" text="лы" type="Atom" uri="360"/>
+  <tok length="1" text="е" type="Atom" uri="362"/>
+  <tok length="1" text=" " type="Atom" uri="166"/>
+  <tok length="3" text="цве" type="Atom" uri="168"/>
+  <tok length="2" text="ты" type="Atom" uri="365"/>
+  <tok length="1" text="." type="Atom" uri="170"/>
+  <tok length="1" text=" " type="Atom" uri="172"/>
+  <tok length="1" text="&#13;" type="Atom" uri="174"/>
+  <tok length="1" text="&#10;" type="Atom" uri="176"/>
+  <tok length="1" text="&#13;" type="Atom" uri="178"/>
+  <tok length="1" text="&#10;" type="Atom" uri="180"/>
+  <tok length="2" text="За" type="Atom" uri="182"/>
+  <tok length="2" text="то" type="Atom" uri="368"/>
+  <tok length="2" text="пи" type="Atom" uri="370"/>
+  <tok length="1" text=" " type="Atom" uri="184"/>
+  <tok length="2" text="ты" type="Atom" uri="186"/>
+  <tok length="1" text=" " type="Atom" uri="188"/>
+  <tok length="3" text="печ" type="Atom" uri="190"/>
+  <tok length="2" text="ку" type="Atom" uri="374"/>
+  <tok length="1" text="," type="Atom" uri="192"/>
+  <tok length="1" text=" " type="Atom" uri="194"/>
+  <tok length="3" text="пос" type="Atom" uri="196"/>
+  <tok length="2" text="те" type="Atom" uri="377"/>
+  <tok length="2" text="ли" type="Atom" uri="379"/>
+  <tok length="1" text=" " type="Atom" uri="198"/>
+  <tok length="3" text="пос" type="Atom" uri="200"/>
+  <tok length="4" text="тель" type="Atom" uri="382"/>
+  <tok length="1" text="," type="Atom" uri="202"/>
+  <tok length="1" text="&#13;" type="Atom" uri="204"/>
+  <tok length="1" text="&#10;" type="Atom" uri="206"/>
+  <tok length="1" text="У" type="Atom" uri="208"/>
+  <tok length="1" text=" " type="Atom" uri="210"/>
+  <tok length="2" text="ме" type="Atom" uri="212"/>
+  <tok length="2" text="ня" type="Atom" uri="386"/>
+  <tok length="1" text=" " type="Atom" uri="214"/>
+  <tok length="2" text="на" type="Atom" uri="216"/>
+  <tok length="1" text=" " type="Atom" uri="218"/>
+  <tok length="4" text="серд" type="Atom" uri="220"/>
+  <tok length="2" text="це" type="Atom" uri="390"/>
+  <tok length="1" text=" " type="Atom" uri="222"/>
+  <tok length="3" text="без" type="Atom" uri="224"/>
+  <tok length="1" text=" " type="Atom" uri="226"/>
+  <tok length="2" text="те" type="Atom" uri="228"/>
+  <tok length="2" text="бя" type="Atom" uri="394"/>
+  <tok length="1" text=" " type="Atom" uri="230"/>
+  <tok length="2" text="ме" type="Atom" uri="232"/>
+  <tok length="4" text="тель" type="Atom" uri="397"/>
+  <tok length="1" text="»" type="Atom" uri="234"/>
+  <tok length="1" text="." type="Atom" uri="236"/>
+  <tok length="1" text=" " type="Atom" uri="238"/>
+  <tok length="1" text="&#13;" type="Atom" uri="240"/>
+  <tok length="1" text="&#10;" type="Atom" uri="242"/>
+  <tok length="1" text="&#13;" type="Atom" uri="244"/>
+  <tok length="1" text="&#10;" type="Atom" uri="246"/>
+  <tok length="1" text="3" type="Atom" uri="248"/>
+  <tok length="1" text=" " type="Atom" uri="250"/>
+  <tok length="2" text="ок" type="Atom" uri="252"/>
+  <tok length="3" text="тяб" type="Atom" uri="400"/>
+  <tok length="2" text="ря" type="Atom" uri="402"/>
+  <tok length="1" text=" " type="Atom" uri="254"/>
+  <tok length="4" text="1925" type="Atom" uri="256"/>
+  <tok length="1" text="&#13;" type="Atom" uri="258"/>
+  <tok length="1" text="&#10;" type="Atom" uri="260"/>
+  <tok length="1" text="&#13;" type="Atom" uri="262"/>
+  <tok length="1" text="&#10;" type="Atom" uri="264"/>
+  <trn end="0" start="0" type="SpaceToken" uri="1">
+    <attrs kind="control"/>
+  </trn>
+  <trn end="2" start="2" type="SpaceToken" uri="3">
+    <attrs kind="control"/>
+  </trn>
+  <trn end="270" start="4" type="Token" uri="5">
+    <attrs kind="word" lang="cyr" orth="upperInitial"/>
+  </trn>
+  <trn end="6" start="6" type="SpaceToken" uri="7">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="273" start="8" type="Token" uri="9">
+    <attrs kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="394" start="228" type="PhonWord" uri="600"/>
+  <trn end="397" start="232" type="Gramm" uri="510">
+    <attrs ACCPL="3" ANIM="inan" CAS="acc" DICTID="-1" GEND="f" ID="-1" NMB="sg" POS="N" WORDFORM="метель" ZINDEX="ж 8а" base="метель" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="397" start="232" type="Gramm" uri="509">
+    <attrs ACCPL="3" ANIM="inan" CAS="nom" DICTID="-1" GEND="f" ID="-1" NMB="sg" POS="N" WORDFORM="метель" ZINDEX="ж 8а" base="метель" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="232" start="232" type="Syllable" uri="398"/>
+  <trn end="397" start="397" type="Syllable" uri="399"/>
+  <trn end="397" start="232" type="AccVariant" uri="601">
+    <attrs MorphArr="[510;509]"/>
+    <nd ref="398"/>
+    <nd pcon="s" ref="399"/>
+  </trn>
+  <trn end="397" start="232" type="PhonWord" uri="602"/>
+  <trn end="402" start="252" type="Gramm" uri="512">
+    <attrs ACCPL="6" ANIM="inan" CAS="gen" DICTID="-1" GEND="m" ID="-1" NMB="sg" POS="N" WORDFORM="октября" ZINDEX="м 2в" base="октябрь" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="402" start="252" type="Gramm" uri="511">
+    <attrs ACCPL="6" ANIM="inan" CAS="gen" DICTID="-1" GEND="m" ID="-1" NMB="sg" POS="N" WORDFORM="октября" ZINDEX="м 2в" base="октябрь" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="252" start="252" type="Syllable" uri="401"/>
+  <trn end="400" start="400" type="Syllable" uri="403"/>
+  <trn end="402" start="402" type="Syllable" uri="404"/>
+  <trn end="402" start="252" type="AccVariant" uri="603">
+    <attrs MorphArr="[512;511]"/>
+    <nd ref="401"/>
+    <nd ref="403"/>
+    <nd pcon="s" ref="404"/>
+  </trn>
+  <trn end="402" start="252" type="PhonWord" uri="604"/>
+  <trn end="20" start="4" type="Verse" uri="605"/>
+  <trn end="50" start="26" type="Verse" uri="606"/>
+  <trn end="82" start="60" type="Verse" uri="607"/>
+  <trn end="112" start="88" type="Verse" uri="608"/>
+  <trn end="348" start="122" type="Verse" uri="609"/>
+  <trn end="172" start="152" type="Verse" uri="610"/>
+  <trn end="202" start="182" type="Verse" uri="611"/>
+  <trn end="238" start="208" type="Verse" uri="612"/>
+  <trn end="264" start="0" type="CorpusElement" uri="614">
+    <attrs author="Есенин" meter="Х6ц" title="Голубая кофта. Синие глаза..." year="1925"/>
+  </trn>
+  <trn end="256" start="248" type="IgnoredText" uri="615"/>
+  <trn end="216" start="216" type="Gramm" uri="500">
+    <attrs DICTID="-1" GCAS="acc" ID="-1" POS="PREP" base="на" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="216" start="216" type="Gramm" uri="501">
+    <attrs DICTID="-1" GCAS="prp" ID="-1" POS="PREP" base="на" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="216" start="216" type="Gramm" uri="502">
+    <attrs DICTID="-1" GCAS="prp2" ID="-1" POS="PREP" base="на" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="390" start="220" type="Gramm" uri="503">
+    <attrs ACCPL="1" ANIM="inan" CAS="nom" DICTID="-1" GEND="n" ID="-1" NMB="sg" POS="N" WORDFORM="сердце" ZINDEX="с 5*с % берет за сердце ( волнует ); положа руку на сердце ( чистосердечно ); это мне по сердцу ( нравится )" base="сердце" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="390" start="220" type="Gramm" uri="504">
+    <attrs ACCPL="1" ANIM="inan" CAS="acc" DICTID="-1" GEND="n" ID="-1" NMB="sg" POS="N" WORDFORM="сердце" ZINDEX="с 5*с % берет за сердце ( волнует ); положа руку на сердце ( чистосердечно ); это мне по сердцу ( нравится )" base="сердце" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="390" start="220" type="Gramm" uri="505">
+    <attrs ACCPL="1" ANIM="inan" CAS="prp" DICTID="-1" GEND="n" ID="-1" NMB="sg" POS="N" WORDFORM="сердце" ZINDEX="с 5*с % берет за сердце ( волнует ); положа руку на сердце ( чистосердечно ); это мне по сердцу ( нравится )" base="сердце" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="224" start="224" type="Gramm" uri="506">
+    <attrs DICTID="-1" GCAS="gen" ID="-1" POS="PREP" base="без" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="394" start="228" type="Gramm" uri="507">
+    <attrs ANIM="anim" CAS="acc" DICTID="-1" ID="-1" NMB="sg" POS="N" PRN="prn" base="ты" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="394" start="228" type="Gramm" uri="508">
+    <attrs ANIM="anim" CAS="gen" DICTID="-1" ID="-1" NMB="sg" POS="N" PRN="prn" base="ты" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="270" start="4" type="Gramm" uri="405">
+    <attrs ACCPL="5" CAS="nom" DICTID="-1" GEND="f" ID="-1" NMB="sg" POS="A" WORDFORM="голубая" ZINDEX="п 1в?" base="голубой" kind="word" lang="cyr" orth="upperInitial"/>
+  </trn>
+  <trn end="4" start="4" type="Syllable" uri="267"/>
+  <trn end="266" start="266" type="Syllable" uri="269"/>
+  <trn end="268" start="268" type="Syllable" uri="271"/>
+  <trn end="270" start="270" type="Syllable" uri="272"/>
+  <trn end="270" start="4" type="AccVariant" uri="513">
+    <attrs MorphArr="[405]"/>
+    <nd ref="267"/>
+    <nd ref="269"/>
+    <nd pcon="s" ref="271"/>
+    <nd ref="272"/>
+  </trn>
+  <trn end="270" start="4" type="PhonWord" uri="514"/>
+  <trn end="273" start="8" type="Gramm" uri="406">
+    <attrs ACCPL="1" ANIM="inan" CAS="nom" DICTID="-1" GEND="f" ID="-1" NMB="sg" POS="N" WORDFORM="кофта" ZINDEX="ж 1а" base="кофта" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="8" start="8" type="Syllable" uri="274"/>
+  <trn end="273" start="273" type="Syllable" uri="275"/>
+  <trn end="273" start="8" type="AccVariant" uri="515">
+    <attrs MorphArr="[406]"/>
+    <nd pcon="s" ref="274"/>
+    <nd ref="275"/>
+  </trn>
+  <trn end="273" start="8" type="PhonWord" uri="516"/>
+  <trn end="278" start="14" type="Gramm" uri="408">
+    <attrs ACCPL="1" ANIM="inan" CAS="acc" DICTID="-1" ID="-1" NMB="pl" POS="A" WORDFORM="синие" ZINDEX="п 2а/с" base="синий" kind="word" lang="cyr" orth="upperInitial"/>
+  </trn>
+  <trn end="278" start="14" type="Gramm" uri="407">
+    <attrs ACCPL="1" CAS="nom" DICTID="-1" ID="-1" NMB="pl" POS="A" WORDFORM="синие" ZINDEX="п 2а/с" base="синий" kind="word" lang="cyr" orth="upperInitial"/>
+  </trn>
+  <trn end="14" start="14" type="Syllable" uri="277"/>
+  <trn end="276" start="276" type="Syllable" uri="279"/>
+  <trn end="278" start="278" type="Syllable" uri="280"/>
+  <trn end="278" start="14" type="AccVariant" uri="517">
+    <attrs MorphArr="[408;407]"/>
+    <nd pcon="s" ref="277"/>
+    <nd ref="279"/>
+    <nd ref="280"/>
+  </trn>
+  <trn end="278" start="14" type="PhonWord" uri="518"/>
+  <trn end="281" start="18" type="Gramm" uri="409">
+    <attrs ACCPL="2" ANIM="inan" CAS="gen" DICTID="-1" GEND="m" ID="-1" NMB="sg" POS="N" WORDFORM="глаза" ZINDEX="м 1с&quot;1&quot;&quot;2&quot;, п2 % с гла'зу на' глаз [//на гла'з]; у семи' ня'нек дитя' без гла'зу [//без гла'за]" base="глаз" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="18" start="18" type="Syllable" uri="282"/>
+  <trn end="281" start="281" type="Syllable" uri="283"/>
+  <trn end="281" start="18" type="AccVariant" uri="519">
+    <attrs MorphArr="[409]"/>
+    <nd pcon="s" ref="282"/>
+    <nd ref="283"/>
+  </trn>
+  <trn end="281" start="18" type="Gramm" uri="411">
+    <attrs ACCPL="4" ANIM="inan" CAS="acc" DICTID="-1" GEND="m" ID="-1" NMB="pl" POS="N" WORDFORM="глаза" ZINDEX="м 1с&quot;1&quot;&quot;2&quot;, п2 % с гла'зу на' глаз [//на гла'з]; у семи' ня'нек дитя' без гла'зу [//без гла'за]" base="глаз" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="281" start="18" type="Gramm" uri="410">
+    <attrs ACCPL="4" ANIM="inan" CAS="nom" DICTID="-1" GEND="m" ID="-1" NMB="pl" POS="N" WORDFORM="глаза" ZINDEX="м 1с&quot;1&quot;&quot;2&quot;, п2 % с гла'зу на' глаз [//на гла'з]; у семи' ня'нек дитя' без гла'зу [//без гла'за]" base="глаз" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="281" start="18" type="AccVariant" uri="520">
+    <attrs MorphArr="[411;410]"/>
+    <nd ref="282"/>
+    <nd pcon="s" ref="283"/>
+  </trn>
+  <trn end="281" start="18" type="PhonWord" uri="521"/>
+  <trn end="286" start="26" type="Gramm" uri="417">
+    <attrs ACCPL="5" CAS="prp" DICTID="-1" GEND="f" ID="-1" NMB="sg" POS="A" PRN="prn" WORDFORM="никакой" ZINDEX="мс-п п 3в, #12" base="никакой" kind="word" lang="cyr" orth="upperInitial"/>
+  </trn>
+  <trn end="286" start="26" type="Gramm" uri="416">
+    <attrs ACCPL="5" CAS="inst" DICTID="-1" GEND="f" ID="-1" NMB="sg" POS="A" PRN="prn" WORDFORM="никакой" ZINDEX="мс-п п 3в, #12" base="никакой" kind="word" lang="cyr" orth="upperInitial"/>
+  </trn>
+  <trn end="286" start="26" type="Gramm" uri="415">
+    <attrs ACCPL="5" CAS="dat" DICTID="-1" GEND="f" ID="-1" NMB="sg" POS="A" PRN="prn" WORDFORM="никакой" ZINDEX="мс-п п 3в, #12" base="никакой" kind="word" lang="cyr" orth="upperInitial"/>
+  </trn>
+  <trn end="286" start="26" type="Gramm" uri="414">
+    <attrs ACCPL="5" CAS="gen" DICTID="-1" GEND="f" ID="-1" NMB="sg" POS="A" PRN="prn" WORDFORM="никакой" ZINDEX="мс-п п 3в, #12" base="никакой" kind="word" lang="cyr" orth="upperInitial"/>
+  </trn>
+  <trn end="286" start="26" type="Gramm" uri="412">
+    <attrs ACCPL="5" CAS="nom" DICTID="-1" GEND="m" ID="-1" NMB="sg" POS="A" PRN="prn" WORDFORM="никакой" ZINDEX="мс-п п 3в, #12" base="никакой" kind="word" lang="cyr" orth="upperInitial"/>
+  </trn>
+  <trn end="26" start="26" type="Syllable" uri="285"/>
+  <trn end="284" start="284" type="Syllable" uri="287"/>
+  <trn end="286" start="286" type="Syllable" uri="288"/>
+  <trn end="286" start="26" type="AccVariant" uri="522">
+    <attrs MorphArr="[417;416;415;414;412]"/>
+    <nd ref="285"/>
+    <nd ref="287"/>
+    <nd pcon="s" ref="288"/>
+  </trn>
+  <trn end="286" start="26" type="PhonWord" uri="523"/>
+  <trn end="30" start="30" type="Gramm" uri="418">
+    <attrs CAS="nom" DICTID="-1" ID="-1" NMB="sg" POS="N" PRN="prn" base="я" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="30" start="30" type="Syllable" uri="289"/>
+  <trn end="30" start="30" type="AccVariant" uri="524">
+    <attrs MorphArr="[418]"/>
+    <nd pcon="s" ref="289"/>
+  </trn>
+  <trn end="30" start="30" type="PhonWord" uri="525"/>
+  <trn end="290" start="34" type="Gramm" uri="421">
+    <attrs ACCPL="2" ANIM="inan" CAS="acc" DICTID="-1" GEND="f" ID="-1" NMB="pl" POS="N" WORDFORM="правды" ZINDEX="ж 1а" base="правда" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="290" start="34" type="Gramm" uri="420">
+    <attrs ACCPL="2" ANIM="inan" CAS="nom" DICTID="-1" GEND="f" ID="-1" NMB="pl" POS="N" WORDFORM="правды" ZINDEX="ж 1а" base="правда" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="290" start="34" type="Gramm" uri="419">
+    <attrs ACCPL="2" ANIM="inan" CAS="gen" DICTID="-1" GEND="f" ID="-1" NMB="sg" POS="N" WORDFORM="правды" ZINDEX="ж 1а" base="правда" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="34" start="34" type="Syllable" uri="291"/>
+  <trn end="290" start="290" type="Syllable" uri="292"/>
+  <trn end="290" start="34" type="AccVariant" uri="526">
+    <attrs MorphArr="[421;420;419]"/>
+    <nd pcon="s" ref="291"/>
+    <nd ref="292"/>
+  </trn>
+  <trn end="290" start="34" type="PhonWord" uri="527"/>
+  <trn end="293" start="38" type="Gramm" uri="430">
+    <attrs ACCPL="1" ADJI="adji" ANIM="anim" CAS="prp" DICTID="-1" GEND="f" ID="-1" NMB="sg" POS="N" WORDFORM="милой" ZINDEX="жо п 1а" base="милая" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="293" start="38" type="Gramm" uri="429">
+    <attrs ACCPL="1" ADJI="adji" ANIM="anim" CAS="inst" DICTID="-1" GEND="f" ID="-1" NMB="sg" POS="N" WORDFORM="милой" ZINDEX="жо п 1а" base="милая" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="293" start="38" type="Gramm" uri="428">
+    <attrs ACCPL="1" ADJI="adji" ANIM="anim" CAS="dat" DICTID="-1" GEND="f" ID="-1" NMB="sg" POS="N" WORDFORM="милой" ZINDEX="жо п 1а" base="милая" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="293" start="38" type="Gramm" uri="427">
+    <attrs ACCPL="1" ADJI="adji" ANIM="anim" CAS="gen" DICTID="-1" GEND="f" ID="-1" NMB="sg" POS="N" WORDFORM="милой" ZINDEX="жо п 1а" base="милая" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="293" start="38" type="Gramm" uri="426">
+    <attrs ACCPL="1" CAS="prp" DICTID="-1" GEND="f" ID="-1" NMB="sg" POS="A" WORDFORM="милой" ZINDEX="п 1а/с'" base="милый" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="293" start="38" type="Gramm" uri="425">
+    <attrs ACCPL="1" CAS="inst" DICTID="-1" GEND="f" ID="-1" NMB="sg" POS="A" WORDFORM="милой" ZINDEX="п 1а/с'" base="милый" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="293" start="38" type="Gramm" uri="424">
+    <attrs ACCPL="1" CAS="dat" DICTID="-1" GEND="f" ID="-1" NMB="sg" POS="A" WORDFORM="милой" ZINDEX="п 1а/с'" base="милый" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="293" start="38" type="Gramm" uri="423">
+    <attrs ACCPL="1" CAS="gen" DICTID="-1" GEND="f" ID="-1" NMB="sg" POS="A" WORDFORM="милой" ZINDEX="п 1а/с'" base="милый" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="293" start="38" type="Gramm" uri="422">
+    <attrs ACCPL="1" ANIM="anim" CAS="inst" DICTID="-1" GEND="f" ID="-1" NMB="sg" POS="N" WORDFORM="милой" ZINDEX="жо 1а (_гипокор._) !!ч2" base="мила" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="38" start="38" type="Syllable" uri="294"/>
+  <trn end="293" start="293" type="Syllable" uri="295"/>
+  <trn end="293" start="38" type="AccVariant" uri="528">
+    <attrs MorphArr="[430;429;428;427;426;425;424;423;422]"/>
+    <nd pcon="s" ref="294"/>
+    <nd ref="295"/>
+  </trn>
+  <trn end="293" start="38" type="PhonWord" uri="529"/>
+  <trn end="42" start="42" type="Gramm" uri="431">
+    <attrs ACCPL="-1" DICTID="-1" ID="-1" POS="PCL" WORDFORM="не" ZINDEX="(_нормально без удар._) част." base="не" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="42" start="42" type="Syllable" uri="296"/>
+  <trn end="42" start="42" type="AccVariant" uri="530">
+    <attrs MorphArr="[431]"/>
+    <nd ref="296"/>
+  </trn>
+  <trn end="42" start="42" type="PhonWord" uri="531"/>
+  <trn end="297" start="46" type="Gramm" uri="432">
+    <attrs ACCPL="4" ASP="pf" DICTID="-1" GEND="m" ID="-1" MD="ind" NMB="sg" POS="V" REPR="fin" TNS="past" TRANS="vt" VOX="act" WORDFORM="сказал" ZINDEX="св 6с" base="сказать" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="46" start="46" type="Syllable" uri="298"/>
+  <trn end="297" start="297" type="Syllable" uri="299"/>
+  <trn end="297" start="46" type="AccVariant" uri="532">
+    <attrs MorphArr="[432]"/>
+    <nd ref="298"/>
+    <nd pcon="s" ref="299"/>
+  </trn>
+  <trn end="297" start="46" type="PhonWord" uri="533"/>
+  <trn end="286" start="26" type="Gramm" uri="413">
+    <attrs ANIM="inan" CAS="acc" DICTID="-1" ID="-1" NMB="sg" POS="A" PRN="prn" WORDFORM="никакой" ZINDEX="мс-п п 3в, #12" base="никакой" kind="word" lang="cyr" orth="upperInitial"/>
+  </trn>
+  <trn end="302" start="60" type="Gramm" uri="434">
+    <attrs ACCPL="1" ADJI="adji" ANIM="anim" CAS="nom" DICTID="-1" GEND="f" ID="-1" NMB="sg" POS="N" WORDFORM="милая" ZINDEX="жо п 1а" base="милая" kind="word" lang="cyr" orth="upperInitial"/>
+  </trn>
+  <trn end="302" start="60" type="Gramm" uri="433">
+    <attrs ACCPL="1" CAS="nom" DICTID="-1" GEND="f" ID="-1" NMB="sg" POS="A" WORDFORM="милая" ZINDEX="п 1а/с'" base="милый" kind="word" lang="cyr" orth="upperInitial"/>
+  </trn>
+  <trn end="60" start="60" type="Syllable" uri="301"/>
+  <trn end="300" start="300" type="Syllable" uri="303"/>
+  <trn end="302" start="302" type="Syllable" uri="304"/>
+  <trn end="302" start="60" type="AccVariant" uri="534">
+    <attrs MorphArr="[434;433]"/>
+    <nd pcon="s" ref="301"/>
+    <nd ref="303"/>
+    <nd ref="304"/>
+  </trn>
+  <trn end="302" start="60" type="PhonWord" uri="535"/>
+  <trn end="307" start="64" type="Gramm" uri="435">
+    <attrs ACCPL="5" ASP="pf" DICTID="-1" GEND="f" ID="-1" MD="ind" NMB="sg" POS="V" REPR="fin" TNS="past" TRANS="vt" VOX="act" WORDFORM="спросила" ZINDEX="св 4с $I(-а'-)" base="спросить" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="64" start="64" type="Syllable" uri="306"/>
+  <trn end="305" start="305" type="Syllable" uri="308"/>
+  <trn end="307" start="307" type="Syllable" uri="309"/>
+  <trn end="307" start="64" type="AccVariant" uri="536">
+    <attrs MorphArr="[435]"/>
+    <nd ref="306"/>
+    <nd pcon="s" ref="308"/>
+    <nd ref="309"/>
+  </trn>
+  <trn end="307" start="64" type="PhonWord" uri="537"/>
+  <trn end="310" start="72" type="Gramm" uri="436">
+    <attrs ACCPL="2" ASP="ipf" DICTID="-1" ID="-1" MD="ind" NMB="sg" POS="V" PRS="3" REPR="fin" TNS="pres" TRANS="vt" VOX="act" WORDFORM="крутит" ZINDEX="нсв 4с" base="крутить" kind="word" lang="cyr" orth="upperInitial"/>
+  </trn>
+  <trn end="72" start="72" type="Syllable" uri="311"/>
+  <trn end="310" start="310" type="Syllable" uri="312"/>
+  <trn end="310" start="72" type="AccVariant" uri="538">
+    <attrs MorphArr="[436]"/>
+    <nd pcon="s" ref="311"/>
+    <nd ref="312"/>
+  </trn>
+  <trn end="310" start="72" type="PhonWord" uri="539"/>
+  <trn end="76" start="76" type="Gramm" uri="439">
+    <attrs ACCPL="1" ANIM="anim" DICTID="-1" GEND="mf" ID="-1" POS="N" WORDFORM="ли" ZINDEX="мо-жо 0 !!ф. !!ч2" base="ли" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="76" start="76" type="Gramm" uri="437">
+    <attrs ACCPL="1" ANIM="inan" DICTID="-1" GEND="n" ID="-1" INVAR="invar" POS="N" WORDFORM="ли" ZINDEX="с 0 (_китайская мера длины_)" base="ли" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="76" start="76" type="Syllable" uri="313"/>
+  <trn end="76" start="76" type="AccVariant" uri="540">
+    <attrs MorphArr="[439;437]"/>
+    <nd pcon="s" ref="313"/>
+  </trn>
+  <trn end="76" start="76" type="Gramm" uri="438">
+    <attrs ACCPL="-1" DICTID="-1" ID="-1" POS="CONJ" WORDFORM="ли" ZINDEX="(_без удар._) союз; част." base="ли" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="76" start="76" type="AccVariant" uri="541">
+    <attrs MorphArr="[438]"/>
+    <nd ref="313"/>
+  </trn>
+  <trn end="76" start="76" type="PhonWord" uri="542"/>
+  <trn end="314" start="80" type="Gramm" uri="441">
+    <attrs ACCPL="3" ANIM="inan" CAS="acc" DICTID="-1" GEND="f" ID="-1" NMB="sg" POS="N" WORDFORM="метель" ZINDEX="ж 8а" base="метель" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="314" start="80" type="Gramm" uri="440">
+    <attrs ACCPL="3" ANIM="inan" CAS="nom" DICTID="-1" GEND="f" ID="-1" NMB="sg" POS="N" WORDFORM="метель" ZINDEX="ж 8а" base="метель" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="80" start="80" type="Syllable" uri="315"/>
+  <trn end="314" start="314" type="Syllable" uri="316"/>
+  <trn end="314" start="80" type="AccVariant" uri="543">
+    <attrs MorphArr="[441;440]"/>
+    <nd ref="315"/>
+    <nd pcon="s" ref="316"/>
+  </trn>
+  <trn end="314" start="80" type="PhonWord" uri="544"/>
+  <trn end="319" start="88" type="Gramm" uri="443">
+    <attrs ACCPL="5" ASP="pf" DICTID="-1" ID="-1" POS="V" REPR="inf" TRANS="vt" WORDFORM="затопить" ZINDEX="св 4с (_залить водой_) $II" base="затопить" kind="word" lang="cyr" orth="upperInitial"/>
+  </trn>
+  <trn end="319" start="88" type="Gramm" uri="442">
+    <attrs ACCPL="5" ASP="pf" DICTID="-1" ID="-1" POS="V" REPR="inf" TRANS="vt" WORDFORM="затопить" ZINDEX="св 4с (печь) $I(-а'-)" base="затопить" kind="word" lang="cyr" orth="upperInitial"/>
+  </trn>
+  <trn end="88" start="88" type="Syllable" uri="318"/>
+  <trn end="317" start="317" type="Syllable" uri="320"/>
+  <trn end="319" start="319" type="Syllable" uri="321"/>
+  <trn end="319" start="88" type="AccVariant" uri="545">
+    <attrs MorphArr="[443;442]"/>
+    <nd ref="318"/>
+    <nd ref="320"/>
+    <nd pcon="s" ref="321"/>
+  </trn>
+  <trn end="319" start="88" type="PhonWord" uri="546"/>
+  <trn end="92" start="92" type="Gramm" uri="444">
+    <attrs ACCPL="-1" DICTID="-1" ID="-1" POS="PCL" WORDFORM="бы" ZINDEX="(_без удар._) част." base="бы" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="92" start="92" type="Syllable" uri="322"/>
+  <trn end="92" start="92" type="AccVariant" uri="547">
+    <attrs MorphArr="[444]"/>
+    <nd ref="322"/>
+  </trn>
+  <trn end="92" start="92" type="PhonWord" uri="548"/>
+  <trn end="323" start="96" type="Gramm" uri="445">
+    <attrs ACCPL="1" ANIM="inan" CAS="acc" DICTID="-1" GEND="f" ID="-1" NMB="sg" POS="N" WORDFORM="печку" ZINDEX="ж 3*а" base="печка" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="96" start="96" type="Syllable" uri="324"/>
+  <trn end="323" start="323" type="Syllable" uri="325"/>
+  <trn end="323" start="96" type="AccVariant" uri="549">
+    <attrs MorphArr="[445]"/>
+    <nd pcon="s" ref="324"/>
+    <nd ref="325"/>
+  </trn>
+  <trn end="323" start="96" type="PhonWord" uri="550"/>
+  <trn end="328" start="102" type="Gramm" uri="446">
+    <attrs ACCPL="6" ASP="pf" DICTID="-1" ID="-1" POS="V" REPR="inf" TRANS="vt" WORDFORM="постелить" ZINDEX="св 4с" base="постелить" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="102" start="102" type="Syllable" uri="327"/>
+  <trn end="326" start="326" type="Syllable" uri="329"/>
+  <trn end="328" start="328" type="Syllable" uri="330"/>
+  <trn end="328" start="102" type="AccVariant" uri="551">
+    <attrs MorphArr="[446]"/>
+    <nd ref="327"/>
+    <nd ref="329"/>
+    <nd pcon="s" ref="330"/>
+  </trn>
+  <trn end="328" start="102" type="PhonWord" uri="552"/>
+  <trn end="331" start="106" type="Gramm" uri="448">
+    <attrs ACCPL="4" ANIM="inan" CAS="acc" DICTID="-1" GEND="f" ID="-1" NMB="sg" POS="N" WORDFORM="постель" ZINDEX="ж 8а" base="постель" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="331" start="106" type="Gramm" uri="447">
+    <attrs ACCPL="4" ANIM="inan" CAS="nom" DICTID="-1" GEND="f" ID="-1" NMB="sg" POS="N" WORDFORM="постель" ZINDEX="ж 8а" base="постель" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="106" start="106" type="Syllable" uri="332"/>
+  <trn end="331" start="331" type="Syllable" uri="333"/>
+  <trn end="331" start="106" type="AccVariant" uri="553">
+    <attrs MorphArr="[448;447]"/>
+    <nd ref="332"/>
+    <nd pcon="s" ref="333"/>
+  </trn>
+  <trn end="331" start="106" type="PhonWord" uri="554"/>
+  <trn end="122" start="122" type="Gramm" uri="449">
+    <attrs CAS="nom" DICTID="-1" ID="-1" NMB="sg" POS="N" PRN="prn" base="я" kind="word" lang="cyr" orth="upperInitial"/>
+  </trn>
+  <trn end="122" start="122" type="Syllable" uri="334"/>
+  <trn end="122" start="122" type="AccVariant" uri="555">
+    <attrs MorphArr="[449]"/>
+    <nd pcon="s" ref="334"/>
+  </trn>
+  <trn end="122" start="122" type="PhonWord" uri="556"/>
+  <trn end="337" start="126" type="Gramm" uri="450">
+    <attrs ACCPL="3" ASP="pf" DICTID="-1" GEND="m" ID="-1" MD="ind" NMB="sg" POS="V" REPR="fin" TNS="past" TRANS="vi" VOX="act" WORDFORM="ответил" ZINDEX="св нп 4а $II" base="ответить" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="126" start="126" type="Syllable" uri="336"/>
+  <trn end="335" start="335" type="Syllable" uri="338"/>
+  <trn end="337" start="337" type="Syllable" uri="339"/>
+  <trn end="337" start="126" type="AccVariant" uri="557">
+    <attrs MorphArr="[450]"/>
+    <nd ref="336"/>
+    <nd pcon="s" ref="338"/>
+    <nd ref="339"/>
+  </trn>
+  <trn end="337" start="126" type="PhonWord" uri="558"/>
+  <trn end="340" start="130" type="Gramm" uri="459">
+    <attrs ACCPL="1" ADJI="adji" ANIM="anim" CAS="prp" DICTID="-1" GEND="f" ID="-1" NMB="sg" POS="N" WORDFORM="милой" ZINDEX="жо п 1а" base="милая" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="340" start="130" type="Gramm" uri="458">
+    <attrs ACCPL="1" ADJI="adji" ANIM="anim" CAS="inst" DICTID="-1" GEND="f" ID="-1" NMB="sg" POS="N" WORDFORM="милой" ZINDEX="жо п 1а" base="милая" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="340" start="130" type="Gramm" uri="457">
+    <attrs ACCPL="1" ADJI="adji" ANIM="anim" CAS="dat" DICTID="-1" GEND="f" ID="-1" NMB="sg" POS="N" WORDFORM="милой" ZINDEX="жо п 1а" base="милая" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="340" start="130" type="Gramm" uri="456">
+    <attrs ACCPL="1" ADJI="adji" ANIM="anim" CAS="gen" DICTID="-1" GEND="f" ID="-1" NMB="sg" POS="N" WORDFORM="милой" ZINDEX="жо п 1а" base="милая" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="340" start="130" type="Gramm" uri="455">
+    <attrs ACCPL="1" CAS="prp" DICTID="-1" GEND="f" ID="-1" NMB="sg" POS="A" WORDFORM="милой" ZINDEX="п 1а/с'" base="милый" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="340" start="130" type="Gramm" uri="454">
+    <attrs ACCPL="1" CAS="inst" DICTID="-1" GEND="f" ID="-1" NMB="sg" POS="A" WORDFORM="милой" ZINDEX="п 1а/с'" base="милый" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="340" start="130" type="Gramm" uri="453">
+    <attrs ACCPL="1" CAS="dat" DICTID="-1" GEND="f" ID="-1" NMB="sg" POS="A" WORDFORM="милой" ZINDEX="п 1а/с'" base="милый" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="340" start="130" type="Gramm" uri="452">
+    <attrs ACCPL="1" CAS="gen" DICTID="-1" GEND="f" ID="-1" NMB="sg" POS="A" WORDFORM="милой" ZINDEX="п 1а/с'" base="милый" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="340" start="130" type="Gramm" uri="451">
+    <attrs ACCPL="1" ANIM="anim" CAS="inst" DICTID="-1" GEND="f" ID="-1" NMB="sg" POS="N" WORDFORM="милой" ZINDEX="жо 1а (_гипокор._) !!ч2" base="мила" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="130" start="130" type="Syllable" uri="341"/>
+  <trn end="340" start="340" type="Syllable" uri="342"/>
+  <trn end="340" start="130" type="AccVariant" uri="559">
+    <attrs MorphArr="[459;458;457;456;455;454;453;452;451]"/>
+    <nd pcon="s" ref="341"/>
+    <nd ref="342"/>
+  </trn>
+  <trn end="340" start="130" type="PhonWord" uri="560"/>
+  <trn end="343" start="138" type="Gramm" uri="460">
+    <attrs ACCPL="1" DICTID="-1" ID="-1" POS="ADV" WORDFORM="нынче" ZINDEX="н" base="нынче" kind="word" lang="cyr" orth="upperInitial"/>
+  </trn>
+  <trn end="138" start="138" type="Syllable" uri="344"/>
+  <trn end="343" start="343" type="Syllable" uri="345"/>
+  <trn end="343" start="138" type="AccVariant" uri="561">
+    <attrs MorphArr="[460]"/>
+    <nd pcon="s" ref="344"/>
+    <nd ref="345"/>
+  </trn>
+  <trn end="343" start="138" type="PhonWord" uri="562"/>
+  <trn end="348" start="146" type="Gramm" uri="466">
+    <attrs ACCPL="3" ANIM="inan" CAS="acc" DICTID="-1" GEND="f" ID="-1" NMB="pl" POS="N" WORDFORM="высоты" ZINDEX="ж 1D" base="высота" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="348" start="146" type="Gramm" uri="465">
+    <attrs ACCPL="3" ANIM="inan" CAS="nom" DICTID="-1" GEND="f" ID="-1" NMB="pl" POS="N" WORDFORM="высоты" ZINDEX="ж 1D" base="высота" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="146" start="146" type="Syllable" uri="347"/>
+  <trn end="346" start="346" type="Syllable" uri="349"/>
+  <trn end="348" start="348" type="Syllable" uri="350"/>
+  <trn end="348" start="146" type="AccVariant" uri="563">
+    <attrs MorphArr="[466;465]"/>
+    <nd ref="347"/>
+    <nd pcon="s" ref="349"/>
+    <nd ref="350"/>
+  </trn>
+  <trn end="382" start="200" type="Token" uri="201">
+    <attrs kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="348" start="146" type="Gramm" uri="464">
+    <attrs ACCPL="5" ANIM="inan" CAS="gen" DICTID="-1" GEND="f" ID="-1" NMB="sg" POS="N" WORDFORM="высоты" ZINDEX="ж 1D" base="высота" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="348" start="146" type="AccVariant" uri="564">
+    <attrs MorphArr="[464]"/>
+    <nd ref="347"/>
+    <nd ref="349"/>
+    <nd pcon="s" ref="350"/>
+  </trn>
+  <trn end="348" start="146" type="PhonWord" uri="565"/>
+  <trn end="202" start="202" type="Token" uri="203">
+    <attrs kind="punctuation"/>
+  </trn>
+  <trn end="156" start="152" type="Gramm" uri="468">
+    <attrs ANIM="anim" CAS="nom" DICTID="-1" ID="-1" IREL="irel" NMB="sg" POS="N" PRN="prn" base="кто-то" kind="complex" lang="cyr" orth="upperInitial"/>
+  </trn>
+  <trn end="152" start="152" type="Syllable" uri="351"/>
+  <trn end="156" start="156" type="Syllable" uri="352"/>
+  <trn end="156" start="152" type="AccVariant" uri="566">
+    <attrs MorphArr="[468]"/>
+    <nd pcon="s" ref="351"/>
+    <nd ref="352"/>
+  </trn>
+  <trn end="156" start="152" type="AccVariant" uri="567">
+    <attrs MorphArr="[468]"/>
+    <nd ref="351"/>
+    <nd pcon="s" ref="352"/>
+  </trn>
+  <trn end="204" start="204" type="SpaceToken" uri="205">
+    <attrs kind="control"/>
+  </trn>
+  <trn end="156" start="152" type="AccVariant" uri="568">
+    <attrs MorphArr="[468]"/>
+    <nd ref="351"/>
+    <nd ref="352"/>
+  </trn>
+  <trn end="156" start="152" type="PhonWord" uri="569"/>
+  <trn end="206" start="206" type="SpaceToken" uri="207">
+    <attrs kind="control"/>
+  </trn>
+  <trn end="208" start="208" type="Token" uri="209">
+    <attrs kind="word" lang="cyr" orth="upperInitial"/>
+  </trn>
+  <trn end="357" start="160" type="Gramm" uri="471">
+    <attrs ACCPL="4" ASP="ipf" DICTID="-1" ID="-1" MD="ind" NMB="sg" POS="V" PRS="3" REPR="fin" TNS="pres" TRANS="vt" VOX="act" WORDFORM="осыпает" ZINDEX="нсв 1а $6" base="осыпать" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="160" start="160" type="Syllable" uri="354"/>
+  <trn end="353" start="353" type="Syllable" uri="356"/>
+  <trn end="355" start="355" type="Syllable" uri="358"/>
+  <trn end="357" start="357" type="Syllable" uri="359"/>
+  <trn end="357" start="160" type="AccVariant" uri="570">
+    <attrs MorphArr="[471]"/>
+    <nd ref="354"/>
+    <nd ref="356"/>
+    <nd pcon="s" ref="358"/>
+    <nd ref="359"/>
+  </trn>
+  <trn end="357" start="160" type="PhonWord" uri="571"/>
+  <trn end="362" start="164" type="Gramm" uri="481">
+    <attrs ACCPL="1" ANIM="inan" CAS="acc" DICTID="-1" ID="-1" NMB="pl" POS="A" WORDFORM="белые" ZINDEX="п 1а (_город_); ф. &lt;п 1а&gt; !!м !!ч2" base="белый" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="362" start="164" type="Gramm" uri="480">
+    <attrs ACCPL="1" CAS="nom" DICTID="-1" ID="-1" NMB="pl" POS="A" WORDFORM="белые" ZINDEX="п 1а (_город_); ф. &lt;п 1а&gt; !!м !!ч2" base="белый" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="362" start="164" type="Gramm" uri="479">
+    <attrs ACCPL="1" ANIM="anim" CAS="nom" DICTID="-1" GEND="m" ID="-1" NMB="pl" POS="N" WORDFORM="белые" ZINDEX="мо п 1а/с''" base="белый" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="362" start="164" type="Gramm" uri="478">
+    <attrs ACCPL="1" ANIM="anim" CAS="nom" DICTID="-1" GEND="plt" ID="-1" NMB="pl" POS="N" WORDFORM="белые" ZINDEX="мн. одуш. п 1а (_в шахматах, шашках: одна из двух участвующих в игре сторон_)" base="белые" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="362" start="164" type="Gramm" uri="477">
+    <attrs ACCPL="1" ANIM="inan" CAS="acc" DICTID="-1" ID="-1" NMB="pl" POS="A" WORDFORM="белые" ZINDEX="п 1а (_река_) !!ж !!ч2" base="белая" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="362" start="164" type="Gramm" uri="476">
+    <attrs ACCPL="1" CAS="nom" DICTID="-1" ID="-1" NMB="pl" POS="A" WORDFORM="белые" ZINDEX="п 1а (_река_) !!ж !!ч2" base="белая" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="362" start="164" type="Gramm" uri="475">
+    <attrs ACCPL="1" ANIM="inan" CAS="acc" DICTID="-1" ID="-1" NMB="pl" POS="A" WORDFORM="белые" ZINDEX="п 1а/с'' % средь бе'ла дня'" base="белый" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="362" start="164" type="Gramm" uri="474">
+    <attrs ACCPL="1" CAS="nom" DICTID="-1" ID="-1" NMB="pl" POS="A" WORDFORM="белые" ZINDEX="п 1а/с'' % средь бе'ла дня'" base="белый" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="362" start="164" type="Gramm" uri="473">
+    <attrs ACCPL="1" ANIM="inan" CAS="acc" DICTID="-1" GEND="plt" ID="-1" NMB="pl" POS="N" WORDFORM="белые" ZINDEX="мн. неод. п 1а (_в шахматах, шашках: один из двух наборов фигур_)" base="белые" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="362" start="164" type="Gramm" uri="472">
+    <attrs ACCPL="1" ANIM="inan" CAS="nom" DICTID="-1" GEND="plt" ID="-1" NMB="pl" POS="N" WORDFORM="белые" ZINDEX="мн. неод. п 1а (_в шахматах, шашках: один из двух наборов фигур_)" base="белые" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="164" start="164" type="Syllable" uri="361"/>
+  <trn end="360" start="360" type="Syllable" uri="363"/>
+  <trn end="362" start="362" type="Syllable" uri="364"/>
+  <trn end="362" start="164" type="AccVariant" uri="572">
+    <attrs MorphArr="[481;480;479;478;477;476;475;474;473;472]"/>
+    <nd pcon="s" ref="361"/>
+    <nd ref="363"/>
+    <nd ref="364"/>
+  </trn>
+  <trn end="362" start="164" type="PhonWord" uri="573"/>
+  <trn end="210" start="210" type="SpaceToken" uri="211">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="365" start="168" type="Gramm" uri="483">
+    <attrs ACCPL="4" ANIM="inan" CAS="acc" DICTID="-1" GEND="m" ID="-1" NMB="pl" POS="N" WORDFORM="цветы" ZINDEX="м 3*в (_цветущее растение_) @ _мн._ цвет ы', -о'в, -а'м" base="цветок" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="365" start="168" type="Gramm" uri="482">
+    <attrs ACCPL="4" ANIM="inan" CAS="nom" DICTID="-1" GEND="m" ID="-1" NMB="pl" POS="N" WORDFORM="цветы" ZINDEX="м 3*в (_цветущее растение_) @ _мн._ цвет ы', -о'в, -а'м" base="цветок" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="168" start="168" type="Syllable" uri="366"/>
+  <trn end="365" start="365" type="Syllable" uri="367"/>
+  <trn end="365" start="168" type="AccVariant" uri="574">
+    <attrs MorphArr="[483;482]"/>
+    <nd ref="366"/>
+    <nd pcon="s" ref="367"/>
+  </trn>
+  <trn end="365" start="168" type="PhonWord" uri="575"/>
+  <trn end="386" start="212" type="Token" uri="213">
+    <attrs kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="370" start="182" type="Gramm" uri="485">
+    <attrs ACCPL="5" ASP="pf" DICTID="-1" ID="-1" MD="imp" NMB="sg" POS="V" REPR="fin" TRANS="vt" VOX="act" WORDFORM="затопи" ZINDEX="св 4с (_залить водой_) $II" base="затопить" kind="word" lang="cyr" orth="upperInitial"/>
+  </trn>
+  <trn end="370" start="182" type="Gramm" uri="484">
+    <attrs ACCPL="5" ASP="pf" DICTID="-1" ID="-1" MD="imp" NMB="sg" POS="V" REPR="fin" TRANS="vt" VOX="act" WORDFORM="затопи" ZINDEX="св 4с (печь) $I(-а'-)" base="затопить" kind="word" lang="cyr" orth="upperInitial"/>
+  </trn>
+  <trn end="182" start="182" type="Syllable" uri="369"/>
+  <trn end="368" start="368" type="Syllable" uri="371"/>
+  <trn end="370" start="370" type="Syllable" uri="372"/>
+  <trn end="370" start="182" type="AccVariant" uri="576">
+    <attrs MorphArr="[485;484]"/>
+    <nd ref="369"/>
+    <nd ref="371"/>
+    <nd pcon="s" ref="372"/>
+  </trn>
+  <trn end="370" start="182" type="PhonWord" uri="577"/>
+  <trn end="214" start="214" type="SpaceToken" uri="215">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="186" start="186" type="Gramm" uri="486">
+    <attrs ANIM="anim" CAS="nom" DICTID="-1" ID="-1" NMB="sg" POS="N" PRN="prn" base="ты" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="186" start="186" type="Syllable" uri="373"/>
+  <trn end="186" start="186" type="AccVariant" uri="578">
+    <attrs MorphArr="[486]"/>
+    <nd pcon="s" ref="373"/>
+  </trn>
+  <trn end="186" start="186" type="PhonWord" uri="579"/>
+  <trn end="216" start="216" type="Token" uri="217">
+    <attrs kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="218" start="218" type="SpaceToken" uri="219">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="374" start="190" type="Gramm" uri="487">
+    <attrs ACCPL="1" ANIM="inan" CAS="acc" DICTID="-1" GEND="f" ID="-1" NMB="sg" POS="N" WORDFORM="печку" ZINDEX="ж 3*а" base="печка" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="190" start="190" type="Syllable" uri="375"/>
+  <trn end="374" start="374" type="Syllable" uri="376"/>
+  <trn end="374" start="190" type="AccVariant" uri="580">
+    <attrs MorphArr="[487]"/>
+    <nd pcon="s" ref="375"/>
+    <nd ref="376"/>
+  </trn>
+  <trn end="374" start="190" type="PhonWord" uri="581"/>
+  <trn end="142" start="142" type="Gramm" uri="461">
+    <attrs DICTID="-1" GCAS="gen" ID="-1" POS="PREP" base="с" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="379" start="196" type="Gramm" uri="492">
+    <attrs ACCPL="4" ANIM="inan" CAS="acc" DICTID="-1" GEND="f" ID="-1" NMB="pl" POS="N" WORDFORM="постели" ZINDEX="ж 8а" base="постель" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="379" start="196" type="Gramm" uri="491">
+    <attrs ACCPL="4" ANIM="inan" CAS="nom" DICTID="-1" GEND="f" ID="-1" NMB="pl" POS="N" WORDFORM="постели" ZINDEX="ж 8а" base="постель" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="379" start="196" type="Gramm" uri="490">
+    <attrs ACCPL="4" ANIM="inan" CAS="prp" DICTID="-1" GEND="f" ID="-1" NMB="sg" POS="N" WORDFORM="постели" ZINDEX="ж 8а" base="постель" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="379" start="196" type="Gramm" uri="489">
+    <attrs ACCPL="4" ANIM="inan" CAS="dat" DICTID="-1" GEND="f" ID="-1" NMB="sg" POS="N" WORDFORM="постели" ZINDEX="ж 8а" base="постель" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="379" start="196" type="Gramm" uri="488">
+    <attrs ACCPL="4" ANIM="inan" CAS="gen" DICTID="-1" GEND="f" ID="-1" NMB="sg" POS="N" WORDFORM="постели" ZINDEX="ж 8а" base="постель" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="196" start="196" type="Syllable" uri="378"/>
+  <trn end="377" start="377" type="Syllable" uri="380"/>
+  <trn end="379" start="379" type="Syllable" uri="381"/>
+  <trn end="379" start="196" type="AccVariant" uri="582">
+    <attrs MorphArr="[492;491;490;489;488]"/>
+    <nd ref="378"/>
+    <nd pcon="s" ref="380"/>
+    <nd ref="381"/>
+  </trn>
+  <trn end="142" start="142" type="Gramm" uri="462">
+    <attrs DICTID="-1" GCAS="inst" ID="-1" POS="PREP" base="с" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="379" start="196" type="Gramm" uri="494">
+    <attrs ACCPL="6" ASP="pf" DICTID="-1" ID="-1" MD="imp" NMB="sg" POS="V" REPR="fin" TRANS="vt" VOX="act" WORDFORM="постели" ZINDEX="св 4с" base="постелить" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="379" start="196" type="Gramm" uri="493">
+    <attrs ACCPL="6" ASP="pf" DICTID="-1" ID="-1" MD="imp" NMB="sg" POS="V" REPR="fin" TRANS="vt" VOX="act" WORDFORM="постели" ZINDEX="св 6с @ _буд._ пост елю', -е'лет, -е'лют [//постели'ть] $II(постила'ть)" base="постлать" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="379" start="196" type="AccVariant" uri="583">
+    <attrs MorphArr="[494;493]"/>
+    <nd ref="378"/>
+    <nd ref="380"/>
+    <nd pcon="s" ref="381"/>
+  </trn>
+  <trn end="390" start="220" type="Token" uri="221">
+    <attrs kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="142" start="142" type="Gramm" uri="463">
+    <attrs DICTID="-1" GCAS="acc" ID="-1" POS="PREP" base="с" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="379" start="196" type="PhonWord" uri="584"/>
+  <trn end="100" start="100" type="SpaceToken" uri="101">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="382" start="200" type="Gramm" uri="496">
+    <attrs ACCPL="4" ANIM="inan" CAS="acc" DICTID="-1" GEND="f" ID="-1" NMB="sg" POS="N" WORDFORM="постель" ZINDEX="ж 8а" base="постель" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="382" start="200" type="Gramm" uri="495">
+    <attrs ACCPL="4" ANIM="inan" CAS="nom" DICTID="-1" GEND="f" ID="-1" NMB="sg" POS="N" WORDFORM="постель" ZINDEX="ж 8а" base="постель" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="200" start="200" type="Syllable" uri="383"/>
+  <trn end="382" start="382" type="Syllable" uri="384"/>
+  <trn end="382" start="200" type="AccVariant" uri="585">
+    <attrs MorphArr="[496;495]"/>
+    <nd ref="383"/>
+    <nd pcon="s" ref="384"/>
+  </trn>
+  <trn end="222" start="222" type="SpaceToken" uri="223">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="382" start="200" type="PhonWord" uri="586"/>
+  <trn end="328" start="102" type="Token" uri="103">
+    <attrs kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="208" start="208" type="Gramm" uri="497">
+    <attrs DICTID="-1" GCAS="gen" ID="-1" POS="PREP" base="у" kind="word" lang="cyr" orth="upperInitial"/>
+  </trn>
+  <trn end="208" start="208" type="Syllable" uri="385"/>
+  <trn end="208" start="208" type="AccVariant" uri="587">
+    <attrs MorphArr="[497]"/>
+    <nd ref="385"/>
+  </trn>
+  <trn end="224" start="224" type="Token" uri="225">
+    <attrs kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="152" hidden="true" start="152" type="Gramm" uri="467">
+    <attrs ANIM="anim" CAS="nom" DICTID="-1" ID="-1" IREL="irel" NMB="sg" POS="N" PRN="prn" base="кто" kind="word" lang="cyr" orth="upperInitial"/>
+  </trn>
+  <trn end="208" start="208" type="PhonWord" uri="588"/>
+  <trn end="104" start="104" type="SpaceToken" uri="105">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="386" start="212" type="Gramm" uri="499">
+    <attrs CAS="gen" DICTID="-1" ID="-1" NMB="sg" POS="N" PRN="prn" base="я" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="386" start="212" type="Gramm" uri="498">
+    <attrs CAS="acc" DICTID="-1" ID="-1" NMB="sg" POS="N" PRN="prn" base="я" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="212" start="212" type="Syllable" uri="387"/>
+  <trn end="386" start="386" type="Syllable" uri="388"/>
+  <trn end="386" start="212" type="AccVariant" uri="589">
+    <attrs MorphArr="[499;498]"/>
+    <nd pcon="s" ref="387"/>
+    <nd ref="388"/>
+  </trn>
+  <trn end="226" start="226" type="SpaceToken" uri="227">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="156" hidden="true" start="156" type="Gramm" uri="469">
+    <attrs CAS="acc" DICTID="-1" GEND="n" ID="-1" NMB="sg" POS="A" PRN="prn" base="тот" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="331" start="106" type="Token" uri="107">
+    <attrs kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="394" start="228" type="Token" uri="229">
+    <attrs kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="108" start="108" type="Token" uri="109">
+    <attrs kind="punctuation" lang="lat" position="endpunct"/>
+  </trn>
+  <trn end="386" start="212" type="AccVariant" uri="590">
+    <attrs MorphArr="[499;498]"/>
+    <nd ref="387"/>
+    <nd pcon="s" ref="388"/>
+  </trn>
+  <trn end="156" hidden="true" start="156" type="Gramm" uri="470">
+    <attrs CAS="nom" DICTID="-1" GEND="n" ID="-1" NMB="sg" POS="A" PRN="prn" base="тот" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="386" start="212" type="PhonWord" uri="591"/>
+  <trn end="216" start="216" type="Syllable" uri="389"/>
+  <trn end="216" start="216" type="AccVariant" uri="592">
+    <attrs MorphArr="[502;501;500]"/>
+    <nd ref="389"/>
+  </trn>
+  <trn end="216" start="216" type="PhonWord" uri="593"/>
+  <trn end="230" start="230" type="SpaceToken" uri="231">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="220" start="220" type="Syllable" uri="391"/>
+  <trn end="390" start="390" type="Syllable" uri="392"/>
+  <trn end="390" start="220" type="AccVariant" uri="594">
+    <attrs MorphArr="[505;504;503]"/>
+    <nd pcon="s" ref="391"/>
+    <nd ref="392"/>
+  </trn>
+  <trn end="110" start="110" type="Token" uri="111">
+    <attrs kind="punctuation"/>
+  </trn>
+  <trn end="390" start="220" type="PhonWord" uri="595"/>
+  <trn end="397" start="232" type="Token" uri="233">
+    <attrs kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="224" start="224" type="Syllable" uri="393"/>
+  <trn end="224" start="224" type="AccVariant" uri="596">
+    <attrs MorphArr="[506]"/>
+    <nd ref="393"/>
+  </trn>
+  <trn end="112" start="112" type="SpaceToken" uri="113">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="224" start="224" type="PhonWord" uri="597"/>
+  <trn end="234" start="234" type="Token" uri="235">
+    <attrs kind="punctuation" lang="lat" position="endpunct"/>
+  </trn>
+  <trn end="228" start="228" type="Syllable" uri="395"/>
+  <trn end="394" start="394" type="Syllable" uri="396"/>
+  <trn end="394" start="228" type="AccVariant" uri="598">
+    <attrs MorphArr="[508;507]"/>
+    <nd pcon="s" ref="395"/>
+    <nd ref="396"/>
+  </trn>
+  <trn end="114" start="114" type="SpaceToken" uri="115">
+    <attrs kind="control"/>
+  </trn>
+  <trn end="394" start="228" type="AccVariant" uri="599">
+    <attrs MorphArr="[508;507]"/>
+    <nd ref="395"/>
+    <nd pcon="s" ref="396"/>
+  </trn>
+  <trn end="236" start="236" type="Token" uri="237">
+    <attrs kind="punctuation"/>
+  </trn>
+  <trn end="116" start="116" type="SpaceToken" uri="117">
+    <attrs kind="control"/>
+  </trn>
+  <trn end="238" start="238" type="SpaceToken" uri="239">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="118" start="118" type="SpaceToken" uri="119">
+    <attrs kind="control"/>
+  </trn>
+  <trn end="10" start="10" type="Token" uri="11">
+    <attrs kind="punctuation"/>
+  </trn>
+  <trn end="12" start="12" type="SpaceToken" uri="13">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="278" start="14" type="Token" uri="15">
+    <attrs kind="word" lang="cyr" orth="upperInitial"/>
+  </trn>
+  <trn end="16" start="16" type="SpaceToken" uri="17">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="281" start="18" type="Token" uri="19">
+    <attrs kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="240" start="240" type="SpaceToken" uri="241">
+    <attrs kind="control"/>
+  </trn>
+  <trn end="120" start="120" type="SpaceToken" uri="121">
+    <attrs kind="control"/>
+  </trn>
+  <trn end="242" start="242" type="SpaceToken" uri="243">
+    <attrs kind="control"/>
+  </trn>
+  <trn end="122" start="122" type="Token" uri="123">
+    <attrs kind="word" lang="cyr" orth="upperInitial"/>
+  </trn>
+  <trn end="244" start="244" type="SpaceToken" uri="245">
+    <attrs kind="control"/>
+  </trn>
+  <trn end="124" start="124" type="SpaceToken" uri="125">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="246" start="246" type="SpaceToken" uri="247">
+    <attrs kind="control"/>
+  </trn>
+  <trn end="337" start="126" type="Token" uri="127">
+    <attrs kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="248" start="248" type="Token" uri="249">
+    <attrs kind="number" lang="lat"/>
+  </trn>
+  <trn end="128" start="128" type="SpaceToken" uri="129">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="20" start="20" type="Token" uri="21">
+    <attrs kind="punctuation"/>
+  </trn>
+  <trn end="22" start="22" type="SpaceToken" uri="23">
+    <attrs kind="control"/>
+  </trn>
+  <trn end="24" start="24" type="SpaceToken" uri="25">
+    <attrs kind="control"/>
+  </trn>
+  <trn end="286" start="26" type="Token" uri="27">
+    <attrs kind="word" lang="cyr" orth="upperInitial"/>
+  </trn>
+  <trn end="28" start="28" type="SpaceToken" uri="29">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="250" start="250" type="SpaceToken" uri="251">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="340" start="130" type="Token" uri="131">
+    <attrs kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="402" start="252" type="Token" uri="253">
+    <attrs kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="132" start="132" type="Token" uri="133">
+    <attrs kind="punctuation"/>
+  </trn>
+  <trn end="254" start="254" type="SpaceToken" uri="255">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="134" start="134" type="SpaceToken" uri="135">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="256" start="256" type="Token" uri="257">
+    <attrs kind="number" lang="lat"/>
+  </trn>
+  <trn end="136" start="136" type="Token" uri="137">
+    <attrs kind="punctuation" lang="lat" position="startpunct"/>
+  </trn>
+  <trn end="258" start="258" type="SpaceToken" uri="259">
+    <attrs kind="control"/>
+  </trn>
+  <trn end="343" start="138" type="Token" uri="139">
+    <attrs kind="word" lang="cyr" orth="upperInitial"/>
+  </trn>
+  <trn end="30" start="30" type="Token" uri="31">
+    <attrs kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="32" start="32" type="SpaceToken" uri="33">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="290" start="34" type="Token" uri="35">
+    <attrs kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="36" start="36" type="SpaceToken" uri="37">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="293" start="38" type="Token" uri="39">
+    <attrs kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="260" start="260" type="SpaceToken" uri="261">
+    <attrs kind="control"/>
+  </trn>
+  <trn end="140" start="140" type="SpaceToken" uri="141">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="262" start="262" type="SpaceToken" uri="263">
+    <attrs kind="control"/>
+  </trn>
+  <trn end="142" start="142" type="Token" uri="143">
+    <attrs kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="264" start="264" type="SpaceToken" uri="265">
+    <attrs kind="control"/>
+  </trn>
+  <trn end="144" start="144" type="SpaceToken" uri="145">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="348" start="146" type="Token" uri="147">
+    <attrs kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="148" start="148" type="SpaceToken" uri="149">
+    <attrs kind="control"/>
+  </trn>
+  <trn end="40" start="40" type="SpaceToken" uri="41">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="42" start="42" type="Token" uri="43">
+    <attrs kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="44" start="44" type="SpaceToken" uri="45">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="297" start="46" type="Token" uri="47">
+    <attrs kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="48" start="48" type="Token" uri="49">
+    <attrs kind="punctuation"/>
+  </trn>
+  <trn end="150" start="150" type="SpaceToken" uri="151">
+    <attrs kind="control"/>
+  </trn>
+  <trn end="152" start="152" type="Token" uri="153">
+    <attrs kind="word" lang="cyr" orth="upperInitial"/>
+  </trn>
+  <trn end="154" start="154" type="Token" uri="155">
+    <attrs kind="punctuation" subkind="dashpunct"/>
+  </trn>
+  <trn end="156" start="156" type="Token" uri="157">
+    <attrs kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="158" start="158" type="SpaceToken" uri="159">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="50" start="50" type="SpaceToken" uri="51">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="52" start="52" type="SpaceToken" uri="53">
+    <attrs kind="control"/>
+  </trn>
+  <trn end="54" start="54" type="SpaceToken" uri="55">
+    <attrs kind="control"/>
+  </trn>
+  <trn end="56" start="56" type="SpaceToken" uri="57">
+    <attrs kind="control"/>
+  </trn>
+  <trn end="58" start="58" type="SpaceToken" uri="59">
+    <attrs kind="control"/>
+  </trn>
+  <trn end="357" start="160" type="Token" uri="161">
+    <attrs kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="162" start="162" type="SpaceToken" uri="163">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="362" start="164" type="Token" uri="165">
+    <attrs kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="166" start="166" type="SpaceToken" uri="167">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="365" start="168" type="Token" uri="169">
+    <attrs kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="302" start="60" type="Token" uri="61">
+    <attrs kind="word" lang="cyr" orth="upperInitial"/>
+  </trn>
+  <trn end="62" start="62" type="SpaceToken" uri="63">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="307" start="64" type="Token" uri="65">
+    <attrs kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="66" start="66" type="Token" uri="67">
+    <attrs kind="punctuation"/>
+  </trn>
+  <trn end="68" start="68" type="SpaceToken" uri="69">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="170" start="170" type="Token" uri="171">
+    <attrs kind="punctuation"/>
+  </trn>
+  <trn end="172" start="172" type="SpaceToken" uri="173">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="174" start="174" type="SpaceToken" uri="175">
+    <attrs kind="control"/>
+  </trn>
+  <trn end="176" start="176" type="SpaceToken" uri="177">
+    <attrs kind="control"/>
+  </trn>
+  <trn end="178" start="178" type="SpaceToken" uri="179">
+    <attrs kind="control"/>
+  </trn>
+  <trn end="70" start="70" type="Token" uri="71">
+    <attrs kind="punctuation" lang="lat" position="startpunct"/>
+  </trn>
+  <trn end="310" start="72" type="Token" uri="73">
+    <attrs kind="word" lang="cyr" orth="upperInitial"/>
+  </trn>
+  <trn end="74" start="74" type="SpaceToken" uri="75">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="76" start="76" type="Token" uri="77">
+    <attrs kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="78" start="78" type="SpaceToken" uri="79">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="180" start="180" type="SpaceToken" uri="181">
+    <attrs kind="control"/>
+  </trn>
+  <trn end="370" start="182" type="Token" uri="183">
+    <attrs kind="word" lang="cyr" orth="upperInitial"/>
+  </trn>
+  <trn end="184" start="184" type="SpaceToken" uri="185">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="186" start="186" type="Token" uri="187">
+    <attrs kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="188" start="188" type="SpaceToken" uri="189">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="314" start="80" type="Token" uri="81">
+    <attrs kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="82" start="82" type="Token" uri="83">
+    <attrs kind="punctuation"/>
+  </trn>
+  <trn end="84" start="84" type="SpaceToken" uri="85">
+    <attrs kind="control"/>
+  </trn>
+  <trn end="86" start="86" type="SpaceToken" uri="87">
+    <attrs kind="control"/>
+  </trn>
+  <trn end="319" start="88" type="Token" uri="89">
+    <attrs kind="word" lang="cyr" orth="upperInitial"/>
+  </trn>
+  <trn end="374" start="190" type="Token" uri="191">
+    <attrs kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="192" start="192" type="Token" uri="193">
+    <attrs kind="punctuation"/>
+  </trn>
+  <trn end="194" start="194" type="SpaceToken" uri="195">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="379" start="196" type="Token" uri="197">
+    <attrs kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="198" start="198" type="SpaceToken" uri="199">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="90" start="90" type="SpaceToken" uri="91">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="92" start="92" type="Token" uri="93">
+    <attrs kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="94" start="94" type="SpaceToken" uri="95">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="323" start="96" type="Token" uri="97">
+    <attrs kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="98" start="98" type="Token" uri="99">
+    <attrs kind="punctuation"/>
+  </trn>
+</Document>

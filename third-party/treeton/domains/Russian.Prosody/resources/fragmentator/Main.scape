@@ -1,0 +1,5 @@
+package prosody;
+
+program Main {
+  exec CreateVerses;
+}

@@ -1,0 +1,9 @@
+package prosody.onegin;
+
+program Main {
+  exec CreateVerses;
+  exec CreateSplits;
+  exec CreateStrophes;
+  exec CreateChapters;
+  exec CreatePieceOfArt;
+}

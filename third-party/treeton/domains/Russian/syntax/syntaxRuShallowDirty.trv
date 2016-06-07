@@ -1,0 +1,378 @@
+analyzer SyntaxRuShallow {
+  input {Gramm,Token}
+  repRelations {adv,delim,modif}
+  uniRelations {appos,auxil,conjunct,coord_conj,coordin,explic,elect,genet,infin,objA,objD,objG,objI,predic,preposit}
+
+  goal {
+    @type == "Gramm" && SYNTTYPE == "Clause" : ()
+  }
+
+  delimiter {@type == "Token" && kind == "punctuation"}
+
+  gapPenalty         e0*100
+  repPenalty         e1*500
+  compactnessPenalty  e3*10
+
+  projectivityPenalty {
+     {} : e2*50
+     {@parentRel=="coordin"} : e2*100000
+  }
+
+  rule ChtoClause_conj {
+    {@type == "Gramm" && POS == "V"}
+    +
+    {@type == "Gramm" && SYNTTYPE == "ChtoClause"} ^
+    -->
+    (A,B){explic}
+    C[A]{@type="Gramm";TYPE="Syntax";SYNTTYPE="Clause";LR="lr";}
+  }
+
+  rule ChtoClause {
+    {@type == "Gramm" && POS == "CONJ" && base=="что"}
+    +
+    {@type == "Gramm" && SYNTTYPE == "Clause"} ^
+    -->
+    (A,B){conjunct}
+    C[A]{@type="Gramm";TYPE="Syntax";SYNTTYPE="ChtoClause";}
+  }
+
+  // соединение клауз с помощью союза 'а'
+
+  rule AClause_conj {
+    {@type == "Gramm" && SYNTTYPE == "Clause" && LR == null}
+    +
+    {@type == "Gramm" && SYNTTYPE == "AClause"} ^
+    -->
+    (A,B){coord_conj}
+    C[A]{@type="Gramm";TYPE="Syntax";SYNTTYPE="Clause";LR="lr";}
+  }
+
+  //аппозитивы
+
+  rule appos {
+    {@type == "Gramm" && TYPE == "Morph" && POS == "N"}
+    +
+    [{@type == "Gramm" && TYPE == "Morph" && POS == "N" && PRN == null}] ^
+    ::
+    A.CAS == B.CAS || B.CAS == "nom"
+    -->
+    (A,B){appos}
+
+    ::
+    true : (50)
+  }
+
+  //ср. "медленно плыть"
+
+  rule circumst_adv {
+    {@type == "Gramm" && POS == "V","PRED" && AUXIL == null}
+    ~
+    {@type == "Gramm" && TYPE == "Morph" && (POS == "ADV" || POS == "A" && ATTR == "sh")}
+    -->
+    (A,B){adv}
+
+  }
+
+  //ср. "двигаться быстрее"
+
+  rule circumst_cmp {
+    {@type == "Gramm" && POS == "V" && AUXIL == null}
+    ~
+    {@type == "Gramm" && (TYPE == "Morph" && POS == "A" && DGR == "cmp" || TYPE == "Syntax" && SYNTTYPE == "GERG")}
+    -->
+    (A,B){adv}
+
+  }
+
+  //ср. "плыть (в сторону)"
+
+  rule circumst_prepg {
+    {@type == "Gramm" && (POS == "V" && AUXIL == null || POS == "PRED","N" || POS == "A" && ATTR == "sh")}
+    ~
+    {@type == "Gramm" && SYNTTYPE == "PREPG"}
+    -->
+    (A,B){adv}
+
+    ::
+    A.POS == "N" : (5)
+  }
+
+  //присоединение клаузы к союзу 'а'
+
+  rule Clause_conj_a {
+    {@type == "Gramm" && POS == "CONJ" && base=="а"}
+    +
+    {@type == "Gramm" && SYNTTYPE == "Clause"} ^
+    -->
+    (A,B){coordin}
+    C[A]{@type="Gramm";TYPE="Syntax";SYNTTYPE="AClause";}
+  }
+
+  //создание клаузы
+
+  rule Clause_create {
+    {@type == "Gramm" && (POS == "V" && REPR == "fin" && AUXIL == null || POS == "PRED")}
+    -->
+    C[A]{@type="Gramm";TYPE="Syntax";SYNTTYPE="Clause";}
+  }
+
+  //ср. "партия готова"
+
+  rule Clause_from_short_Adj {
+    {@type == "Gramm" && POS == "N" &&  CAS == "nom"}
+    ~
+    {@type == "Gramm" && POS == "A" &&  ATTR == "sh"}
+    ::
+    A.NMB == B.NMB && (A.NMB == "pl" ? true : (A.GEND == B.GEND || (A.GEND == "mf" && B.GEND != "n")))
+    -->
+    (B,A){predic}
+    C[B]{@type="Gramm";TYPE="Syntax";SYNTTYPE="Clause";}
+  }
+
+  //Связь между прилагательным и предшествующим наречием
+
+  rule delim_adv_adj {
+    {@type == "Gramm" && POS == "A" && PRN == null}
+    ~
+    {@type == "Gramm" && POS == "ADV" && PRN == null}
+    -->
+    (A,B){delim}
+    ::
+    B.base == "так" && A.ATTR != "sh" : (40)
+  }
+
+  //Связь с отрицательной частицей
+
+  rule delim_v_neg {
+    {@type == "Gramm" && (POS == "V" && AUXIL == null || POS == "A" && ATTR == "sh")}
+    +
+    [{@type == "Gramm" && TYPE == "Morph" && POS == "PCL" && base == "не"}] ^
+    -->
+    (A,B){delim}
+
+  }
+
+  //ср. "остров сокровищ"
+
+  rule genet {
+    {@type == "Gramm" && POS == "N" && PRN == null && ADJI == null && PNT == null}
+    ~
+    {@type == "Gramm" && POS == "N" && CAS == "gen" && PRN == null}
+    -->
+    (A,B){genet}
+    ::
+    B.@end < A.@start : (7)
+  }
+
+  rule GERG_create {
+    {@type == "Gramm" && TYPE == "Morph" &&  POS == "V" &&  REPR == "gern"}
+    -->
+    C[A]{@type="Gramm";TYPE="Syntax";SYNTTYPE="GERG";}
+  }
+
+  rule infin {
+    {@type == "Gramm" && POS == "V","PRED"}
+    ~
+    {@type == "Gramm" && POS == "V" && REPR == "inf" && VOX == null}
+    -->
+    (A,B){infin}
+
+  }
+
+  //ср. "красный стол"
+
+  rule Modif_aggr {
+    {@type == "Gramm" && POS == "N"}
+    ~
+    {@type == "Gramm" && (POS == "A" || SYNTTYPE == "PARTG")}
+    ::
+    (A.CAS == "prp2" && B.CAS == "prp" || A.CAS == B.CAS) && A.NMB == B.NMB &&
+    (B.ANIM == null || A.ANIM == null || A.ANIM == B.ANIM) &&
+    (A.NMB == "pl" ? true : (A.GEND == B.GEND || (A.GEND == "mf" && B.GEND != "n")))
+    -->
+    (A,B){modif}
+  }
+
+  //Связь глагола с существительным в вин. падеже
+
+  rule objA {
+    {@type == "Gramm" && POS == "V" && VOX == null}
+    ~
+    {@type == "Gramm" && POS == "N" && CAS == "acc"}
+    -->
+    (A,B){objA}
+
+    ::
+
+    A.TRANS != "vt" : (140)
+  }
+
+  //ср. "заплатить арендатору"
+
+  rule objD {
+    {@type == "Gramm" && TYPE == "Morph" && POS == "V"}
+    ~
+    {@type == "Gramm" && TYPE == "Morph" && POS == "N" && CAS == "dat"}
+    -->
+    (A,B){objD}
+
+  }
+
+  //ср. "работал топором"
+
+  rule objI {
+    {@type == "Gramm" && TYPE == "Morph" && POS == "V"}
+    ~
+    {@type == "Gramm" && POS == "N" && CAS == "inst"}
+    -->
+    (A,B){objI}
+
+  }
+
+  //создание группы причастного оборота
+
+  rule PARTG_create {
+    {@type == "Gramm" && TYPE == "Morph" && POS == "V" && REPR == "part"}
+    -->
+    C[A]{@type="Gramm";CAS=A.CAS;NMB=A.NMB;ANIM=A.ANIM;GEND=A.GEND;TYPE="Syntax";SYNTTYPE="PARTG";}
+  }
+
+  //были определены
+
+  rule PassiveToBe {
+    {@type == "Gramm" && POS == "V" && REPR == "fin"}
+    ~
+    {@type == "Gramm" && POS == "V" && REPR == "part" && ATTR == "sh" && TNS == "past" && VOX == "pass"}
+    ::
+    A.NMB == B.NMB && (A.NMB == "pl" ? true : A.GEND == B.GEND)
+    -->
+    (A,B){auxil}
+
+  }
+
+  //ср. "мальчик спал"
+
+  rule predicPast {
+    {@type == "Gramm" && POS == "V" && REPR == "fin" && TNS == "past"}
+    ~
+    {@type == "Gramm" && POS == "N" && CAS == "nom"}
+    ::
+    A.NMB == B.NMB && (A.NMB == "pl" || A.NMB == "sg" &&
+    (B.GEND == null || A.GEND == B.GEND || B.GEND == "mf" && A.GEND!="n"))
+    -->
+    (A,B){predic}
+
+  }
+
+  //обработка предикативов
+
+  rule predicPRED {
+    {@type == "Gramm" && POS == "PRED" &&  TYPE == "Morph"}
+    ~
+    {@type == "Gramm" && POS == "N" && CAS == "nom"}
+    -->
+    (A,B){predic}
+
+  }
+
+  //ср. "я читаю"
+
+  rule predicPrs1 {
+    {@type == "Gramm" && POS == "V" && REPR == "fin" && TNS == "pres","fut" && PRS == "1" && AUXIL == null}
+    ~
+    {@type == "Gramm" && TYPE == "Morph" && POS == "N" && base == "я","мы" && CAS == "nom"}
+    ::
+    A.NMB == B.NMB
+    -->
+    (A,B){predic}
+
+  }
+
+  //ср. "ты читаешь"
+
+  rule predicPrs2 {
+    {@type == "Gramm" && POS == "V" && REPR == "fin" && TNS == "pres","fut" && PRS == "2" && AUXIL == null}
+    ~
+    {@type == "Gramm" && TYPE == "Morph" && POS == "N" && base == "ты","вы" && CAS == "nom"}
+    ::
+    A.NMB == B.NMB
+    -->
+    (A,B){predic}
+
+  }
+
+  //ср. "он читает"
+
+  rule predicPrs3 {
+    {@type == "Gramm" && POS == "V" && REPR == "fin" && TNS == "pres","fut" && PRS == "3" && AUXIL == null}
+    ~
+    {@type == "Gramm" && POS == "N" && CAS == "nom" && base != "я","мы","ты","вы"}
+    ::
+    A.NMB == B.NMB
+    -->
+    (A,B){predic}
+
+  }
+
+  //ср. "в столе"
+
+  rule PREPG_create {
+    {@type == "Gramm" && TYPE == "Morph" && POS == "PREP"}
+    +
+    [{@type == "Gramm" && POS == "N"}] ^
+    ::
+    A.GCAS == B.CAS &&
+    (B.base != "он" || B.ADPREP == "adprep" && A.GPRON == "n" || B.ADPREP == null && A.GPRON == "j")
+    -->
+    (A,B){preposit}
+    C[A]{@type="Gramm";TYPE="Syntax";SYNTTYPE="PREPG";}
+  }
+
+  //запятая перед "а"
+
+  rule punct_conj_a {
+    {@type == "Gramm" && TYPE == "Punct" && @string == ","}
+    +
+    {@type == "Gramm" && POS == "CONJ" && base == "а"} ^
+    -->
+    (B,A){delim}
+  }
+
+  //запятая перед "что"
+
+  rule punct_conj_chto {
+    {@type == "Gramm" && TYPE == "Punct" && @string == ","}
+    +
+    {@type == "Gramm" && POS == "CONJ" && base == "что"} ^
+    -->
+    (B,A){delim}
+  }
+
+  //запятая перед или после причастного оборота
+
+  rule punct_PARTG {
+    {@type == "Gramm" && TYPE == "Punct" && @string == ","}
+    +
+    {@type == "Gramm" && SYNTTYPE == "PARTG"}
+    -->
+    (B,A){delim}
+  }
+
+  //запятая вокруг вводного слова
+
+  rule punct_vvodn {
+    {@type == "Gramm" && TYPE == "Punct" && @string == ","}
+    +
+    {@type == "Gramm" && POS == "PAR" && TYPE == "Morph"}
+    -->
+    (B,A){delim}
+  }
+
+  rule Vvodnoe_slovo {
+    {@type == "Gramm" && TYPE == "Morph" && POS == "PAR"}
+    ~
+    {@type == "Gramm" && TYPE == "Syntax" && SYNTTYPE == "Clause"}
+    -->
+    B[A]
+  }
+}

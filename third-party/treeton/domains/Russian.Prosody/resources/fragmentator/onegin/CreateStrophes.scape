@@ -1,0 +1,13 @@
+package prosody.onegin;
+
+phase CreateStrophes {
+  input Split,Verse;
+  output Fragment;
+  control brill;
+
+  rule r1 {
+    {Split: type=stropheCaption}:b({Verse}+):v{Split}
+    ->create Fragment[b,v](caption:=b.name;type:=strophe;displayText:=true;), remove b
+
+  }
+}

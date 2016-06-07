@@ -1,0 +1,690 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://starling.rinet.ru/treeton/config" xsi:schemaLocation="http://starling.rinet.ru/treeton/config http://starling.rinet.ru/treeton/config/contextSchema.xsd">
+    <DOMAIN NAME="Common" DIR="./Common/" SHORTNAME="">
+        <TYPESDCL>./types.dcl</TYPESDCL>
+        <RELSXML>./relations.xml</RELSXML>
+
+        <RESOURCETYPE NAME="Cleanup">
+            <CLASS>treeton.res.CleanUp</CLASS>
+        </RESOURCETYPE>
+
+        <RESOURCETYPE NAME="Tokeniser">
+            <CLASS>treeton.res.tokeniser.SimpleTokeniser</CLASS>
+            <PARAMDESCRIPTION NAME="rulesPath" TYPE="String"/>
+            <PARAMDESCRIPTION NAME="atomicType" TYPE="String"/>
+            <PARAMDESCRIPTION NAME="defaultTokenType" TYPE="String"/>
+            <PARAMDESCRIPTION NAME="kindFeature" TYPE="String"/>
+            <PARAMDESCRIPTION NAME="langFeature" TYPE="String"/>
+        </RESOURCETYPE>
+
+        <RESOURCETYPE NAME="Minimizator">
+            <CLASS>treeton.res.minimz.Minimizator</CLASS>
+            <PARAMDESCRIPTION NAME="rulesPath" TYPE="String"/>
+        </RESOURCETYPE>
+
+        <RESOURCETYPE NAME="ScapeTransducer">
+            <CLASS>treeton.res.ScapeTransducer</CLASS>
+            <PARAMDESCRIPTION NAME="rulesPath" TYPE="String"/>
+            <PARAMDESCRIPTION NAME="mainProgram" TYPE="String"/>
+        </RESOURCETYPE>
+
+        <RESOURCETYPE NAME="VNPExtractor">
+            <CLASS>treeton.res.ru.extraction.VNPExtraction</CLASS>
+        </RESOURCETYPE>
+
+        <RESOURCETYPE NAME="VNPExtractor2">
+            <CLASS>treeton.res.ru.extraction.NewExtraction</CLASS>
+        </RESOURCETYPE>
+
+        <RESOURCETYPE NAME="TrainingData">
+            <CLASS>treeton.res.ru.extraction.TrainingData</CLASS>
+        </RESOURCETYPE>
+
+        <RESOURCETYPE NAME="PrepAttachment">
+            <CLASS>treeton.res.ru.extraction.PrepAttachment</CLASS>
+        </RESOURCETYPE>
+
+
+        <RESOURCE NAME="Common_Cleanup" TYPE="Cleanup"/>
+
+        <DOMAIN NAME="Russian" DIR="./Russian/" SHORTNAME="R">
+            <TYPESDCL>./types.dcl</TYPESDCL>
+            <RELSXML>./relations.xml</RELSXML>
+
+            <SYNTAX_RULES NAME="ShallowSyntax">
+                <RULESPATH>./syntax/syntaxRuShallow.xml</RULESPATH>
+            </SYNTAX_RULES>
+
+            <SYNTAX_PENALTIES NAME="ShallowSyntaxPenalties">
+                <RULESPATH>./syntax/penaltiesRuShallow.xml</RULESPATH>
+            </SYNTAX_PENALTIES>
+
+            <RESOURCETYPE NAME="UncoveredTrnsGenerator">
+                <CLASS>treeton.res.UncoveredTrnsProcessor</CLASS>
+                <PARAMDESCRIPTION NAME="coverTypes" TYPE="String" MANYVALUED="true"/>
+                <PARAMDESCRIPTION NAME="inputTemplate" TYPE="String"/>
+                <PARAMDESCRIPTION NAME="assignments" TYPE="String"/>
+            </RESOURCETYPE>
+
+            <RESOURCETYPE NAME="TrnMapper">
+                <CLASS>treeton.res.TrnMapper</CLASS>
+                <PARAMDESCRIPTION NAME="path" TYPE="String"/>
+            </RESOURCETYPE>
+
+            <RESOURCETYPE NAME="NumbersProcessor">
+                <CLASS>treeton.res.ru.NumbersProcessor</CLASS>
+                <PARAMDESCRIPTION NAME="propertiesURL" TYPE="String"/>
+                <PARAMDESCRIPTION NAME="templatesPhase" TYPE="String"/>
+                <PARAMDESCRIPTION NAME="Morph_type" TYPE="String"/>
+            </RESOURCETYPE>
+
+            <RESOURCETYPE NAME="InvarsConverter">
+                <CLASS>treeton.res.InvarsConverter</CLASS>
+                <PARAMDESCRIPTION NAME="inputType" TYPE="String"/>
+            </RESOURCETYPE>
+
+            <RESOURCETYPE NAME="GovModelMultiplier">
+                <CLASS>treeton.res.government.GovModelMultiplier</CLASS>
+                <PARAMDESCRIPTION NAME="inputType" TYPE="String"/>
+                <PARAMDESCRIPTION NAME="GovDictionary" TYPE="String"/>
+                <PARAMDESCRIPTION NAME="semFeatureName" TYPE="String"/>
+                <PARAMDESCRIPTION NAME="govIDFeatureName" TYPE="String"/>
+                <PARAMDESCRIPTION NAME="govFeatureName" TYPE="String"/>
+            </RESOURCETYPE>
+
+            <RESOURCETYPE NAME="UnknownMorphFsmApplier">
+                <CLASS>treeton.res.ru.unknown.RuUnknownMorphFsmApplierResource</CLASS>
+                <PARAMDESCRIPTION NAME="uncoveredAreasOnly" TYPE="Boolean" OPTIONAL="true"/>
+                <PARAMDESCRIPTION NAME="path" TYPE="String"/>
+                <PARAMDESCRIPTION NAME="Tokeniser_resourceType" TYPE="String"/>
+                <PARAMDESCRIPTION NAME="predMorphPhaseTemplate" TYPE="String"/>
+            </RESOURCETYPE>
+
+            <RESOURCETYPE NAME="RusMorphDictsApplier">
+                <CLASS>treeton.res.ru.RusMorphApplierResource</CLASS>
+                <PARAMDESCRIPTION NAME="uncoveredAreasOnly" TYPE="Boolean" OPTIONAL="true"/>
+                <PARAMDESCRIPTION NAME="path" TYPE="String"/>
+                <PARAMDESCRIPTION NAME="Tokeniser_resourceType" TYPE="String"/>
+            </RESOURCETYPE>
+
+            <RESOURCETYPE NAME="RusFreqDictApplier">
+                <CLASS>treeton.res.ru.frequency.FreqDictApplierResource</CLASS>
+                <PARAMDESCRIPTION NAME="path" TYPE="String"/>
+                <PARAMDESCRIPTION NAME="Morph_type" TYPE="String"/>
+            </RESOURCETYPE>
+
+            <RESOURCETYPE NAME="StarlingMorphApplier">
+                <CLASS>treeton.res.ru.StarlingMorphApplier</CLASS>
+
+                <!-- native engine will be used if absent -->
+                <PARAMDESCRIPTION NAME="port" TYPE="Integer" OPTIONAL="true"/>
+
+                <PARAMDESCRIPTION NAME="conversionLexRules" TYPE="String"/>
+                <PARAMDESCRIPTION NAME="conversionInflRules" TYPE="String"/>
+                <PARAMDESCRIPTION NAME="nativeMorphDictPath" TYPE="String" OPTIONAL="true"/>
+                <PARAMDESCRIPTION NAME="targetType" TYPE="String"/>
+                <PARAMDESCRIPTION NAME="predMorphPhase" TYPE="String"/>
+                <PARAMDESCRIPTION NAME="logging" TYPE="Boolean"  OPTIONAL="true"/>
+                <PARAMDESCRIPTION NAME="specialWords" TYPE="String"/>
+            </RESOURCETYPE>
+
+            <RESOURCETYPE NAME="StarlingOnlyAccentMorphApplier">
+                <CLASS>treeton.res.ru.StarlingOnlyAccentMorphApplier</CLASS>
+
+                <PARAMDESCRIPTION NAME="targetType" TYPE="String"/>
+                <PARAMDESCRIPTION NAME="bagOfWordsPath" TYPE="String" OPTIONAL="true"/>
+                <PARAMDESCRIPTION NAME="predMorphPhase" TYPE="String"/>
+                <PARAMDESCRIPTION NAME="specialWords" TYPE="String"/>
+            </RESOURCETYPE>
+
+            <RESOURCETYPE NAME="Syllabizator">
+                <CLASS>treeton.res.ru.Syllabizator</CLASS>
+                <PARAMDESCRIPTION NAME="targetType" TYPE="String"/>
+                <PARAMDESCRIPTION NAME="inputTemplate" TYPE="String"/>
+            </RESOURCETYPE>
+
+            <RESOURCETYPE NAME="AccentGenerator">
+                <CLASS>treeton.res.ru.AccentGenerator</CLASS>
+                <PARAMDESCRIPTION NAME="Morph_type" TYPE="String"/>
+                <PARAMDESCRIPTION NAME="ACCPL_feature" TYPE="String"/>
+                <PARAMDESCRIPTION NAME="POS_feature" TYPE="String"/>
+                <PARAMDESCRIPTION NAME="Klitik_feature" TYPE="String"/>
+                <PARAMDESCRIPTION NAME="AccVariant_type" TYPE="String"/>
+                <PARAMDESCRIPTION NAME="MorphArr_feature" TYPE="String"/>
+                <PARAMDESCRIPTION NAME="Syllable_type" TYPE="String"/>
+                <PARAMDESCRIPTION NAME="PhonWord_type" TYPE="String"/>
+                <PARAMDESCRIPTION NAME="klitik_POSes" TYPE="String" MANYVALUED="true" OPTIONAL="true"/>
+            </RESOURCETYPE>
+
+            <RESOURCE NAME="Russian_Tokeniser" TYPE="Tokeniser">
+                <PARAM NAME="rulesPath">
+                    <VALUE>./resources/tokeniser/DefaultTokeniser.rules</VALUE>
+                </PARAM>
+                <PARAM NAME="atomicType">
+                    <VALUE>Atom</VALUE>
+                </PARAM>
+                <PARAM NAME="defaultTokenType">
+                    <VALUE>DEFAULT_TOKEN</VALUE>
+                </PARAM>
+                <PARAM NAME="kindFeature">
+                    <VALUE>kind</VALUE>
+                </PARAM>
+                <PARAM NAME="langFeature">
+                    <VALUE>lang</VALUE>
+                </PARAM>
+            </RESOURCE>
+
+            <RESOURCE NAME="Russian_CommaProcessor" TYPE="ScapeTransducer">
+                <PARAM NAME="rulesPath">
+                    <VALUE>./resources/morph/punct/</VALUE>
+                </PARAM>
+                <PARAM NAME="mainProgram">
+                    <VALUE>russian.morph.punct.Main</VALUE>
+                </PARAM>
+            </RESOURCE>
+
+
+            <RESOURCE NAME="Russian_UnknownMorphGenerator" TYPE="UncoveredTrnsGenerator">
+                <COMMENT>Russian UnknownMorphGenerator</COMMENT>
+                <PARAM NAME="inputTemplate">
+                    <VALUE>{Token: kind=word,lang=cyr}</VALUE>
+                </PARAM>
+                <PARAM NAME="assignments">
+                    <VALUE>Gramm(WORDFORM:=@.string;orth:=@.orth;kind:=@.kind;lang:=@.lang;TYPE:=unknown;)</VALUE>
+                </PARAM>
+                <PARAM NAME="coverTypes">
+                    <VALUE>Gramm</VALUE>
+                </PARAM>
+            </RESOURCE>
+
+            <RESOURCE NAME="Russian_NumbersProcessor" TYPE="NumbersProcessor">
+                <COMMENT>Russian NumbersProcessor</COMMENT>
+                <PARAM NAME="propertiesURL">
+                    <VALUE>./resources/morph/procnum.properties</VALUE>
+                </PARAM>
+                <PARAM NAME="Morph_type">
+                    <VALUE>Gramm</VALUE>
+                </PARAM>
+                <PARAM NAME="templatesPhase">
+                    <VALUE>./resources/morph/procnum/templates.scape</VALUE>
+                </PARAM>
+            </RESOURCE>
+
+            <RESOURCE NAME="Russian_MorphMinimizator" TYPE="Minimizator">
+                <COMMENT>Russian Morphological Minimization Utility</COMMENT>
+                <PARAM NAME="rulesPath">
+                    <VALUE>./resources/morph/MinimzMorph.java</VALUE>
+                </PARAM>
+            </RESOURCE>
+
+            <RESOURCE NAME="Russian_MorphInvarsConverter" TYPE="InvarsConverter">
+                <COMMENT>Russian Morph Invars Converter</COMMENT>
+                <PARAM NAME="inputType">
+                    <VALUE>Gramm</VALUE>
+                </PARAM>
+            </RESOURCE>
+
+            <RESOURCE NAME="Russian_MorphGovModelMultiplier" TYPE="GovModelMultiplier">
+                <COMMENT>Russian Morph Gov Mapper</COMMENT>
+                <PARAM NAME="inputType">
+                    <VALUE>Gramm</VALUE>
+                </PARAM>
+                <PARAM NAME="GovDictionary">
+                    <VALUE>treeton.dictanalyzer.govdictloader.govonto.GovDictionaryOntoImpl</VALUE>
+                </PARAM>
+                <PARAM NAME="semFeatureName">
+                    <VALUE>SEM</VALUE>
+                </PARAM>
+                <PARAM NAME="govFeatureName">
+                    <VALUE>GOV</VALUE>
+                </PARAM>
+                <PARAM NAME="govIDFeatureName">
+                    <VALUE>GOVID</VALUE>
+                </PARAM>
+            </RESOURCE>
+
+            <RESOURCE NAME="Russian_UnknownMorphFsmApplier" TYPE="UnknownMorphFsmApplier">
+                <PARAM NAME="path">
+                    <VALUE>./resources/morph/zaliz.dct</VALUE>
+                </PARAM>
+                <PARAM NAME="Tokeniser_resourceType">
+                    <VALUE>Tokeniser</VALUE>
+                </PARAM>
+                <PARAM NAME="predMorphPhaseTemplate">
+                    <VALUE>({Token:kind=word}{Token:}*)?{Gramm:TYPE=unknown}</VALUE>
+                </PARAM>
+            </RESOURCE>
+
+            <RESOURCE NAME="Russian_ZalizApplier" TYPE="RusMorphDictsApplier">
+                <PARAM NAME="path">
+                    <VALUE>./resources/morph/zaliz.dct</VALUE>
+                </PARAM>
+                <PARAM NAME="Tokeniser_resourceType">
+                    <VALUE>Tokeniser</VALUE>
+                </PARAM>
+            </RESOURCE>
+
+            <RESOURCE NAME="Russian_FreqDictApplier" TYPE="RusFreqDictApplier">
+                <PARAM NAME="path">
+                    <VALUE>./resources/morph/freq/freq_dict.txt</VALUE>
+                </PARAM>
+                <PARAM NAME="Morph_type">
+                    <VALUE>Gramm</VALUE>
+                </PARAM>
+            </RESOURCE>
+
+            <RESOURCE NAME="Russian_VNPExtractor" TYPE="VNPExtractor">
+            </RESOURCE>
+
+            <RESOURCE NAME="Russian_VNPExtractor2" TYPE="VNPExtractor2">
+            </RESOURCE>
+
+
+            <RESOURCE NAME="Russian_TrainingData" TYPE="TrainingData">
+            </RESOURCE>
+
+            <RESOURCE NAME="Russian_PrepAttachment" TYPE="PrepAttachment">
+            </RESOURCE>
+
+
+            <RESOURCE NAME="Russian_StarlingMorphApplier" TYPE="StarlingMorphApplier">
+                <PARAM NAME="port">
+                    <VALUE>8001</VALUE>
+                </PARAM>
+                <PARAM NAME="conversionLexRules">
+                    <VALUE>./resources/starlingMorph/conversionLex.map</VALUE>
+                </PARAM>
+                <PARAM NAME="conversionInflRules">
+                    <VALUE>./resources/starlingMorph/conversionInfl.map</VALUE>
+                </PARAM>
+                <PARAM NAME="targetType">
+                    <VALUE>Gramm</VALUE>
+                </PARAM>
+                <PARAM NAME="predMorphPhase">
+                    <VALUE>./resources/starlingMorph/PredMorph.scape</VALUE>
+                </PARAM>
+                <PARAM NAME="specialWords">
+                    <VALUE>./resources/starlingMorph/specialWords.dct</VALUE>
+                </PARAM>
+                <PARAM NAME="logging">
+                    <VALUE>true</VALUE>
+                </PARAM>
+            </RESOURCE>
+
+            <RESOURCE NAME="Russian_StarlingOnlyAccentMorphApplier" TYPE="StarlingOnlyAccentMorphApplier">
+                <PARAM NAME="targetType">
+                    <VALUE>Gramm</VALUE>
+                </PARAM>
+                <PARAM NAME="bagOfWordsPath">
+                    <VALUE>./resources/starlingMorph/accentsBag.bin</VALUE>
+                </PARAM>
+                <PARAM NAME="predMorphPhase">
+                    <VALUE>./resources/starlingMorph/PredMorph.scape</VALUE>
+                </PARAM>
+                <PARAM NAME="specialWords">
+                    <VALUE>./resources/starlingMorph/specialWords.dct</VALUE>
+                </PARAM>
+            </RESOURCE>
+
+
+            <RESOURCE NAME="Russian_StarlingNativeMorphApplier" TYPE="StarlingMorphApplier">
+                <PARAM NAME="conversionLexRules">
+                    <VALUE>./resources/starlingMorph/conversionLex.map</VALUE>
+                </PARAM>
+                <PARAM NAME="conversionInflRules">
+                    <VALUE>./resources/starlingMorph/conversionInfl.map</VALUE>
+                </PARAM>
+                <PARAM NAME="nativeMorphDictPath">
+                    <VALUE>./resources/starlingMorph/dict_ru.dct</VALUE>
+                </PARAM>
+                <PARAM NAME="targetType">
+                    <VALUE>Gramm</VALUE>
+                </PARAM>
+                <PARAM NAME="predMorphPhase">
+                    <VALUE>./resources/starlingMorph/PredMorph.scape</VALUE>
+                </PARAM>
+                <PARAM NAME="specialWords">
+                    <VALUE>./resources/starlingMorph/specialWords.dct</VALUE>
+                </PARAM>
+                <PARAM NAME="logging">
+                    <VALUE>true</VALUE>
+                </PARAM>
+            </RESOURCE>
+
+            <RESOURCE NAME="Russian_Syllabizator" TYPE="Syllabizator">
+                <PARAM NAME="targetType">
+                    <VALUE>Syllable</VALUE>
+                </PARAM>
+                <PARAM NAME="inputTemplate">
+                    <VALUE>{Token: kind=word,lang=cyr}</VALUE>
+                </PARAM>
+            </RESOURCE>
+
+            <RESOURCE NAME="Russian_AccentGenerator" TYPE="AccentGenerator">
+                <PARAM NAME="Morph_type">
+                    <VALUE>Gramm</VALUE>
+                </PARAM>
+                <PARAM NAME="ACCPL_feature">
+                    <VALUE>ACCPL</VALUE>
+                </PARAM>
+                <PARAM NAME="POS_feature">
+                    <VALUE>POS</VALUE>
+                </PARAM>
+                <PARAM NAME="Klitik_feature">
+                    <VALUE>Klitik</VALUE>
+                </PARAM>
+                <PARAM NAME="AccVariant_type">
+                    <VALUE>AccVariant</VALUE>
+                </PARAM>
+                <PARAM NAME="MorphArr_feature">
+                    <VALUE>MorphArr</VALUE>
+                </PARAM>
+                <PARAM NAME="Syllable_type">
+                    <VALUE>Syllable</VALUE>
+                </PARAM>
+                <PARAM NAME="PhonWord_type">
+                    <VALUE>PhonWord</VALUE>
+                </PARAM>
+                <!-- PARAM NAME="klitik_POSes">
+                    <VALUE>PREP</VALUE>
+                    <VALUE>CONJ</VALUE>
+                    <VALUE>INTJ</VALUE>
+                    <VALUE>PCL</VALUE>
+                </PARAM -->
+            </RESOURCE>
+
+            <CHAIN NAME="MorphChain">
+                <REF RESOURCE="Common_Cleanup"/>
+                <REF RESOURCE="Russian_Tokeniser"/>
+                <REF RESOURCE="Russian_ZalizApplier"/>
+                <!--REF RESOURCE="Russian_CommaProcessor"/-->
+                <REF RESOURCE="Russian_NumbersProcessor"/>
+                <REF RESOURCE="Russian_MorphMinimizator"/>
+                <REF RESOURCE="Russian_MorphInvarsConverter"/>
+                <!--REF RESOURCE="Russian_SuperMorphInvarsConverter"/-->
+                <!--REF RESOURCE="Russian_Morph_vs_SuperMorph_Minimizator"/-->
+                <!--REF RESOURCE="Russian_UnknownMorphGenerator"/-->
+            </CHAIN>
+
+            <CHAIN NAME="NativeMorphChain">
+                <REF RESOURCE="Common_Cleanup"/>
+                <REF RESOURCE="Russian_Tokeniser"/>
+                <REF RESOURCE="Russian_StarlingNativeMorphApplier"/>
+                <REF RESOURCE="Russian_NumbersProcessor"/>
+                <REF RESOURCE="Russian_MorphMinimizator"/>
+                <REF RESOURCE="Russian_MorphInvarsConverter"/>
+
+                <!--REF RESOURCE="Russian_UnknownMorphGenerator"/-->
+                <!--REF RESOURCE="Russian_SuperMorphInvarsConverter"/-->
+                <!--REF RESOURCE="Russian_Morph_vs_SuperMorph_Minimizator"/-->
+            </CHAIN>
+
+            <CHAIN NAME="MorphChainWithFreq">
+                <REF RESOURCE="Common_Cleanup"/>
+                <REF RESOURCE="Russian_Tokeniser"/>
+                <REF RESOURCE="Russian_ZalizApplier"/>
+                <!--REF RESOURCE="Russian_CommaProcessor"/-->
+                <REF RESOURCE="Russian_NumbersProcessor"/>
+                <REF RESOURCE="Russian_MorphMinimizator"/>
+                <REF RESOURCE="Russian_MorphInvarsConverter"/>
+                <REF RESOURCE="Russian_FreqDictApplier"/>
+                <!--REF RESOURCE="Russian_SuperMorphInvarsConverter"/-->
+                <!--REF RESOURCE="Russian_Morph_vs_SuperMorph_Minimizator"/-->
+                <!--REF RESOURCE="Russian_UnknownMorphGenerator"/-->
+            </CHAIN>
+
+            <CHAIN NAME="NativeMorphChainWithFreq">
+                <REF RESOURCE="Common_Cleanup"/>
+                <REF RESOURCE="Russian_Tokeniser"/>
+                <REF RESOURCE="Russian_StarlingNativeMorphApplier"/>
+                <REF RESOURCE="Russian_NumbersProcessor"/>
+                <REF RESOURCE="Russian_MorphMinimizator"/>
+                <REF RESOURCE="Russian_MorphInvarsConverter"/>
+                <REF RESOURCE="Russian_FreqDictApplier"/>
+
+                <!--REF RESOURCE="Russian_UnknownMorphGenerator"/-->
+                <!--REF RESOURCE="Russian_SuperMorphInvarsConverter"/-->
+                <!--REF RESOURCE="Russian_Morph_vs_SuperMorph_Minimizator"/-->
+            </CHAIN>
+
+            <CHAIN NAME="MorphChainGov">
+                <REF RESOURCE="Common_Cleanup"/>
+                <REF RESOURCE="Russian_Tokeniser"/>
+                <REF RESOURCE="Russian_ZalizApplier"/>
+                <!--REF RESOURCE="Russian_CommaProcessor"/-->
+                <REF RESOURCE="Russian_NumbersProcessor"/>
+                <REF RESOURCE="Russian_MorphMinimizator"/>
+                <REF RESOURCE="Russian_MorphInvarsConverter"/>
+                <REF RESOURCE="Russian_MorphGovModelMultiplier"/>
+                <!--REF RESOURCE="Russian_SuperMorphInvarsConverter"/-->
+                <!--REF RESOURCE="Russian_Morph_vs_SuperMorph_Minimizator"/-->
+                <!--REF RESOURCE="Russian_UnknownMorphGenerator"/-->
+            </CHAIN>
+
+            <CHAIN NAME="MorphChainUnknown">
+                <REF RESOURCE="Common_Cleanup"/>
+                <REF RESOURCE="Russian_Tokeniser"/>
+                <REF RESOURCE="Russian_ZalizApplier"/>
+                <!--REF RESOURCE="Russian_CommaProcessor"/-->
+                <REF RESOURCE="Russian_NumbersProcessor"/>
+                <REF RESOURCE="Russian_MorphMinimizator"/>
+                <REF RESOURCE="Russian_UnknownMorphGenerator"/>
+                <REF RESOURCE="Russian_UnknownMorphFsmApplier"/>
+                <REF RESOURCE="Russian_MorphInvarsConverter"/>
+                <!--REF RESOURCE="Russian_SuperMorphInvarsConverter"/-->
+                <!--REF RESOURCE="Russian_Morph_vs_SuperMorph_Minimizator"/-->
+            </CHAIN>
+
+            <CHAIN NAME="MorphChainWithFreqUnknown">
+                <REF RESOURCE="Common_Cleanup"/>
+                <REF RESOURCE="Russian_Tokeniser"/>
+                <REF RESOURCE="Russian_ZalizApplier"/>
+                <!--REF RESOURCE="Russian_CommaProcessor"/-->
+                <REF RESOURCE="Russian_NumbersProcessor"/>
+                <REF RESOURCE="Russian_MorphMinimizator"/>
+                <REF RESOURCE="Russian_UnknownMorphGenerator"/>
+                <REF RESOURCE="Russian_UnknownMorphFsmApplier"/>
+                <REF RESOURCE="Russian_MorphInvarsConverter"/>
+                <REF RESOURCE="Russian_FreqDictApplier"/>
+                <!--REF RESOURCE="Russian_SuperMorphInvarsConverter"/-->
+                <!--REF RESOURCE="Russian_Morph_vs_SuperMorph_Minimizator"/-->
+                <!--REF RESOURCE="Russian_UnknownMorphGenerator"/-->
+            </CHAIN>
+
+            <CHAIN NAME="VNPExtractorChain">
+                <REF RESOURCE="Common_Cleanup"/>
+                <REF RESOURCE="Russian_Tokeniser"/>
+                <REF RESOURCE="Russian_ZalizApplier"/>
+                <!--REF RESOURCE="Russian_CommaProcessor"/-->
+                <REF RESOURCE="Russian_NumbersProcessor"/>
+                <REF RESOURCE="Russian_MorphMinimizator"/>
+                <REF RESOURCE="Russian_MorphInvarsConverter"/>
+                <!--REF RESOURCE="Russian_SuperMorphInvarsConverter"/-->
+                <!--REF RESOURCE="Russian_Morph_vs_SuperMorph_Minimizator"/-->
+                <!--REF RESOURCE="Russian_UnknownMorphGenerator"/-->
+                <!-- REF RESOURCE="Russian_MorphMerger"/-->
+                <REF RESOURCE="Russian_VNPExtractor"/>
+            </CHAIN>
+
+
+            <CHAIN NAME="VNPExtractorChain2">
+                <REF RESOURCE="Common_Cleanup"/>
+                <REF RESOURCE="Russian_Tokeniser"/>
+                <REF RESOURCE="Russian_ZalizApplier"/>
+                <!--REF RESOURCE="Russian_CommaProcessor"/-->
+                <REF RESOURCE="Russian_NumbersProcessor"/>
+                <REF RESOURCE="Russian_MorphMinimizator"/>
+                <REF RESOURCE="Russian_UnknownMorphGenerator"/>
+                <REF RESOURCE="Russian_MorphInvarsConverter"/>
+                <!--REF RESOURCE="Russian_SuperMorphInvarsConverter"/-->
+                <!--REF RESOURCE="Russian_Morph_vs_SuperMorph_Minimizator"/-->
+                <!--REF RESOURCE="Russian_UnknownMorphGenerator"/-->
+                <!-- REF RESOURCE="Russian_MorphMerger"/-->
+                <REF RESOURCE="Russian_VNPExtractor2"/>
+            </CHAIN>
+
+
+            <CHAIN NAME="MorphTrainingData">
+                <REF RESOURCE="Common_Cleanup"/>
+                <REF RESOURCE="Russian_Tokeniser"/>
+                <REF RESOURCE="Russian_ZalizApplier"/>
+                <!--REF RESOURCE="Russian_CommaProcessor"/-->
+                <REF RESOURCE="Russian_NumbersProcessor"/>
+                <REF RESOURCE="Russian_MorphMinimizator"/>
+                <REF RESOURCE="Russian_UnknownMorphGenerator"/>
+                <REF RESOURCE="Russian_MorphInvarsConverter"/>
+                <!--REF RESOURCE="Russian_SuperMorphInvarsConverter"/-->
+                <!--REF RESOURCE="Russian_Morph_vs_SuperMorph_Minimizator"/-->
+                <!--REF RESOURCE="Russian_UnknownMorphGenerator"/-->
+                <!-- REF RESOURCE="Russian_MorphMerger"/-->
+                <REF RESOURCE="Russian_TrainingData"/>
+            </CHAIN>
+
+
+            <CHAIN NAME="PrepAttachment">
+                <REF RESOURCE="Common_Cleanup"/>
+                <REF RESOURCE="Russian_Tokeniser"/>
+                <REF RESOURCE="Russian_ZalizApplier"/>
+                <!--REF RESOURCE="Russian_CommaProcessor"/-->
+                <REF RESOURCE="Russian_NumbersProcessor"/>
+                <REF RESOURCE="Russian_MorphMinimizator"/>
+                <REF RESOURCE="Russian_UnknownMorphGenerator"/>
+                <REF RESOURCE="Russian_MorphInvarsConverter"/>
+                <!--REF RESOURCE="Russian_SuperMorphInvarsConverter"/-->
+                <!--REF RESOURCE="Russian_Morph_vs_SuperMorph_Minimizator"/-->
+                <!--REF RESOURCE="Russian_UnknownMorphGenerator"/-->
+                <!-- REF RESOURCE="Russian_MorphMerger"/-->
+                <REF RESOURCE="Russian_PrepAttachment"/>
+            </CHAIN>
+
+
+            <DOMAIN NAME="Prosody" SHORTNAME="P" DIR="./Russian.Prosody/">
+                <TYPESDCL>./types.dcl</TYPESDCL>
+                <RELSXML>./relations.xml</RELSXML>
+
+                <RESOURCE NAME="ProsodyUtil" TYPE="ScapeTransducer">
+                    <PARAM NAME="rulesPath">
+                        <VALUE>./resources/util/</VALUE>
+                    </PARAM>
+                    <PARAM NAME="mainProgram">
+                        <VALUE>prosody.util.Main</VALUE>
+                    </PARAM>
+                </RESOURCE>
+
+                <RESOURCE NAME="UniversalProsodyFragmentator" TYPE="ScapeTransducer">
+                    <PARAM NAME="rulesPath">
+                        <VALUE>./resources/fragmentator/</VALUE>
+                    </PARAM>
+                    <PARAM NAME="mainProgram">
+                        <VALUE>prosody.Main</VALUE>
+                    </PARAM>
+                </RESOURCE>
+
+                <RESOURCE NAME="OneginFragmentator" TYPE="ScapeTransducer">
+                    <PARAM NAME="rulesPath">
+                        <VALUE>./resources/fragmentator/</VALUE>
+                    </PARAM>
+                    <PARAM NAME="mainProgram">
+                        <VALUE>prosody.onegin.Main</VALUE>
+                    </PARAM>
+                </RESOURCE>
+
+                <RESOURCETYPE NAME="VerseProcessingResource">
+                    <CLASS>treeton.res.ru.prosody.VerseProcessor</CLASS>
+                </RESOURCETYPE>
+
+                <RESOURCETYPE NAME="MeterAnalyzerResource">
+                    <CLASS>treeton.res.ru.prosody.MeterAnalyzer</CLASS>
+                    <PARAMDESCRIPTION NAME="benchmarkPath" TYPE="String" OPTIONAL="true"/>
+                </RESOURCETYPE>
+
+                <RESOURCETYPE NAME="MdlMeterAnalyzerResource">
+                    <CLASS>treeton.res.ru.prosody.MdlMeterAnalyzer</CLASS>
+                    <PARAMDESCRIPTION NAME="grammarPath" TYPE="String"/>
+                    <PARAMDESCRIPTION NAME="stressRestrictionViolationWeight" TYPE="String"/>
+                    <PARAMDESCRIPTION NAME="reaccentuationRestrictionViolationWeight" TYPE="String"/>
+                </RESOURCETYPE>
+
+                <RESOURCE NAME="VerseProcessor" TYPE="VerseProcessingResource"/>
+
+                <RESOURCE NAME="MeterAnalyzer" TYPE="MeterAnalyzerResource">
+                    <PARAM NAME="benchmarkPath">
+                        <VALUE>./resources/meteranalyzer/hlebnikovMeters.txt</VALUE>
+                    </PARAM>
+                </RESOURCE>
+
+                <RESOURCE NAME="MdlMeterAnalyzer" TYPE="MdlMeterAnalyzerResource">
+                    <PARAM NAME="grammarPath">
+                        <VALUE>./resources/meteranalyzer/first.mdl</VALUE>
+                    </PARAM>
+                    <PARAM NAME="stressRestrictionViolationWeight">
+                        <VALUE>40</VALUE>
+                    </PARAM>
+                    <PARAM NAME="reaccentuationRestrictionViolationWeight">
+                        <VALUE>60</VALUE>
+                    </PARAM>
+                </RESOURCE>
+
+                <CHAIN NAME="BasicProsodyChain">
+                    <REF RESOURCE="Common_Cleanup"/>
+                    <REF RESOURCE="Russian_Tokeniser"/>
+                    <REF RESOURCE="Russian_Syllabizator"/>
+                    <REF RESOURCE="Russian_StarlingMorphApplier"/>
+                    <REF RESOURCE="Russian_MorphMinimizator"/>
+                    <REF RESOURCE="Russian_UnknownMorphGenerator"/>
+                    <REF RESOURCE="Russian_AccentGenerator"/>
+                    <REF RESOURCE="UniversalProsodyFragmentator"/>
+                </CHAIN>
+
+                <CHAIN NAME="MusimatixProsodyChain">
+                    <REF RESOURCE="Common_Cleanup"/>
+                    <REF RESOURCE="Russian_Tokeniser"/>
+                    <REF RESOURCE="Russian_Syllabizator"/>
+                    <REF RESOURCE="Russian_StarlingOnlyAccentMorphApplier"/>
+                    <REF RESOURCE="Russian_MorphMinimizator"/>
+                    <REF RESOURCE="Russian_UnknownMorphGenerator"/>
+                    <REF RESOURCE="Russian_AccentGenerator"/>
+                </CHAIN>
+
+                <CHAIN NAME="OneginChain">
+                    <REF RESOURCE="Common_Cleanup"/>
+                    <REF RESOURCE="Russian_Tokeniser"/>
+                    <REF RESOURCE="Russian_Syllabizator"/>
+                    <REF RESOURCE="Russian_StarlingMorphApplier"/>
+                    <!--REF RESOURCE="Russian_StarlingNativeMorphApplier"/-->
+                    <REF RESOURCE="Russian_MorphMinimizator"/>
+                    <REF RESOURCE="Russian_UnknownMorphGenerator"/>
+                    <REF RESOURCE="OneginFragmentator"/>
+                    <REF RESOURCE="Russian_AccentGenerator"/>
+                    <!--REF RESOURCE="VerseProcessor"/-->
+                    <REF RESOURCE="MdlMeterAnalyzer"/>
+                </CHAIN>
+                <DOMAIN NAME="Lomonosov" SHORTNAME="Lm" DIR="./Russian.Prosody.Lomonosov/">
+                    <TYPESDCL>./types.dcl</TYPESDCL>
+                    <RELSXML>./relations.xml</RELSXML>
+
+                    <RESOURCE NAME="Gramm2glossTrnMapper" TYPE="TrnMapper">
+                        <PARAM NAME="path">
+                            <VALUE>./morph/Gramm2gloss.map</VALUE>
+                        </PARAM>
+                    </RESOURCE>
+
+                    <CHAIN NAME="glossChain">
+                        <REF RESOURCE="Common_Cleanup"/>
+                        <REF RESOURCE="Russian_Tokeniser"/>
+                        <REF RESOURCE="Russian_ZalizApplier"/>
+                        <!-- REF RESOURCE="Russian_CommaProcessor"/-->
+                        <REF RESOURCE="Russian_NumbersProcessor"/>
+                        <REF RESOURCE="Russian_MorphMinimizator"/>
+                        <REF RESOURCE="Russian_MorphInvarsConverter"/>
+                        <REF RESOURCE="Gramm2glossTrnMapper"/>
+
+                        <!--REF RESOURCE="Russian_SuperMorphInvarsConverter"/-->
+                        <!--REF RESOURCE="Russian_Morph_vs_SuperMorph_Minimizator"/-->
+                        <!--REF RESOURCE="Russian_UnknownMorphGenerator"/-->
+                    </CHAIN>
+                </DOMAIN>
+            </DOMAIN>
+        </DOMAIN>
+    </DOMAIN>
+</Document>

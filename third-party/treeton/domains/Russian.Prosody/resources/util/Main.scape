@@ -1,0 +1,6 @@
+package prosody.util;
+
+program Main {
+  exec CollectSingleSyllables;
+  exec SoutSingleSyllables;
+}

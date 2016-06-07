@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://starling.rinet.ru/treeton" storageURI="http://starling.rinet.ru/treeton/prosodyExample" xsi:schemaLocation="http://starling.rinet.ru/treeton http://starling.rinet.ru/treeton/TrnStorageSchema.xsd">
+  <tok length="1" text="М" type="Atom" uri="1"/>
+  <tok length="1" text="о" type="Atom" uri="1a"/>
+  <tok length="1" text="р" type="Atom" uri="1b"/>
+  <tok length="1" text="о" type="Atom" uri="1c"/>
+  <tok length="1" text="з" type="Atom" uri="1d"/>
+  <tok length="1" text=" " type="Atom" uri="2"/>
+  <tok length="1" text="и" type="Atom" uri="3"/>
+  <tok length="1" text=" " type="Atom" uri="4"/>
+  <tok length="1" text="с" type="Atom" uri="5"/>
+  <tok length="1" text="о" type="Atom" uri="5a"/>
+  <tok length="2" text="лн" type="Atom" uri="5b"/>
+  <tok length="1" text="ц" type="Atom" uri="5c"/>
+  <tok length="1" text="е" type="Atom" uri="5d"/>
+  <tok length="1" text=";" type="Atom" uri="6"/>
+  <tok length="1" text=" " type="Atom" uri="7"/>
+  <tok length="1" text="д" type="Atom" uri="8"/>
+  <tok length="1" text="е" type="Atom" uri="8a"/>
+  <tok length="2" text="нь" type="Atom" uri="8b"/>
+  <tok length="1" text=" " type="Atom" uri="9"/>
+  <tok length="1" text="ч" type="Atom" uri="10"/>
+  <tok length="1" text="у" type="Atom" uri="10a"/>
+  <tok length="1" text="д" type="Atom" uri="10b"/>
+  <tok length="1" text="е" type="Atom" uri="10c"/>
+  <tok length="1" text="с" type="Atom" uri="10d"/>
+  <tok length="1" text="н" type="Atom" uri="10e"/>
+  <tok length="1" text="ы" type="Atom" uri="10f"/>
+  <tok length="1" text="й" type="Atom" uri="10g"/>
+  <tok length="1" text="!" type="Atom" uri="11"/>
+  <tok length="1" text=" " type="Atom" uri="12"/>
+  <tok length="0.5" text="Е" type="Atom" uri="13"/>
+  <tok length="0.5" text="" type="Atom" uri="13a"/>
+  <tok length="1" text="щ" type="Atom" uri="13b"/>
+  <tok length="1" text="е" type="Atom" uri="13c"/>
+  <tok length="1" text=" " type="Atom" uri="14"/>
+
+
+  <tok length="2" text="ты" type="Atom" uri="15"/>
+  <tok length="1" text=" " type="Atom" uri="16"/>
+  <tok length="8" text="дремлешь" type="Atom" uri="17"/>
+  <tok length="1" text="," type="Atom" uri="18"/>
+  <tok length="1" text=" " type="Atom" uri="19"/>
+  <tok length="4" text="друг" type="Atom" uri="20"/>
+  <tok length="1" text=" " type="Atom" uri="21"/>
+  <tok length="10" text="прелестный" type="Atom" uri="22"/>
+  <tok length="1" text=" " type="Atom" uri="23"/>
+  <tok length="1" text="-" type="Atom" uri="24"/>
+  <tok length="1" text="-" type="Atom" uri="25"/>
+
+
+  <trn end="1" start="1" type="Phoneme" uri="f1">
+    <attrs notation="м"/>
+  </trn>
+  <trn end="1a" start="1a" type="Phoneme" uri="f1a">
+    <attrs notation="ʌ"/>
+  </trn>
+
+  <trn end="1a" start="1" type="Syllable" uri="s1">
+    <attrs accent="0"/>
+    <nd ref="f1"/>
+    <nd ref="f1a"/>
+  </trn>
+
+  <trn end="1b" start="1b" type="Phoneme" uri="f1b">
+    <attrs notation="р"/>
+  </trn>
+  <trn end="1c" start="1c" type="Phoneme" uri="f1c">
+    <attrs notation="о'"/>
+  </trn>
+  <trn end="1d" start="1d" type="Phoneme" uri="f1d">
+    <attrs notation="с"/>
+  </trn>
+
+  <trn end="1d" start="1b" type="Syllable" uri="s2">
+    <attrs accent="1"/>
+    <nd ref="f1b"/>
+    <nd ref="f1c"/>
+    <nd ref="f1d"/>
+  </trn>
+
+  <trn end="1d" start="1" type="PhonWord" uri="pw1">
+    <nd ref="s1"/>
+    <nd ref="s2"/>
+  </trn>
+
+  <trn end="3" start="3" type="Phoneme" uri="f3">
+    <attrs notation="ы"/>
+  </trn>
+
+  <trn end="3" start="3" type="Syllable" uri="s3">
+    <attrs accent="0"/>
+    <nd ref="f3"/>
+  </trn>
+
+  <trn end="5" start="5" type="Phoneme" uri="f5">
+    <attrs notation="с"/>
+  </trn>
+  <trn end="5a" start="5a" type="Phoneme" uri="f5a">
+    <attrs notation="о'"/>
+  </trn>
+  <trn end="5b" start="5b" type="Phoneme" uri="f5b">
+    <attrs notation="н"/>
+  </trn>
+
+  <trn end="5b" start="5" type="Syllable" uri="s4">
+    <attrs accent="1"/>
+    <nd ref="f5"/>
+    <nd ref="f5a"/>
+    <nd ref="f5b"/>
+  </trn>
+
+
+  <trn end="5c" start="5c" type="Phoneme" uri="f5c">
+    <attrs notation="ц"/>
+  </trn>
+  <trn end="5d" start="5d" type="Phoneme" uri="f5d">
+    <attrs notation="ъ"/>
+  </trn>
+
+  <trn end="5d" start="5c" type="Syllable" uri="s5">
+    <attrs accent="1"/>
+    <nd ref="f5c"/>
+    <nd ref="f5d"/>
+  </trn>
+
+  <trn end="5d" start="3" type="PhonWord" uri="pw2">
+    <nd ref="s3"/>
+    <nd ref="s4"/>
+    <nd ref="s5"/>
+  </trn>
+
+  <trn end="8" start="8" type="Phoneme" uri="f8">
+    <attrs notation="д`"/>
+  </trn>
+  <trn end="8a" start="8a" type="Phoneme" uri="f8a">
+    <attrs notation="ê'"/>
+  </trn>
+  <trn end="8b" start="8b" type="Phoneme" uri="f8b">
+    <attrs notation="н`"/>
+  </trn>
+
+  <trn end="8b" start="8" type="Syllable" uri="s6">
+    <attrs accent="1"/>
+    <nd ref="f8"/>
+    <nd ref="f8a"/>
+    <nd ref="f8b"/>
+  </trn>
+
+  <trn end="8b" start="8" type="PhonWord" uri="pw3">
+    <nd ref="s6"/>
+  </trn>
+
+
+  <trn end="10" start="10" type="Phoneme" uri="f10">
+    <attrs notation="ч`"/>
+  </trn>
+  <trn end="10a" start="10a" type="Phoneme" uri="f10a">
+    <attrs notation="ÿ"/>
+  </trn>
+
+  <trn end="10a" start="10" type="Syllable" uri="s7">
+    <attrs accent="0"/>
+    <nd ref="f10"/>
+    <nd ref="f10a"/>
+  </trn>
+
+  <trn end="10b" start="10b" type="Phoneme" uri="f10b">
+    <attrs notation="д`"/>
+  </trn>
+  <trn end="10c" start="10c" type="Phoneme" uri="f10c">
+    <attrs notation="е'"/>
+  </trn>
+
+  <trn end="10c" start="10b" type="Syllable" uri="s8">
+    <attrs accent="1"/>
+    <nd ref="f10b"/>
+    <nd ref="f10c"/>
+  </trn>
+
+  <trn end="10d" start="10d" type="Phoneme" uri="f10d">
+    <attrs notation="с"/>
+  </trn>
+  <trn end="10e" start="10e" type="Phoneme" uri="f10e">
+    <attrs notation="н"/>
+  </trn>
+  <trn end="10f" start="10f" type="Phoneme" uri="f10f">
+    <attrs notation="ъ"/>
+  </trn>
+  <trn end="10g" start="10g" type="Phoneme" uri="f10g">
+    <attrs notation=""/>
+  </trn>
+
+  <trn end="10g" start="10d" type="Syllable" uri="s9">
+    <attrs accent="1"/>
+    <nd ref="f10d"/>
+    <nd ref="f10e"/>
+    <nd ref="f10f"/>
+    <nd ref="f10g"/>
+  </trn>
+
+  <trn end="10g" start="10" type="PhonWord" uri="pw4">
+    <nd ref="s7"/>
+    <nd ref="s8"/>
+    <nd ref="s9"/>
+  </trn>
+
+  <trn end="13" start="13" type="Phoneme" uri="f13">
+    <attrs notation=""/>
+  </trn>
+  <trn end="13a" start="13a" type="Phoneme" uri="f13a">
+    <attrs notation="ь"/>
+  </trn>
+
+  <trn end="13a" start="13" type="Syllable" uri="s10">
+    <attrs accent="0"/>
+    <nd ref="f13"/>
+    <nd ref="f13a"/>
+  </trn>
+
+  <trn end="13b" start="13b" type="Phoneme" uri="f13b">
+    <attrs notation="ш`:"/>
+  </trn>
+  <trn end="13c" start="13c" type="Phoneme" uri="f13c">
+    <attrs notation="`о'"/>
+  </trn>
+
+  <trn end="13c" start="13b" type="Syllable" uri="s11">
+    <attrs accent="1"/>
+    <nd ref="f13b"/>
+    <nd ref="f13c"/>
+  </trn>
+
+  <trn end="13c" start="13" type="PhonWord" uri="pw5">
+    <nd ref="s10"/>
+    <nd ref="s11"/>
+  </trn>
+
+  <trn end="3" start="3" type="Morph" uri="28">
+    <attrs ACCPL="1" DICTID="51" ID="25259" POS="CONJ" WORDFORM="и" ZINDEX="союз (_без удар._)" base="и" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="20" start="20" type="Morph" uri="41">
+    <attrs ACCPL="3" ANIM="anim" CAS="nom" DICTID="51" GEND="m" ID="19278" NMB="sg" POS="N" WORDFORM="друг" ZINDEX="мо 3с @ _мн._ друз ьҤ, -Ҕй, -ьҤм" base="друг" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="5d" start="5" type="Morph" uri="29">
+    <attrs ACCPL="2" ANIM="inan" CAS="nom" DICTID="51" GEND="n" ID="80056" NMB="sg" POS="N" WORDFORM="солнце" ZINDEX="с 5а" base="солнце" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="1d" start="1" type="Morph" uri="27">
+    <attrs ACCPL="4" ANIM="inan" CAS="acc" DICTID="51" GEND="m" ID="38918" NMB="sg" POS="N" WORDFORM="мороз" ZINDEX="м 1а, Р2" base="мороз" kind="word" lang="cyr" orth="upperInitial"/>
+  </trn>
+  <trn end="8b" start="8" type="Morph" uri="32">
+    <attrs ACCPL="2" ANIM="inan" CAS="nom" DICTID="51" GEND="m" ID="16810" NMB="sg" POS="N" WORDFORM="день" ZINDEX="м 2*в % зҒ день; нҒ день; со днҤ нҒ день; изо днҤ [//Ҙзо дня] в дҔнь; _простореч._ стҚлько-то рҒз на днҢ (_в течение дня_)" base="день" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="10g" start="10" type="Morph" uri="35">
+    <attrs ACCPL="4" CAS="nom" DICTID="51" GEND="m" ID="94140" NMB="sg" POS="A" WORDFORM="чудесный" ZINDEX="п 1*а" base="чудесный" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="1d" start="1" type="Morph" uri="26">
+    <attrs ACCPL="4" ANIM="inan" CAS="nom" DICTID="51" GEND="m" ID="38918" NMB="sg" POS="N" WORDFORM="мороз" ZINDEX="м 1а, Р2" base="мороз" kind="word" lang="cyr" orth="upperInitial"/>
+  </trn>
+  <trn end="5d" hidden="true" opened="true" start="3" type="Phrase" uri="45">
+    <attrs CAS="nom" NMB="sg" SINGLE="single" TYPE="ConjN"/>
+    <nd pcon="s" ref="28">
+      <nd ref="29" relType="coord_conj"/>
+    </nd>
+  </trn>
+  <trn end="5d" hidden="true" opened="true" start="1" type="Phrase" uri="46">
+    <attrs CAS="nom" NMB="pl" POS="N" TYPE="ConjN"/>
+    <nd pcon="s" ref="26"/>
+    <nd pcon="s" ref="45"/>
+  </trn>
+  <trn end="17" start="17" type="Morph" uri="40">
+    <attrs ACCPL="5" ASP="ipf" DICTID="51" ID="19184" MD="ind" NMB="sg" POS="V" PRS="2" REPR="fin" TNS="pres" WORDFORM="дремлешь" ZINDEX="нсв нп 6с" base="дремать" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="13c" start="13" type="Morph" uri="37">
+    <attrs ACCPL="3" DICTID="51" ID="19964" POS="ADV" WORDFORM="еще" ZINDEX="н  (_часто без удар._: еще)" base="еще" kind="word" lang="cyr" orth="upperInitial"/>
+  </trn>
+  <trn end="15" start="15" type="Morph" uri="39">
+    <attrs ACCPL="2" ANIM="anim" CAS="nom" DICTID="51" ID="87034" NMB="sg" POS="N" PRN="prn" WORDFORM="ты" ZINDEX="мс @: _Р., В._ тебҤ, _Д., П._ тебҔ, _Т._ тобҚй//тобҚю !!irreg" base="ты" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="22" start="22" type="Morph" uri="42">
+    <attrs ACCPL="5" CAS="nom" DICTID="51" GEND="m" ID="63822" NMB="sg" POS="A" WORDFORM="прелестный" ZINDEX="п 1*а" base="прелестный" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="22" opened="true" start="1" type="Lookup" uri="0">
+    <nd pcon="w" ref="32">
+      <nd ref="35" relType="modif"/>
+    </nd>
+    <nd pcon="w" ref="46"/>
+    <nd pcon="w" ref="40">
+      <nd ref="37" relType="adv"/>
+      <nd ref="39" relType="predic"/>
+    </nd>
+    <nd pcon="w" ref="41">
+      <nd ref="42" relType="modif"/>
+    </nd>
+  </trn>
+  <trn end="10g" start="10" type="Morph" uri="36">
+    <attrs ACCPL="4" ANIM="inan" CAS="acc" DICTID="51" GEND="m" ID="94140" NMB="sg" POS="A" WORDFORM="чудесный" ZINDEX="п 1*а" base="чудесный" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="8b" start="8" type="Morph" uri="33">
+    <attrs ACCPL="2" ANIM="inan" CAS="acc" DICTID="51" GEND="m" ID="16810" NMB="sg" POS="N" WORDFORM="день" ZINDEX="м 2*в % зҒ день; нҒ день; со днҤ нҒ день; изо днҤ [//Ҙзо дня] в дҔнь; _простореч._ стҚлько-то рҒз на днҢ (_в течение дня_)" base="день" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="8b" start="8" type="Morph" uri="34">
+    <attrs ACCPL="2" ASP="pf" DICTID="51" ID="17091" MD="imp" NMB="sg" POS="V" PRS="2" REPR="fin" TRANS="vt" WORDFORM="день" ZINDEX="св 15а $III(_см._)" base="деть" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="5d" start="5" type="Morph" uri="30">
+    <attrs ACCPL="2" ANIM="inan" CAS="acc" DICTID="51" GEND="n" ID="80056" NMB="sg" POS="N" WORDFORM="солнце" ZINDEX="с 5а" base="солнце" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="13c" start="13" type="Morph" uri="38">
+    <attrs ACCPL="3" DICTID="51" ID="19965" POS="PCL" WORDFORM="еще" ZINDEX="част." base="еще" kind="word" lang="cyr" orth="upperInitial"/>
+  </trn>
+  <trn end="5d" start="5" type="Morph" uri="31">
+    <attrs ACCPL="2" ANIM="inan" CAS="prp" DICTID="51" GEND="n" ID="80056" NMB="sg" POS="N" WORDFORM="солнце" ZINDEX="с 5а" base="солнце" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="22" start="22" type="Morph" uri="43">
+    <attrs ACCPL="5" ANIM="inan" CAS="acc" DICTID="51" GEND="m" ID="63822" NMB="sg" POS="A" WORDFORM="прелестный" ZINDEX="п 1*а" base="прелестный" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+</Document>

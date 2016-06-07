@@ -1,0 +1,48 @@
+package prosody.util;
+
+phase CollectSingleSyllables {
+  input Syllable,SpaceToken,Token;
+  output Syllable;
+  control first;
+
+  rule r1 {
+    ({SpaceToken}|{Token:kind=punctuation}){Syllable}:b({SpaceToken}|{Token:kind=punctuation})
+    ->
+    java {
+        Map<String,String> map = (Map<String,String>)env.getProperty("SingleSyllablesTable");
+        if (map == null) {
+            map = new HashMap<String,String>();
+            env.setProperty("SingleSyllablesTable",map);
+        }
+        Treenotation t = b.getTrn(0);
+
+        TreenotationStorage treenotationStorage = t.getStorage();
+
+        TypeIteratorInterface it = treenotationStorage.typeIterator(treenotationStorage.getTypes().get("Gramm"),t.getStartToken(),t.getEndToken());
+
+        Set<String> poses = new HashSet<String>();
+
+        while (it.hasNext()) {
+            Treenotation trn = (Treenotation) it.next();
+            Object o = trn.get("POS");
+            Object prn = trn.get("PRN");
+            if (prn!=null) {
+                o = "PRN";
+            }
+            if (o!=null) {
+                poses.add(o.toString());
+            }
+        }
+        String[] strings = poses.toArray(new String[poses.size()]);
+        Arrays.sort(strings);
+
+        StringBuffer buf = new StringBuffer();
+
+        for (String s : strings) {
+            buf.append(s);
+        }
+
+        map.put(t.getText().toLowerCase(),buf.toString());
+    }
+  }
+}

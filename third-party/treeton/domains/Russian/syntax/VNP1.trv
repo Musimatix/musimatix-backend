@@ -1,0 +1,106 @@
+analyzer SyntaxRuShallow {
+  input {Gramm,Token}
+  repRelations {modif,circumst}
+  uniRelations {objA,predicPass,preposit}
+
+  goal {
+    @type == "Syntax" && PGROUP == "clause" : ()
+    POS == "N" : e6*50
+    PHRASE == "prepg" : e6*60
+  }
+
+  delimiter {@type == "Token" && (kind == "punctuation")}
+
+  gapPenalty          e0*500
+  repPenalty          e1*50000
+  compactnessPenalty  e3*2
+  unreasonableDelimPenalty e4*300
+
+  delimReasoning {
+    {@type == "Syntax" && PGROUP != null,"clause" }+{@type == "Token" && @string==","} : ()
+    {@type == "Token"  && @string==","}+{CONJ == "conjelem"} ^ : ()
+    {@type == "Syntax" && PGROUP == "clause"}+{@type == "Token" && @string == "."} ^ : ()
+  }
+
+  projectivityPenalty {
+     {@type != "Syntax"} : e2*30
+     {@parentRel=="coordin","coord_conj"} : e2*100000
+     {@parentRel=="preposit"} : e2*10000
+     //{PGROUP=="clause"} : e2*10000
+  }
+
+
+  /*comPenalty {
+     {objA}{infin} : e4*70000
+  }*/
+
+  /*projectivity {
+      {@parentRel == "conj"}  {@type != null} : (100000)
+
+  } */
+
+
+  //ср. "в столе"
+
+  rule preposit {
+    {POS == "PREP"}
+    ~
+    {POS == "N" && base != "пирог","съесть","пирога"}^
+    ::
+    A.GCAS == B.CAS &&
+    (B.base != "он" || B.ADPREP == "adprep" && A.GPRON == "n" || B.ADPREP == null && A.GPRON == "j")
+    -->
+    (A,B){preposit}
+  }
+
+  //Связь глагола с существительным в вин. падеже
+
+  rule objA {
+    {POS == "V" && VOX != "pass" && base != "пирог","съесть","пирога"}
+    ~
+    {POS == "N" && CAS == "acc" && base != "пирог","съесть","пирога"}
+    -->
+    (A,B){objA}
+
+    ::
+
+    A.TRANS == "vi" : e7*140
+    A.TRANS == null : e7*140
+
+  }
+
+  rule predic_pass {
+    {POS == "V" && VOX == "pass" && base != "пирог","съесть","пирога"}
+    ~
+    {POS == "N" && CAS == "nom" && base != "пирог","съесть","пирога"}
+    -->
+    (A,B){predicPass}
+
+  }
+
+  //ср. "красный стол"
+
+  rule modif {
+    {POS == "N" && base != "пирог","съесть","пирога"}
+    ~
+    {POS == "A" || POS == "V" && REPR == "part" && base != "пирог","съесть","пирога"}
+    ::
+    (A.CAS == "prp2" && B.CAS == "prp" || A.CAS == B.CAS) && A.NMB == B.NMB &&
+    (B.ANIM == null || A.ANIM == null || A.ANIM == B.ANIM) &&
+    (A.NMB == "pl" ? true : (A.GEND == B.GEND || (A.GEND == "mf" && B.GEND != "n")))
+    -->
+    (A,B){modif}
+  }
+
+  rule circumst {
+    {@type != "Syntax" && POS == "V","PRED","N" && base != "пирог","съесть","пирога"}
+    ~
+    {POS == "PREP"}
+    ::
+    A.POS != "N" ||  A.@start < B.@start || A.CAS != B.GCAS
+    -->
+    (A,B){circumst}
+  }
+}
+
+

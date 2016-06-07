@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Document xmlns="http://starling.rinet.ru/treeton" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" domain="Common.Russian" name="ShallowSyntax" outputType="System" viewName="Русский синтаксис (поверхностный)" xsi:schemaLocation="http://starling.rinet.ru/treeton http://starling.rinet.ru/treeton/SyntaxRulesSchema.xsd">
+  <rule comments="Создание группы прилагательного" name="ADJG_create" wellFormed="ok">
+    <template end="5" name="root" start="0"/>
+    <template end="5" name="A" start="0">Morph: POS=A</template>
+    <structure template="root">
+      <rel from="root" to="A" type="path"/>
+    </structure>
+    <transformation trn1="A" trn2="C" type="TRANSFORM_AGGREGATE_STRONG"/>
+    <vector target="root"/>
+    <vector target="C">Phrase(TYPE:=ADJG;*:=A.*;base:=null;)</vector>
+  </rule>
+  <rule comments="Присоединение наречия к группе прилагательного" name="ADJG_modif" wellFormed="ok">
+    <template end="10" name="root" start="0"/>
+    <template end="10" name="C" start="5">Phrase: TYPE=ADJG</template>
+    <template end="10" name="B" start="5">Morph: POS=A</template>
+    <template end="5" name="A" start="0">Morph: POS=ADV</template>
+    <structure template="root">
+      <rel from="root" to="C" type="path"/>
+      <rel from="root" to="A" type="path"/>
+    </structure>
+    <structure template="C">
+      <rel from="C" to="B" type="strong"/>
+    </structure>
+    <transformation relType="adv" trn1="B" trn2="A" type="TRANSFORM_LINK"/>
+    <vector target="root"/>
+  </rule>
+  <rule comments="Создание клаузы" name="Clause_create" wellFormed="ok">
+    <template end="5" name="root" start="0"/>
+    <template end="5" name="A" start="0">Morph: POS=V</template>
+    <structure template="root">
+      <rel from="root" to="A" type="path"/>
+    </structure>
+    <transformation trn1="A" trn2="C" type="TRANSFORM_AGGREGATE_STRONG"/>
+    <vector target="root"/>
+    <vector target="C">Phrase(TYPE:=Clause;*:=A.*;base:=null;)</vector>
+  </rule>
+  <rule comments="Связь глагола с прямым дополнением в вин. падеже" name="Clause_objA" wellFormed="ok">
+    <template end="10" name="root" start="0"/>
+    <template end="10" name="C" start="5">Phrase: TYPE=Clause</template>
+    <template end="10" name="B" start="5">Morph: POS=V</template>
+    <template end="5" name="A" start="0">Phrase: TYPE=NP, CAS=acc</template>
+    <structure template="root">
+      <rel from="root" to="A" type="path"/>
+      <rel from="root" to="C" type="path"/>
+    </structure>
+    <structure template="C">
+      <rel from="C" to="B" type="strong"/>
+    </structure>
+    <penalties>B.TRANS!=vt -&gt; (40)</penalties>
+    <transformation relType="objA" trn1="B" trn2="A" type="TRANSFORM_LINK"/>
+    <vector target="root"/>
+  </rule>
+  <rule comments="Связь глагола с подлежащим" name="Clause_predic" wellFormed="ok">
+    <template end="10" name="root" start="0"/>
+    <template end="10" name="B" start="5">Morph: POS=V</template>
+    <template end="5" name="A" start="0">Phrase: TYPE=NP, CAS=nom</template>
+    <template end="10" name="C" start="5">Phrase: TYPE=Clause, REPR=fin</template>
+    <structure template="root">
+      <rel from="root" to="A" type="path"/>
+      <rel from="root" to="C" type="path"/>
+    </structure>
+    <structure template="C">
+      <rel from="C" to="B" type="strong"/>
+    </structure>
+    <transformation relType="predic" trn1="B" trn2="A" type="TRANSFORM_LINK"/>
+    <vector target="root"/>
+  </rule>
+  <rule commented="true" comments="Связь глагола с предложной группой" name="Clause_prepg" wellFormed="ok">
+    <template end="10" name="root" start="0"/>
+    <template end="10" name="B" start="5">Morph: POS=V</template>
+    <template end="10" name="C" start="5">Phrase: TYPE=Clause</template>
+    <template end="5" name="A" start="0">Phrase: TYPE=PREPG</template>
+    <structure template="root">
+      <rel from="root" to="A" type="path"/>
+      <rel from="root" to="C" type="path"/>
+    </structure>
+    <structure template="C">
+      <rel from="C" to="B" type="strong"/>
+    </structure>
+    <transformation relType="adv" trn1="B" trn2="A" type="TRANSFORM_LINK"/>
+    <vector target="root"/>
+  </rule>
+  <rule comments="Присоединение изъяснительного придаточного к глагольной группе" name="Complement" wellFormed="ok">
+    <template end="20" name="root" start="0"/>
+    <template end="20" name="E" start="15">Phrase: TYPE=Clause</template>
+    <template end="5" name="A" start="0">Morph: TYPE=COMMA</template>
+    <template end="20" name="D" start="15">Morph</template>
+    <template end="10" name="B" start="5">Morph: POS=CONJ, base="что"</template>
+    <template end="15" name="C" start="10">Phrase: TYPE=Clause, REPR=fin</template>
+    <structure template="root">
+      <rel from="root" to="E" type="path"/>
+      <rel from="root" to="C" type="path"/>
+      <rel from="root" to="B" type="path"/>
+      <rel from="root" to="A" type="path"/>
+    </structure>
+    <structure template="E">
+      <rel from="E" to="D" type="strong"/>
+    </structure>
+    <constraints>B.end == C.start - 1 &amp;&amp; A.end == B.start - 1</constraints>
+    <transformation relType="coord_conj" trn1="B" trn2="C" type="TRANSFORM_LINK"/>
+    <transformation relType="coordin" trn1="D" trn2="B" type="TRANSFORM_LINK"/>
+    <transformation relType="delim" trn1="B" trn2="A" type="TRANSFORM_LINK"/>
+    <vector target="root"/>
+  </rule>
+  <rule comments="" name="Complement_close" wellFormed="ok">
+    <template end="15" name="root" start="0"/>
+    <template end="15" name="C" start="10">Morph: TYPE=COMMA</template>
+    <template end="10" name="B" start="5">Phrase: TYPE=Clause</template>
+    <template end="5" name="A" start="0">Morph: POS=CONJ, base="что"</template>
+    <structure template="root">
+      <rel from="root" to="C" type="path"/>
+      <rel from="root" to="A" type="path"/>
+      <rel from="A" name="coord_conj" to="B" type="simple"/>
+    </structure>
+    <constraints>B.end == C.start</constraints>
+    <transformation relType="delim" trn1="B" trn2="C" type="TRANSFORM_LINK"/>
+    <vector target="root"/>
+  </rule>
+  <rule comments="Создание именной группы" name="NP_create" wellFormed="ok">
+    <template end="5" name="root" start="0"/>
+    <template end="5" name="A" start="0">Morph: POS=N</template>
+    <structure template="root">
+      <rel from="root" to="A" type="path"/>
+    </structure>
+    <transformation trn1="A" trn2="B" type="TRANSFORM_AGGREGATE_STRONG"/>
+    <vector target="root"/>
+    <vector target="B">Phrase(TYPE:=NP;*:=A.*;base:=null;)</vector>
+  </rule>
+  <rule comments="Присоединение группы прилагательного к именной группе" name="NP_modif" wellFormed="ok">
+    <template end="10" name="root" start="0"/>
+    <template end="10" name="B" start="5">Morph: POS=N</template>
+    <template end="10" name="C" start="5">Phrase: TYPE=NP</template>
+    <template end="5" name="A" start="0">Phrase: TYPE=ADJG</template>
+    <structure template="root">
+      <rel from="root" to="A" type="path"/>
+      <rel from="root" to="C" type="path"/>
+    </structure>
+    <structure template="C">
+      <rel from="C" to="B" type="strong"/>
+    </structure>
+    <constraints>(C.CAS == prp2 &amp;&amp; A.CAS == prp || A.CAS == C.CAS) &amp;&amp; A.NMB == C.NMB &amp;&amp; (C.ANIM == null || A.ANIM==null || A.ANIM == C.ANIM) &amp;&amp; (C.NMB == pl ? true : (A.GEND == C.GEND || (C.GEND == mf &amp;&amp; A.GEND != n)))</constraints>
+    <transformation relType="modif" trn1="B" trn2="A" type="TRANSFORM_LINK"/>
+    <vector target="root"/>
+  </rule>
+  <rule commented="true" comments="Создание предложной группы" name="PREPG_create" wellFormed="ok">
+    <template end="10" name="root" start="0"/>
+    <template end="10" name="B" start="5">Phrase: TYPE=NP</template>
+    <template end="5" name="A" start="0">Morph: POS=PREP</template>
+    <structure template="root">
+      <rel from="root" to="A" type="path"/>
+      <rel from="root" to="B" type="path"/>
+    </structure>
+    <constraints>A.GCAS == B.CAS, B.base != он || B.ADPREP == adprep &amp;&amp; A.GPRON == n || B.ADPREP == null &amp;&amp; A.GPRON == j,  A.start &lt; B.start /*сделать непосредственное примыкание*/</constraints>
+    <transformation relType="preposit" trn1="A" trn2="B" type="TRANSFORM_LINK"/>
+    <transformation trn1="A" trn2="C" type="TRANSFORM_AGGREGATE_STRONG"/>
+    <vector target="root"/>
+    <vector target="C">Phrase(TYPE:=PREPG;)</vector>
+  </rule>
+  <rule comments="Присоединение именной группы к глагольной или другой именной посредством предлога" name="Preposit" wellFormed="ok">
+    <template end="15" name="root" start="0"/>
+    <template end="5" name="A" start="0">Morph:POS=PREP</template>
+    <template end="10" name="B" start="5">Phrase: TYPE=NP</template>
+    <template end="15" name="C" start="10">Morph</template>
+    <template end="15" name="D" start="10">Phrase: TYPE=NP|Clause</template>
+    <structure template="root">
+      <rel from="root" to="B" type="path"/>
+      <rel from="root" to="A" type="path"/>
+      <rel from="root" to="D" type="path"/>
+    </structure>
+    <structure template="D">
+      <rel from="D" to="C" type="strong"/>
+    </structure>
+    <constraints>A.GCAS == B.CAS, B.base != он || B.ADPREP == adprep &amp;&amp; A.GPRON == n || B.ADPREP == null &amp;&amp; A.GPRON == j,  A.start &lt; B.start</constraints>
+    <penalties>A.end != B.start - 1 -&gt; (40)</penalties>
+    <transformation relType="adv" trn1="C" trn2="A" type="TRANSFORM_LINK"/>
+    <transformation relType="preposit" trn1="A" trn2="B" type="TRANSFORM_LINK"/>
+    <vector target="root"/>
+  </rule>
+  <rule comments="Определение главной клаузы" name="ROOT" wellFormed="ok">
+    <template end="5" name="root" start="0"/>
+    <template end="5" name="A" start="0">Phrase: TYPE=Clause, REPR=fin</template>
+    <structure template="root">
+      <rel from="root" to="A" type="path"/>
+    </structure>
+    <transformation trn1="root" trn2="A" type="TRANSFORM_ADDMEMBER_STRONG"/>
+    <vector target="root"/>
+  </rule>
+</Document>

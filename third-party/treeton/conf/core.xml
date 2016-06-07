@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Document>
+  <ADMIN_MAIL>starost@rinet.ru</ADMIN_MAIL>
+  <CONTEXT_CONFIGURATION>
+    <URL>../domains/</URL>
+  </CONTEXT_CONFIGURATION>
+  <LOCALE>ru</LOCALE>
+</Document>

@@ -1,0 +1,54 @@
+analyzer SyntaxRu {
+    input {Gramm,Token}
+    repRelations {modif}
+    uniRelations {predic,objA}
+
+    goal {
+        @type == "Syntax","Gramm" : ()
+    }
+
+    delimiter {@type == "Token" && kind == "punctuation"}
+
+    gapPenalty          e0*500
+    repPenalty          e1*50000
+    compactnessPenalty  e3*2
+    unreasonableDelimPenalty e4*300
+
+    delimReasoning {
+        { @type == "Syntax" }+{@type == "Token" && @string==","} : ()
+    }
+
+    projectivityPenalty {
+        {@type != "Syntax"} : e2*30
+    }
+
+    //ср. "мальчик спал"
+
+    rule predicPast {
+        {POS == "V" && REPR == "fin" && TNS == "past"}
+        ~
+        {POS == "N" && CAS == "nom"}
+        ::
+        A.NMB == B.NMB && (A.NMB == "pl" || A.NMB == "sg" &&
+        (B.GEND == null || A.GEND == B.GEND || B.GEND == "mf" && A.GEND!="n"))
+        -->
+        (A,B){predic}
+    }
+
+    //Связь глагола с существительным в вин. падеже
+
+    rule objA {
+        {POS == "V" && VOX != "pass"}
+        ~
+        {POS == "N" && CAS == "acc"}
+        -->
+        (A,B){objA}
+
+        ::
+
+        A.TRANS == "vi" : e7*140
+        A.TRANS == null : e7*140
+    }
+
+
+}

@@ -1,0 +1,33 @@
+#CASE_SENSITIVE
+@@@@@
+@@@@@
+@([А-Я][а-я]+[вкмть]ич)(а|у|ем|ом|е|и|ей|ам|ами|ах)?@$1@LEXTYPE=propnoun,freqOrthm=u*,POS=N,PNT=ptrn,GEND=m,ANIM=anim@_REQS=FL-sbs_4@Иванович, Ивановича, ...
+@([А-Я][а-я]+[вч]н)(а|ы|у|е|ой|ам|ами|ах)@$1а@LEXTYPE=propnoun,freqOrthm=u*,POS=N,PNT=ptrn,GEND=f,ANIM=anim@_REQS=FL-sbs_1@Ивановна, Ивановны, Саввична, Саввичны, ...
+@([А-Я][а-я]+(ов|ев|ич))ен@$1на@LEXTYPE=propnoun,freqOrthm=u*,POS=N,PNT=ptrn,GEND=f,NMB=pl,CAS=gen,ANIM=anim@@[нет] Ивановен, Саввичен
+@([А-Я][а-я]+(ов|ев|ич))ен@$1на@LEXTYPE=propnoun,freqOrthm=u*,POS=N,PNT=ptrn,GEND=f,NMB=pl,CAS=acc,ANIM=anim@@[позвал] Ивановен, Саввичен
+@@@@@
+@@@@@
+FL-sbs_4@[А-Я][А-я]+ч@@NMB=sg,CAS=nom@@Иванович
+FL-sbs_4@[А-Я][А-я]+а@@NMB=sg,CAS=gen@@[нет] Ивановича
+FL-sbs_4@[А-Я][А-я]+а@@NMB=sg,CAS=acc@@[видел] Ивановича
+FL-sbs_4@[А-Я][А-я]+у@@NMB=sg,CAS=dat@@[дал] Ивановичу
+FL-sbs_4@[А-Я][А-я]+ем@@NMB=sg,CAS=inst@@[говорил с] Ивановичем
+FL-sbs_4@[А-Я][А-я]+е@@NMB=sg,CAS=prp@@[о] Ивановиче
+FL-sbs_4@[А-Я][А-я]+чи@@NMB=pl,CAS=nom@@[пришли] Ивановичи
+FL-sbs_4@[А-Я][А-я]+ей@@NMB=pl,CAS=gen@@[нет] Ивановичей
+FL-sbs_4@[А-Я][А-я]+ей@@NMB=pl,CAS=acc@@[видел] Ивановичей
+FL-sbs_4@[А-Я][А-я]+ам@@NMB=pl,CAS=dat@@[дал] Ивановичам
+FL-sbs_4@[А-Я][А-я]+ами@@NMB=pl,CAS=inst@@[говорил с] Ивановичами
+FL-sbs_4@[А-Я][а-я]+ах@@NMB=pl,CAS=prp@@[о] Ивановичах
+@@@@@
+FL-sbs_1@[А-Я][А-я]+а@@NMB=sg,CAS=nom@@Ивановна
+FL-sbs_1@[А-Я][А-я]+ы@@NMB=sg,CAS=gen@@Ивановны
+FL-sbs_1@[А-Я][А-я]+ы@@NMB=pl,CAS=nom@@Ивановны
+FL-sbs_1@[А-Я][А-я]+е@@NMB=sg,CAS=dat@@[дал] Ивановне
+FL-sbs_1@[А-Я][А-я]+е@@NMB=sg,CAS=prp@@[об] Ивановне
+FL-sbs_1@[А-Я][А-я]+у@@NMB=sg,CAS=acc@@[привел] Ивановну
+FL-sbs_1@[А-Я][А-я]+ой@@NMB=sg,CAS=inst@@[говорил с] Ивановной
+FL-sbs_1@[А-Я][А-я]+ам@@NMB=pl,CAS=dat@@[дал] Ивановнам
+FL-sbs_1@[А-Я][А-я]+ами@@NMB=pl,CAS=inst@@[говорил с] Ивановнами
+FL-sbs_1@[А-Я][а-я]+ах@@NMB=pl,CAS=prp@@[об] Ивановнах
+@@@@@

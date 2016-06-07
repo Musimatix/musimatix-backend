@@ -1,0 +1,34 @@
+@@@@@
+@@@@@
+@([א-ÿ]+)מגא(עü|כ)(סÿ)?@$1מגאעü@POS=V,ASP=ipf@_REQS=FL-stem_past@רענאפמגאעü, רענאפמגאעüסÿ, רענאפמגאכ, רענאפמגאכסÿ
+@([א-ÿ]+)מגא(כא|כמ|כט|גרט)(סü)?@$1מגאעü@POS=V,ASP=ipf@_REQS=FL-stem_past@רענאפמגאכא, רענאפמגאכאסü, רענאפמגאגרט
+@([א-ÿ]+)מגאג@$1מגאעü@POS=V,REPR=gern,TNS=past,ASP=ipf@רענאפמגאג
+@([א-ÿ]+)(ףורü|ףוע|ףול|ף‏ע|ףי)(סÿ)?@$1מגאעü@POS=V,ASP=ipf@_REQS=FL-stem_pres@רענאפףוע
+@([א-ÿ]+)(ףועו|ףיעו)(סü)?@$1מגאעü@POS=V,ASP=ipf@_REQS=FL-stem_pres@רענאפףועו, רענאפףיעו
+@([א-ÿ]+(טח|טנ))(ף‏|ףÿ)(סü)?@$1מגאעü@POS=V,ASP=ipf@_REQS=FL-stem_pres@נוגטחף‏, פמנלטנףÿ
+@@@@@
+@@@@@
+FL-stem_past@[א-ÿ]+((עü(סÿ)?)|(קü(סÿ)?)|(עט(סü)?))@@REPR=inf@_REQS=FL-sja@רענאפמגאעü, בונוקü, ןמכחעט
+FL-stem_past@[א-ÿ]+כ(סÿ)?@@REPR=fin,MD=ind,TNS=past,NMB=sg,GEND=m@_REQS=FL-sja@רענאפמגאכ, דמנוכ
+FL-stem_past@[א-ÿ]+כא(סü)?@@REPR=fin,MD=ind,TNS=past,NMB=sg,GEND=f@_REQS=FL-sja@רענאפמגאכא, דמנוכא
+FL-stem_past@[א-ÿ]+כמ(סü)?@@REPR=fin,MD=ind,TNS=past,NMB=sg,GEND=n@_REQS=FL-sja@רענאפמגאכמ, דמנוכמ
+FL-stem_past@[א-ÿ]+כט(סü)?@@REPR=fin,MD=ind,TNS=past,NMB=pl@_REQS=FL-sja@רענאפמגאכט, דמנוכט
+FL-stem_past@[א-ÿ]+ג(רט(סü)?)?@@REPR=gern,TNS=past@_REQS=FL-sja@רענאפמגאג, רענאפמגאגרט, חאדמנוג, חאדמנוגרטסü
+@@@@@
+@@@@@
+FL-stem_pres@[א-ÿ]+ף‏(סü)?@@REPR=fin,MD=ind,TNS=pres,NMB=sg,PRS=1@_REQS=FL-sja@רענאפף‏
+FL-stem_pres@[א-ÿ]+ףורü(סÿ)?@@REPR=fin,MD=ind,TNS=pres,NMB=sg,PRS=2@_REQS=FL-sja@רענאפףורü
+FL-stem_pres@[א-ÿ]+ףוע(סÿ)?@@REPR=fin,MD=ind,TNS=pres,NMB=sg,PRS=3@_REQS=FL-sja@רענאפףוע
+FL-stem_pres@[א-ÿ]+ףול(סÿ)?@@REPR=fin,MD=ind,TNS=pres,NMB=pl,PRS=1@_REQS=FL-sja@רענאפףול
+FL-stem_pres@[א-ÿ]+ףולעו(סü)?@@REPR=fin,MD=ind,COOP=coop@_REQS=FL-sja@מרענאפףולעו
+FL-stem_pres@[א-ÿ]+ףועו(סü)?@@REPR=fin,MD=ind,TNS=pres,NMB=pl,PRS=2@_REQS=FL-sja@רענאפףועו
+FL-stem_pres@[א-ÿ]+ף‏ע(סÿ)?@@REPR=fin,MD=ind,TNS=pres,NMB=pl,PRS=3@_REQS=FL-sja@רענאפף‏ע
+FL-stem_pres@[א-ÿ]+ףי(סÿ)?@@REPR=fin,MD=imper,NMB=sg@_REQS=FL-sja@ רענאפףי
+FL-stem_pres@[א-ÿ]+ףיעו(סü)?@@REPR=fin,MD=imper,NMB=pl@_REQS=FL-sja@ רענאפףיעו
+FL-stem_pres@[א-ÿ]+ףÿ(סü)?@@REPR=gern,TNS=pres@_REQS=FL-sja@רענאפףÿ
+@@@@@
+@@@@@
+@@@@@
+FL-sja@[א-ÿ]+(סÿ|סü)@@VOX=pass,REFL=refl@@רענאפמגאעüסÿ
+FL-sja@[א-ÿ]+(?<!סÿ|סü)@@@@רענאפמגאעü
+@@@@@

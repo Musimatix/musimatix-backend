@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Document xmlns="http://starling.rinet.ru/treeton" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" domain="Common.Russian" name="ShallowSyntaxPenalties" viewName="Штрафы для русского синтаксиса" xsi:schemaLocation="http://starling.rinet.ru/treeton http://starling.rinet.ru/treeton/PenaltyRulesSchema.xsd">
+  <default N="1" type="rep" value="0"/>
+  <default N="2" type="rep" value="0"/>
+  <default N="3" type="rep" value="0"/>
+  <default N="4" type="rep" value="0"/>
+  <default N="5" type="rep" value="1000"/>
+  <default type="RR" value="100"/>
+  <default type="TT" value="100"/>
+  <default type="RT" value="100"/>
+  <default type="TT" value="100"/>
+  <default type="SR" value="100"/>
+  <default type="SRR" value="10"/>
+  <penalty N="2" comments="" type="rep" value="50">
+    <relation number="1" relType="genet"/>
+  </penalty>
+  <penalty N="2" comments="" type="rep" value="100">
+    <relation number="1" relType="predic"/>
+  </penalty>
+  <penalty N="3" comments="" type="rep" value="100">
+    <relation number="1" relType="objI"/>
+  </penalty>
+  <penalty N="2" comments="" type="rep" value="100">
+    <relation number="1" relType="objD"/>
+  </penalty>
+  <penalty N="2" comments="" type="rep" value="30">
+    <relation number="1" relType="objA"/>
+  </penalty>
+  <penalty N="3" comments="" type="rep" value="100">
+    <relation number="1" relType="objA"/>
+  </penalty>
+</Document>

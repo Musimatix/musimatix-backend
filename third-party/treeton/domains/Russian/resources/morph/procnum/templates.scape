@@ -1,0 +1,31 @@
+package numbers;
+
+phase templates {
+  input Token,SpaceToken,DEFAULT_TOKEN;
+  output Gramm;
+
+  rule r1 {
+   {Token: kind=number}
+   ->
+  }
+
+  rule r2 {
+   {Token: kind=number}{Token: kind=punctuation, string="-"}{Token: kind=word}
+   ->
+  }
+
+  rule r3 {
+   {Token: kind=number}{Token: kind=word}
+   ->
+  }
+
+  rule r4 {
+   {Token: kind=number}{Token: kind=punctuation, string="."}{Token: kind=number}
+   ->
+  }
+
+  rule r5 {
+   {Token: kind=number}{Token: kind=punctuation, string=","}{Token: kind=number}
+   ->
+  }
+}

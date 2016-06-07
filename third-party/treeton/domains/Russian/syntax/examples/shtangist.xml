@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://starling.rinet.ru/treeton" storageURI="" xsi:schemaLocation="http://starling.rinet.ru/treeton http://starling.rinet.ru/treeton/TrnStorageSchema.xsd">
+  <tok length="11" text="Белорусский" type="Atom" uri="0"/>
+  <tok length="1" text=" " type="Atom" uri="2"/>
+  <tok length="8" text="штангист" type="Atom" uri="4"/>
+  <tok length="1" text=" " type="Atom" uri="6"/>
+  <tok length="5" text="понес" type="Atom" uri="8"/>
+  <tok length="1" text=" " type="Atom" uri="10"/>
+  <tok length="7" text="суровое" type="Atom" uri="12"/>
+  <tok length="1" text=" " type="Atom" uri="14"/>
+  <tok length="9" text="наказание" type="Atom" uri="16"/>
+  <tok length="1" text=" " type="Atom" uri="18"/>
+  <tok length="2" text="за" type="Atom" uri="20"/>
+  <tok length="1" text=" " type="Atom" uri="22"/>
+  <tok length="10" text="применение" type="Atom" uri="24"/>
+  <tok length="1" text=" " type="Atom" uri="26"/>
+  <tok length="7" text="допинга" type="Atom" uri="28"/>
+  <trn end="0" start="0" type="Token" uri="1">
+    <attrs kind="word" lang="cyr" orth="upperInitial"/>
+  </trn>
+  <trn end="8" start="8" type="Morph" uri="33">
+    <attrs ACCPL="7" ASP="pf" DICTID="51" GEND="m" ID="61406" MD="ind" NMB="sg" POS="V" REPR="fin" TNS="past" TRANS="vt" WORDFORM="понес" ZINDEX="св 7в/в (-с-)&quot;9&quot;, Җ" base="понести" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="16" start="16" type="Morph" uri="37">
+    <attrs ACCPL="6" ANIM="inan" CAS="acc" DICTID="51" GEND="n" ID="40625" NMB="sg" POS="N" WORDFORM="наказание" ZINDEX="с 7а" base="наказание" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="20" start="20" type="Morph" uri="38">
+    <attrs ACCPL="2" DICTID="51" GCAS="acc" GPRON="n" ID="20657" POS="PREP" WORDFORM="за" ZINDEX="предл. !!GPRON=n !!GCAS=acc (_нормально без удар._)" base="за" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="24" start="24" type="Morph" uri="41">
+    <attrs ACCPL="7" ANIM="inan" CAS="acc" DICTID="51" GEND="n" ID="64875" NMB="sg" POS="N" WORDFORM="применение" ZINDEX="с 7а" base="применение" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="28" start="28" type="Morph" uri="42">
+    <attrs ACCPL="2" ANIM="inan" CAS="gen" DICTID="51" GEND="m" ID="18571" NMB="sg" POS="N" WORDFORM="допинга" ZINDEX="м 3а" base="допинг" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="12" start="12" type="Morph" uri="35">
+    <attrs ACCPL="4" CAS="acc" DICTID="51" GEND="n" ID="83341" NMB="sg" POS="A" WORDFORM="суровое" ZINDEX="п 1а" base="суровый" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="4" start="4" type="Morph" uri="32">
+    <attrs ACCPL="6" ANIM="anim" CAS="nom" DICTID="51" GEND="m" ID="95423" NMB="sg" POS="N" WORDFORM="штангист" ZINDEX="мо 1а" base="штангист" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="0" start="0" type="Morph" uri="30">
+    <attrs ACCPL="6" CAS="nom" DICTID="51" GEND="m" ID="4002" NMB="sg" POS="A" WORDFORM="белорусский" ZINDEX="п 3а!~" base="белорусский" kind="word" lang="cyr" orth="upperInitial"/>
+  </trn>
+  <trn end="28" opened="true" start="0" type="Lookup" uri="44">
+    <nd ref="33">
+      <nd ref="37" relType="objA">
+        <nd ref="38" relType="adv">
+          <nd ref="41" relType="preposit">
+            <nd ref="42" relType="genet"/>
+          </nd>
+        </nd>
+        <nd ref="35" relType="modif"/>
+      </nd>
+      <nd ref="32" relType="predic">
+        <nd ref="30" relType="modif"/>
+      </nd>
+    </nd>
+  </trn>
+  <trn end="0" start="0" type="Morph" uri="31">
+    <attrs ACCPL="6" ANIM="inan" CAS="acc" DICTID="51" GEND="m" ID="4002" NMB="sg" POS="A" WORDFORM="белорусский" ZINDEX="п 3а!~" base="белорусский" kind="word" lang="cyr" orth="upperInitial"/>
+  </trn>
+  <trn end="2" start="2" type="SpaceToken" uri="3">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="4" start="4" type="Token" uri="5">
+    <attrs kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="6" start="6" type="SpaceToken" uri="7">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="8" start="8" type="Token" uri="9">
+    <attrs kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="10" start="10" type="SpaceToken" uri="11">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="12" start="12" type="Token" uri="13">
+    <attrs kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="12" start="12" type="Morph" uri="34">
+    <attrs ACCPL="4" CAS="nom" DICTID="51" GEND="n" ID="83341" NMB="sg" POS="A" WORDFORM="суровое" ZINDEX="п 1а" base="суровый" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="14" start="14" type="SpaceToken" uri="15">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="16" start="16" type="Token" uri="17">
+    <attrs kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="16" start="16" type="Morph" uri="36">
+    <attrs ACCPL="6" ANIM="inan" CAS="nom" DICTID="51" GEND="n" ID="40625" NMB="sg" POS="N" WORDFORM="наказание" ZINDEX="с 7а" base="наказание" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="18" start="18" type="SpaceToken" uri="19">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="20" start="20" type="Token" uri="21">
+    <attrs kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="20" start="20" type="Morph" uri="39">
+    <attrs ACCPL="2" DICTID="51" GCAS="inst" GPRON="n" ID="20658" POS="PREP" WORDFORM="за" ZINDEX="предл. !!GPRON=n !!GCAS=inst (_нормально без удар._)" base="за" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="22" start="22" type="SpaceToken" uri="23">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="24" start="24" type="Token" uri="25">
+    <attrs kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="24" start="24" type="Morph" uri="40">
+    <attrs ACCPL="7" ANIM="inan" CAS="nom" DICTID="51" GEND="n" ID="64875" NMB="sg" POS="N" WORDFORM="применение" ZINDEX="с 7а" base="применение" kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+  <trn end="26" start="26" type="SpaceToken" uri="27">
+    <attrs kind="space"/>
+  </trn>
+  <trn end="28" start="28" type="Token" uri="29">
+    <attrs kind="word" lang="cyr" orth="lowercase"/>
+  </trn>
+</Document>
