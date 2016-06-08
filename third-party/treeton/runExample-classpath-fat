@@ -1,0 +1,1 @@
+java -cp ./prosody.jar:./.lib-one-jar/fat-jar/treeton-third-party.jar treeton.prosody.musimatix.VerseProcessingExample ./domains/Russian.Prosody/resources/meteranalyzer/first.mdl
