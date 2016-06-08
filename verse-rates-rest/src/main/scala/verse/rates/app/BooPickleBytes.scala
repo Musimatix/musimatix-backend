@@ -1,4 +1,4 @@
-package verse.rates
+package verse.rates.app
 
 import java.nio.ByteBuffer
 
