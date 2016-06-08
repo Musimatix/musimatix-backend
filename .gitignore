@@ -2,3 +2,5 @@
 .idea/*
 *.class
 target/
+.lib-fat-jar/
+.tmp/
