@@ -20,7 +20,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>ru.svyaznoy.streaming.app.custwti.rest.RestServerApp</mainClass>
+                            <mainClass>verse.rates.rest.RestServerApp</mainClass>
                             <classpathPrefix>lib/</classpathPrefix>
                         </manifest>
                     </archive>
@@ -144,6 +144,13 @@
         </dependency>
 
         <dependency>
+            <!-- https://github.com/lloydmeta/enumeratum -->
+            <groupId>com.beachape</groupId>
+            <artifactId>enumeratum_2.11</artifactId>
+            <version>1.4.4</version>
+        </dependency>
+
+        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.33</version>
@@ -161,6 +168,28 @@
             <version>2.9.1</version>
         </dependency>
 
+        <dependency>
+            <groupId>treeton</groupId>
+            <artifactId>prosody</artifactId>
+            <version>0.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>treeton</groupId>
+            <artifactId>treeton.lib.3p</artifactId>
+            <version>1.0</version>
+        </dependency>
+
     </dependencies>
+
+    <repositories>
+        <repository>
+            <!-- Add jar to local repo command -->
+            <!-- mvn install:install-file -DlocalRepositoryPath=repo -DcreateChecksum=true -Dpackaging=jar -Dfile=[your-jar] -DgroupId=[...] -DartifactId=[...] -Dversion=[...] -->
+            <!-- install sources with "-Dclassifier=sources" parameter -->
+            <id>repo</id>
+            <url>file://${project.basedir}/repo</url>
+        </repository>
+    </repositories>
 
 </project>

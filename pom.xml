@@ -14,7 +14,7 @@
     <properties>
         <scala.version>2.11.1</scala.version>
         <scala.major.version>2.11</scala.major.version>
-        <java.source>1.7</java.source>
+        <java.source>1.8</java.source>
         <encoding>UTF-8</encoding>
     </properties>
 
