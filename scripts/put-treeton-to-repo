@@ -1,4 +1,0 @@
-mvn install:install-file -DlocalRepositoryPath=../verse-rates-rest/repo -DcreateChecksum=true -Dpackaging=jar -Dfile=../third-party/treeton/prosody.jar -DgroupId=treeton -DartifactId=prosody -Dversion=0.2
-mvn install:install-file -DlocalRepositoryPath=../verse-rates-rest/repo -DcreateChecksum=true -Dpackaging=jar -Dfile=../third-party/treeton/src/prosody.src.jar -DgroupId=treeton -DartifactId=prosody -Dversion=0.2 -Dclassifier=sources
-
-mvn install:install-file -DlocalRepositoryPath=../repo -DcreateChecksum=true -Dpackaging=jar -Dfile=../third-party/treeton/.lib-fat-jar/fat-jar/treeton-third-party.jar -DgroupId=treeton -DartifactId=treeton.lib.3p -Dversion=1.0
