@@ -42,10 +42,10 @@ object TreetonExampleApp {
     song.add("Он уважать себя заставил")
     song.add("И лучше выдумать не мог")
 
-//    val verseDescriptions = processor.process(song)
-//    for (verseDescription <- verseDescriptions) {
-//      System.out.println(verseDescription)
-//    }
+    val verseDescriptions = processor.process(song).asScala
+    for (verseDescription <- verseDescriptions) {
+      println(verseDescription)
+    }
 
     processor.deinitialize()
   }
