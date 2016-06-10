@@ -176,14 +176,20 @@
 
         <dependency>
             <groupId>treeton</groupId>
-            <artifactId>treeton.lib.3p</artifactId>
+            <artifactId>treeton-lib-3p</artifactId>
             <version>1.0</version>
         </dependency>
 
         <dependency>
-            <groupId>javaml</groupId>
-            <artifactId>javml.nsf.net</artifactId>
+            <groupId>javaml-sf-net</groupId>
+            <artifactId>javaml-core</artifactId>
             <version>0.1.7</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.5</version>
         </dependency>
 
     </dependencies>
