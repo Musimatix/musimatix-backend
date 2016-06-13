@@ -59,7 +59,7 @@ meter taktovik3 {
   threshold 80;
   name "Тактовик на трехсложной основе";
 
-  (U)?(U)? (s u (u)?(u)?)* (S)(U)?(U)?
+  (U)?(U)? (S u (u)?(u)?)* (S)(U)?(U)?
 }
 
 meter taktovik2 {
@@ -67,5 +67,5 @@ meter taktovik2 {
   threshold 80;
   name "Тактовик на двухсложной основе";
 
-  (U)?(U)? (s (u)?(u)?)* (S)(U)?(U)?
+  (U)?(U)? (S (u)?(u)?)* (S)(U)?(U)?
 }
