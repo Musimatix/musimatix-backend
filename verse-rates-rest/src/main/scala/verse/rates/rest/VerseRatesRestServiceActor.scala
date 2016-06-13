@@ -1,6 +1,7 @@
 package verse.rates.rest
 
 import akka.actor.Actor
+import akka.actor.Status.Success
 import org.json4s.JsonAST.{JString, JField, JObject}
 import org.json4s._
 import org.json4s.jackson.Serialization
@@ -16,6 +17,8 @@ import spray.json.DefaultJsonProtocol
 import spray.routing._
 import scala.io.Source
 import verse.rates.processor.VectorsProcessor.{ErrorMessage => EM, TitleBox}
+
+import scala.util.{Failure, Try}
 
 
 class VerseRatesRestServiceActor (override val vectorsProcessor: VectorsProcessor)
@@ -84,11 +87,18 @@ abstract class VerseRatesRestService
     respondWithMediaType(`application/json`) {
       respondWithHeader(RawHeader("Access-Control-Allow-Origin", "*")) { ctx =>
         val jsonBody = ctx.request.entity.asString
-        val json = parse(jsonBody) \ "suggestTitle"
-        val titles = (json \ "keywords", json \  "limit") match {
-          case (JString(s), JInt(l)) => vectorsProcessor.suggest(s, l.toInt)
-          case (JString(s), JNothing) => vectorsProcessor.suggest(s, suggestLimit)
-          case _ => Seq.empty[TitleBox]
+        val titles = Try {
+          val json = parse(jsonBody) \ "suggestTitle"
+          (json \ "keywords", json \  "limit") match {
+            case (JString(s), JInt(l)) => vectorsProcessor.suggest(s, l.toInt)
+            case (JString(s), JNothing) => vectorsProcessor.suggest(s, suggestLimit)
+            case _ => Seq.empty[TitleBox]
+          }
+        } match {
+          case scala.util.Success(tbxs) => tbxs
+          case Failure(_) =>
+            println("Illegal request:\n" + jsonBody)
+            Seq.empty[TitleBox]
         }
 
         val titlesVal = JField("titles",
