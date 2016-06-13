@@ -14,8 +14,8 @@ object VerseMetrics {
   case object AccentAmbiguous extends AccentType
 
   case class Syllable(pos : Int, len : Int, accent: AccentType)
-  type Syllables = Vector[Syllable]
-  type VerseVec = Vector[Double]
+  type Syllables = Seq[Syllable]
+  type VerseVec = Seq[Double]
 
   def serializeSyllables(ss: Syllables): Array[Byte] = {
     val bbuf = Pickle.intoBytes(ss)

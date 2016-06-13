@@ -180,7 +180,7 @@ class VectorsUpdater(val con: Connection) {
   }
 
   def updateTables(): Unit = {
-    val songs = getSongs.sortBy(_.id).dropWhile(_.id < 3675)
+    val songs = getSongs.sortBy(_.id).dropWhile(_.id < 6688)
 
     songs.zipWithIndex.foreach { case (song, i) =>
       val start = System.nanoTime

@@ -2,8 +2,8 @@ package verse.rates.app
 
 import UpdateVectorsApp._
 import com.typesafe.config.ConfigFactory
-import verse.rates.processor.VerseProcessor
-import verse.rates.processor.VerseProcessor.{VerseRates, ErrorCode}
+import verse.rates.processor.VectorsProcessor$
+import verse.rates.processor.VectorsProcessor.{VerseRates, ErrorCode}
 
 import scala.util.{Failure, Success, Try}
 

@@ -5,8 +5,8 @@ import akka.io.IO
 import akka.pattern.ask
 import akka.util.Timeout
 import com.typesafe.config.ConfigFactory
-import verse.rates.processor.VerseProcessorImpl
 import spray.can.Http
+import verse.rates.processor.VectorsProcessorImpl
 import scala.concurrent.duration._
 
 
@@ -19,8 +19,8 @@ object RestServerApp {
     val conf = rootConf.getConfig("verse.rates.rest")
 
     implicit val system = ActorSystem(appName)
-    val scoringProcessor = new VerseProcessorImpl(conf)
-    val service = system.actorOf(Props(classOf[VerseRatesRestServiceActor], scoringProcessor), "rest-service")
+    val vectorsProcessor = new VectorsProcessorImpl(conf)
+    val service = system.actorOf(Props(classOf[VerseRatesRestServiceActor], vectorsProcessor), "rest-service")
 
     implicit val timeout = Timeout(5.seconds)
 

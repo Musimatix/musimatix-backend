@@ -5,20 +5,20 @@ import org.json4s.JsonAST.{JString, JField, JObject}
 import org.json4s._
 import org.json4s.jackson.Serialization
 import org.json4s.jackson.Serialization.writePretty
+import org.json4s.jackson.JsonMethods._
+import org.json4s.JsonDSL._
 import spray.http.HttpHeaders.RawHeader
-import verse.rates.processor.VerseProcessor
-import verse.rates.rest.VerseRatesRestService._
+import verse.rates.processor.VectorsProcessor
 import spray.http.MediaTypes._
 import spray.http._
 import spray.httpx.SprayJsonSupport
 import spray.json.DefaultJsonProtocol
 import spray.routing._
-import spray.routing.directives.BasicDirectives
 import scala.io.Source
-import VerseProcessor.{ErrorMessage => EM}
+import verse.rates.processor.VectorsProcessor.{ErrorMessage => EM, TitleBox}
 
 
-class VerseRatesRestServiceActor (override val verseProcessor: VerseProcessor)
+class VerseRatesRestServiceActor (override val vectorsProcessor: VectorsProcessor)
   extends VerseRatesRestService with Actor with HttpService {
 
   def actorRefFactory = context
@@ -35,6 +35,8 @@ object VerseRatesRestService {
   val songsResourceName = schemaPath + "frontend.songs.response.sample.json"
   val tagsResourceName = schemaPath + "frontend.tags.response.sample.json"
   val suggestTitleResourceName = schemaPath + "frontend.suggest.title.response.sample.json"
+
+  val suggestLimit = 10
 
   def respResource(ctx: RequestContext, resourceName: String) =
     ctx.complete(HttpResponse(StatusCodes.OK,
@@ -54,7 +56,7 @@ abstract class VerseRatesRestService
 
   implicit val json4sFormats = Serialization.formats(NoTypeHints)
 
-  def verseProcessor: VerseProcessor
+  def vectorsProcessor: VectorsProcessor
 
   def respResource(resourceName: String) =
     respondWithMediaType(`application/json`) { ctx =>
@@ -78,6 +80,40 @@ abstract class VerseRatesRestService
       }
     }
 
+  def respSuggestion() =
+    respondWithMediaType(`application/json`) {
+      respondWithHeader(RawHeader("Access-Control-Allow-Origin", "*")) { ctx =>
+        val jsonBody = ctx.request.entity.asString
+        val json = parse(jsonBody) \ "suggestTitle"
+        val titles = (json \ "keywords", json \  "limit") match {
+          case (JString(s), JInt(l)) => vectorsProcessor.suggest(s, l.toInt)
+          case (JString(s), JNothing) => vectorsProcessor.suggest(s, suggestLimit)
+          case _ => Seq.empty[TitleBox]
+        }
+
+        val titlesVal = JField("titles",
+          titles.map { tb =>
+            JObject(
+              JField("id", JInt(tb.id)),
+              JField("title", JString(tb.title))
+            )
+          }
+        )
+        val rootObj = JObject(
+          JField("object", JString("frontend.suggest.title.response")),
+          JField("version", JString("1.0")),
+          JField("lang", JString("eng")),
+          titlesVal
+        )
+
+        ctx.complete(HttpResponse(StatusCodes.OK,
+          HttpEntity(ContentType(MediaTypes.`application/json`, HttpCharsets.`UTF-8`),
+            writePretty(rootObj)
+          )))
+      }
+    }
+
+
   case class VerseRows(rows: Seq[String])
 
   case class Verse(verse: VerseRows)
@@ -98,7 +134,7 @@ abstract class VerseRatesRestService
               val (code, output) = {
                 val sVerse = verse.verse.rows.mkString("\n")
 
-                verseProcessor.invokeCalculator(sVerse) match {
+                vectorsProcessor.invokeCalculator(sVerse) match {
                   case Right(rates) => StatusCodes.OK -> {
 
                     val rowsRates = rates.rowsRates
@@ -148,14 +184,59 @@ abstract class VerseRatesRestService
           respResourceExt(songsResourceName)
         } ~
         path("suggest_title") {
-          respResourceExt(suggestTitleResourceName)
+          respSuggestion()
         }
       }
     } ~
     get {
-      pathPrefix("songs" / "env" / "tags") {
-        respResourceExt(tagsResourceName)
-      } ~
+      pathPrefix("songs" / "env") {
+        path("similar") {
+          parameters("id".as[Int]) { id =>
+            respondWithMediaType(`application/json`) {
+              respondWithHeader(RawHeader("Access-Control-Allow-Origin", "*")) {
+                val songs = vectorsProcessor.findSimilar(id, 20)
+
+                val songsIds = songs.map(_.id).mkString(", ")
+                val s =
+                  s"""{
+                      |  "ids" : [$songsIds]
+                      |}
+                   """.stripMargin
+
+                complete(HttpResponse(StatusCodes.OK,
+                  HttpEntity(ContentType(MediaTypes.`application/json`, HttpCharsets.`UTF-8`),
+                  s
+                )))
+              }
+            }
+          }
+        } ~
+        path("suggest_title") {
+          parameters("prefix", "limit".as[Int] ?) { (prefix, limit) =>
+            respondWithMediaType(`application/json`) {
+              respondWithHeader(RawHeader("Access-Control-Allow-Origin", "*")) {
+                val titles = vectorsProcessor.suggest(prefix, limit.getOrElse(suggestLimit))
+                  .map { tb => "\"" + tb.title + "\"" }
+
+                val s =
+                  s"""{
+                     |  "titles" : [
+                     |${titles.mkString(",\n")}
+                     |  ]
+                     |}
+                   """.stripMargin
+
+                complete(HttpResponse(StatusCodes.OK,
+                  HttpEntity(ContentType(MediaTypes.`application/json`, HttpCharsets.`UTF-8`),
+                  s
+                )))
+              }
+            }
+          }
+        } ~
+        path("tags") {
+          respResourceExt(tagsResourceName)
+        }      } ~
       pathEndOrSingleSlash {
         respondWithMediaType(`text/html`) {
           complete {
