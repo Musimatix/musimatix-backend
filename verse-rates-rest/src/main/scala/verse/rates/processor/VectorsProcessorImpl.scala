@@ -39,7 +39,7 @@ class VectorsProcessorImpl(confRoot: Config) extends VectorsProcessor {
       confTreeton <- Try { confRoot.getConfig(confTreetonKey) }
     } yield (confMsmx, confTreeton)) match {
       case Success((confMsmx, confTreeton)) =>
-        verseProcessor = createVerseProcessor(confTreeton)
+        verseProcessor = createVerseProcessor(confTreeton, logger)
         connectionProvider = Some(new ConnectionProvider(confMsmx))
         buildVectorsTree()
         titleSuggestor = connectionProvider.map { cp => new TitleSuggestor(cp) }
@@ -48,7 +48,7 @@ class VectorsProcessorImpl(confRoot: Config) extends VectorsProcessor {
     }
   }
 
-  def createVerseProcessor(confTreeton: Config): Option[VerseProcessor] = {
+  def createVerseProcessor(confTreeton: Config, logger: Logger): Option[VerseProcessor] = {
     val treetonDataPath = Try { confTreeton.getString("treeton.data.path") }.toOption
     val stressRestrictionViolationWeight = confTreeton.getDouble("stress.restriction.violation.weight")
     val reaccentuationRestrictionViolationWeight = confTreeton.getDouble("reaccentuation.restriction.violation.weight")

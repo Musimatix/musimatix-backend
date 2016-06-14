@@ -1,6 +1,17 @@
 package verse.rates.processor
 
+import java.io.File
+
+import com.typesafe.config.Config
+import org.apache.log4j.{Level, Logger}
+import treeton.core.config.BasicConfiguration
+import treeton.core.config.context.resources.LoggerLogListener
+import treeton.core.config.context.{ContextConfigurationSyntaxImpl, ContextConfiguration}
+import treeton.core.util.LoggerProgressListener
+import treeton.prosody.musimatix.VerseProcessor
 import verse.rates.model.VerseMetrics.{VerseVec, Syllables}
+
+import scala.util.Try
 
 
 /**
@@ -32,6 +43,34 @@ object VectorsProcessor {
     vector: VerseVec = Vector.empty[Double])
 
   case class TitleBox(id: Int, title: String)
+
+  def createVerseProcessor(confTreeton: Config, logger: Logger): Option[VerseProcessor] = {
+    val treetonDataPath = Try { confTreeton.getString("treeton.data.path") }.toOption
+    val stressRestrictionViolationWeight = confTreeton.getDouble("stress.restriction.violation.weight")
+    val reaccentuationRestrictionViolationWeight = confTreeton.getDouble("reaccentuation.restriction.violation.weight")
+    val spacePerMeter = confTreeton.getInt("space.per.meter")
+    val maxStressRestrictionViolations = confTreeton.getInt("max.stress.restriction.violations")
+    val maxReaccentuationRestrictionViolations = confTreeton.getInt("max.reaccentuation.restriction.violations")
+    val maxSyllablesPerVerse = confTreeton.getInt("max.syllables.per.verse")
+    val metricGrammarPath = confTreeton.getString("metric.grammar.path")
+
+    treetonDataPath.foreach { p =>
+      BasicConfiguration.setRootURL(new File(p).toURI.toURL)
+    }
+    BasicConfiguration.createInstance()
+    ContextConfiguration.registerConfigurationClass(classOf[ContextConfigurationSyntaxImpl])
+    ContextConfiguration.createInstance()
+
+    val processor = new VerseProcessor(metricGrammarPath, stressRestrictionViolationWeight,
+      reaccentuationRestrictionViolationWeight, spacePerMeter, maxStressRestrictionViolations,
+      maxReaccentuationRestrictionViolations, maxSyllablesPerVerse)
+    processor.setProgressListener(new LoggerProgressListener("Musimatix", logger))
+    processor.addLogListener(new LoggerLogListener(logger))
+    processor.initialize()
+
+    Some(processor)
+  }
+
 }
 
 trait VectorsProcessor {

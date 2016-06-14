@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream
 import java.sql.{PreparedStatement, SQLType, Statement, Connection}
 import java.util
 
+import com.typesafe.config.{ConfigFactory, Config}
 import org.apache.log4j.{Level, Logger}
 import treeton.core.config.BasicConfiguration
 import treeton.core.config.context.resources.LoggerLogListener
@@ -11,8 +12,10 @@ import treeton.core.config.context.{ContextConfigurationSyntaxImpl, ContextConfi
 import treeton.core.util.LoggerProgressListener
 import treeton.prosody.musimatix.SyllableInfo.StressStatus
 import treeton.prosody.musimatix.{SyllableInfo, VerseProcessor, VerseProcessingExample}
+import verse.rates.app.ConfigHelper._
 import verse.rates.app.VectorsUpdater.Song
 import verse.rates.model.VerseMetrics._
+import verse.rates.processor.{VectorsProcessor, TitleSuggestor, ConnectionProvider}
 import scala.annotation.tailrec
 import scala.util.{Failure, Success, Try}
 import verse.rates.model.VerseMetrics
@@ -24,42 +27,42 @@ object VectorsUpdater {
   case class Song(id: Int, text: String)
 }
 
-class VectorsUpdater(val con: Connection) {
+class VectorsUpdater {
 
-  val stressRestrictionViolationWeight: Double = 1.0
-  val reaccentuationRestrictionViolationWeight: Double = 3.0
-  val spacePerMeter: Int = 10
-  val maxStressRestrictionViolations: Int = 3
-  val maxReaccentuationRestrictionViolations: Int = 2
-  val maxSyllablesPerVerse: Int = 24
-  val metricGrammarPath = "./domains/Russian.Prosody/resources/meteranalyzer/first.mdl"
+  private[this] var verseProcessor: Option[VerseProcessor] = None
+  private[this] var connectionProvider: Option[ConnectionProvider] = None
+
+//  val stressRestrictionViolationWeight: Double = 1.0
+//  val reaccentuationRestrictionViolationWeight: Double = 3.0
+//  val spacePerMeter: Int = 10
+//  val maxStressRestrictionViolations: Int = 3
+//  val maxReaccentuationRestrictionViolations: Int = 2
+//  val maxSyllablesPerVerse: Int = 24
+//  val metricGrammarPath = "./domains/Russian.Prosody/resources/meteranalyzer/first.mdl"
 
   private val logger = Logger.getLogger(classOf[VerseProcessingExample])
-
-  var processor = Option.empty[VerseProcessor]
 
   locally {
     init()
   }
 
-  def statement(s: String) = con.prepareStatement(s.stripMargin.replaceAll("\n", " "))
-  def update(s: String) = con.prepareStatement(s.stripMargin.replaceAll("\n", " "), Statement.RETURN_GENERATED_KEYS)
+//  def statement(s: String) = con.prepareStatement(s.stripMargin.replaceAll("\n", " "))
+//  def update(s: String) = con.prepareStatement(s.stripMargin.replaceAll("\n", " "), Statement.RETURN_GENERATED_KEYS)
 
   def init(): Unit = {
-    BasicConfiguration.createInstance()
-    ContextConfiguration.registerConfigurationClass(classOf[ContextConfigurationSyntaxImpl])
-    ContextConfiguration.createInstance()
-    Logger.getRootLogger.setLevel(Level.WARN)
+    (for {
+      confRoot <- Try { ConfigFactory.load().getConfig(confRootKey) }
+      confMsmx <- Try { confRoot.getConfig(confMsmxKey) }
+      confTreeton <- Try { confRoot.getConfig(confTreetonKey) }
+    } yield (confMsmx, confTreeton)) match {
+      case Success((confMsmx, confTreeton)) =>
+        verseProcessor = VectorsProcessor.createVerseProcessor(confTreeton, logger)
+        connectionProvider = Some(new ConnectionProvider(confMsmx))
+      case Failure(f) =>
+        println(f.getMessage)
+    }
 
-    processor = Some(new VerseProcessor( metricGrammarPath,
-      stressRestrictionViolationWeight, reaccentuationRestrictionViolationWeight,
-      spacePerMeter, maxStressRestrictionViolations, maxReaccentuationRestrictionViolations,
-      maxSyllablesPerVerse))
-
-    processor.foreach { p =>
-//      p.setProgressListener(new LoggerProgressListener("Musimatix", logger))
-//      p.addLogListener(new LoggerLogListener(logger))
-      p.initialize()
+    verseProcessor.foreach { p =>
       val dim = p.getMetricVectorDimension
       println(s"Vector dimension: $dim")
     }
@@ -72,21 +75,25 @@ class VectorsUpdater(val con: Connection) {
   def getSongs: Seq[Song] = {
     val builder = Vector.newBuilder[Song]
     // get russian songs
-    val st = statement("SELECT s.id, s.plain FROM songs s, tagged t WHERE s.id = t.song_id AND t.tag_id = 2")
-    val rs = st.executeQuery()
-    Try {
-      @tailrec
-      def nextSong(): Unit = {
-        if (rs.next()) {
-          val id = rs.getInt(1)
-          builder += Song(id, rs.getString(2))
-          nextSong()
+    for (
+      conn <- connectionProvider;
+      st <- conn.select("SELECT s.id, s.plain FROM songs s, tagged t WHERE s.id = t.song_id AND t.tag_id = 2")
+    ) {
+      val rs = st.executeQuery()
+      Try {
+        @tailrec
+        def nextSong(): Unit = {
+          if (rs.next()) {
+            val id = rs.getInt(1)
+            builder += Song(id, rs.getString(2))
+            nextSong()
+          }
         }
+        nextSong()
       }
-      nextSong()
+      rs.close()
+      st.close()
     }
-    rs.close()
-    st.close()
     builder.result()
   }
 
@@ -106,36 +113,43 @@ class VectorsUpdater(val con: Connection) {
           st.setNull(field, java.sql.Types.BLOB)
       }
     }
-    calculatedRows.foreach { case (idx, row, vmOpt) =>
-      val vv = vmOpt.map( vm => serializeVerseVec(vm.vec) )
-      val sv = vmOpt.map( vm => serializeSyllables(vm.syl) )
-      val st = update("INSERT INTO rows (song_id, idx, plain, accents, vector) VALUES (?, ?, ?, ?, ?)")
-      st.setInt(1, id)
-      st.setInt(2, idx)
-      st.setString(3, row)
-      setBlobValue(st, 4, sv)
-      setBlobValue(st, 5, vv)
-      val keysCount = st.executeUpdate()
-      st.close()
-    }
-    val vectors = calculatedRows.flatMap { case (_, _, vmOpt) => vmOpt.map(_.vec) }
 
-    def sumVec(vec1: VerseVec, vec2: VerseVec): VerseVec = {
-      vec1.zip(vec2).map { case (d1, d2) => d1 + d2 }
+    for (conn <- connectionProvider) {
+      calculatedRows.foreach { case (idx, row, vmOpt) =>
+        val vv = vmOpt.map( vm => serializeVerseVec(vm.vec) )
+        val sv = vmOpt.map( vm => serializeSyllables(vm.syl) )
+        conn.update("INSERT INTO rows (song_id, idx, plain, accents, vector) VALUES (?, ?, ?, ?, ?)")
+          .foreach { st =>
+            st.setInt(1, id)
+            st.setInt(2, idx)
+            st.setString(3, row)
+            setBlobValue(st, 4, sv)
+            setBlobValue(st, 5, vv)
+            val keysCount = st.executeUpdate()
+            st.close()
+          }
+      }
+      val vectors = calculatedRows.flatMap { case (_, _, vmOpt) => vmOpt.map(_.vec) }
+
+      def sumVec(vec1: VerseVec, vec2: VerseVec): VerseVec = {
+        vec1.zip(vec2).map { case (d1, d2) => d1 + d2 }
+      }
+      val songVec = vectors
+        .reduceOption(sumVec)
+        .map ( vec => vec.map(_ / vectors.size))
+      val songVecBytes = songVec.map(serializeVerseVec)
+      conn.update("UPDATE songs SET vector=? WHERE id=?")
+        .foreach { st =>
+          setBlobValue(st, 1, songVecBytes)
+          st.setInt(2, id)
+          val updated = st.executeUpdate()
+          st.close()
+        }
     }
-    val songVec = vectors
-      .reduceOption(sumVec)
-      .map ( vec => vec.map(_ / vectors.size))
-    val songVecBytes = songVec.map(serializeVerseVec)
-    val st2 = update("UPDATE songs SET vector=? WHERE id=?")
-    setBlobValue(st2, 1, songVecBytes)
-    st2.setInt(2, id)
-    val updated = st2.executeUpdate()
-    st2.close()
   }
 
   def processSong(song: Song): Unit = {
-    processor.foreach { p =>
+    verseProcessor.foreach { p =>
       val rows = song.text
         .split("\n")
         .flatMap { r =>
@@ -197,6 +211,7 @@ class VectorsUpdater(val con: Connection) {
   }
 
   def bye(): Unit = {
-    processor.foreach(_.deinitialize())
+    verseProcessor.foreach(_.deinitialize())
+    connectionProvider.foreach(_.bye())
   }
 }

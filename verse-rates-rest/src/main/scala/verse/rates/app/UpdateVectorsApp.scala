@@ -2,6 +2,7 @@ package verse.rates.app
 
 import UpdateVectorsApp._
 import com.typesafe.config.ConfigFactory
+import org.apache.log4j.{Level, Logger}
 import verse.rates.processor.VectorsProcessor$
 import verse.rates.processor.VectorsProcessor.{VerseRates, ErrorCode}
 
@@ -15,17 +16,15 @@ object UpdateVectorsApp {
     println("Updating vectors")
     println("Reading...")
 
+    Logger.getRootLogger.setLevel(Level.WARN)
+
     (for {
       confRoot <- Try { ConfigFactory.load().getConfig(confRootKey) }
-      conf <- Try { confRoot.getConfig(confMsmxKey) }
-      p <- MySqlParam(conf)
-      c <- p.connect()
-    } yield c) match {
-      case Success(conMsmx) =>
-        val upd = new VectorsUpdater(conMsmx)
+    } yield confRoot) match {
+      case Success(_) =>
+        val upd = new VectorsUpdater
         upd.updateTables()
         upd.bye()
-        conMsmx.close()
       case Failure(f) =>
         println(f.getMessage)
     }

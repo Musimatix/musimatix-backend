@@ -1,0 +1,81 @@
+rm -rf ../third-party/treeton/.lib-fat-jar/*
+rm -rf ../third-party/treeton/.lib-fat-jar/.*
+mkdir ../third-party/treeton/.lib-fat-jar/unzipped
+mkdir ../third-party/treeton/.lib-fat-jar/fat-jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/jwpl/JWPL_API_0.6.0.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/jwpl/activation-1.1.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/jwpl/ant-1.8.3.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/jwpl/ant-launcher-1.8.3.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/jwpl/antlr-2.7.7.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/jwpl/c3p0-0.9.1.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/jwpl/commons-codec-1.6.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/jwpl/commons-io-1.4.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/jwpl/commons-jxpath-1.3.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/jwpl/de.tudarmstadt.ukp.wikipedia.api-0.9.2.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/jwpl/de.tudarmstadt.ukp.wikipedia.datamachine-0.9.2.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/jwpl/de.tudarmstadt.ukp.wikipedia.dist-0.9.2.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/jwpl/de.tudarmstadt.ukp.wikipedia.mwdumper-0.9.2.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/jwpl/de.tudarmstadt.ukp.wikipedia.parser-0.9.2.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/jwpl/de.tudarmstadt.ukp.wikipedia.revisionmachine-0.9.2.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/jwpl/de.tudarmstadt.ukp.wikipedia.timemachine-0.9.2.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/jwpl/de.tudarmstadt.ukp.wikipedia.util-0.9.2.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/jwpl/de.tudarmstadt.ukp.wikipedia.wikimachine-0.9.2.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/jwpl/dom4j-1.6.1.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/jwpl/hibernate-c3p0-4.1.3.Final.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/jwpl/hibernate-commons-annotations-4.0.1.Final.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/jwpl/hibernate-core-4.1.3.Final.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/jwpl/hibernate-jpa-2.0-api-1.0.1.Final.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/jwpl/javassist-3.16.1-GA.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/jwpl/jboss-logging-3.1.0.GA.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/jwpl/jboss-transaction-api_1.1_spec-1.0.0.Final.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/jwpl/jgrapht-jdk1.5-0.7.3.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/jwpl/jopt-simple-4.3.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/jwpl/mail-1.4.1.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/jwpl/mysql-connector-java-5.1.21.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/jwpl/ptk-common-1.1.0.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/jwpl/rats-runtime-1.15.0.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/jwpl/spring-asm-3.1.1.RELEASE.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/jwpl/spring-beans-3.1.1.RELEASE.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/jwpl/spring-core-3.1.1.RELEASE.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/jwpl/swc-engine-1.1.0.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/jwpl/swc-parser-lazy-1.1.0.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/jwpl/swing-layout-1.0.2.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/jwpl/trove4j-3.0.2.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/jwpl/utils-0.3.0.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/jwpl/xercesImpl-2.9.1-lucene.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/treetonGui.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/glf/glf.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/looks/looks-1.2.2.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/swingx/swingx-beaninfo-1.6.2.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/swingx/swingx-core-1.6.2.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/treetonCore.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/OntosUtil/Serializer.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/OntosUtil/Utils.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/junit/dist/junit-4.1.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/log4j/dist/log4j-1.2.14.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/xerces/xercesImpl.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/xerces/xml-apis.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/scape.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/gate/gate3classes.zip
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/treetonRus.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/morph/Morph.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/morph/Morph.src.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/morph/MorphApi.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/morph/MorphApi.src.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lingvTools.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/javatools/tools.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lingvToolsRu.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/regexpwalker/RegexpWalker.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/regexpwalker/RegexpWalker.src.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/treevial.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/Jape4/Jape4.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/getopt/GnuGetOpt.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/java_cup_v10k/java_cup.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/java_cup_v10k/java_cup.src.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/javamail-1.3.1/activation.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/javamail-1.3.1/mail.jar
+unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/jflex-1.4.2/JFlex.jar
+rm -r ../third-party/treeton/.lib-fat-jar/unzipped/META-INF
+cd ../third-party/treeton/.lib-fat-jar/unzipped
+jar cvf ../fat-jar/treeton-third-party.jar *
+
