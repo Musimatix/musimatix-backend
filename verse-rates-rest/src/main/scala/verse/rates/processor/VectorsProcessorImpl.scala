@@ -53,6 +53,9 @@ class VectorsProcessorImpl(confRoot: Config) extends VectorsProcessor {
     val stressRestrictionViolationWeight = confTreeton.getDouble("stress.restriction.violation.weight")
     val reaccentuationRestrictionViolationWeight = confTreeton.getDouble("reaccentuation.restriction.violation.weight")
     val spacePerMeter = confTreeton.getInt("space.per.meter")
+    val maxStressRestrictionViolations = confTreeton.getInt("max.stress.restriction.violations")
+    val maxReaccentuationRestrictionViolations = confTreeton.getInt("max.reaccentuation.restriction.violations")
+    val maxSyllablesPerVerse = confTreeton.getInt("max.syllables.per.verse")
     val metricGrammarPath = confTreeton.getString("metric.grammar.path")
 
     treetonDataPath.foreach { p =>
@@ -64,7 +67,9 @@ class VectorsProcessorImpl(confRoot: Config) extends VectorsProcessor {
 
     Logger.getRootLogger.setLevel(Level.INFO)
 
-    val processor = new VerseProcessor(metricGrammarPath, stressRestrictionViolationWeight, reaccentuationRestrictionViolationWeight, spacePerMeter)
+    val processor = new VerseProcessor(metricGrammarPath, stressRestrictionViolationWeight,
+      reaccentuationRestrictionViolationWeight, spacePerMeter, maxStressRestrictionViolations,
+      maxReaccentuationRestrictionViolations, maxSyllablesPerVerse)
     processor.setProgressListener(new LoggerProgressListener("Musimatix", logger))
     processor.addLogListener(new LoggerLogListener(logger))
     processor.initialize()

@@ -26,9 +26,12 @@ object VectorsUpdater {
 
 class VectorsUpdater(val con: Connection) {
 
-  val stressRestrictionViolationWeight: Double = 0.4
-  val reaccentuationRestrictionViolationWeight: Double = 0.6
+  val stressRestrictionViolationWeight: Double = 1.0
+  val reaccentuationRestrictionViolationWeight: Double = 3.0
   val spacePerMeter: Int = 10
+  val maxStressRestrictionViolations: Int = 3
+  val maxReaccentuationRestrictionViolations: Int = 2
+  val maxSyllablesPerVerse: Int = 24
   val metricGrammarPath = "./domains/Russian.Prosody/resources/meteranalyzer/first.mdl"
 
   private val logger = Logger.getLogger(classOf[VerseProcessingExample])
@@ -48,11 +51,10 @@ class VectorsUpdater(val con: Connection) {
     ContextConfiguration.createInstance()
     Logger.getRootLogger.setLevel(Level.WARN)
 
-    processor = Some(new VerseProcessor(
-      metricGrammarPath,
-      stressRestrictionViolationWeight,
-      reaccentuationRestrictionViolationWeight,
-      spacePerMeter))
+    processor = Some(new VerseProcessor( metricGrammarPath,
+      stressRestrictionViolationWeight, reaccentuationRestrictionViolationWeight,
+      spacePerMeter, maxStressRestrictionViolations, maxReaccentuationRestrictionViolations,
+      maxSyllablesPerVerse))
 
     processor.foreach { p =>
 //      p.setProgressListener(new LoggerProgressListener("Musimatix", logger))
