@@ -19,12 +19,14 @@ object UpdateVectorsApp {
     Logger.getRootLogger.setLevel(Level.WARN)
 
     (for {
-      confRoot <- Try { ConfigFactory.load().getConfig(confRootKey) }
-    } yield confRoot) match {
-      case Success(_) =>
-        val upd = new VectorsUpdater
+      sta <- Try { args.headOption.map(_.trim.toInt) }
+      crt <- Try { ConfigFactory.load().getConfig(confRootKey) }
+    } yield (sta, crt)) match {
+      case Success((start, _)) =>
+        val upd = new VectorsUpdater(start)
         upd.updateTables()
         upd.bye()
+        println("done")
       case Failure(f) =>
         println(f.getMessage)
     }

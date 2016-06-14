@@ -27,27 +27,16 @@ object VectorsUpdater {
   case class Song(id: Int, text: String)
 }
 
-class VectorsUpdater {
+class VectorsUpdater(start: Option[Int] = None) {
 
   private[this] var verseProcessor: Option[VerseProcessor] = None
   private[this] var connectionProvider: Option[ConnectionProvider] = None
-
-//  val stressRestrictionViolationWeight: Double = 1.0
-//  val reaccentuationRestrictionViolationWeight: Double = 3.0
-//  val spacePerMeter: Int = 10
-//  val maxStressRestrictionViolations: Int = 3
-//  val maxReaccentuationRestrictionViolations: Int = 2
-//  val maxSyllablesPerVerse: Int = 24
-//  val metricGrammarPath = "./domains/Russian.Prosody/resources/meteranalyzer/first.mdl"
 
   private val logger = Logger.getLogger(classOf[VerseProcessingExample])
 
   locally {
     init()
   }
-
-//  def statement(s: String) = con.prepareStatement(s.stripMargin.replaceAll("\n", " "))
-//  def update(s: String) = con.prepareStatement(s.stripMargin.replaceAll("\n", " "), Statement.RETURN_GENERATED_KEYS)
 
   def init(): Unit = {
     (for {
@@ -196,9 +185,14 @@ class VectorsUpdater {
   }
 
   def updateTables(): Unit = {
-    val songs = getSongs.sortBy(_.id) //.dropWhile(_.id < 9500)
+    val songs = getSongs.sortBy(_.id)
 
-    songs.zipWithIndex.foreach { case (song, i) =>
+    val part = start match {
+      case Some(i) => songs.dropWhile(_.id < i)
+      case _ => songs
+    }
+
+    part.zipWithIndex.foreach { case (song, i) =>
       val start = System.nanoTime
       processSong(song)
       val time = (System.nanoTime - start) / 1000000L
