@@ -1,7 +1,6 @@
 package verse.rates.rest
 
 import akka.actor.Actor
-import akka.actor.Status.Success
 import org.json4s.JsonAST.{JString, JField, JObject}
 import org.json4s._
 import org.json4s.jackson.Serialization
@@ -9,7 +8,7 @@ import org.json4s.jackson.Serialization.writePretty
 import org.json4s.jackson.JsonMethods._
 import org.json4s.JsonDSL._
 import spray.http.HttpHeaders.RawHeader
-import verse.rates.processor.VectorsProcessor
+import verse.rates.processor.{VerseResponses, VectorsProcessor}
 import spray.http.MediaTypes._
 import spray.http._
 import spray.httpx.SprayJsonSupport
@@ -22,7 +21,7 @@ import scala.util.{Failure, Try}
 
 
 class VerseRatesRestServiceActor (override val vectorsProcessor: VectorsProcessor)
-  extends VerseRatesRestService with Actor with HttpService {
+  extends VerseRatesRestService with Actor {
 
   def actorRefFactory = context
   def receive = runRoute(ciRoute)
@@ -41,88 +40,15 @@ object VerseRatesRestService {
 
   val suggestLimit = 10
 
-  def respResource(ctx: RequestContext, resourceName: String) =
-    ctx.complete(HttpResponse(StatusCodes.OK,
-      HttpEntity(ContentType(MediaTypes.`application/json`, HttpCharsets.`UTF-8`),
-      Source.fromInputStream(getClass.getResourceAsStream(resourceName))
-        .getLines
-        .mkString("\n")
-    )))
+  implicit val json4sFormats = Serialization.formats(NoTypeHints)
 }
 
 abstract class VerseRatesRestService
-  extends HttpService {
+  extends VerseResponses {
 
   import VerseRatesRestService._
 
   import language.postfixOps
-
-  implicit val json4sFormats = Serialization.formats(NoTypeHints)
-
-  def vectorsProcessor: VectorsProcessor
-
-  def respResource(resourceName: String) =
-    respondWithMediaType(`application/json`) { ctx =>
-      ctx.complete(HttpResponse(StatusCodes.OK,
-        HttpEntity(ContentType(MediaTypes.`application/json`, HttpCharsets.`UTF-8`),
-          Source.fromInputStream(getClass.getResourceAsStream(resourceName))
-            .getLines
-            .mkString("\n")
-        )))
-    }
-
-  def respResourceExt(resourceName: String) =
-    respondWithMediaType(`application/json`) {
-      respondWithHeader(RawHeader("Access-Control-Allow-Origin", "*")) {
-        complete(HttpResponse(StatusCodes.OK,
-          HttpEntity(ContentType(MediaTypes.`application/json`, HttpCharsets.`UTF-8`),
-            Source.fromInputStream(getClass.getResourceAsStream(resourceName))
-              .getLines
-              .mkString("\n")
-          )))
-      }
-    }
-
-  def respSuggestion() =
-    respondWithMediaType(`application/json`) {
-      respondWithHeader(RawHeader("Access-Control-Allow-Origin", "*")) { ctx =>
-        val jsonBody = ctx.request.entity.asString
-        val titles = Try {
-          val json = parse(jsonBody) \ "suggestTitle"
-          (json \ "keywords", json \  "limit") match {
-            case (JString(s), JInt(l)) => vectorsProcessor.suggest(s, l.toInt)
-            case (JString(s), JNothing) => vectorsProcessor.suggest(s, suggestLimit)
-            case _ => Seq.empty[TitleBox]
-          }
-        } match {
-          case scala.util.Success(tbxs) => tbxs
-          case Failure(_) =>
-            println("Illegal request:\n" + jsonBody)
-            Seq.empty[TitleBox]
-        }
-
-        val titlesVal = JField("titles",
-          titles.map { tb =>
-            JObject(
-              JField("id", JInt(tb.id)),
-              JField("title", JString(tb.title))
-            )
-          }
-        )
-        val rootObj = JObject(
-          JField("object", JString("frontend.suggest.title.response")),
-          JField("version", JString("1.0")),
-          JField("lang", JString("eng")),
-          titlesVal
-        )
-
-        ctx.complete(HttpResponse(StatusCodes.OK,
-          HttpEntity(ContentType(MediaTypes.`application/json`, HttpCharsets.`UTF-8`),
-            writePretty(rootObj)
-          )))
-      }
-    }
-
 
   case class VerseRows(rows: Seq[String])
 
@@ -202,51 +128,26 @@ abstract class VerseRatesRestService
       pathPrefix("songs" / "env") {
         path("similar") {
           parameters("id".as[Int]) { id =>
-            respondWithMediaType(`application/json`) {
-              respondWithHeader(RawHeader("Access-Control-Allow-Origin", "*")) {
-                val songs = vectorsProcessor.findSimilar(id, 20)
+            respJsonString { ctx =>
+              val songs = vectorsProcessor.findSimilar(id, 20)
 
-                val songsIds = songs.map(_.id).mkString(", ")
-                val s =
-                  s"""{
-                      |  "ids" : [$songsIds]
-                      |}
-                   """.stripMargin
-
-                complete(HttpResponse(StatusCodes.OK,
-                  HttpEntity(ContentType(MediaTypes.`application/json`, HttpCharsets.`UTF-8`),
-                  s
-                )))
-              }
+              val songsIds = songs.map(_.id).mkString(", ")
+              s"""{
+                  |  "ids" : [$songsIds]
+                  |}
+                 """.stripMargin
             }
           }
         } ~
         path("suggest_title") {
           parameters("prefix", "limit".as[Int] ?) { (prefix, limit) =>
-            respondWithMediaType(`application/json`) {
-              respondWithHeader(RawHeader("Access-Control-Allow-Origin", "*")) {
-                val titles = vectorsProcessor.suggest(prefix, limit.getOrElse(suggestLimit))
-                  .map { tb => "\"" + tb.title + "\"" }
-
-                val s =
-                  s"""{
-                     |  "titles" : [
-                     |${titles.mkString(",\n")}
-                     |  ]
-                     |}
-                   """.stripMargin
-
-                complete(HttpResponse(StatusCodes.OK,
-                  HttpEntity(ContentType(MediaTypes.`application/json`, HttpCharsets.`UTF-8`),
-                  s
-                )))
-              }
-            }
+            respSuggestion(prefix, limit)
           }
         } ~
         path("tags") {
           respResourceExt(tagsResourceName)
-        }      } ~
+        }
+      } ~
       pathEndOrSingleSlash {
         respondWithMediaType(`text/html`) {
           complete {

@@ -13,16 +13,16 @@ import FabrikaImporter._
 object FabrikaImporter {
 
 
-  sealed trait MxTag extends EnumEntry
+  sealed trait ImpTag extends EnumEntry
 
-  object MxTag extends Enum[MxTag] {
+  object ImpTag extends Enum[ImpTag] {
     val values = findValues
-    case object Eng extends MxTag
-    case object Rus extends MxTag
+    case object Eng extends ImpTag
+    case object Rus extends ImpTag
   }
 
   // authors - ids in old DB
-  case class Composition(oldId: Int, title: String, text: String, lang: MxTag, authors: Seq[Int])
+  case class Composition(oldId: Int, title: String, text: String, lang: ImpTag, authors: Seq[Int])
 
   // oldId - id in old DB
   // newId - id in new DB after import
@@ -92,9 +92,9 @@ class FabrikaImporter(val conSource: Connection, val conTarget: Connection, limi
   def isCyrillic(c: Char): Boolean =
     Character.UnicodeBlock.of(c).equals(Character.UnicodeBlock.CYRILLIC)
 
-  def checkLang(text: String): MxTag =
-    if (text.view.take(100).exists(isCyrillic)) MxTag.Rus
-    else MxTag.Eng
+  def checkLang(text: String): ImpTag =
+    if (text.view.take(100).exists(isCyrillic)) ImpTag.Rus
+    else ImpTag.Eng
 
   def getCompositions(c2a: Int => Seq[Int]): Seq[Composition] = {
     val builder = Vector.newBuilder[Composition]
@@ -124,7 +124,7 @@ class FabrikaImporter(val conSource: Connection, val conTarget: Connection, limi
     def save(a: Author): Option[Int] = {
       val st = update("INSERT INTO authors (name_rus, name_eng, old_id) VALUES (?, ?, ?)", conTarget)
       val lang = checkLang(a.name)
-      val (s, n) =  if (lang == MxTag.Eng) (2, 1) else (1, 2)
+      val (s, n) =  if (lang == ImpTag.Eng) (2, 1) else (1, 2)
       st.setString(s, a.name)
       st.setNull(n, java.sql.Types.VARCHAR)
       st.setInt(3, a.oldId)
@@ -151,7 +151,7 @@ class FabrikaImporter(val conSource: Connection, val conTarget: Connection, limi
     def save(c: Composition): Unit = {
       val st = update("INSERT INTO songs (title_rus, title_eng, plain, old_id) VALUES (?, ?, ?, ?)", conTarget)
       val lang = checkLang(c.title)
-      val (s, n) =  if (lang == MxTag.Eng) (2, 1) else (1, 2)
+      val (s, n) =  if (lang == ImpTag.Eng) (2, 1) else (1, 2)
       st.setString(s, c.title)
       st.setNull(n, java.sql.Types.VARCHAR)
       st.setString(3, c.text)
@@ -168,7 +168,7 @@ class FabrikaImporter(val conSource: Connection, val conTarget: Connection, limi
           stAuthors.executeUpdate()
           stAuthors.close()
         }
-        val tagId = if (c.lang == MxTag.Eng) 1 else 2
+        val tagId = if (c.lang == ImpTag.Eng) 1 else 2
         val stTags = update(s"INSERT INTO tagged (song_id, tag_id) VALUES ($songId, $tagId)", conTarget)
         stTags.executeUpdate()
         stTags.close()
@@ -199,7 +199,7 @@ class FabrikaImporter(val conSource: Connection, val conTarget: Connection, limi
     }
 
     val compositions = getCompositions(authorsForComposition)
-    val (rusCompositions, engCompositions) = compositions.partition(_.lang == MxTag.Rus)
+    val (rusCompositions, engCompositions) = compositions.partition(_.lang == ImpTag.Rus)
     val groupedCompositions =
       Vector(
         (rusCompositions, limit.rus),
