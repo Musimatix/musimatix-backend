@@ -56,6 +56,12 @@ abstract class VerseResponses extends HttpService with VectorsProcessorProvider 
       .mkString("\n")
   }
 
+  def respSimilar() = respJsonString { ctx =>
+    val jsonBody = ctx.request.entity.asString
+
+    jsonBody
+  }
+
   def respSongs() = respJsonString { ctx =>
     val jsonBody = ctx.request.entity.asString
     val (songs, lang) = Try {
@@ -135,7 +141,7 @@ abstract class VerseResponses extends HttpService with VectorsProcessorProvider 
     val jsonBody = ctx.request.entity.asString
     val titles = Try {
       val json = parse(jsonBody) \ "suggestTitle"
-      (json \ "keywords", json \  "limit") match {
+      (json \ "keywords", json \ "limit") match {
         case (JString(s), JInt(l)) => vectorsProcessor.suggest(s, l.toInt)
         case (JString(s), JNothing) => vectorsProcessor.suggest(s, suggestLimit)
         case _ => throw new IllegalArgumentException("Illegal request.\n" + jsonBody)
