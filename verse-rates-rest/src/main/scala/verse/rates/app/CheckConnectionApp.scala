@@ -1,9 +1,12 @@
 package verse.rates.app
 
 import java.sql.Connection
-
+import org.json4s.NoTypeHints
+import org.json4s.jackson.Serialization
+import org.json4s.jackson.Serialization.writePretty
 import com.typesafe.config.ConfigFactory
-import verse.rates.processor.ConnectionProvider
+import verse.rates.model.VerseMetrics.LangTag
+import verse.rates.processor.{SongsBox, ConnectionProvider}
 
 import scala.util.{Failure, Success, Try}
 
@@ -13,21 +16,28 @@ import scala.util.{Failure, Success, Try}
 object CheckConnectionApp {
   import ConfigHelper._
 
-  class Checker(val con: Connection) {
+  implicit val json4sFormats = Serialization.formats(NoTypeHints)
 
-    def statement(s: String) = con.prepareStatement(s.stripMargin.replaceAll("\n", " "))
+  class Checker(val cp: ConnectionProvider) {
+    def printSong(id: Int): Unit = {
+      val sb = new SongsBox(cp)
+      sb.getSongsByIds(Vector(id)).foreach { song =>
+        println(writePretty(SongsBox.song2Json(song, LangTag.Rus)))
+      }
+    }
 
     def printStat(): Unit = {
-      val st = statement("SELECT COUNT(*) FROM songs")
-      val rs = st.executeQuery()
-      if (rs.next()) {
-        val nSongs = rs.getInt(1)
-        println(s"Connected. Songs in collection: ${nSongs}.")
-      } else {
-        println(s"Connected. But songs collection is empty.")
+      cp.select("SELECT COUNT(*) FROM songs").foreach { st =>
+        val rs = st.executeQuery()
+        if (rs.next()) {
+          val nSongs = rs.getInt(1)
+          println(s"Connected. Songs in collection: $nSongs.")
+        } else {
+          println(s"Connected. But songs collection is empty.")
+        }
+        rs.close()
+        st.close()
       }
-      rs.close()
-      st.close()
     }
   }
 
@@ -38,9 +48,11 @@ object CheckConnectionApp {
     } yield conf) match {
       case Success(confMsmx) =>
         val connProvider = new ConnectionProvider(confMsmx)
-        connProvider.connection().foreach { conn =>
-          new Checker(conn).printStat()
-        }
+        val checker = new Checker(connProvider)
+
+        checker.printStat()
+        checker.printSong(600)
+
         connProvider.bye()
       case Failure(f) =>
         println(f.getMessage)

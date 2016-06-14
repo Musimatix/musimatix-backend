@@ -13,6 +13,7 @@ import treeton.core.util.LoggerProgressListener
 import treeton.prosody.musimatix.{VerseProcessingExample, VerseProcessor}
 import verse.rates.app.ConfigHelper._
 import verse.rates.calculator.SampleRatesCalculator
+import verse.rates.model.MxSong
 import verse.rates.model.VerseMetrics._
 import verse.rates.processor.VectorsProcessor._
 import scala.annotation.tailrec
@@ -27,6 +28,7 @@ class VectorsProcessorImpl(confRoot: Config) extends VectorsProcessor {
   private[this] var connectionProvider: Option[ConnectionProvider] = None
   private[this] var vectorsTree: Option[KDTree] = None // new KDTree(90)
   private[this] var titleSuggestor: Option[TitleSuggestor] = None
+  private[this] var songsBox: Option[SongsBox] = None
 
   locally {
     init()
@@ -43,6 +45,7 @@ class VectorsProcessorImpl(confRoot: Config) extends VectorsProcessor {
         connectionProvider = Some(new ConnectionProvider(confMsmx))
         buildVectorsTree()
         titleSuggestor = connectionProvider.map { cp => new TitleSuggestor(cp) }
+        songsBox = connectionProvider.map { cp => new SongsBox(cp) }
       case Failure(f) =>
         println(f.getMessage)
     }
@@ -182,4 +185,11 @@ class VectorsProcessorImpl(confRoot: Config) extends VectorsProcessor {
       case _ => Seq.empty[TitleBox]
     }
   }
+
+  def byid(ids: Seq[Int]): Seq[MxSong] =
+    songsBox match {
+      case Some(sb) => sb.getSongsByIds(ids)
+      case _ => Seq.empty[MxSong]
+    }
+
 }

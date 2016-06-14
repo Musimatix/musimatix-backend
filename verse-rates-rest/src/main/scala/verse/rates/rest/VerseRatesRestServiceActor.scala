@@ -114,7 +114,7 @@ abstract class VerseRatesRestService
           respResourceExt(songsResourceName)
         } ~
         path("byid") {
-          respResourceExt(songsResourceName)
+          respSongs()
         } ~
         path("keywords") {
           respResourceExt(songsResourceName)

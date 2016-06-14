@@ -3,10 +3,19 @@ package verse.rates.model
 import java.nio.ByteBuffer
 import boopickle.Default._
 import VerseMetrics._
+import enumeratum.{Enum, EnumEntry}
 
 case class VerseMetrics(vec: VerseVec, syl: Syllables)
 
 object VerseMetrics {
+
+  sealed trait LangTag extends EnumEntry
+
+  object LangTag extends Enum[LangTag] {
+    val values = findValues
+    case object Eng extends LangTag
+    case object Rus extends LangTag
+  }
 
   sealed trait AccentType
   case object AccentStressed extends AccentType

@@ -9,7 +9,8 @@ import treeton.core.config.context.resources.LoggerLogListener
 import treeton.core.config.context.{ContextConfigurationSyntaxImpl, ContextConfiguration}
 import treeton.core.util.LoggerProgressListener
 import treeton.prosody.musimatix.VerseProcessor
-import verse.rates.model.VerseMetrics.{VerseVec, Syllables}
+import verse.rates.model.MxSong
+import verse.rates.model.VerseMetrics.{LangTag, VerseVec, Syllables}
 
 import scala.util.Try
 
@@ -83,4 +84,6 @@ trait VectorsProcessor {
   def findSimilar(rows: Seq[String], limit: Int): Seq[FullSong]
 
   def suggest(s: String, limit: Int): Seq[TitleBox]
+
+  def byid(ids: Seq[Int]): Seq[MxSong]
 }

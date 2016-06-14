@@ -1,6 +1,6 @@
 package verse.rates.processor
 
-import java.sql.{PreparedStatement, Statement, Connection}
+import java.sql.{ResultSet, PreparedStatement, Statement, Connection}
 
 import com.typesafe.config.Config
 import verse.rates.app.MySqlParam
@@ -21,6 +21,11 @@ object ConnectionProvider {
 
   def connection(): Option[Connection] =
     connectionProviderInstance.flatMap(_.ensureConnected().connection())
+
+  def getIntOpt(column: Int)(implicit rs: ResultSet): Option[Int] = {
+    val v = rs.getInt(column)
+    if (rs.wasNull) None else Some(v)
+  }
 }
 
 class ConnectionProvider(val cfg: Config) {
@@ -58,7 +63,6 @@ class ConnectionProvider(val cfg: Config) {
 
   def update(s: String): Option[PreparedStatement] =
     conn.map(_.prepareStatement(stripMultiline(s), Statement.RETURN_GENERATED_KEYS))
-
 
   def reconnect(): Unit = {
     mySqlParam.foreach { p =>
