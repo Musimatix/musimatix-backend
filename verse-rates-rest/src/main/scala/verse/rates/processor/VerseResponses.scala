@@ -30,6 +30,7 @@ object VerseResponses {
   implicit val json4sFormats = Serialization.formats(NoTypeHints)
 
   val suggestLimit = 10
+  val similarLimit = 6
 }
 
 abstract class VerseResponses extends HttpService with VectorsProcessorProvider {
@@ -58,8 +59,32 @@ abstract class VerseResponses extends HttpService with VectorsProcessorProvider 
 
   def respSimilar() = respJsonString { ctx =>
     val jsonBody = ctx.request.entity.asString
+    val (songs, lang) = Try {
+      val json = parse(jsonBody) \ "similar"
+      val lang = json \ "lang" match {
+        case JString("rus") => LangTag.Rus
+        case _ => LangTag.Eng
+      }
 
-    jsonBody
+      val limit = json \ "limit" match {
+        case JInt(i) => i.toInt
+        case _ => similarLimit
+      }
+
+      json \ "id" match {
+        case JInt(id) => (id.toInt, limit, lang)
+        case _ =>
+          throw new IllegalArgumentException("Illegal request.\n" + jsonBody)
+      }
+    } match {
+      case scala.util.Success((id, limit, lang)) =>
+        vectorsProcessor.findSimilar(id, limit+1).filter(_.id != id) -> lang
+      case Failure(f) =>
+        val msg = Option(f.getMessage).fold("")(" " + _)
+        println(s"${f.getClass.getCanonicalName}.$msg")
+        Seq.empty[MxSong] -> LangTag.Eng
+    }
+    writeSongs(songs, lang)
   }
 
   def respSongs() = respJsonString { ctx =>

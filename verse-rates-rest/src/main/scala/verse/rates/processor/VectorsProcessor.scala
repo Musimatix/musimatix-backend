@@ -79,9 +79,11 @@ trait VectorsProcessor {
 
   def invokeCalculator(verse: String): Either[ErrorCode, VerseRates]
 
-  def findSimilar(id: Int, limit: Int): Seq[FullSong]
+  def findSimilarSimple(id: Int, limit: Int): Seq[FullSong]
 
-  def findSimilar(rows: Seq[String], limit: Int): Seq[FullSong]
+  def findSimilarSimple(rows: Seq[String], limit: Int): Seq[FullSong]
+
+  def findSimilar(id: Int, limit: Int): Seq[MxSong]
 
   def suggest(s: String, limit: Int): Seq[TitleBox]
 

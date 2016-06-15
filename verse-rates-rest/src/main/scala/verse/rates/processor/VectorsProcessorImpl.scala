@@ -144,7 +144,7 @@ class VectorsProcessorImpl(confRoot: Config) extends VectorsProcessor {
     )
   }
 
-  override def findSimilar(id: Int, limit: Int): Seq[FullSong] = {
+  override def findSimilarSimple(id: Int, limit: Int): Seq[FullSong] = {
     val builder = Vector.newBuilder[FullSong]
     for (
       cp <- connectionProvider;
@@ -175,8 +175,37 @@ class VectorsProcessorImpl(confRoot: Config) extends VectorsProcessor {
     builder.result()
   }
 
-  override def findSimilar(rows: Seq[String], limit: Int): Seq[FullSong] = {
+  override def findSimilarSimple(rows: Seq[String], limit: Int): Seq[FullSong] = {
     Seq.empty[FullSong]
+  }
+
+  override def findSimilar(id: Int, limit: Int): Seq[MxSong] = {
+    val songs = for {
+      cp <- connectionProvider
+      vt <- vectorsTree
+      sb <- songsBox
+      st <- cp.select("SELECT vector FROM songs WHERE id = ?")
+    } yield {
+      st.setInt(1, id)
+      val rs = st.executeQuery()
+      val idsVec = if (rs.next()) {
+        val vec = Option(rs.getBlob(1))
+          .map( blob => deserializeVerseVec(IOUtils.toByteArray(blob.getBinaryStream)) )
+        vec.map { v =>
+          val ids = vt.nearest(v.toArray, limit)
+            .toVector
+            .map(Int.unbox)
+          println(s"found: ${ids.length}")
+          ids.toVector
+        }.getOrElse(Vector.empty[Int])
+      } else {
+        Vector.empty[Int]
+      }
+      rs.close()
+      st.close()
+      sb.getSongsByIds(idsVec)
+    }
+    songs.getOrElse(Vector.empty[MxSong])
   }
 
   override def suggest(s: String, limit: Int): Seq[TitleBox] = {

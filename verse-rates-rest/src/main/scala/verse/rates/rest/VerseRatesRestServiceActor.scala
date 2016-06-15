@@ -111,7 +111,7 @@ abstract class VerseRatesRestService
       } ~
       pathPrefix("songs" / "search") {
         path("similar") {
-          respResourceExt(songsResourceName)
+          respSimilar()
         } ~
         path("byid") {
           respSongs()
@@ -129,7 +129,7 @@ abstract class VerseRatesRestService
         path("similar") {
           parameters("id".as[Int]) { id =>
             respJsonString { ctx =>
-              val songs = vectorsProcessor.findSimilar(id, 20)
+              val songs = vectorsProcessor.findSimilarSimple(id, 20)
 
               val songsIds = songs.map(_.id).mkString(", ")
               s"""{
