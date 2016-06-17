@@ -635,6 +635,12 @@
                     <REF RESOURCE="Russian_AccentGenerator"/>
                     <REF RESOURCE="UniversalProsodyFragmentator"/>
                 </CHAIN>
+                             
+                <CHAIN NAME="OnlySyllabizatorChain">
+                    <REF RESOURCE="Common_Cleanup"/>
+                    <REF RESOURCE="Russian_Tokeniser"/>
+                    <REF RESOURCE="Russian_Syllabizator"/>
+                </CHAIN>
 
                 <CHAIN NAME="MusimatixProsodyChain">
                     <REF RESOURCE="Common_Cleanup"/>
