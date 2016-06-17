@@ -4,3 +4,4 @@
 target/
 .lib-fat-jar/
 .tmp/
+local/
