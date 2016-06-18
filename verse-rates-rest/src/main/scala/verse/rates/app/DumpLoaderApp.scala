@@ -1,19 +1,18 @@
 package verse.rates.app
 
-import java.sql.Connection
+import com.typesafe.config.ConfigFactory
 import org.json4s.NoTypeHints
 import org.json4s.jackson.Serialization
 import org.json4s.jackson.Serialization.writePretty
-import com.typesafe.config.ConfigFactory
 import verse.rates.model.VerseMetrics.LangTag
-import verse.rates.processor.{SongsBox, ConnectionProvider}
+import verse.rates.processor.{ConnectionProvider, SongsBox}
 
 import scala.util.{Failure, Success, Try}
 
 /** **
   *
   * ***/
-object CheckConnectionApp {
+object DumpLoaderApp {
   import ConfigHelper._
 
   implicit val json4sFormats = Serialization.formats(NoTypeHints)
