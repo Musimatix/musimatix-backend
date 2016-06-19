@@ -29,6 +29,13 @@ object FabrikaImporter {
     val eng: Option[Int] = None
   }
   case class SomeLimit(rus: Option[Int], eng: Option[Int]) extends Limit
+
+  def isCyrillic(c: Char): Boolean =
+    Character.UnicodeBlock.of(c).equals(Character.UnicodeBlock.CYRILLIC)
+
+  def checkLang(text: String): LangTag =
+    if (text.view.take(100).exists(isCyrillic)) LangTag.Rus
+    else LangTag.Eng
 }
 
 class FabrikaImporter(val conSource: Connection, val conTarget: Connection, limit: Limit = NoLimit) {
@@ -80,13 +87,6 @@ class FabrikaImporter(val conSource: Connection, val conTarget: Connection, limi
     st.close()
     builder.result()
   }
-
-  def isCyrillic(c: Char): Boolean =
-    Character.UnicodeBlock.of(c).equals(Character.UnicodeBlock.CYRILLIC)
-
-  def checkLang(text: String): LangTag =
-    if (text.view.take(100).exists(isCyrillic)) LangTag.Rus
-    else LangTag.Eng
 
   def getCompositions(c2a: Int => Seq[Int]): Seq[Composition] = {
     val builder = Vector.newBuilder[Composition]
