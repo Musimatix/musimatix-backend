@@ -39,7 +39,7 @@ object ProsodyExampleApp {
     val metricGrammarPath = args(0)
     val processor = new VerseProcessor(metricGrammarPath, stressRestrictionViolationWeight,
       reaccentuationRestrictionViolationWeight, spacePerMeter, maxStressRestrictionViolations,
-      maxReaccentuationRestrictionViolations, maxSyllablesPerVerse)
+      maxReaccentuationRestrictionViolations, maxSyllablesPerVerse, false)
     processor.setProgressListener(new LoggerProgressListener("Musimatix", logger))
     processor.addLogListener(new LoggerLogListener(logger))
     processor.initialize()
