@@ -1,6 +1,6 @@
 # JSON schemas
 ## Name convention
-Each JSON file has name with follwing structure:  
+Each JSON file has name with following structure:
     `{scope}`.`{symbolic id}`.`{direction}`.`{kind}`.`[variant]`.json
 - `{scope}`
  
@@ -24,5 +24,7 @@ It is response for `byid.request`, `keywords.request`, `similar.request`.
 - `tags.request.get.url` -- this file contains URL for GET request for all tags list.
 - `suggest.title.request` -- suggest titles by first letters.
 - `suggest.title.response` -- suggested titles.
+- `presyllables.request` -- song's text for syllables processing. Message `syllables.response` will be returned.
+- `syllables.response` -- song with syllables array for each text row.
 
 Schemas and samples can be validated at: http://www.jsonschemavalidator.net

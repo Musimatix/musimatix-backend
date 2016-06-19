@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Song's rows with text and syllables",
+  "self": {
+    "vendor": "com.musimatix",
+    "name": "syllables_response",
+    "format": "jsonschema",
+    "version": "1-0-0"
+  },
+  "definitions": {
+    "syllable": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "length": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "type": {
+          "enum": [ "+", "-", "?" ]
+        }
+      },
+      "required": ["start", "length", "type"],
+      "additionalProperties": false
+    },
+    "row": {
+      "type": "object",
+      "properties": {
+        "plain": {
+          "type": "string"
+        },
+        "syl": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/syllable"
+          },
+          "minItems": 1,
+          "uniqueItems": false
+        }
+      },
+      "minItems": 1,
+      "uniqueItems": false
+    }
+  },
+  "type": "object",
+  "properties": {
+    "object": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "syllables": {
+      "type": "object",
+      "properties": {
+        "rows": {
+          "type": "array",
+          "items" : {
+            "$ref": "#/definitions/row"
+          },
+          "minItems": 1,
+          "uniqueItems": false
+        }
+      },
+      "required": ["rows"],
+      "additionalProperties": false
+    }
+  },
+  "required": ["object", "syllables"],
+  "additionalProperties": false
+}
