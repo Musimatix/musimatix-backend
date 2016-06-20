@@ -27,4 +27,12 @@ It is response for `byid.request`, `keywords.request`, `similar.request`.
 - `presyllables.request` -- song's text for syllables processing. Message `syllables.response` will be returned.
 - `syllables.response` -- song with syllables array for each text row.
 
+## Requests' paths
+- `byid.request` -> `POST songs/search/byid`
+- `keywords.request` -> `POST songs/search/keywords`
+- `similar.request` -> `POST songs/search/similar`
+- `tags.request.get` -> `GET songs/env/tags`
+- `suggest.title` -> `POST songs/search/suggest_title`
+- `presyllables.request` -> `POST songs/search/presyllables`
+
 Schemas and samples can be validated at: http://www.jsonschemavalidator.net
