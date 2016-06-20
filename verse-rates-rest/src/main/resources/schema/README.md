@@ -16,23 +16,23 @@ Each JSON file has name with following structure:
 
 ## Frontend messages
 `{symbolic id}` and `{direction}` parts only. 
-- `byid.request` -- get songs by exact song id. Ids array is allowed.
-- `keywords.request` -- search by keywords.
-- `similar.request` -- search songs by rhythmic pattern, keywords and tags. Message `songs.response` will be returned.
-- `songs.response` -- songs list. Each song with all attributes.  
+- `byid.request` &ndash; get songs by exact song id. Ids array is allowed.
+- `keywords.request` &ndash; search by keywords.
+- `similar.request` &ndash; search songs by rhythmic pattern, keywords and tags. Message `songs.response` will be returned.
+- `songs.response` &ndash; songs list. Each song with all attributes.
 It is response for `byid.request`, `keywords.request`, `similar.request`.
-- `tags.request.get.url` -- this file contains URL for GET request for all tags list.
-- `suggest.title.request` -- suggest titles by first letters.
-- `suggest.title.response` -- suggested titles.
-- `presyllables.request` -- song's text for syllables processing. Message `syllables.response` will be returned.
-- `syllables.response` -- song with syllables array for each text row.
+- `tags.request.get.url` &ndash; this file contains URL for GET request for all tags list.
+- `suggest.title.request` &ndash; suggest titles by first letters.
+- `suggest.title.response` &ndash; suggested titles.
+- `presyllables.request` &ndash; song's text for syllables processing. Message `syllables.response` will be returned.
+- `syllables.response` &ndash; song with syllables array for each text row.
 
 ## Requests' paths
-- `byid.request` -> `POST songs/search/byid`
-- `keywords.request` -> `POST songs/search/keywords`
-- `similar.request` -> `POST songs/search/similar`
-- `tags.request.get` -> `GET songs/env/tags`
-- `suggest.title` -> `POST songs/search/suggest_title`
-- `presyllables.request` -> `POST songs/search/presyllables`
+- `byid.request` &rArr; `POST songs/search/byid`
+- `keywords.request` &rArr; `POST songs/search/keywords`
+- `similar.request` &rArr; `POST songs/search/similar`
+- `tags.request.get` &rArr; `GET songs/env/tags`
+- `suggest.title` &rArr; `POST songs/search/suggest_title`
+- `presyllables.request` &rArr; `POST songs/search/presyllables`
 
 Schemas and samples can be validated at: http://www.jsonschemavalidator.net
