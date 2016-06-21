@@ -121,6 +121,9 @@ abstract class VerseRatesRestService
         } ~
         path("suggest_title") {
           respSuggestion()
+        } ~
+        path("presyllables") {
+          respPresyllables()
         }
       }
     } ~

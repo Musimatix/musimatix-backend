@@ -68,7 +68,7 @@ class TitleSuggestor(val cp: ConnectionProvider) {
     var idsSet = Set.empty[Int]
     var idsVec = Vector.empty[Int]
     def addIds(tree: RadixTree[Set[Int]]): Unit = {
-      val buckets = tree.getValuesForKeysStartingWith(s).asScala
+      val buckets = tree.getValuesForKeysStartingWith(s.toLowerCase).asScala
       buckets.takeWhile { b =>
         if (idsVec.size < limit) {
           b.foreach { id =>

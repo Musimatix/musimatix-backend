@@ -1,6 +1,7 @@
 package verse.rates.processor
 
 import java.io.File
+import java.util
 
 import com.typesafe.config.{ConfigFactory, Config}
 import net.sf.javaml.core.kdtree.KDTree
@@ -10,7 +11,7 @@ import treeton.core.config.BasicConfiguration
 import treeton.core.config.context.resources.LoggerLogListener
 import treeton.core.config.context.{ContextConfigurationSyntaxImpl, ContextConfiguration}
 import treeton.core.util.LoggerProgressListener
-import treeton.prosody.musimatix.{VerseProcessingExample, VerseProcessor}
+import treeton.prosody.musimatix.{StressDescription, SyllableInfo, VerseProcessingExample, VerseProcessor}
 import verse.rates.app.ConfigHelper._
 import verse.rates.calculator.SampleRatesCalculator
 import verse.rates.model.MxSong
@@ -18,6 +19,9 @@ import verse.rates.model.VerseMetrics._
 import verse.rates.processor.VectorsProcessor._
 import scala.annotation.tailrec
 import scala.util.{Failure, Success, Try}
+import verse.rates.util.StringUtil._
+import collection.JavaConverters._
+import VectorsProcessor._
 
 
 class VectorsProcessorImpl(confRoot: Config) extends VectorsProcessor {
@@ -206,6 +210,89 @@ class VectorsProcessorImpl(confRoot: Config) extends VectorsProcessor {
       sb.getSongsByIds(idsVec)
     }
     songs.getOrElse(Vector.empty[MxSong])
+  }
+
+  override def findSimilar(rows: Seq[(String, Syllables)], limit: Int): Seq[MxSong] = {
+    val songs = for {
+      cp <- connectionProvider
+      vt <- vectorsTree
+      sb <- songsBox
+      vp <- verseProcessor
+    } yield {
+      val significantRows = rows.filter { case (r, _) =>
+        r.nonEmpty && r.exists(isCyrillic)
+      }
+
+      val convertedRows = significantRows.map { case (r, syls) =>
+        val stresses = syls
+          .flatMap { syl =>
+            syl.accent match {
+              case AccentStressed =>
+                Some(new SyllableInfo(syl.pos, syl.len, SyllableInfo.StressStatus.STRESSED))
+              case AccentUnstressed =>
+                Some(new SyllableInfo(syl.pos, syl.len, SyllableInfo.StressStatus.UNSTRESSED))
+              case _ => None
+            }
+          }
+        val jarr = new util.ArrayList[SyllableInfo]()
+        stresses.foreach(jarr.add)
+        (r, new StressDescription(jarr))
+      }
+      val (rowsSeq, stressesSeq) = convertedRows.unzip
+      val javaRows = rowsSeq.asJava
+      val javaStresses = stressesSeq.asJava
+
+      val verseDescriptions = vp.process(javaRows, javaStresses).asScala.toVector
+
+      val vectors = verseDescriptions
+        .map { vd =>
+        vd.metricVector.asScala.toVector
+          .map {
+            case d: java.lang.Double => Double.unbox(d)
+            case _ => 0.0
+          }
+      }
+
+      def sumVec(vec1: VerseVec, vec2: VerseVec): VerseVec = {
+        vec1.zip(vec2).map { case (d1, d2) => d1 + d2 }
+      }
+
+      val songVec = vectors
+        .reduceOption(sumVec)
+        .map { vec =>
+          val scaled = vec.map(_ / vectors.size)
+          val idsVec = vt.nearest(scaled.toArray, limit)
+            .toVector
+            .map(Int.unbox)
+          idsVec
+        }.getOrElse(Seq.empty[Int])
+      sb.getSongsByIds(songVec)
+    }
+    songs.getOrElse(Vector.empty[MxSong])
+  }
+
+  def calcSyllables(rows: Seq[String]): Seq[(String, Syllables)] = {
+    val syllables = (for {
+      vp <- verseProcessor
+    } yield {
+        val withIndex = rows.zipWithIndex.toVector
+        val filtered = withIndex.filter { case (r, _) => r.exists(isCyrillic) }
+
+        val vds = vp.process(filtered.map(_._1).asJava).asScala.toVector
+
+        val sylsRows = vds.map { vd =>
+          vd.syllables.asScala.toSeq.map( si =>
+            Syllable(si.startOffset, si.length, accentTypeForStress(si.stressStatus)))
+        }
+
+        val idx2syls = filtered.zip(sylsRows)
+          .map { case ((r, i), syls) => i -> syls }
+          .toMap
+          .withDefaultValue(Seq.empty[Syllable])
+
+        withIndex.map { case (r, idx) => r -> idx2syls(idx) }
+    }).getOrElse( rows.map(_ -> Seq.empty[Syllable]))
+    syllables
   }
 
   override def suggest(s: String, limit: Int): Seq[TitleBox] = {

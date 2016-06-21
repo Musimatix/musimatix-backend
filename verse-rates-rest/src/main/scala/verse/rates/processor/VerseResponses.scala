@@ -12,7 +12,7 @@ import spray.http.HttpHeaders.RawHeader
 import spray.routing.{RequestContext, Route, HttpService}
 import spray.http.MediaTypes._
 import verse.rates.model.MxSong
-import verse.rates.model.VerseMetrics.LangTag
+import verse.rates.model.VerseMetrics._
 import verse.rates.processor.VectorsProcessor.TitleBox
 import verse.rates.processor.VerseResponses.VectorsProcessorProvider
 
@@ -71,20 +71,79 @@ abstract class VerseResponses extends HttpService with VectorsProcessorProvider 
         case _ => similarLimit
       }
 
-      json \ "id" match {
-        case JInt(id) => (id.toInt, limit, lang)
+      val idValue = json \ "id"
+      val rowsValue = json \ "rows"
+
+      (idValue, rowsValue) match {
+        case (JInt(id), JNothing) =>
+          val iid = id.toInt
+          vectorsProcessor.findSimilar(iid, limit+1).filter(_.id != iid) -> lang
+        case (JNothing, JArray(arr)) =>
+          val rowsSyls = arr.map { case jv =>
+
+            println(jv)
+
+            val JString(plain) = jv \ "plain"
+            val syls = jv \ "syl" match {
+              case JArray(sylArr) =>
+                sylArr.map { sylVal =>
+                  val JInt(pos) = sylVal \ "start"
+                  val JInt(length) = sylVal \ "length"
+                  val JString(sign) = sylVal \ "type"
+                  Syllable(pos.toInt, length.toInt, sign match {
+                    case "+" => AccentStressed
+                    case "-" => AccentUnstressed
+                    case _ => AccentAmbiguous
+                  })
+                }
+              case JNothing =>
+                Seq.empty[Syllable]
+              case _ =>
+                throw new IllegalArgumentException("Illegal syllables type.")
+            }
+            plain -> syls
+          }
+          vectorsProcessor.findSimilar(rowsSyls, limit) -> lang
         case _ =>
           throw new IllegalArgumentException("Illegal request.\n" + jsonBody)
       }
     } match {
-      case scala.util.Success((id, limit, lang)) =>
-        vectorsProcessor.findSimilar(id, limit+1).filter(_.id != id) -> lang
+      case scala.util.Success((sng, lng)) => sng -> lng
       case Failure(f) =>
         val msg = Option(f.getMessage).fold("")(" " + _)
         println(s"${f.getClass.getCanonicalName}.$msg")
         Seq.empty[MxSong] -> LangTag.Eng
     }
     writeSongs(songs, lang)
+  }
+
+  def respPresyllables() = respJsonString { ctx =>
+    val jsonBody = ctx.request.entity.asString
+    val syllabledRows = Try {
+      val json = parse(jsonBody) \ "presyllables"
+
+      json \ "rows" match {
+        case arr: JArray =>
+          val rows = arr.arr
+            .toVector
+            .zipWithIndex.map { case (js, idx) =>
+            js match {
+              case JString(s) => s
+              case _ => throw new IllegalArgumentException(s"Illegal value at row $idx.")
+            }
+          }
+          val rowsCalculated = vectorsProcessor.calcSyllables(rows)
+          rowsCalculated
+        case _ => throw new IllegalArgumentException("Illegal request.\n" + jsonBody)
+      }
+    } match {
+      case scala.util.Success(sl) => sl
+      case Failure(f) =>
+        val msg = Option(f.getMessage).fold("")(" " + _)
+        println(s"${f.getClass.getCanonicalName}.$msg")
+        Seq.empty[(String, Syllables)]
+    }
+    writeSyllables(syllabledRows)
   }
 
   def respSongs() = respJsonString { ctx =>
@@ -128,6 +187,38 @@ abstract class VerseResponses extends HttpService with VectorsProcessorProvider 
       JField("version", JString("1.0")),
       JField("lang", JString(sLang)),
       songsVal
+    )
+    writePretty(rootObj)
+  }
+
+  private[this] def syllable2Val(syl: Syllable): JObject = {
+    JObject(
+      JField("start", JInt(syl.pos)),
+      JField("length", JInt(syl.len)),
+      JField("type", JString(syl.accent match {
+        case AccentStressed => "+"
+        case AccentUnstressed => "-"
+        case _ => "?"
+      }))
+    )
+  }
+
+  private[this] def writeSyllables(rows: Seq[(String, Syllables)]): String = {
+    val rowsList = rows.toList
+      .map { case (r, syls) =>
+        val plain = JField("plain", JString(r))
+        val fields =
+          if (syls.isEmpty) plain :: Nil
+          else plain :: JField("syl", JArray(syls.map(syllable2Val).toList)) :: Nil
+        JObject(fields)
+      }
+
+    val rowsVal = JField("rows", JArray(rowsList))
+
+    val rootObj = JObject(
+      JField("object", JString("frontend.syllables.response")),
+      JField("version", JString("1.0")),
+      JField("syllables", JObject(rowsVal))
     )
     writePretty(rootObj)
   }
