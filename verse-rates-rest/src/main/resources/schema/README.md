@@ -7,9 +7,9 @@ Each JSON file has name with following structure:
   > __frontend__ &ndash; means that it is browser-server message  
   > __backend__ &ndash; means that it is inner serverside message
   
-- `{symbolic id}` &ndash; message unique id or name&nbsp;&ndash; can contain dots inside as word delimiter
-- `{direction}` &ndash; __request__ or __response__
-- `{kind}`
+<li>`{symbolic id}` &ndash; message unique id or name&nbsp;&ndash; can contain dots inside as word delimiter
+<li>`{direction}` &ndash; __request__ or __response__
+<li>`{kind}`
   
   > __schema__ &ndash; it is JSON schema (see: [json-schema.org](http://json-schema.org))  
   > __sample__ &ndash; it is sample of message in accordance with its schema
