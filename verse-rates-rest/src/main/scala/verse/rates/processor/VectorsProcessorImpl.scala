@@ -14,7 +14,7 @@ import treeton.core.util.LoggerProgressListener
 import treeton.prosody.musimatix.{StressDescription, SyllableInfo, VerseProcessingExample, VerseProcessor}
 import verse.rates.app.ConfigHelper._
 import verse.rates.calculator.SampleRatesCalculator
-import verse.rates.model.MxSong
+import verse.rates.model.{MxTag, MxSong}
 import verse.rates.model.VerseMetrics._
 import verse.rates.processor.VectorsProcessor._
 import scala.annotation.tailrec
@@ -34,6 +34,10 @@ class VectorsProcessorImpl(confRoot: Config) extends VectorsProcessor {
   private[this] var titleSuggestor: Option[TitleSuggestor] = None
   private[this] var songsBox: Option[SongsBox] = None
 
+  private[this] var similarityBound = 100.0
+  private[this] val similarBucket = 5000
+
+
   locally {
     init()
   }
@@ -43,16 +47,20 @@ class VectorsProcessorImpl(confRoot: Config) extends VectorsProcessor {
       confRoot <- Try { ConfigFactory.load().getConfig(confRootKey) }
       confMsmx <- Try { confRoot.getConfig(confMsmxKey) }
       confTreeton <- Try { confRoot.getConfig(confTreetonKey) }
-    } yield (confMsmx, confTreeton)) match {
-      case Success((confMsmx, confTreeton)) =>
+      confSongs <- Try { confRoot.getConfig(confSongsKey) }
+    } yield (confMsmx, confTreeton, confSongs)) match {
+      case Success((confMsmx, confTreeton, confSongs)) =>
         verseProcessor = createVerseProcessor(confTreeton, logger)
         connectionProvider = Some(new ConnectionProvider(confMsmx))
         buildVectorsTree()
         titleSuggestor = connectionProvider.map { cp => new TitleSuggestor(cp) }
         songsBox = connectionProvider.map { cp => new SongsBox(cp) }
+        Try { similarityBound = confSongs.getDouble("similarity.bound") }
       case Failure(f) =>
         println(f.getMessage)
     }
+
+    println(s"simi:$similarityBound")
   }
 
   def createVerseProcessor(confTreeton: Config, logger: Logger): Option[VerseProcessor] = {
@@ -179,11 +187,7 @@ class VectorsProcessorImpl(confRoot: Config) extends VectorsProcessor {
     builder.result()
   }
 
-  override def findSimilarSimple(rows: Seq[String], limit: Int): Seq[FullSong] = {
-    Seq.empty[FullSong]
-  }
-
-  override def findSimilar(id: Int, limit: Int): Seq[MxSong] = {
+  override def findSimilar(id: Int, limit: Int, tags: Seq[Int]): Seq[MxSong] = {
     val songs = for {
       cp <- connectionProvider
       vt <- vectorsTree
@@ -192,27 +196,48 @@ class VectorsProcessorImpl(confRoot: Config) extends VectorsProcessor {
     } yield {
       st.setInt(1, id)
       val rs = st.executeQuery()
-      val idsVec = if (rs.next()) {
+      val (idsVec, baseVec) = if (rs.next()) {
         val vec = Option(rs.getBlob(1))
           .map( blob => deserializeVerseVec(IOUtils.toByteArray(blob.getBinaryStream)) )
+
         vec.map { v =>
-          val ids = vt.nearest(v.toArray, limit)
-            .toVector
-            .map(Int.unbox)
-          println(s"found: ${ids.length}")
-          ids.toVector
-        }.getOrElse(Vector.empty[Int])
+          val filteredIds = if (tags.nonEmpty) {
+            val ids = vt.nearest(v.toArray, similarBucket)
+              .toVector
+              .map(Int.unbox)
+            sb.filterByTags(ids, tags)
+          } else
+            vt.nearest(v.toArray, limit + 1)
+              .toVector
+              .map(Int.unbox)
+
+          filteredIds.view.filter(_ != id).take(limit).force -> v
+        }.getOrElse(Vector.empty[Int] -> Seq.empty[Double])
       } else {
-        Vector.empty[Int]
+        Vector.empty[Int] -> Seq.empty[Double]
       }
       rs.close()
       st.close()
-      sb.getSongsByIds(idsVec)
+      val ss = sb.getSongsByIds(idsVec)
+      updateSimilarity(ss, baseVec)
     }
     songs.getOrElse(Vector.empty[MxSong])
   }
 
-  override def findSimilar(rows: Seq[(String, Syllables)], limit: Int): Seq[MxSong] = {
+  def updateSimilarity(songs: Seq[MxSong], baseVec: VerseVec): Seq[MxSong] = {
+    if (baseVec.nonEmpty)
+      songs.map { song =>
+        val siml = song.vec.map {vec =>
+          val dist = distance(baseVec, vec)
+          if (dist > similarityBound) 0.0
+          else (similarityBound - dist) / similarityBound
+        }
+        song.copy(similarity = siml)
+      }
+    else songs
+  }
+
+  override def findSimilar(rows: Seq[(String, Syllables)], limit: Int, tags: Seq[Int]): Seq[MxSong] = {
     val songs = for {
       cp <- connectionProvider
       vt <- vectorsTree
@@ -257,16 +282,26 @@ class VectorsProcessorImpl(confRoot: Config) extends VectorsProcessor {
         vec1.zip(vec2).map { case (d1, d2) => d1 + d2 }
       }
 
-      val songVec = vectors
+      val (songVec, baseVec) = vectors
         .reduceOption(sumVec)
         .map { vec =>
           val scaled = vec.map(_ / vectors.size)
-          val idsVec = vt.nearest(scaled.toArray, limit)
-            .toVector
-            .map(Int.unbox)
-          idsVec
-        }.getOrElse(Seq.empty[Int])
-      sb.getSongsByIds(songVec)
+
+          val filteredIds = if (tags.nonEmpty) {
+            val ids = vt.nearest(scaled.toArray, similarBucket)
+              .toVector
+              .map(Int.unbox)
+            sb.filterByTags(ids, tags)
+              .take(limit)
+          } else
+            vt.nearest(scaled.toArray, limit)
+              .toVector
+              .map(Int.unbox)
+
+          filteredIds -> scaled
+        }.getOrElse(Seq.empty[Int] -> Seq.empty[Double])
+        val ss = sb.getSongsByIds(songVec)
+        updateSimilarity(ss, baseVec)
     }
     songs.getOrElse(Vector.empty[MxSong])
   }
@@ -297,7 +332,7 @@ class VectorsProcessorImpl(confRoot: Config) extends VectorsProcessor {
 
   override def suggest(s: String, limit: Int): Seq[TitleBox] = {
     titleSuggestor match {
-      case Some(ts) => ts.suggest(s, limit)
+      case Some(ts) => ts.suggest(s.toLowerCase, limit)
       case _ => Seq.empty[TitleBox]
     }
   }
@@ -307,5 +342,31 @@ class VectorsProcessorImpl(confRoot: Config) extends VectorsProcessor {
       case Some(sb) => sb.getSongsByIds(ids)
       case _ => Seq.empty[MxSong]
     }
+
+  def getTags: Seq[MxTag] = {
+    val tags = Vector.newBuilder[MxTag]
+    for (
+      cp <- connectionProvider;
+      st <- cp.select("SELECT id, name_rus, name_eng FROM tags")
+    ) {
+      val rs = st.executeQuery()
+      Try {
+        @tailrec
+        def nextTag(): Unit = {
+          if (rs.next()) {
+            tags += MxTag(
+              rs.getInt(1),
+              Option(rs.getString(2)),
+              Option(rs.getString(3)))
+            nextTag()
+          }
+        }
+        nextTag()
+      }
+      rs.close()
+      st.close()
+    }
+    tags.result()
+  }
 
 }

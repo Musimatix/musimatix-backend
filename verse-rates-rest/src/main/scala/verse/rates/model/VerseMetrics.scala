@@ -47,4 +47,13 @@ object VerseMetrics {
   def deserializeVerseVec(barr: Array[Byte]): VerseVec = {
     Unpickle[VerseVec].fromBytes(ByteBuffer.wrap(barr))
   }
+
+  def distance(v1: VerseVec, v2: VerseVec): Double = {
+    math.sqrt(
+      v1.iterator.zip(v2.iterator).foldLeft(0.0){ case (sum, (d1, d2)) =>
+        val dd = d1 - d2
+        sum + dd * dd
+      }
+    )
+  }
 }

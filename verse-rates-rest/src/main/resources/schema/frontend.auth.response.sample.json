@@ -1,0 +1,8 @@
+{
+  "object": "frontend.auth.response",
+  "version": "1.0",
+  "auth": {
+    "session": "88b4a9f062c94d7cab573ec20be668d6",
+    "name": "John Smith"
+  }
+}

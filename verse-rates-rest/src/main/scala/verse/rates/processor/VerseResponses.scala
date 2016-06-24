@@ -71,18 +71,26 @@ abstract class VerseResponses extends HttpService with VectorsProcessorProvider 
         case _ => similarLimit
       }
 
+      val tags = json \ "tags" match {
+        case JArray(jsTags) =>
+          jsTags.flatMap {
+            case JInt(tagId) => Some(tagId.toInt)
+            case _ => None
+          }
+        case _ => Seq.empty[Int]
+      }
+
       val idValue = json \ "id"
       val rowsValue = json \ "rows"
 
       (idValue, rowsValue) match {
         case (JInt(id), JNothing) =>
           val iid = id.toInt
-          vectorsProcessor.findSimilar(iid, limit+1).filter(_.id != iid) -> lang
+          vectorsProcessor
+            .findSimilar(iid, limit+1, tags)
+            .filter(_.id != iid) -> lang
         case (JNothing, JArray(arr)) =>
           val rowsSyls = arr.map { case jv =>
-
-            println(jv)
-
             val JString(plain) = jv \ "plain"
             val syls = jv \ "syl" match {
               case JArray(sylArr) =>
@@ -103,7 +111,7 @@ abstract class VerseResponses extends HttpService with VectorsProcessorProvider 
             }
             plain -> syls
           }
-          vectorsProcessor.findSimilar(rowsSyls, limit) -> lang
+          vectorsProcessor.findSimilar(rowsSyls, limit, tags) -> lang
         case _ =>
           throw new IllegalArgumentException("Illegal request.\n" + jsonBody)
       }
@@ -253,6 +261,32 @@ abstract class VerseResponses extends HttpService with VectorsProcessorProvider 
     writeTitleBoxes(titles)
   }
 
+  def respTags(lang: String) = respJsonString { ctx =>
+    val normLang = lang match {
+      case "rus" => "rus"
+      case _ => "eng"
+    }
+
+    val jsTags = vectorsProcessor.getTags.map( tag =>
+      JObject(
+        JField("id", JInt(tag.id)),
+        JField("name", JString(
+          if ("rus" == normLang)
+            tag.nameRus.orElse(tag.nameEng).getOrElse(s"Tag[${tag.id}]")
+          else tag.nameEng.getOrElse(s"Ta[(${tag.id}]")
+        ))
+      )
+    )
+
+    val rootObj = JObject(
+      JField("object", JString("frontend.tags.response")),
+      JField("version", JString("1.0")),
+      JField("lang", JString(normLang)),
+      JField("tags", JArray(jsTags.toList))
+    )
+    writePretty(rootObj)
+  }
+
   def respSuggestion() = respJsonString { ctx =>
     val jsonBody = ctx.request.entity.asString
     val titles = Try {
@@ -270,5 +304,25 @@ abstract class VerseResponses extends HttpService with VectorsProcessorProvider 
         Seq.empty[TitleBox]
     }
     writeTitleBoxes(titles)
+  }
+
+  def respFeedback() = respJsonString { ctx => "" }
+
+  def respAuth(email: String) = {
+    if (email.startsWith("a")) {
+      respJsonString { ctx =>
+        val rootObj = JObject(
+          JField("object", JString("frontend.auth.response")),
+          JField("version", JString("1.0")),
+          JField("session", JString("88b4a9f062c94d7cab573ec20be668d6")),
+          JField("name", JString("John Smith"))
+        )
+        writePretty(rootObj)
+      }
+    } else {
+      respondWithHeader(RawHeader("Access-Control-Allow-Origin", "*")) { ctx =>
+        ctx.complete(HttpResponse(StatusCodes.Unauthorized))
+      }
+    }
   }
 }

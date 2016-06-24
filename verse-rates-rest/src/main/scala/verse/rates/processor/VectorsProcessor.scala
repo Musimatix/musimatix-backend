@@ -10,7 +10,7 @@ import treeton.core.config.context.{ContextConfigurationSyntaxImpl, ContextConfi
 import treeton.core.util.LoggerProgressListener
 import treeton.prosody.musimatix.SyllableInfo.StressStatus
 import treeton.prosody.musimatix.VerseProcessor
-import verse.rates.model.MxSong
+import verse.rates.model.{MxTag, MxSong}
 import verse.rates.model.VerseMetrics._
 
 import scala.util.Try
@@ -88,15 +88,15 @@ trait VectorsProcessor {
 
   def findSimilarSimple(id: Int, limit: Int): Seq[FullSong]
 
-  def findSimilarSimple(rows: Seq[String], limit: Int): Seq[FullSong]
+  def findSimilar(id: Int, limit: Int, tags: Seq[Int]): Seq[MxSong]
 
-  def findSimilar(id: Int, limit: Int): Seq[MxSong]
-
-  def findSimilar(rows: Seq[(String, Syllables)], limit: Int): Seq[MxSong]
+  def findSimilar(rows: Seq[(String, Syllables)], limit: Int, tags: Seq[Int]): Seq[MxSong]
 
   def suggest(s: String, limit: Int): Seq[TitleBox]
 
   def byid(ids: Seq[Int]): Seq[MxSong]
 
   def calcSyllables(rows: Seq[String]): Seq[(String, Syllables)]
+
+  def getTags: Seq[MxTag]
 }

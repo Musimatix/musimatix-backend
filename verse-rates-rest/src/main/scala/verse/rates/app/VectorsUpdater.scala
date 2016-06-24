@@ -1,7 +1,7 @@
 package verse.rates.app
 
 import java.io.ByteArrayInputStream
-import java.sql.{PreparedStatement, SQLType, Statement, Connection}
+import java.sql.{PreparedStatement, Statement, Connection}
 import java.util
 
 import com.typesafe.config.{ConfigFactory, Config}
