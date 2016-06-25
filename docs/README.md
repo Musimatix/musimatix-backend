@@ -1,4 +1,4 @@
-### Created with SQL Power Architect 1.0.8 Community Edition (free)###
+### Created with SQL Power Architect 1.0.8 Community Edition (free)
 
 [Product page](http://www.sqlpower.ca/page/architect)
 

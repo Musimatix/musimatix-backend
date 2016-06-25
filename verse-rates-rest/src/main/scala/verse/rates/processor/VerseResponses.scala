@@ -356,6 +356,26 @@ abstract class VerseResponses extends HttpService with VectorsProcessorProvider 
     }
   }
 
+  def respVideoId(songId: Int) = {
+    vectorsProcessor.findVideo(songId)
+      .map { videoId =>
+        JObject(
+          JField("object", JString("frontend.video.id.response")),
+          JField("version", JString("1.0")),
+          JField("videoId", JObject(
+            JField("id", JString(videoId))
+          ))
+        )
+    } match {
+      case Some(jsObj) =>
+        respJsonString { ctx => writePretty(jsObj) }
+      case _ =>
+        respondWithHeader(RawHeader("Access-Control-Allow-Origin", "*")) { ctx =>
+          ctx.complete(HttpResponse(StatusCodes.NotFound))
+        }
+    }
+  }
+
   def respVideoId() =
     respondWithHeader(RawHeader("Access-Control-Allow-Origin", "*")) { ctx =>
       val jsonBody = ctx.request.entity.asString

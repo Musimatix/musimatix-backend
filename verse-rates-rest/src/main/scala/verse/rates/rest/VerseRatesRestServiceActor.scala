@@ -167,6 +167,9 @@ abstract class VerseRatesRestService
         } ~
         path("recognize") {
           parameters("session")(respRecognize)
+        } ~
+        path("video_id") {
+          parameters("song_id".as[Int])(respVideoId)
         }
       } ~
       pathEndOrSingleSlash {
