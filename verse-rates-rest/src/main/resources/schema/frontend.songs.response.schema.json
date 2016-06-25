@@ -83,6 +83,13 @@
             "$ref": "#/definitions/rows",
             "description": "Song rows where accented syllables are marked with {}"
           },
+          "similarity": {
+            "type": "number",
+            "minimum": 0,
+            "exclusiveMinimum": false,
+            "maximum": 1,
+            "exclusiveMaximum": false
+          },
           "tags": {
             "type": "array",
             "items" : {

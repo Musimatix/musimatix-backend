@@ -1,5 +1,7 @@
 package verse.rates.processor
 
+import java.math.MathContext
+
 import org.apache.commons.io.IOUtils
 import org.json4s.JsonAST._
 import verse.rates.model.VerseMetrics._
@@ -78,11 +80,55 @@ object SongsBox {
       fields :+= JField("tags", JArray(
         song.tags.map(a => tag2Json(a, lang)).toList))
     }
+    song.similarity.foreach { sim =>
+      fields :+= JField("similarity", JDecimal(BigDecimal(sim, new MathContext(2, java.math.RoundingMode.HALF_UP))))
+    }
     JObject(fields)
   }
 }
 
 class SongsBox(val cp: ConnectionProvider) {
+
+  var tagToSongs = Map.empty[Int, Set[Int]]
+
+  locally {
+    buildTagToSongs()
+  }
+
+  def filterByTags(ids: Seq[Int], tags: Seq[Int]): Seq[Int] = {
+    if (tags.isEmpty) ids
+    else {
+      val allFiltered = tags.view.map(tagToSongs).reduce((s1, s2) => s1.intersect(s2))
+      ids.filter(allFiltered.contains)
+    }
+  }
+
+  def buildTagToSongs(): Unit = {
+    cp.select("SELECT song_id, tag_id FROM tagged").foreach { st =>
+      val rs = st.executeQuery()
+
+      @tailrec
+      def nextPair(): Unit = {
+        if (rs.next()) {
+          val song_id = rs.getInt(1)
+          val tag_id = rs.getInt(2)
+
+          tagToSongs += tag_id -> (
+            tagToSongs.get(tag_id) match {
+              case Some(songs) => songs + song_id
+              case _ => Set(song_id)
+            })
+
+          nextPair()
+        }
+      }
+      nextPair()
+
+      rs.close()
+      st.close()
+    }
+    tagToSongs = tagToSongs.withDefaultValue(Set.empty[Int])
+  }
 
   def getSongsByIds(ids: Seq[Int]): Seq[MxSong] = {
     ids.flatMap { id =>
@@ -120,7 +166,8 @@ class SongsBox(val cp: ConnectionProvider) {
                   .map(blob => deserializeVerseVec(IOUtils.toByteArray(blob.getBinaryStream))),
                 Seq.empty[MxTag],
                 None,
-                Seq.empty[MxAuthor]
+                Seq.empty[MxAuthor],
+                None
               ))
             }
 

@@ -4,6 +4,7 @@ import java.sql.Connection
 
 import com.typesafe.config.ConfigFactory
 import org.apache.commons.io.IOUtils
+import verse.rates.env.MySqlParam
 import verse.rates.model.VerseMetrics.{VerseVec, Syllables}
 import verse.rates.model.VerseMetrics._
 

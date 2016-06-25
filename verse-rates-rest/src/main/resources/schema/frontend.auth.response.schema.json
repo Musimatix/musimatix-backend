@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Successful auth",
+  "self": {
+    "vendor": "com.musimatix",
+    "name": "auth_response",
+    "format": "jsonschema",
+    "version": "1-0-0"
+  },
+  "type": "object",
+  "properties": {
+    "object": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "auth" : {
+      "type": "object",
+      "description": "Response properties",
+      "properties": {
+        "session":  {
+          "type": "string",
+          "description": "Session guid"
+        },
+        "email":  {
+          "type": "string",
+          "description": "User's name from DB"
+        },
+        "name":  {
+          "type": "string",
+          "description": "User's e-mail"
+        }
+      },
+      "required": ["session", "email"],
+      "additionalProperties": false
+    }
+  },
+  "required": ["object", "auth"],
+  "additionalProperties": false
+}

@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Video id",
+  "self": {
+    "vendor": "com.musimatix",
+    "name": "video_id_response",
+    "format": "jsonschema",
+    "version": "1-0-0"
+  },
+  "type": "object",
+  "properties": {
+    "object": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "videoId" : {
+      "type": "object",
+      "description": "Response properties",
+      "properties": {
+        "id":  {
+          "type": "string",
+          "description": "Video id (youtube 'v' parameter's value)"
+        }
+      },
+      "required": ["id"],
+      "additionalProperties": false
+    }
+  },
+  "required": ["object", "videoId"],
+  "additionalProperties": false
+}

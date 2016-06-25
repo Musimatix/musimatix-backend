@@ -1,0 +1,26 @@
+{
+  "object": "frontend.syllables.response",
+  "version": "1.0",
+  "syllables": {
+    "rows": [
+      {
+        "plain": "We'll be singing",
+        "syl": [
+          { "start": 0, "length": 2, "type": "+" },
+          { "start": 6, "length": 2, "type": "?" },
+          { "start": 9, "length": 3, "type": "+" },
+          { "start": 12, "length": 4, "type": "-" }
+        ]
+      },
+      {
+        "plain": "When we're winning",
+        "syl": [
+          { "start": 0, "length": 2, "type": "+" },
+          { "start": 6, "length": 2, "type": "?" },
+          { "start": 9, "length": 3, "type": "+" },
+          { "start": 12, "length": 4, "type": "-" }
+        ]
+      }
+    ]
+  }
+}

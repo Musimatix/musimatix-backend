@@ -1,0 +1,9 @@
+{
+  "object": "frontend.recognized.response",
+  "version": "1.0",
+  "recognized": {
+    "session": "88b4a9f062c94d7cab573ec20be668d6",
+    "email": "user@mailserver.com",
+    "name": "John Smith"
+  }
+}

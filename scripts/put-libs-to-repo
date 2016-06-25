@@ -1,9 +1,9 @@
 # put prosody to local repo
-mvn install:install-file -DlocalRepositoryPath=../verse-rates-rest/repo -DcreateChecksum=true -Dpackaging=jar -Dfile=../third-party/treeton/prosody.jar -DgroupId=treeton -DartifactId=prosody -Dversion=0.4
-mvn install:install-file -DlocalRepositoryPath=../verse-rates-rest/repo -DcreateChecksum=true -Dpackaging=jar -Dfile=../third-party/treeton/src/prosody.src.jar -DgroupId=treeton -DartifactId=prosody -Dversion=0.4 -Dclassifier=sources
+mvn install:install-file -DlocalRepositoryPath=../verse-rates-rest/repo -DcreateChecksum=true -Dpackaging=jar -Dfile=../third-party/treeton/prosody.jar -DgroupId=treeton -DartifactId=prosody -Dversion=0.5
+mvn install:install-file -DlocalRepositoryPath=../verse-rates-rest/repo -DcreateChecksum=true -Dpackaging=jar -Dfile=../third-party/treeton/src/prosody.src.jar -DgroupId=treeton -DartifactId=prosody -Dversion=0.5 -Dclassifier=sources
 
 # put treeton lib to local repo
-mvn install:install-file -DlocalRepositoryPath=../verse-rates-rest/repo -DcreateChecksum=true -Dpackaging=jar -Dfile=../third-party/treeton/.lib-fat-jar/fat-jar/treeton-third-party.jar -DgroupId=treeton -DartifactId=treeton-lib-3p -Dversion=1.1
+mvn install:install-file -DlocalRepositoryPath=../verse-rates-rest/repo -DcreateChecksum=true -Dpackaging=jar -Dfile=../third-party/treeton/.lib-fat-jar/fat-jar/treeton-third-party.jar -DgroupId=treeton -DartifactId=treeton-lib-3p -Dversion=1.2
 
 # put javaml lib to local repo
 mvn install:install-file -DlocalRepositoryPath=../verse-rates-rest/repo -DcreateChecksum=true -Dpackaging=jar -Dfile=../.tmp/javaml-0.1.7.jar -DgroupId=javaml-sf-net -DartifactId=javaml-core -Dversion=0.1.7

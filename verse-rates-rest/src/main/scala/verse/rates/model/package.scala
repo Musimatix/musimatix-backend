@@ -12,5 +12,6 @@ package object model {
 
   case class MxSong(id: Int, titleRus: Option[String], titleEng: Option[String],
     rowsPlain: Seq[String], rowsAccents: Seq[Syllables], rowsVectors: Seq[VerseVec],
-    vec: Option[VerseVec], tags: Seq[MxTag], group: Option[MxGroup], authors: Seq[MxAuthor])
+    vec: Option[VerseVec], tags: Seq[MxTag], group: Option[MxGroup], authors: Seq[MxAuthor],
+    similarity: Option[Double])
 }

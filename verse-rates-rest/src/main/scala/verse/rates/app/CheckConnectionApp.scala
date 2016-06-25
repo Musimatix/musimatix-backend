@@ -44,14 +44,14 @@ object CheckConnectionApp {
   def main(args: Array[String]) {
     (for {
       confRoot <- Try { ConfigFactory.load().getConfig(confRootKey) }
-      conf <- Try { confRoot.getConfig(confMsmxKey) }
+      conf <- Try { confRoot.getConfig("station.mysql") }
     } yield conf) match {
       case Success(confMsmx) =>
         val connProvider = new ConnectionProvider(confMsmx)
         val checker = new Checker(connProvider)
 
         checker.printStat()
-        checker.printSong(600)
+//        checker.printSong(600)
 
         connProvider.bye()
       case Failure(f) =>

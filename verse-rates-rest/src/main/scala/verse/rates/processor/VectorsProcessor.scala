@@ -8,9 +8,10 @@ import treeton.core.config.BasicConfiguration
 import treeton.core.config.context.resources.LoggerLogListener
 import treeton.core.config.context.{ContextConfigurationSyntaxImpl, ContextConfiguration}
 import treeton.core.util.LoggerProgressListener
+import treeton.prosody.musimatix.SyllableInfo.StressStatus
 import treeton.prosody.musimatix.VerseProcessor
-import verse.rates.model.MxSong
-import verse.rates.model.VerseMetrics.{LangTag, VerseVec, Syllables}
+import verse.rates.model.{MxTag, MxSong}
+import verse.rates.model.VerseMetrics._
 
 import scala.util.Try
 
@@ -64,7 +65,7 @@ object VectorsProcessor {
 
     val processor = new VerseProcessor(metricGrammarPath, stressRestrictionViolationWeight,
       reaccentuationRestrictionViolationWeight, spacePerMeter, maxStressRestrictionViolations,
-      maxReaccentuationRestrictionViolations, maxSyllablesPerVerse)
+      maxReaccentuationRestrictionViolations, maxSyllablesPerVerse, false)
     processor.setProgressListener(new LoggerProgressListener("Musimatix", logger))
     processor.addLogListener(new LoggerLogListener(logger))
     processor.initialize()
@@ -72,6 +73,12 @@ object VectorsProcessor {
     Some(processor)
   }
 
+  def accentTypeForStress(ss: StressStatus): AccentType =
+    ss match {
+      case StressStatus.STRESSED   => AccentStressed
+      case StressStatus.UNSTRESSED => AccentUnstressed
+      case _ => AccentAmbiguous
+    }
 }
 
 trait VectorsProcessor {
@@ -81,11 +88,15 @@ trait VectorsProcessor {
 
   def findSimilarSimple(id: Int, limit: Int): Seq[FullSong]
 
-  def findSimilarSimple(rows: Seq[String], limit: Int): Seq[FullSong]
+  def findSimilar(id: Int, limit: Int, tags: Seq[Int]): Seq[MxSong]
 
-  def findSimilar(id: Int, limit: Int): Seq[MxSong]
+  def findSimilar(rows: Seq[(String, Syllables)], limit: Int, tags: Seq[Int]): Seq[MxSong]
 
   def suggest(s: String, limit: Int): Seq[TitleBox]
 
   def byid(ids: Seq[Int]): Seq[MxSong]
+
+  def calcSyllables(rows: Seq[String]): Seq[(String, Syllables)]
+
+  def getTags: Seq[MxTag]
 }

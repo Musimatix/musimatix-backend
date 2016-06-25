@@ -1,6 +1,6 @@
-package verse.rates.app
+package verse.rates.env
 
-import java.sql.{DriverManager, Connection}
+import java.sql.{Connection, DriverManager}
 
 import com.typesafe.config.Config
 

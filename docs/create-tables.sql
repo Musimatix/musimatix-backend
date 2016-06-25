@@ -87,6 +87,32 @@ CREATE TABLE fragments (
         ON DELETE RESTRICT
 );
 
+CREATE TABLE users (
+    id INT UNSIGNED AUTO_INCREMENT,
+    email VARCHAR(255),
+    name VARCHAR(255),
+    password VARCHAR(255)
+    PRIMARY KEY(id)
+)
+CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+
+CREATE TABLE visits (
+    user_id INT UNSIGNED NOT NULL,
+    visit_time DATETIME NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+        ON UPDATE RESTRICT
+        ON DELETE RESTRICT
+ );
+
+CREATE TABLE feedback (
+    user_id INT UNSIGNED NOT NULL,
+    fb_time DATETIME NOT NULL,
+    text MEDIUMTEXT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+        ON UPDATE RESTRICT
+        ON DELETE RESTRICT
+ );
+
 INSERT INTO tag_groups (name_rus, name_eng) VALUES ('Язык', 'Language');
 INSERT INTO tags (group_id, name_rus, name_eng) VALUES (1, 'Англ.', 'Eng');
 INSERT INTO tags (group_id, name_rus, name_eng) VALUES (1, 'Рус.', 'Rus');

@@ -1,7 +1,7 @@
 package verse.rates.app
 
 import java.io.ByteArrayInputStream
-import java.sql.{PreparedStatement, SQLType, Statement, Connection}
+import java.sql.{PreparedStatement, Statement, Connection}
 import java.util
 
 import com.typesafe.config.{ConfigFactory, Config}
@@ -22,6 +22,7 @@ import verse.rates.model.VerseMetrics
 import verse.rates.model.VerseMetrics._
 import verse.rates.util.StringUtil._
 import collection.JavaConverters._
+import VectorsProcessor._
 
 object VectorsUpdater {
   case class Song(id: Int, text: String)
@@ -85,13 +86,6 @@ class VectorsUpdater(start: Option[Int] = None) {
     }
     builder.result()
   }
-
-  def accentTypeForStress(ss: StressStatus): AccentType =
-    ss match {
-      case StressStatus.STRESSED   => AccentStressed
-      case StressStatus.UNSTRESSED => AccentUnstressed
-      case _ => AccentAmbiguous
-    }
 
   def saveCalculatedRows(id: Int, calculatedRows: Seq[(Int, String, Option[VerseMetrics])]): Unit = {
     def setBlobValue(st: PreparedStatement, field: Int, bOpt: Option[Array[Byte]]): Unit = {

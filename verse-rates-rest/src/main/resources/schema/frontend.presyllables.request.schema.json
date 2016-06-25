@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Song's plain rows",
+  "self": {
+    "vendor": "com.musimatix",
+    "name": "presyllables_request",
+    "format": "jsonschema",
+    "version": "1-0-0"
+  },
+  "type": "object",
+  "properties": {
+    "object": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "presyllables": {
+      "type": "object",
+      "properties": {
+        "rows": {
+          "type": "array",
+          "items" : {
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": false
+        }
+      },
+      "required": ["rows"],
+      "additionalProperties": false
+    }
+  },
+  "required": ["object", "presyllables"],
+  "additionalProperties": false
+}

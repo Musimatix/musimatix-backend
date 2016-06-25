@@ -5,10 +5,16 @@
     "lang": "rus",
     "limit": 5,
     "rows": [
-      "When we're winning",
-      "We'll be singing",
-      "I get knocked down",
-      "But I get up again"
+      {
+        "plain": "We'll be singing",
+        "syl": [
+          { "start": 9, "length": 3, "type": "-" },
+          { "start": 12, "length": 4, "type": "+" }
+        ]
+      },
+      {
+        "plain": "When we're winning"
+      }
     ],
     "keywords": "hello bye",
     "tags": [ 11, 5, 8 ]

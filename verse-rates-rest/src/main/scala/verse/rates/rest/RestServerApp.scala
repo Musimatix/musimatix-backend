@@ -11,7 +11,7 @@ import scala.concurrent.duration._
 
 
 object RestServerApp {
-  val appName = "rest-server"
+  val appName = "Musimatix-REST"
 
   def main(args: Array[String]): Unit = {
     val rootConf = ConfigFactory.load()

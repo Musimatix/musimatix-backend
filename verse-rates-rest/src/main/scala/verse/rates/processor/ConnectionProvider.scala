@@ -3,8 +3,7 @@ package verse.rates.processor
 import java.sql.{ResultSet, PreparedStatement, Statement, Connection}
 
 import com.typesafe.config.Config
-import verse.rates.app.MySqlParam
-import verse.rates.env.LogHub
+import verse.rates.env.{MySqlParam, LogHub}
 
 import scala.util.{Failure, Success}
 
@@ -58,11 +57,15 @@ class ConnectionProvider(val cfg: Config) {
   private[this] def stripMultiline(s: String): String =
     s.stripMargin.replaceAll("\n", " ")
 
-  def select(s: String): Option[PreparedStatement] =
+  def select(s: String): Option[PreparedStatement] = {
+    ensureConnected()
     conn.map(_.prepareStatement(stripMultiline(s)))
+  }
 
-  def update(s: String): Option[PreparedStatement] =
+  def update(s: String): Option[PreparedStatement] = {
+    ensureConnected()
     conn.map(_.prepareStatement(stripMultiline(s), Statement.RETURN_GENERATED_KEYS))
+  }
 
   def reconnect(): Unit = {
     mySqlParam.foreach { p =>
@@ -76,7 +79,7 @@ class ConnectionProvider(val cfg: Config) {
   }
 
   def ensureConnected(): ConnectionProvider = {
-    if (conn.isEmpty) reconnect()
+    if (conn.forall(!_.isValid(0))) reconnect()
     this
   }
 

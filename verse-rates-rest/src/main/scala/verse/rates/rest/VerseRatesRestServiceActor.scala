@@ -109,18 +109,28 @@ abstract class VerseRatesRestService
           }
         }
       } ~
-      pathPrefix("songs" / "search") {
-        path("similar") {
-          respSimilar()
+      pathPrefix("songs") {
+        pathPrefix("search") {
+          path("similar") {
+            respSimilar()
+          } ~
+          path("byid") {
+            respSongs()
+          } ~
+          path("keywords") {
+            respResourceExt(songsResourceName)
+          } ~
+          path("suggest_title") {
+            respSuggestion()
+          } ~
+          path("presyllables") {
+            respPresyllables()
+          }
         } ~
-        path("byid") {
-          respSongs()
-        } ~
-        path("keywords") {
-          respResourceExt(songsResourceName)
-        } ~
-        path("suggest_title") {
-          respSuggestion()
+        pathPrefix("env") {
+          path("feedback") {
+            respFeedback()
+          }
         }
       }
     } ~
@@ -145,7 +155,18 @@ abstract class VerseRatesRestService
           }
         } ~
         path("tags") {
-          respResourceExt(tagsResourceName)
+          parameters("lang" ?) { lang =>
+            respTags(lang.getOrElse("eng"))
+          }
+        } ~
+        path("auth") {
+          parameters("email")(respAuth)
+        } ~
+        path("recognize") {
+          parameters("session")(respRecognize)
+        } ~
+        path("video_id") {
+          parameters("song_id")(respVideoId)
         }
       } ~
       pathEndOrSingleSlash {
