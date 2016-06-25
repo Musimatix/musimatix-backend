@@ -160,9 +160,13 @@ abstract class VerseRatesRestService
           }
         } ~
         path("auth") {
-          parameters("email") { email =>
-            respAuth(email)
-          }
+          parameters("email")(respAuth)
+        } ~
+        path("recognize") {
+          parameters("session")(respRecognize)
+        } ~
+        path("video_id") {
+          parameters("song_id")(respVideoId)
         }
       } ~
       pathEndOrSingleSlash {

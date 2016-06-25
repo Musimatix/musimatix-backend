@@ -19,6 +19,7 @@ Each JSON file has name with following structure:
 ## Frontend messages
 `{symbolic id}` and `{direction}` parts only.
 - `auth.response`  &ndash; authorization result which is returned on successful authorization. If authorization fails `401` status code is returned.
+- `recognized.response`  &ndash; user info if user session was acknowledged. If session is not acknowledged `401` status code is returned.
 - `byid.request` &ndash; get songs by exact song id. Ids array is allowed.
 - `keywords.request` &ndash; search by keywords.
 - `similar.request` &ndash; search songs by rhythmic pattern, keywords and tags. Message `songs.response` will be returned.
@@ -33,12 +34,14 @@ It is response for `byid.request`, `keywords.request`, `similar.request`.
 
 ## Requests' paths
 - `auth.request` &rArr; `GET` `songs/env/auth`. Parameters: `email`.
-- `byid.request` &rArr; `POST` `songs/search/byid`
-- `keywords.request` &rArr; `POST` `songs/search/keywords`
-- `similar.request` &rArr; `POST` `songs/search/similar`
+- `recognize.request` &rArr; `GET` `songs/env/recognize`. Parameters: `session`. `recognized.response` is expecting.
+- `byid.request` &rArr; `POST` `songs/search/byid`.
+- `keywords.request` &rArr; `POST` `songs/search/keywords`.
+- `similar.request` &rArr; `POST` `songs/search/similar`.
 - `tags.request.get` &rArr; `GET` `songs/env/tags`. Parameters: `lang`
-- `suggest.title` &rArr; `POST` `songs/search/suggest_title`
-- `presyllables.request` &rArr; `POST` `songs/search/presyllables`
+- `suggest.title` &rArr; `POST` `songs/search/suggest_title`.
+- `presyllables.request` &rArr; `POST` `songs/search/presyllables`.
 - `feedback.request` &rArr; `POST` `songs/env/feedback`.
+- `video.id.request` &rArr; `GET` `songs/env/video_id`. Parameters: `song_id`. `video.id.response` is expecting on success or `404` status code on fail.
 
 Schemas and samples can be validated at: http://www.jsonschemavalidator.net

@@ -1,9 +1,9 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description": "Successful auth",
+  "description": "Successful recognition",
   "self": {
     "vendor": "com.musimatix",
-    "name": "auth_response",
+    "name": "recognized_response",
     "format": "jsonschema",
     "version": "1-0-0"
   },
@@ -15,7 +15,7 @@
     "version": {
       "type": "string"
     },
-    "auth" : {
+    "recognized" : {
       "type": "object",
       "description": "Response properties",
       "properties": {
@@ -36,6 +36,6 @@
       "additionalProperties": false
     }
   },
-  "required": ["object", "auth"],
+  "required": ["object", "recognized"],
   "additionalProperties": false
 }

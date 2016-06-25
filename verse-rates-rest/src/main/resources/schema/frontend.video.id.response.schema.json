@@ -1,9 +1,9 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description": "Successful auth",
+  "description": "Video id",
   "self": {
     "vendor": "com.musimatix",
-    "name": "auth_response",
+    "name": "video_id_response",
     "format": "jsonschema",
     "version": "1-0-0"
   },
@@ -15,27 +15,19 @@
     "version": {
       "type": "string"
     },
-    "auth" : {
+    "videoId" : {
       "type": "object",
       "description": "Response properties",
       "properties": {
-        "session":  {
+        "id":  {
           "type": "string",
-          "description": "Session guid"
-        },
-        "email":  {
-          "type": "string",
-          "description": "User's name from DB"
-        },
-        "name":  {
-          "type": "string",
-          "description": "User's e-mail"
+          "description": "Video id (youtube 'v' parameter's value)"
         }
       },
-      "required": ["session", "email"],
+      "required": ["id"],
       "additionalProperties": false
     }
   },
-  "required": ["object", "auth"],
+  "required": ["object", "videoId"],
   "additionalProperties": false
 }

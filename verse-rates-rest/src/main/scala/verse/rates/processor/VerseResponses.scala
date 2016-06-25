@@ -314,14 +314,57 @@ abstract class VerseResponses extends HttpService with VectorsProcessorProvider 
         val rootObj = JObject(
           JField("object", JString("frontend.auth.response")),
           JField("version", JString("1.0")),
-          JField("session", JString("88b4a9f062c94d7cab573ec20be668d6")),
-          JField("name", JString("John Smith"))
+          JField("auth", JObject(
+            JField("session", JString("88b4a9f062c94d7cab573ec20be668d6")),
+            JField("email", JString(email)),
+            JField("name", JString("John Smith"))
+          ))
         )
         writePretty(rootObj)
       }
     } else {
       respondWithHeader(RawHeader("Access-Control-Allow-Origin", "*")) { ctx =>
         ctx.complete(HttpResponse(StatusCodes.Unauthorized))
+      }
+    }
+  }
+
+  def respRecognize(session: String) = {
+    if (true) {
+      respJsonString { ctx =>
+        val rootObj = JObject(
+          JField("object", JString("frontend.recognized.response")),
+          JField("version", JString("1.0")),
+          JField("recognized", JObject(
+            JField("session", JString("88b4a9f062c94d7cab573ec20be668d6")),
+            JField("email", JString("user@mailserver.com")),
+            JField("name", JString("John Smith"))
+          ))
+        )
+        writePretty(rootObj)
+      }
+    } else {
+      respondWithHeader(RawHeader("Access-Control-Allow-Origin", "*")) { ctx =>
+        ctx.complete(HttpResponse(StatusCodes.Unauthorized))
+      }
+    }
+  }
+
+  def respVideoId(songId: String) = {
+    if (true) {
+      respJsonString { ctx =>
+        val rootObj = JObject(
+          JField("object", JString("frontend.video.id.response")),
+          JField("version", JString("1.0")),
+          JField("videoId", JObject(
+            JField("id", JString("YbnGiXm02OY"))
+          ))
+        )
+        writePretty(rootObj)
+      }
+    } else {
+      respondWithHeader(RawHeader("Access-Control-Allow-Origin", "*")) { ctx =>
+        ctx.complete(HttpResponse(StatusCodes.NotFound))
       }
     }
   }
