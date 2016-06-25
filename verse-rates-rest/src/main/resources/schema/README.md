@@ -30,11 +30,13 @@ It is response for `byid.request`, `keywords.request`, `similar.request`.
 - `suggest.title.response` &ndash; suggested titles.
 - `presyllables.request` &ndash; song's text for syllables processing. Message `syllables.response` will be returned.
 - `syllables.response` &ndash; song with syllables array for each text row.
-- `feedback.request` &ndash; Any JSON with feedback form data. It is saved "as is"" in DB. Server always returns `200` status code and void data.
+- `feedback.request` &ndash; any JSON with feedback form data. It is saved "as is"" in DB. Server always returns `200` status code and void data.
+- `video.id.request` &ndash; song id to find corresponded video.
+- `video.id.response` &ndash; video id for song.
 
 ## Requests' paths
 - `auth.request` &rArr; `GET` `songs/env/auth`. Parameters: `email`.
-- `recognize.request` &rArr; `GET` `songs/env/recognize`. Parameters: `session`. `recognized.response` is expecting.
+- `recognize.request` &rArr; `GET` `songs/env/recognize`. Parameters: `session`. `recognized.response` is expected.
 - `byid.request` &rArr; `POST` `songs/search/byid`.
 - `keywords.request` &rArr; `POST` `songs/search/keywords`.
 - `similar.request` &rArr; `POST` `songs/search/similar`.
@@ -42,6 +44,6 @@ It is response for `byid.request`, `keywords.request`, `similar.request`.
 - `suggest.title` &rArr; `POST` `songs/search/suggest_title`.
 - `presyllables.request` &rArr; `POST` `songs/search/presyllables`.
 - `feedback.request` &rArr; `POST` `songs/env/feedback`.
-- `video.id.request` &rArr; `GET` `songs/env/video_id`. Parameters: `song_id`. `video.id.response` is expecting on success or `404` status code on fail.
+- `video.id.request` &rArr; `POST` `songs/env/video_id`. `video.id.response` is expected on success or `404` status code on fail.
 
 Schemas and samples can be validated at: http://www.jsonschemavalidator.net

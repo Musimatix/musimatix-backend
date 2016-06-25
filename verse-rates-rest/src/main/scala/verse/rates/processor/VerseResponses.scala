@@ -11,7 +11,7 @@ import spray.http.MediaTypes._
 import spray.http.HttpHeaders.RawHeader
 import spray.routing.{RequestContext, Route, HttpService}
 import spray.http.MediaTypes._
-import verse.rates.model.MxSong
+import verse.rates.model.{MxUser, MxSong}
 import verse.rates.model.VerseMetrics._
 import verse.rates.processor.VectorsProcessor.TitleBox
 import verse.rates.processor.VerseResponses.VectorsProcessorProvider
@@ -41,13 +41,11 @@ abstract class VerseResponses extends HttpService with VectorsProcessorProvider 
     respJsonString(StatusCodes.OK)(json)
 
   def respJsonString(code: StatusCode)(json: RequestContext => String): Route = {
-    respondWithMediaType(`application/json`) {
-      respondWithHeader(RawHeader("Access-Control-Allow-Origin", "*")) { ctx =>
-        ctx.complete(HttpResponse(StatusCodes.OK,
-          HttpEntity(ContentType(MediaTypes.`application/json`, HttpCharsets.`UTF-8`),
-            json(ctx)
-          )))
-      }
+    respondWithHeader(RawHeader("Access-Control-Allow-Origin", "*")) { ctx =>
+      ctx.complete(HttpResponse(code,
+        HttpEntity(ContentType(MediaTypes.`application/json`, HttpCharsets.`UTF-8`),
+          json(ctx)
+        )))
     }
   }
 
@@ -306,66 +304,89 @@ abstract class VerseResponses extends HttpService with VectorsProcessorProvider 
     writeTitleBoxes(titles)
   }
 
-  def respFeedback() = respJsonString { ctx => "" }
+  def respFeedback() = respJsonString { ctx =>
+    val jsonBody = ctx.request.entity.asString
+    vectorsProcessor.saveFeedback(jsonBody)
+    ""
+  }
+
+  def mxUserToJson(user: MxUser, session: String): JObject = {
+    JObject(
+      List(
+        Some("session" -> JString(session)),
+        Some("email" -> JString(user.email)),
+        user.name.map(n => "name" -> JString(n))
+      ).flatten
+    )
+  }
 
   def respAuth(email: String) = {
-    if (email.startsWith("a")) {
-      respJsonString { ctx =>
-        val rootObj = JObject(
-          JField("object", JString("frontend.auth.response")),
-          JField("version", JString("1.0")),
-          JField("auth", JObject(
-            JField("session", JString("88b4a9f062c94d7cab573ec20be668d6")),
-            JField("email", JString(email)),
-            JField("name", JString("John Smith"))
-          ))
-        )
-        writePretty(rootObj)
-      }
-    } else {
-      respondWithHeader(RawHeader("Access-Control-Allow-Origin", "*")) { ctx =>
-        ctx.complete(HttpResponse(StatusCodes.Unauthorized))
-      }
+    vectorsProcessor.admitUserByEmail(email) match {
+      case Some((user, session)) =>
+        respJsonString { ctx =>
+          val rootObj = JObject(
+            JField("object", JString("frontend.auth.response")),
+            JField("version", JString("1.0")),
+            JField("auth", mxUserToJson(user, session))
+          )
+          writePretty(rootObj)
+        }
+      case _ =>
+        respondWithHeader(RawHeader("Access-Control-Allow-Origin", "*")) { ctx =>
+          ctx.complete(HttpResponse(StatusCodes.Unauthorized))
+        }
     }
   }
 
   def respRecognize(session: String) = {
-    if (true) {
-      respJsonString { ctx =>
-        val rootObj = JObject(
-          JField("object", JString("frontend.recognized.response")),
-          JField("version", JString("1.0")),
-          JField("recognized", JObject(
-            JField("session", JString("88b4a9f062c94d7cab573ec20be668d6")),
-            JField("email", JString("user@mailserver.com")),
-            JField("name", JString("John Smith"))
-          ))
-        )
-        writePretty(rootObj)
-      }
-    } else {
-      respondWithHeader(RawHeader("Access-Control-Allow-Origin", "*")) { ctx =>
-        ctx.complete(HttpResponse(StatusCodes.Unauthorized))
-      }
+    vectorsProcessor.recognizeSession(session) match {
+      case Some(user) =>
+        respJsonString { ctx =>
+          val rootObj = JObject(
+            JField("object", JString("frontend.recognized.response")),
+            JField("version", JString("1.0")),
+            JField("recognized", mxUserToJson(user, session))
+          )
+          writePretty(rootObj)
+        }
+      case _ =>
+        respondWithHeader(RawHeader("Access-Control-Allow-Origin", "*")) { ctx =>
+          ctx.complete(HttpResponse(StatusCodes.Unauthorized))
+        }
     }
   }
 
-  def respVideoId(songId: String) = {
-    if (true) {
-      respJsonString { ctx =>
-        val rootObj = JObject(
-          JField("object", JString("frontend.video.id.response")),
-          JField("version", JString("1.0")),
-          JField("videoId", JObject(
-            JField("id", JString("YbnGiXm02OY"))
+  def respVideoId() =
+    respondWithHeader(RawHeader("Access-Control-Allow-Origin", "*")) { ctx =>
+      val jsonBody = ctx.request.entity.asString
+      Try {
+        val json = parse(jsonBody) \ "videoId"
+
+        val songId = json \ "id" match {
+          case JInt(i) => i.toInt
+          case _ => throw new IllegalArgumentException("Error reding song id in request video.")
+        }
+        vectorsProcessor.findVideo(songId).map { videoId =>
+          Some(JObject(
+            JField("object", JString("frontend.video.id.response")),
+            JField("version", JString("1.0")),
+            JField("videoId", JObject(
+              JField("id", JString(videoId))
+            ))
           ))
-        )
-        writePretty(rootObj)
-      }
-    } else {
-      respondWithHeader(RawHeader("Access-Control-Allow-Origin", "*")) { ctx =>
-        ctx.complete(HttpResponse(StatusCodes.NotFound))
+        }
+      } match {
+        case scala.util.Success(Some(jsObj)) =>
+            ctx.complete(HttpResponse(StatusCodes.OK,
+              HttpEntity(ContentType(MediaTypes.`application/json`, HttpCharsets.`UTF-8`),
+                writePretty(jsObj)
+              )))
+        case scala.util.Success(_) =>
+          ctx.complete(HttpResponse(StatusCodes.NotFound))
+        case Failure(f) =>
+          val msg = Option(f.getMessage).fold("")(" " + _)
+          println(s"${f.getClass.getCanonicalName}.$msg")
+          ctx.complete(HttpResponse(StatusCodes.NotFound))
       }
     }
-  }
 }

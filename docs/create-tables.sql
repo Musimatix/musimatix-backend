@@ -89,7 +89,7 @@ CREATE TABLE fragments (
 
 CREATE TABLE users (
     id INT UNSIGNED AUTO_INCREMENT,
-    email VARCHAR(255),
+    email VARCHAR(255) NOT NULL,
     name VARCHAR(255),
     password VARCHAR(255)
     PRIMARY KEY(id)
@@ -102,18 +102,25 @@ CREATE TABLE visits (
     FOREIGN KEY (user_id) REFERENCES users(id)
         ON UPDATE RESTRICT
         ON DELETE RESTRICT
- );
+);
+
+CREATE TABLE newbies (
+    email VARCHAR(255) NOT NULL,
+    visit_time DATETIME NOT NULL
+);
 
 CREATE TABLE feedback (
-    user_id INT UNSIGNED NOT NULL,
     fb_time DATETIME NOT NULL,
-    text MEDIUMTEXT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id)
-        ON UPDATE RESTRICT
-        ON DELETE RESTRICT
- );
+    text MEDIUMTEXT NOT NULL
+);
 
 INSERT INTO tag_groups (name_rus, name_eng) VALUES ('Язык', 'Language');
 INSERT INTO tags (group_id, name_rus, name_eng) VALUES (1, 'Англ.', 'Eng');
 INSERT INTO tags (group_id, name_rus, name_eng) VALUES (1, 'Рус.', 'Rus');
 SELECT * FROM tags;
+
+-- -- -- -- -- -- -- -- --
+INSERT INTO users (email, name) VALUES ("demand@yandex.ru", "Andrey");
+INSERT INTO users (email, name) VALUES ("edbond88@gmail.com", "Ed Bond");
+-- -- -- -- -- -- -- -- --
+

@@ -1,0 +1,7 @@
+{
+  "object": "frontend.video.id.request",
+  "version": "1.0",
+  "videoId": {
+    "id": 1235
+  }
+}

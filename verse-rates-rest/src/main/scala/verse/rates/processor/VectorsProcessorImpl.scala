@@ -1,8 +1,11 @@
 package verse.rates.processor
 
 import java.io.File
+import java.sql.Timestamp
 import java.util
+import java.util.{UUID, Calendar}
 
+import com.fasterxml.uuid.Generators
 import com.typesafe.config.{ConfigFactory, Config}
 import net.sf.javaml.core.kdtree.KDTree
 import org.apache.commons.io.IOUtils
@@ -14,7 +17,7 @@ import treeton.core.util.LoggerProgressListener
 import treeton.prosody.musimatix.{StressDescription, SyllableInfo, VerseProcessingExample, VerseProcessor}
 import verse.rates.app.ConfigHelper._
 import verse.rates.calculator.SampleRatesCalculator
-import verse.rates.model.{MxTag, MxSong}
+import verse.rates.model.{MxUser, MxTag, MxSong}
 import verse.rates.model.VerseMetrics._
 import verse.rates.processor.VectorsProcessor._
 import scala.annotation.tailrec
@@ -33,6 +36,7 @@ class VectorsProcessorImpl(confRoot: Config) extends VectorsProcessor {
   private[this] var vectorsTree: Option[KDTree] = None // new KDTree(90)
   private[this] var titleSuggestor: Option[TitleSuggestor] = None
   private[this] var songsBox: Option[SongsBox] = None
+  private[this] var usersBox: Option[UsersBox] = None
 
   private[this] var similarityBound = 100.0
   private[this] val similarBucket = 5000
@@ -53,8 +57,11 @@ class VectorsProcessorImpl(confRoot: Config) extends VectorsProcessor {
         verseProcessor = createVerseProcessor(confTreeton, logger)
         connectionProvider = Some(new ConnectionProvider(confMsmx))
         buildVectorsTree()
-        titleSuggestor = connectionProvider.map { cp => new TitleSuggestor(cp) }
-        songsBox = connectionProvider.map { cp => new SongsBox(cp) }
+        connectionProvider.foreach { cp =>
+          titleSuggestor = Some(new TitleSuggestor(cp))
+          songsBox = Some(new SongsBox(cp))
+          usersBox = Some(new UsersBox(cp))
+        }
         Try { similarityBound = confSongs.getDouble("similarity.bound") }
       case Failure(f) =>
         println(f.getMessage)
@@ -367,6 +374,30 @@ class VectorsProcessorImpl(confRoot: Config) extends VectorsProcessor {
       st.close()
     }
     tags.result()
+  }
+
+  def saveFeedback(rawForm: String): Unit = {
+    for (
+      cp <- connectionProvider;
+      st <- cp.update("INSERT INTO feedback (fb_time, text) VALUES (?, ?)")
+    ) {
+      val timestamp = new Timestamp(Calendar.getInstance.getTimeInMillis)
+      st.setTimestamp(1, timestamp)
+      st.setString(2, rawForm)
+      st.executeUpdate()
+      st.close()
+    }
+  }
+
+  def admitUserByEmail(email: String): Option[(MxUser, String)] = {
+    usersBox.flatMap(_.register(email))
+  }
+
+  def recognizeSession(session: String): Option[MxUser] =
+    usersBox.flatMap(_.checkSession(session))
+
+  def findVideo(song_id: Int): Option[String] = {
+    Some("YbnGiXm02OY")
   }
 
 }

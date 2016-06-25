@@ -10,7 +10,7 @@ import treeton.core.config.context.{ContextConfigurationSyntaxImpl, ContextConfi
 import treeton.core.util.LoggerProgressListener
 import treeton.prosody.musimatix.SyllableInfo.StressStatus
 import treeton.prosody.musimatix.VerseProcessor
-import verse.rates.model.{MxTag, MxSong}
+import verse.rates.model.{MxUser, MxTag, MxSong}
 import verse.rates.model.VerseMetrics._
 
 import scala.util.Try
@@ -99,4 +99,12 @@ trait VectorsProcessor {
   def calcSyllables(rows: Seq[String]): Seq[(String, Syllables)]
 
   def getTags: Seq[MxTag]
+
+  def saveFeedback(rawForm: String): Unit
+
+  def admitUserByEmail(email: String): Option[(MxUser, String)]
+
+  def recognizeSession(session: String): Option[MxUser]
+
+  def findVideo(song_id: Int): Option[String]
 }

@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Get video id by song id",
+  "self": {
+    "vendor": "com.musimatix",
+    "name": "video_id_request",
+    "format": "jsonschema",
+    "version": "1-0-0"
+  },
+  "type": "object",
+  "properties": {
+    "object": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "videoId" : {
+      "type": "object",
+      "description": "Request properties",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Id of songs"
+        }
+      },
+      "required": ["id"],
+      "additionalProperties": false
+    }
+  },
+  "required": ["object", "videoId"],
+  "additionalProperties": false
+}

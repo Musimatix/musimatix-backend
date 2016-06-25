@@ -130,6 +130,9 @@ abstract class VerseRatesRestService
         pathPrefix("env") {
           path("feedback") {
             respFeedback()
+          } ~
+          path("video_id") {
+            respVideoId()
           }
         }
       }
@@ -164,9 +167,6 @@ abstract class VerseRatesRestService
         } ~
         path("recognize") {
           parameters("session")(respRecognize)
-        } ~
-        path("video_id") {
-          parameters("song_id")(respVideoId)
         }
       } ~
       pathEndOrSingleSlash {

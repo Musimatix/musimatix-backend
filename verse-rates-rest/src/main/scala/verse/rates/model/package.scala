@@ -14,4 +14,6 @@ package object model {
     rowsPlain: Seq[String], rowsAccents: Seq[Syllables], rowsVectors: Seq[VerseVec],
     vec: Option[VerseVec], tags: Seq[MxTag], group: Option[MxGroup], authors: Seq[MxAuthor],
     similarity: Option[Double])
+
+  case class MxUser(id: Int, email: String, name: Option[String])
 }
