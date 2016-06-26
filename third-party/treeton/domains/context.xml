@@ -11,6 +11,7 @@
         <RESOURCETYPE NAME="Tokeniser">
             <CLASS>treeton.res.tokeniser.SimpleTokeniser</CLASS>
             <PARAMDESCRIPTION NAME="rulesPath" TYPE="String"/>
+            <PARAMDESCRIPTION NAME="errorMatchesPath" TYPE="String"/>
             <PARAMDESCRIPTION NAME="atomicType" TYPE="String"/>
             <PARAMDESCRIPTION NAME="defaultTokenType" TYPE="String"/>
             <PARAMDESCRIPTION NAME="kindFeature" TYPE="String"/>
@@ -159,6 +160,9 @@
             <RESOURCE NAME="Russian_Tokeniser" TYPE="Tokeniser">
                 <PARAM NAME="rulesPath">
                     <VALUE>./resources/tokeniser/DefaultTokeniser.rules</VALUE>
+                </PARAM>
+                <PARAM NAME="errorMatchesPath">
+                    <VALUE>./resources/tokeniser/eng-rus_error_matches.txt</VALUE>
                 </PARAM>
                 <PARAM NAME="atomicType">
                     <VALUE>Atom</VALUE>
