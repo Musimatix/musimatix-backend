@@ -54,7 +54,7 @@ meter dolnik2 {
   (U)?(U)? (s (u)?)* (S) (U)?(U)?
 }
 
-meter taktovik3 {
+/*meter taktovik3 {
   priority 2;
   threshold 80;
   name "Тактовик на трехсложной основе";
@@ -68,4 +68,4 @@ meter taktovik2 {
   name "Тактовик на двухсложной основе";
 
   (U)?(U)? (S (u)?(u)?)* (S)(U)?(U)?
-}
+}*/
