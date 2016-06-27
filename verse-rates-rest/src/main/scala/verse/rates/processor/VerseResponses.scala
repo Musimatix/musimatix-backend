@@ -15,6 +15,7 @@ import verse.rates.model.{MxUser, MxSong}
 import verse.rates.model.VerseMetrics._
 import verse.rates.processor.VectorsProcessor.TitleBox
 import verse.rates.processor.VerseResponses.VectorsProcessorProvider
+import verse.rates.util.StringUtil._
 
 import scala.io.Source
 import scala.util.{Failure, Try}
@@ -116,8 +117,7 @@ abstract class VerseResponses extends HttpService with VectorsProcessorProvider 
     } match {
       case scala.util.Success((sng, lng)) => sng -> lng
       case Failure(f) =>
-        val msg = Option(f.getMessage).fold("")(" " + _)
-        println(s"${f.getClass.getCanonicalName}.$msg")
+        println(failureMessage(f))
         Seq.empty[MxSong] -> LangTag.Eng
     }
     writeSongs(songs, lang)
@@ -145,8 +145,7 @@ abstract class VerseResponses extends HttpService with VectorsProcessorProvider 
     } match {
       case scala.util.Success(sl) => sl
       case Failure(f) =>
-        val msg = Option(f.getMessage).fold("")(" " + _)
-        println(s"${f.getClass.getCanonicalName}.$msg")
+        println(failureMessage(f))
         Seq.empty[(String, Syllables)]
     }
     writeSyllables(syllabledRows)
@@ -404,8 +403,7 @@ abstract class VerseResponses extends HttpService with VectorsProcessorProvider 
         case scala.util.Success(_) =>
           ctx.complete(HttpResponse(StatusCodes.NotFound))
         case Failure(f) =>
-          val msg = Option(f.getMessage).fold("")(" " + _)
-          println(s"${f.getClass.getCanonicalName}.$msg")
+          println(failureMessage(f))
           ctx.complete(HttpResponse(StatusCodes.NotFound))
       }
     }

@@ -3,9 +3,7 @@ package verse.rates.processor
 import java.io.File
 import java.sql.Timestamp
 import java.util
-import java.util.{UUID, Calendar}
-
-import com.fasterxml.uuid.Generators
+import java.util.Calendar
 import com.typesafe.config.{ConfigFactory, Config}
 import net.sf.javaml.core.kdtree.KDTree
 import org.apache.commons.io.IOUtils
@@ -27,48 +25,7 @@ import collection.JavaConverters._
 import VectorsProcessor._
 
 
-class VectorsProcessorImpl(confRoot: Config) extends VectorsProcessor {
-
-  private[this] val logger = Logger.getLogger(classOf[VerseProcessingExample])
-
-  private[this] var verseProcessor: Option[VerseProcessor] = None
-  private[this] var connectionProvider: Option[ConnectionProvider] = None
-  private[this] var vectorsTree: Option[KDTree] = None // new KDTree(90)
-  private[this] var titleSuggestor: Option[TitleSuggestor] = None
-  private[this] var songsBox: Option[SongsBox] = None
-  private[this] var usersBox: Option[UsersBox] = None
-
-  private[this] var similarityBound = 100.0
-  private[this] val similarBucket = 5000
-
-
-  locally {
-    init()
-  }
-
-  def init(): Unit = {
-    (for {
-      confRoot <- Try { ConfigFactory.load().getConfig(confRootKey) }
-      confMsmx <- Try { confRoot.getConfig(confMsmxKey) }
-      confTreeton <- Try { confRoot.getConfig(confTreetonKey) }
-      confSongs <- Try { confRoot.getConfig(confSongsKey) }
-    } yield (confMsmx, confTreeton, confSongs)) match {
-      case Success((confMsmx, confTreeton, confSongs)) =>
-        verseProcessor = createVerseProcessor(confTreeton, logger)
-        connectionProvider = Some(new ConnectionProvider(confMsmx))
-        buildVectorsTree()
-        connectionProvider.foreach { cp =>
-          titleSuggestor = Some(new TitleSuggestor(cp))
-          songsBox = Some(new SongsBox(cp))
-          usersBox = Some(new UsersBox(cp))
-        }
-        Try { similarityBound = confSongs.getDouble("similarity.bound") }
-      case Failure(f) =>
-        println(f.getMessage)
-    }
-
-    println(s"simi:$similarityBound")
-  }
+object VectorsProcessorImpl {
 
   def createVerseProcessor(confTreeton: Config, logger: Logger): Option[VerseProcessor] = {
     val treetonDataPath = Try { confTreeton.getString("treeton.data.path") }.toOption
@@ -97,6 +54,68 @@ class VectorsProcessorImpl(confRoot: Config) extends VectorsProcessor {
     processor.initialize()
 
     Some(processor)
+  }
+}
+
+class VectorsProcessorImpl(confRoot: Config) extends VectorsProcessor {
+  import VectorsProcessorImpl._
+
+  private[this] val logger = Logger.getLogger(classOf[VerseProcessingExample])
+
+  private[this] var verseProcessor: Option[VerseProcessor] = None
+  private[this] var connectionProvider: Option[ConnectionProvider] = None
+  private[this] var vectorsTree: Option[KDTree] = None // new KDTree(90)
+  private[this] var titleSuggestor: Option[TitleSuggestor] = None
+  private[this] var songsBox: Option[SongsBox] = None
+  private[this] var usersBox: Option[UsersBox] = None
+
+  private[this] var similarityBound = 100.0
+  private[this] val similarBucket = 5000
+
+  private[this] var mixForSongFile: Option[File] = None
+  private[this] var mixForTextFolder: Option[File] = None
+  private[this] var mixForTextDistance: Double = 0.0
+
+  private[this] var mixForSong = Map.empty[Int, Seq[Int]]
+  private[this] var mixForText: Option[KDTree] = None
+
+  locally {
+    init()
+  }
+
+  def loadMixels(): Unit = {
+    verseProcessor.foreach { vp =>
+      mixForText = Some(new KDTree(vp.getMetricVectorDimension))
+
+    }
+  }
+
+  def init(): Unit = {
+    (for {
+      confRoot <- Try { ConfigFactory.load().getConfig(confRootKey) }
+      confMsmx <- Try { confRoot.getConfig(confMsmxKey) }
+      confTreeton <- Try { confRoot.getConfig(confTreetonKey) }
+      confSongs <- Try { confRoot.getConfig(confSongsKey) }
+    } yield (confMsmx, confTreeton, confSongs)) match {
+      case Success((confMsmx, confTreeton, confSongs)) =>
+        verseProcessor = createVerseProcessor(confTreeton, logger)
+        connectionProvider = Some(new ConnectionProvider(confMsmx))
+        buildVectorsTree()
+        connectionProvider.foreach { cp =>
+          titleSuggestor = Some(new TitleSuggestor(cp))
+          songsBox = Some(new SongsBox(cp))
+          usersBox = Some(new UsersBox(cp))
+        }
+        Try { similarityBound = confSongs.getDouble("similarity.bound") }
+        mixForSongFile = Try { new File(confSongs.getString("mix.for.song.file")) }.toOption
+        mixForTextFolder = Try { new File(confSongs.getString("mix.for.text.folder")) }.toOption
+        Try { mixForTextDistance = confSongs.getDouble("mix.for.text.distance") }
+
+        loadMixels()
+
+      case Failure(f) =>
+        println(failureMessage(f))
+    }
   }
 
   def buildVectorsTree(): Unit = {
@@ -153,7 +172,6 @@ class VectorsProcessorImpl(confRoot: Config) extends VectorsProcessor {
 
     val rowsRates = ratesAsScala.take(rates.length - 1)
     val totalRates = ratesAsScala.last
-
 
     Right(
       VerseRates(
@@ -399,5 +417,4 @@ class VectorsProcessorImpl(confRoot: Config) extends VectorsProcessor {
   def findVideo(song_id: Int): Option[String] = {
     Some("YbnGiXm02OY")
   }
-
 }

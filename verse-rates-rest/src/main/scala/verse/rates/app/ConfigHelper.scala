@@ -8,6 +8,6 @@ object ConfigHelper {
   val confRootKey    = "verse.rates.rest"
   val confMsmxKey    = "msmx.mysql"
   val confTreetonKey = "treeton.processing"
-  val confSongsKey = "songs.search"
+  val confSongsKey   = "songs.search"
 
 }
