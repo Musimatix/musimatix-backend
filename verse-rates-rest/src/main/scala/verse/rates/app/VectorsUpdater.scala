@@ -146,7 +146,7 @@ class VectorsUpdater(start: Option[Int] = None) {
       val filteredForProcessing = withIndex.filter { case (r, _) => r.exists(isCyrillic) }
       if (filteredForProcessing.nonEmpty) {
         val javaCollection = filteredForProcessing.map(_._1).asJava
-        Try { p.process(javaCollection).asScala } match {
+        Try { p.process(javaCollection, false).asScala } match {
           case Success(metricsArray) =>
             val index2Metrics = filteredForProcessing
               .zip(metricsArray)

@@ -23,7 +23,7 @@ object ProsodyExampleApp {
   val spacePerMeter: Int = 10
   val maxStressRestrictionViolations: Int = 3
   val maxReaccentuationRestrictionViolations: Int = 2
-  val maxSyllablesPerVerse: Int = 24
+  val maxSyllablesPerVerse: Int = 23
 
   private val logger = Logger.getLogger(classOf[VerseProcessingExample])
 
@@ -178,7 +178,7 @@ object ProsodyExampleApp {
 //    song.add("     Когда я был там, я видел их - лошадей(пони и зебр) и рыбов: карасей и лещей")
 
     val start = System.nanoTime
-    val verseDescriptions = processor.process(song).asScala
+    val verseDescriptions = processor.process(song, false).asScala
     val workingTime = System.nanoTime - start
     println(s"Time: ${workingTime / 1000000}ms")
     for (verseDescription <- verseDescriptions) {

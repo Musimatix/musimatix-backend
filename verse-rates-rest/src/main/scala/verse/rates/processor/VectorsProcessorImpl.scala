@@ -18,6 +18,7 @@ import verse.rates.calculator.SampleRatesCalculator
 import verse.rates.model.{MxUser, MxTag, MxSong}
 import verse.rates.model.VerseMetrics._
 import verse.rates.processor.VectorsProcessor._
+import verse.rates.processor.YoutubeSearch
 import scala.annotation.tailrec
 import scala.util.{Failure, Success, Try}
 import verse.rates.util.StringUtil._
@@ -68,6 +69,7 @@ class VectorsProcessorImpl(confRoot: Config) extends VectorsProcessor {
   private[this] var titleSuggestor: Option[TitleSuggestor] = None
   private[this] var songsBox: Option[SongsBox] = None
   private[this] var usersBox: Option[UsersBox] = None
+  private[this] var youtubeSearch = new YoutubeSearch
 
   private[this] var similarityBound = 100.0
   private[this] val similarBucket = 5000
@@ -292,7 +294,7 @@ class VectorsProcessorImpl(confRoot: Config) extends VectorsProcessor {
       val javaRows = rowsSeq.asJava
       val javaStresses = stressesSeq.asJava
 
-      val verseDescriptions = vp.process(javaRows, javaStresses).asScala.toVector
+      val verseDescriptions = vp.process(javaRows, javaStresses, false).asScala.toVector
 
       val vectors = verseDescriptions
         .map { vd =>
@@ -338,7 +340,7 @@ class VectorsProcessorImpl(confRoot: Config) extends VectorsProcessor {
         val withIndex = rows.zipWithIndex.toVector
         val filtered = withIndex.filter { case (r, _) => r.exists(isCyrillic) }
 
-        val vds = vp.process(filtered.map(_._1).asJava).asScala.toVector
+        val vds = vp.process(filtered.map(_._1).asJava, true).asScala.toVector
 
         val sylsRows = vds.map { vd =>
           vd.syllables.asScala.toSeq.map( si =>
@@ -415,6 +417,29 @@ class VectorsProcessorImpl(confRoot: Config) extends VectorsProcessor {
     usersBox.flatMap(_.checkSession(session))
 
   def findVideo(song_id: Int): Option[String] = {
-    Some("YbnGiXm02OY")
+    (for {
+      cp <- connectionProvider
+      st <- cp.select(
+        s"""SELECT s.title_rus, s.title_eng, a.name_rus, a.name_eng
+            |FROM songs s
+            |LEFT OUTER JOIN song_author sa ON sa.song_id = s.id
+            |LEFT OUTER JOIN authors a ON sa.author_id = a.id
+            |WHERE s.id = $song_id
+         """.stripMargin)
+    } yield {
+      val rs = st.executeQuery()
+      val name =
+        if (rs.next()) {
+          val author = Option(rs.getString(3)).orElse(Option(rs.getString(4)))
+          val title = Option(rs.getString(1)).orElse(Option(rs.getString(2)))
+          val query = Vector(author, title).flatten.mkString(". ")
+          if (query.isEmpty) None
+          else Some(query)
+        } else None
+      rs.close()
+      st.close()
+      name.flatMap(youtubeSearch.search)
+    }).flatten
+//    Some("YbnGiXm02OY")
   }
 }
