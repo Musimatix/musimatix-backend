@@ -9,7 +9,7 @@ import scala.collection.mutable
 import TitleSuggestor._
 import collection.JavaConverters._
 
-import scala.util.Try
+import scala.util.{Failure, Success, Try}
 
 object TitleSuggestor {
   type IdsBucket = Set[Int]
@@ -33,28 +33,40 @@ class TitleSuggestor(val cp: ConnectionProvider) {
   }
 
   def buildTree(): Unit = {
-    cp.select(
-      "SELECT id, title_rus FROM songs WHERE title_rus IS NOT NULL and vector IS NOT NULL"
-    ).foreach { st =>
+//    cp.select("SELECT s.id, s.title_rus, s.title_eng FROM songs s").foreach { st =>
+      cp.select(
+        """SELECT s.id, s.title_rus, s.title_eng, a.id, a.name_rus, a.name_eng
+          |FROM songs s
+          |LEFT OUTER JOIN song_author sa ON sa.song_id = s.id
+          |LEFT OUTER JOIN authors a ON sa.author_id = a.id
+          |WHERE s.vector IS NOT NULL
+        """.stripMargin).foreach { st =>
       val rs = st.executeQuery()
       Try {
         @tailrec
         def nextTitle(): Unit = {
           if (rs.next()) {
             val id = rs.getInt(1)
-            Option(rs.getString(2)).foreach { title =>
-              id2Title += id -> TitleBox(id, title)
+            val titleOpt = Option(rs.getString(2)).orElse(Option(rs.getString(3)))
+//            val author = Option.empty[String]
+            val author = Option(rs.getString(5)).orElse(Option(rs.getString(6)))
+            titleOpt.foreach { title =>
+              id2Title += id -> TitleBox(id, title, author.map(_.trim))
               val words = title.split("[\\s.,!?:;()\"\'$%&\\[\\]\\{\\}]")
                 .filter( w => w.nonEmpty && w != "-")
                 .map(_.toLowerCase)
 
               words.headOption.foreach(w => addToMap(w, id, head2Ids))
-              words.tail.foreach(w => addToMap(w, id, tail2Ids))
+              if(words.size > 1) words.tail.foreach(w => addToMap(w, id, tail2Ids))
             }
             nextTitle()
           }
         }
         nextTitle()
+      } match {
+        case Success(_) =>
+        case Failure(f) =>
+          f.printStackTrace()
       }
       rs.close()
       st.close()
@@ -62,6 +74,8 @@ class TitleSuggestor(val cp: ConnectionProvider) {
 
     head2Ids.foreach { case (word, ids) => treeHead.put(word, ids) }
     tail2Ids.foreach { case (word, ids) => treeTail.put(word, ids) }
+
+    println(s"Suggests: id2Title:${id2Title.size} head2Ids:${head2Ids.size} tail2Ids:${tail2Ids.size}")
   }
 
   def suggest(s: String, limit: Int): Seq[TitleBox] = {

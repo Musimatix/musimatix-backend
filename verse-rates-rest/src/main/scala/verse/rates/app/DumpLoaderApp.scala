@@ -105,7 +105,7 @@ object DumpLoaderApp {
         }
       }
 
-      val songs = songsBuilder.result().drop(17912)
+      val songs = songsBuilder.result()
 
 //      val authors = songs.map(_.author).distinct
 
@@ -120,7 +120,7 @@ object DumpLoaderApp {
             val nameRus = Option(rs.getString(2))
             val nameEng = Option(rs.getString(3))
             nameRus.orElse(nameEng).foreach { n =>
-              authorsMapBuilder += n -> id
+              authorsMapBuilder += n.trim -> id
             }
             nextAuthor()
           }

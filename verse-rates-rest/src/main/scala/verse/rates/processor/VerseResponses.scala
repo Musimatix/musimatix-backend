@@ -230,10 +230,20 @@ abstract class VerseResponses extends HttpService with VectorsProcessorProvider 
   private[this] def writeTitleBoxes(titles: Seq[TitleBox]): String = {
     val titlesVal = JField("titles",
       titles.map { tb =>
-        JObject(
-          JField("id", JInt(tb.id)),
-          JField("title", JString(tb.title))
-        )
+        val fields =
+          JField("id", JInt(tb.id)) ::
+          JField("title", JString(tb.title)) ::
+          Nil
+
+        if (tb.author.isDefined) {
+          val authors = JField("authors", JArray(
+            JObject(
+              JField("id", JInt(1)),
+              JField("name", JString(tb.author.get))
+            ) :: Nil))
+          JObject(fields :+ authors)
+        } else
+          JObject(fields)
       }
     )
     val rootObj = JObject(

@@ -44,7 +44,7 @@ object VectorsProcessor {
     rowsPlain: Seq[String], syllables: Syllables, tags: Seq[SongTag],
     vector: VerseVec = Vector.empty[Double])
 
-  case class TitleBox(id: Int, title: String)
+  case class TitleBox(id: Int, title: String, author: Option[String])
 
   def createVerseProcessor(confTreeton: Config, logger: Logger): Option[VerseProcessor] = {
     val treetonDataPath = Try { confTreeton.getString("treeton.data.path") }.toOption
