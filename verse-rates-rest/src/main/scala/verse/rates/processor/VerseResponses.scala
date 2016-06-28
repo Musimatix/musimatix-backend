@@ -86,8 +86,7 @@ abstract class VerseResponses extends HttpService with VectorsProcessorProvider 
         case (JInt(id), JNothing) =>
           val iid = id.toInt
           vectorsProcessor
-            .findSimilar(iid, limit+1, tags)
-            .filter(_.id != iid) -> lang
+            .findSimilar(iid, limit, tags) -> lang
         case (JNothing, JArray(arr)) =>
           val rowsSyls = arr.map { case jv =>
             val JString(plain) = jv \ "plain"

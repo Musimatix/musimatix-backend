@@ -1,6 +1,6 @@
 package verse.rates.processor
 
-import java.io.File
+import java.io.{InputStream, File}
 import java.sql.Timestamp
 import java.util
 import java.util.Calendar
@@ -20,6 +20,7 @@ import verse.rates.model.VerseMetrics._
 import verse.rates.processor.VectorsProcessor._
 import verse.rates.processor.YoutubeSearch
 import scala.annotation.tailrec
+import scala.io.Source
 import scala.util.{Failure, Success, Try}
 import verse.rates.util.StringUtil._
 import collection.JavaConverters._
@@ -76,19 +77,137 @@ class VectorsProcessorImpl(confRoot: Config) extends VectorsProcessor {
 
   private[this] var mixForSongFile: Option[File] = None
   private[this] var mixForTextFolder: Option[File] = None
-  private[this] var mixForTextDistance: Double = 0.0
+  private[this] var mixForTextDistance: Double = 0.1
 
   private[this] var mixForSong = Map.empty[Int, Seq[Int]]
-  private[this] var mixForText: Option[KDTree] = None
+    .withDefaultValue(Seq.empty)
+  private[this] var mixForText: Option[KDTree] = None //vector -> Seq(Int)
 
   locally {
     init()
   }
 
-  def loadMixels(): Unit = {
-    verseProcessor.foreach { vp =>
-      mixForText = Some(new KDTree(vp.getMetricVectorDimension))
+  case class MixText(ids: Seq[Int], vec: VerseVec)
 
+  val ReMix = "([^|]+)\\|(.*)".r
+
+  def loadMixels(): Unit = {
+    for {
+      vp <- verseProcessor
+      cp <- connectionProvider
+      st <- cp.select(
+        """SELECT s.id, s.title_rus, s.title_eng, a.id, a.name_rus, a.name_eng
+          |FROM songs s
+          |LEFT OUTER JOIN song_author sa ON sa.song_id = s.id
+          |LEFT OUTER JOIN authors a ON sa.author_id = a.id
+          |WHERE s.vector IS NOT NULL
+        """.stripMargin)
+    } yield {
+      val rs = st.executeQuery()
+
+      var titleAuthor2Id = Map.empty[String, Int]
+
+      @tailrec
+      def nextSong(): Unit = {
+        if (rs.next()) {
+          val song_id = rs.getInt(1)
+          val key = for {
+            title <- Option(rs.getString(2)).orElse(Option(rs.getString(3)))
+            author <- Option(rs.getString(5)).orElse(Option(rs.getString(6)))
+          } yield s"${title.trim.toLowerCase}|${author.trim.toLowerCase}"
+          key.foreach { k => titleAuthor2Id += k -> song_id }
+          nextSong()
+        }
+      }
+      nextSong()
+
+      rs.close()
+      st.close()
+
+      println(s"Title|Author entries: ${titleAuthor2Id.size}")
+
+      mixForSongFile.foreach { f =>
+        Try {
+          val bs = Source.fromFile(f)
+          bs.getLines().foreach  { row =>
+            row.toLowerCase.split("%%").toList match {
+              case head :: tail =>
+                val idOpt = idByTitleAuthor(head, titleAuthor2Id)
+                  idOpt.foreach { id =>
+                  val refs = tail.flatMap(s => idByTitleAuthor(s, titleAuthor2Id))
+                  if (refs.nonEmpty) {
+                    mixForSong += id -> refs
+                  }
+                }
+              case _ =>
+            }
+          }
+          bs.close()
+        }
+      }
+
+      var textsCount = 0
+      mixForTextFolder.foreach { folder =>
+        val mixTree = new KDTree(vp.getMetricVectorDimension)
+        mixForText = Some(mixTree)
+        folder.listFiles.toVector.filter(_.isFile).foreach { file =>
+          val rows = Source.fromFile(file).getLines().toVector
+          if (rows.size > 1) {
+            val head = rows.head
+            val ids = head.toLowerCase.split("%%").toVector.flatMap { item =>
+              idByTitleAuthor(item.trim, titleAuthor2Id)
+            }
+            val songText = rows.tail
+            val stressDescriptions = new util.ArrayList[StressDescription]
+            val plainLyrics = new util.ArrayList[String]
+            val formattedRows = new util.ArrayList[String]
+            songText.map(_.trim).filter(_.nonEmpty).foreach { s =>
+              formattedRows.add(s)
+            }
+            vp.parseFormattedVerses(formattedRows, plainLyrics, stressDescriptions)
+            val verseDescriptions = vp.process(plainLyrics, stressDescriptions, false)
+
+            val vectors = verseDescriptions.asScala.toVector
+              .map { vd =>
+                vd.metricVector.asScala.toVector
+                  .map {
+                    case d: java.lang.Double => Double.unbox(d)
+                    case _ => 0.0
+                  }
+              }
+
+            def sumVec(vec1: VerseVec, vec2: VerseVec): VerseVec = {
+              vec1.zip(vec2).map { case (d1, d2) => d1 + d2 }
+            }
+
+            val baseVec = vectors
+              .reduceOption(sumVec)
+              .map { vec => vec.map(_ / vectors.size) }
+            baseVec.foreach { v =>
+              mixTree.insert(v.toArray, MixText(ids, v))
+              textsCount += 1
+            }
+
+          }
+        }
+      }
+      println(s"Mix roots. Songs: ${mixForSong.size}   Texts: $textsCount")
+    }
+  }
+
+  def idByTitleAuthor(at: String, mp: Map[String, Int]): Option[Int] = {
+    Try {
+      val sp = at.split("\\|")
+      val t = sp(0)
+      val a = sp(1)
+      val key = s"${t.trim.toLowerCase}|${a.trim.toLowerCase}"
+      val v = mp.get(key)
+      v
+    } match {
+      case Success(s) => s
+      case Failure(f) =>
+        println(f.toString)
+        None
     }
   }
 
@@ -221,32 +340,49 @@ class VectorsProcessorImpl(confRoot: Config) extends VectorsProcessor {
       sb <- songsBox
       st <- cp.select("SELECT vector FROM songs WHERE id = ?")
     } yield {
+
+      var mixIds = mixForSong(id).filterNot(id.==)
+
+      var mixSongs = sb.getSongsByIds(mixIds)
+          .map(song => song.copy(similarity = Some(1.0)))
+      val restToFind = math.max(0, limit - mixSongs.size)
+
+      var excludeIds = mixIds.toSet + id
+
       st.setInt(1, id)
       val rs = st.executeQuery()
-      val (idsVec, baseVec) = if (rs.next()) {
-        val vec = Option(rs.getBlob(1))
-          .map( blob => deserializeVerseVec(IOUtils.toByteArray(blob.getBinaryStream)) )
-
-        vec.map { v =>
-          val filteredIds = if (tags.nonEmpty) {
-            val ids = vt.nearest(v.toArray, similarBucket)
-              .toVector
-              .map(Int.unbox)
-            sb.filterByTags(ids, tags)
-          } else
-            vt.nearest(v.toArray, limit + 1)
-              .toVector
-              .map(Int.unbox)
-
-          filteredIds.view.filter(_ != id).take(limit).force -> v
-        }.getOrElse(Vector.empty[Int] -> Seq.empty[Double])
-      } else {
-        Vector.empty[Int] -> Seq.empty[Double]
-      }
+      val baseVecOpt =
+        if (rs.next()) {
+          Option(rs.getBlob(1))
+            .map(blob => deserializeVerseVec(IOUtils.toByteArray(blob.getBinaryStream)))
+        } else None
+      val baseVec = baseVecOpt.getOrElse(Vector.empty[Double])
       rs.close()
       st.close()
-      val ss = sb.getSongsByIds(idsVec)
-      updateSimilarity(ss, baseVec)
+
+      val restIds = if (restToFind > 0 && baseVec.nonEmpty) {
+        if (tags.nonEmpty) {
+          val ids = vt.nearest(baseVec.toArray, similarBucket)
+            .toVector
+            .map(Int.unbox)
+          sb.filterByTags(ids, tags)
+            .view
+            .filterNot(excludeIds.contains)
+            .take(restToFind)
+            .force
+        } else
+          vt.nearest(baseVec.toArray, restToFind + excludeIds.size)
+            .toVector
+            .map(Int.unbox)
+            .filterNot(excludeIds.contains)
+            .take(restToFind)
+      } else {
+        Vector.empty[Int]
+      }
+
+      val restSongs = updateSimilarity(sb.getSongsByIds(restIds), baseVec)
+
+      mixSongs ++ restSongs
     }
     songs.getOrElse(Vector.empty[MxSong])
   }
@@ -254,12 +390,14 @@ class VectorsProcessorImpl(confRoot: Config) extends VectorsProcessor {
   def updateSimilarity(songs: Seq[MxSong], baseVec: VerseVec): Seq[MxSong] = {
     if (baseVec.nonEmpty)
       songs.map { song =>
-        val siml = song.vec.map {vec =>
-          val dist = distance(baseVec, vec)
-          if (dist > similarityBound) 0.0
-          else (similarityBound - dist) / similarityBound
-        }
-        song.copy(similarity = siml)
+        if (song.similarity.isEmpty) {
+          val siml = song.vec.map { vec =>
+            val dist = distance(baseVec, vec)
+            if (dist > similarityBound) 0.0
+            else (similarityBound - dist) / similarityBound
+          }
+          song.copy(similarity = siml)
+        } else song
       }
     else songs
   }
@@ -309,26 +447,53 @@ class VectorsProcessorImpl(confRoot: Config) extends VectorsProcessor {
         vec1.zip(vec2).map { case (d1, d2) => d1 + d2 }
       }
 
-      val (songVec, baseVec) = vectors
+      val baseVec = vectors
         .reduceOption(sumVec)
-        .map { vec =>
-          val scaled = vec.map(_ / vectors.size)
+        .map { vec => vec.map(_ / vectors.size) }
+        .getOrElse(Vector.empty[Double])
 
-          val filteredIds = if (tags.nonEmpty) {
-            val ids = vt.nearest(scaled.toArray, similarBucket)
+      if (baseVec.nonEmpty) {
+
+        val mixIds = mixForText match {
+          case Some(kdt) =>
+            val mixText = kdt.nearest(baseVec.toArray).asInstanceOf[MixText]
+            val MixText(mixIds, mixVec) = mixText
+            val dist = distance(baseVec, mixVec)
+            if (dist <= mixForTextDistance) {
+              mixIds
+            } else Vector.empty[Int]
+          case _ =>
+            Vector.empty[Int]
+        }
+
+        var mixSongs = sb.getSongsByIds(mixIds)
+          .map(song => song.copy(similarity = Some(1.0)))
+        val restToFind = math.max(0, limit - mixSongs.size)
+
+        var excludeIds = mixIds.toSet
+
+        val restIds = if (restToFind > 0) {
+          if (tags.nonEmpty) {
+            val ids = vt.nearest(baseVec.toArray, similarBucket)
               .toVector
               .map(Int.unbox)
             sb.filterByTags(ids, tags)
-              .take(limit)
+              .view
+              .filterNot(excludeIds.contains)
+              .take(restToFind)
+              .force
           } else
-            vt.nearest(scaled.toArray, limit)
+            vt.nearest(baseVec.toArray, restToFind + excludeIds.size)
               .toVector
               .map(Int.unbox)
+              .filterNot(excludeIds.contains)
+              .take(restToFind)
+        } else Vector.empty[Int]
 
-          filteredIds -> scaled
-        }.getOrElse(Seq.empty[Int] -> Seq.empty[Double])
-        val ss = sb.getSongsByIds(songVec)
-        updateSimilarity(ss, baseVec)
+        val restSongs = updateSimilarity(sb.getSongsByIds(restIds), baseVec)
+
+        mixSongs ++ restSongs
+      } else Vector.empty[MxSong]
     }
     songs.getOrElse(Vector.empty[MxSong])
   }

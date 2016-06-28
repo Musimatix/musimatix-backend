@@ -2,6 +2,7 @@ package verse.rates.processor
 
 import java.math.MathContext
 
+import net.sf.javaml.core.kdtree.KDTree
 import org.apache.commons.io.IOUtils
 import org.json4s.JsonAST._
 import verse.rates.model.VerseMetrics._
