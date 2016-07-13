@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Get songs by ids",
+  "self": {
+    "vendor": "com.musimatix",
+    "name": "byid_request",
+    "format": "jsonschema",
+    "version": "1-0-0"
+  },
+  "type": "object",
+  "properties": {
+    "object": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "byId" : {
+      "type": "object",
+      "description": "Request properties",
+      "properties": {
+        "lang":  {
+          "type": "string",
+          "description": "Language for display multilingual properties - tags, for example"
+        },
+        "ids": {
+          "type": "array",
+          "description": "Ids of songs",
+          "items" : {
+            "type" : "integer"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "required": ["ids"],
+      "additionalProperties": false
+    }
+  },
+  "required": ["object", "byId"],
+  "additionalProperties": false
+}

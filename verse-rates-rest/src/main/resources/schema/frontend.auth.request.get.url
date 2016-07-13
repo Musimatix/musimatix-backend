@@ -1,1 +1,1 @@
-http://musimatix.com:port/songs/env/auth&email=user@mailserver.com
+http://musimatix.com:port/songs/env/auth?email=user@mailserver.com&password=pwdstr

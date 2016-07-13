@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Request invite by email",
+  "self": {
+    "vendor": "com.musimatix",
+    "name": "reqinvite_request",
+    "format": "jsonschema",
+    "version": "1-0-0"
+  },
+  "type": "object",
+  "properties": {
+    "object": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "reqInvite" : {
+      "type": "object",
+      "description": "Request properties",
+      "properties": {
+        "email":  {
+          "type": "string",
+          "description": "e-mail of person who wants to get access"
+        }
+      },
+      "required": ["email"],
+      "additionalProperties": false
+    }
+  },
+  "required": ["object", "reqInvite"],
+  "additionalProperties": false
+}

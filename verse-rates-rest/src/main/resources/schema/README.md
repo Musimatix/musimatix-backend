@@ -33,6 +33,8 @@ It is response for `byid.request`, `keywords.request`, `similar.request`.
 - `feedback.request` &ndash; any JSON with feedback form data. It is saved "as is"" in DB. Server always returns `200` status code and void data.
 - `video.id.request` &ndash; song id to find corresponded video.
 - `video.id.response` &ndash; video id for song.
+- `reqinvite.request` &ndash; e-mail of person who wants invite
+- `reqinvite.response` &ndash; result of invite request
 
 ## Requests' paths
 - `auth.request` &rArr; `GET` `songs/env/auth`. Parameters: `email`.
@@ -45,5 +47,6 @@ It is response for `byid.request`, `keywords.request`, `similar.request`.
 - `presyllables.request` &rArr; `POST` `songs/search/presyllables`.
 - `feedback.request` &rArr; `POST` `songs/env/feedback`.
 - `video.id.request` &rArr; `POST` `songs/env/video_id`. `video.id.response` is expected on success or `404` status code on fail.
+- `reqinvite.request` &rArr; `POST` `songs/env/req_invite`. `reqinvite.response` will be returned with success code or error code and message.
 
 Schemas and samples can be validated at: http://www.jsonschemavalidator.net
