@@ -114,13 +114,4 @@ CREATE TABLE feedback (
     text MEDIUMTEXT NOT NULL
 );
 
-INSERT INTO tag_groups (name_rus, name_eng) VALUES ('Язык', 'Language');
-INSERT INTO tags (group_id, name_rus, name_eng) VALUES (1, 'Англ.', 'Eng');
-INSERT INTO tags (group_id, name_rus, name_eng) VALUES (1, 'Рус.', 'Rus');
-SELECT * FROM tags;
-
--- -- -- -- -- -- -- -- --
-INSERT INTO users (email, name) VALUES ("demand@yandex.ru", "Andrey");
-INSERT INTO users (email, name) VALUES ("edbond88@gmail.com", "Ed Bond");
--- -- -- -- -- -- -- -- --
 
