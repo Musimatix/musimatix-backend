@@ -1,9 +1,9 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description": "Get songs by ids",
+  "description": "Request invite by email",
   "self": {
     "vendor": "com.musimatix",
-    "name": "byid_request",
+    "name": "reqinvite_request",
     "format": "jsonschema",
     "version": "1-0-0"
   },
@@ -15,28 +15,19 @@
     "version": {
       "type": "string"
     },
-    "byId" : {
+    "reqInvite" : {
       "type": "object",
       "description": "Request properties",
       "properties": {
-        "lang":  {
+        "email":  {
           "type": "string",
-          "description": "Language for display multilingual properties - tags, for example"
-        },
-        "ids": {
-          "type": "array",
-          "description": "Ids of songs",
-          "items" : {
-            "type" : "integer"
-          },
-          "minItems": 1,
-          "uniqueItems": true
+          "description": "e-mail of person who wants to get access"
         }
       },
-      "required": ["ids"],
+      "required": ["email"],
       "additionalProperties": false
     }
   },
-  "required": ["object", "byId"],
+  "required": ["object", "reqInvite"],
   "additionalProperties": false
 }

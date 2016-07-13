@@ -34,7 +34,6 @@ class YoutubeSearch {
 
   def search(s: String): Option[String] = {
     Try {
-
       val search = youtube.search.list("id,snippet")
 
       // Set your developer key from the Google Developers Console for

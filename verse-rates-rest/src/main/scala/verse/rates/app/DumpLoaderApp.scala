@@ -5,10 +5,11 @@ import java.nio.file.Files
 import java.sql.PreparedStatement
 
 import com.typesafe.config.{Config, ConfigFactory}
-import org.apache.log4j.{Level, Logger}
 import org.json4s.NoTypeHints
 import org.json4s.jackson.Serialization
+import org.slf4j.{LoggerFactory, Logger}
 import treeton.prosody.musimatix.{SyllableInfo, VerseProcessingExample, VerseProcessor}
+import verse.rates.env.ConfigHelper
 import verse.rates.model.{VerseMetrics, MxTag}
 import verse.rates.model.VerseMetrics._
 import verse.rates.processor.VectorsProcessor._
@@ -16,6 +17,7 @@ import verse.rates.processor.{VectorsProcessorImpl, ConnectionProvider, SongsBox
 import verse.rates.util.StringUtil._
 import collection.JavaConverters._
 import scala.annotation.tailrec
+import scala.util.matching.Regex
 import scala.util.{Failure, Success, Try}
 
 /** **
@@ -24,12 +26,10 @@ import scala.util.{Failure, Success, Try}
 object DumpLoaderApp {
   import ConfigHelper._
 
-  Logger.getRootLogger.setLevel(Level.WARN)
-
   implicit val json4sFormats = Serialization.formats(NoTypeHints)
 
   case class DumpSong(id: Option[Int], title: String, author: String, text: String, ext: String,
-    tags: Seq[Int], vec: Seq[Double])
+    tags: Seq[Int], vec: Seq[Double], syls:Seq[Syllables])
 
   def setBlobValue(st: PreparedStatement, field: Int, bOpt: Option[Array[Byte]]): Unit = {
     bOpt match {
@@ -41,14 +41,22 @@ object DumpLoaderApp {
   }
 
   val ReHeader = "^[^:]+:(.*)$".r
+
+  val ReId = "^\\s*id:(.*)$".r
+  val ReTitle = "^\\s*title:(.*)$".r
+  val ReAuthor = "\\s*^author:(.*)$".r
+  val ReTags = "^\\s*tags:(.*)$".r
+  val ReExt = "^\\s*ext:(.*)$".r
   val ReVec = "^\\s*\\((.*)\\)\\s*$".r
+
+  def headerValue(header: Seq[String], re: Regex): Option[String] =
+    header.flatMap { s => re.findFirstMatchIn(s).map(_.group(1)) }.headOption
 
   class Loader(val cp: ConnectionProvider, val confTreeton: Config, val folder: File) {
 
-    private[this] val logger = Logger.getLogger("DumpLoader")
-    logger.setLevel(Level.WARN)
+    private[this] val logger = LoggerFactory.getLogger("DumpLoader")
 
-    val verseProcessor = VectorsProcessorImpl.createVerseProcessor(confTreeton, logger)
+    val verseProcessor = VectorsProcessorImpl.createVerseProcessor(confTreeton)
 
     val tagByName = readTags
 
@@ -73,26 +81,60 @@ object DumpLoaderApp {
           val bs = io.Source.fromFile(f)
           val rows = bs.getLines().toVector
           bs.close()
-          val ReHeader(idS) = rows(0)
-          val ReHeader(title) = rows(1)
-          val ReHeader(author) = rows(2)
-          val ReHeader(ext) = rows(3)
-          val ReHeader(tags) = rows(4)
 
+          val (header, body) = rows.span(!_.startsWith("#"))
+
+          val titleOpt = headerValue(header, ReTitle)
+            .map(_.trim)
+            .filterNot(_.isEmpty)
+          val author = headerValue(header, ReAuthor)
+            .map(_.trim)
+            .getOrElse("")
+          val title = titleOpt match {
+            case Some(t) => t
+            case _ => throw new NoSuchFieldException(s"No title in ${f.getName}")
+          }
+
+          val ext = headerValue(header, ReExt).getOrElse("")
+
+          val idOpt = headerValue(header, ReId)
+            .flatMap { idS => Try { idS.trim.toInt }.toOption }
+
+          val tags = headerValue(header, ReTags).getOrElse("")
           val tagsIds = tags.split(";").toVector
             .flatMap(t => tagByName.get(t.trim.toLowerCase)) :+ 2
-          val idOpt = Try { idS.trim.toInt }.toOption
 
-          val text = rows.drop(5).mkString("\n")
+          val text = body.drop(1).mkString("\n")
 
-          val vec = Try {
-            val bs = io.Source.fromFile(s"${f.getPath}.vector")
-            val ReVec(vecStr) = bs.getLines().toVector.head
+          val (vec, syls) = Try {
+            val bs = io.Source.fromFile(s"${f.getPath}.meta")
+            val metaRows = bs.getLines().toVector
             bs.close()
-            vecStr.split(";").toVector.map(_.trim.toDouble)
-          }.toOption.getOrElse(Seq.empty[Double])
+            val ReVec(vecStr) = metaRows.head
+            val songSyls = metaRows.drop(1).map { rsyls =>
+              val syls = rsyls.split(";").toVector.flatMap { sy =>
+                Try {
+                  val sylOpt = sy.split(",") match {
+                    case Array(pos, length, "U") =>
+                      Some(Syllable(pos.trim.toInt, length.trim.toInt, AccentUnstressed))
+                    case Array(pos, length, "S") =>
+                      Some(Syllable(pos.trim.toInt, length.trim.toInt, AccentStressed))
+                    case Array(pos, length, "?") =>
+                      Some(Syllable(pos.trim.toInt, length.trim.toInt, AccentAmbiguous))
+                    case _ => None
+                  }
+                  sylOpt
+                } match {
+                  case Success(so) => so
+                  case Failure(_) => None
+                }
+              }
+              syls
+            }
+            vecStr.split(";").toVector.map(_.trim.toDouble) -> songSyls
+          }.toOption.getOrElse(Seq.empty[Double] -> Vector.empty[Syllables])
 
-          DumpSong(idOpt, title, author, text, ext, tagsIds, vec)
+          DumpSong(idOpt, title, author, text, ext, tagsIds, vec, syls)
         } match {
           case Success(sn) =>
             val ta = TitleAuthor(sn.title, sn.author)
@@ -107,9 +149,9 @@ object DumpLoaderApp {
 
       val songs = songsBuilder.result()
 
-//      val authors = songs.map(_.author).distinct
+      val authorsInSongs = songs.map(_.author).distinct
 
-      val authorsMapBuilder = Map.newBuilder[String, Int]
+      var authorsMap = Map.empty[String, Int]
 
       cp.select("SELECT id, name_rus, name_eng FROM authors").foreach { st =>
         val rs = st.executeQuery()
@@ -120,7 +162,7 @@ object DumpLoaderApp {
             val nameRus = Option(rs.getString(2))
             val nameEng = Option(rs.getString(3))
             nameRus.orElse(nameEng).foreach { n =>
-              authorsMapBuilder += n.trim -> id
+              authorsMap += n.trim -> id
             }
             nextAuthor()
           }
@@ -131,23 +173,29 @@ object DumpLoaderApp {
         st.close()
       }
 
-//      authors.foreach { a =>
-//        cp.update("INSERT INTO authors (name_rus, name_eng) VALUES (?, ?)").foreach { st =>
-//          val lang = FabrikaImporter.checkLang(a)
-//          val (s, n) =  if (lang == LangTag.Eng) (2, 1) else (1, 2)
-//          st.setString(s, a)
-//          st.setNull(n, java.sql.Types.VARCHAR)
-//          val keysCount = st.executeUpdate()
-//          val rsKeys = st.getGeneratedKeys
-//          val key: Option[Int] = if(rsKeys.next()) Some(rsKeys.getInt(1)) else None
-//          rsKeys.close()
-//          st.close()
-//          key.foreach { k => authorsMapBuilder += a -> k }
-//        }
-//      }
+      j = 0
 
+      authorsInSongs.foreach { a =>
+        if (!authorsMap.contains(a)) {
+          if (j % 100 == 0) print(s"[$j]\n")
+          j += 1
+          print("a")
+          cp.update("INSERT INTO authors (name_rus, name_eng) VALUES (?, ?)")
+            .foreach { st =>
+              val lang = FabrikaImporter.checkLang(a)
+              val (s, n) = if (lang == LangTag.Eng) (2, 1) else (1, 2)
+              st.setString(s, a)
+              st.setNull(n, java.sql.Types.VARCHAR)
+              val keysCount = st.executeUpdate()
+              val rsKeys = st.getGeneratedKeys
+              val key: Option[Int] = if (rsKeys.next()) Some(rsKeys.getInt(1)) else None
+              rsKeys.close()
+              st.close()
+              key.foreach { k => authorsMap += a -> k }
+            }
+        }
+      }
 
-      val authorsMap = authorsMapBuilder.result()
       println(s"Authors: ${authorsMap.size}")
 
       var i = 1
@@ -194,7 +242,14 @@ object DumpLoaderApp {
                     st.close()
                   }
               }
-              processRows(songId, song.text)
+
+              val songRows = song.text.split("\n").toVector
+              val songSyls = song.syls.map(ss =>
+                if (ss.nonEmpty) Some(ss.toVector) else Option.empty[Vector[Syllable]] )
+              val tri = songRows.zipWithIndex.zip(songSyls).map { case ((r, idx), ss) =>
+                (idx+1, r, ss)
+              }
+              saveCalculatedRows(songId, tri)
             }
         }
       }

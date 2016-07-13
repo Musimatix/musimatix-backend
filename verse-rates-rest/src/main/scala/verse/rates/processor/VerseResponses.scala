@@ -257,11 +257,30 @@ abstract class VerseResponses extends HttpService with VectorsProcessorProvider 
 
   def respSuggestion(prefix: String, limit: Option[Int]) = respJsonString { ctx =>
     val titles = Try {
-      vectorsProcessor.suggest(prefix, limit.getOrElse(suggestLimit))
+      vectorsProcessor.suggest(prefix, limit.getOrElse(suggestLimit) + 3)
     } match {
       case scala.util.Success(tbxs) => tbxs
       case Failure(_) =>
         println(s"Failed on vector producing [$prefix:$limit]")
+        Seq.empty[TitleBox]
+    }
+    writeTitleBoxes(titles)
+  }
+
+  def respSuggestion() = respJsonString { ctx =>
+    val jsonBody = ctx.request.entity.asString
+    val titles = Try {
+      val json = parse(jsonBody) \ "suggestTitle"
+      (json \ "keywords", json \ "limit") match {
+        case (JString(s), JInt(l)) => vectorsProcessor.suggest(s, l.toInt + 3)
+        case (JString(s), JNothing) => vectorsProcessor.suggest(s, suggestLimit)
+        case _ => throw new IllegalArgumentException("Illegal request.\n" + jsonBody)
+      }
+    } match {
+      case scala.util.Success(tt) => tt
+      case Failure(f) =>
+        val msg = Option(f.getMessage).fold("")(" " + _)
+        println(s"${f.getClass.getCanonicalName}.$msg")
         Seq.empty[TitleBox]
     }
     writeTitleBoxes(titles)
@@ -293,25 +312,6 @@ abstract class VerseResponses extends HttpService with VectorsProcessorProvider 
     writePretty(rootObj)
   }
 
-  def respSuggestion() = respJsonString { ctx =>
-    val jsonBody = ctx.request.entity.asString
-    val titles = Try {
-      val json = parse(jsonBody) \ "suggestTitle"
-      (json \ "keywords", json \ "limit") match {
-        case (JString(s), JInt(l)) => vectorsProcessor.suggest(s, l.toInt)
-        case (JString(s), JNothing) => vectorsProcessor.suggest(s, suggestLimit)
-        case _ => throw new IllegalArgumentException("Illegal request.\n" + jsonBody)
-      }
-    } match {
-      case scala.util.Success(tt) => tt
-      case Failure(f) =>
-        val msg = Option(f.getMessage).fold("")(" " + _)
-        println(s"${f.getClass.getCanonicalName}.$msg")
-        Seq.empty[TitleBox]
-    }
-    writeTitleBoxes(titles)
-  }
-
   def respFeedback() = respJsonString { ctx =>
     val jsonBody = ctx.request.entity.asString
     vectorsProcessor.saveFeedback(jsonBody)
@@ -328,8 +328,8 @@ abstract class VerseResponses extends HttpService with VectorsProcessorProvider 
     )
   }
 
-  def respAuth(email: String) = {
-    vectorsProcessor.admitUserByEmail(email) match {
+  def respAuth(email: String, pwd: Option[String]) = {
+    vectorsProcessor.admitUserByEmail(email, pwd) match {
       case Some((user, session)) =>
         respJsonString { ctx =>
           val rootObj = JObject(

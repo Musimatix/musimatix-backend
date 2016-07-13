@@ -13,12 +13,11 @@ import treeton.core.config.context.resources.LoggerLogListener
 import treeton.core.config.context.{ContextConfigurationSyntaxImpl, ContextConfiguration}
 import treeton.core.util.LoggerProgressListener
 import treeton.prosody.musimatix.{StressDescription, SyllableInfo, VerseProcessingExample, VerseProcessor}
-import verse.rates.app.ConfigHelper._
+import verse.rates.env.ConfigHelper
+import ConfigHelper._
 import verse.rates.calculator.SampleRatesCalculator
 import verse.rates.model.{MxUser, MxTag, MxSong}
 import verse.rates.model.VerseMetrics._
-import verse.rates.processor.VectorsProcessor._
-import verse.rates.processor.YoutubeSearch
 import scala.annotation.tailrec
 import scala.io.Source
 import scala.util.{Failure, Success, Try}
@@ -29,7 +28,9 @@ import VectorsProcessor._
 
 object VectorsProcessorImpl {
 
-  def createVerseProcessor(confTreeton: Config, logger: Logger): Option[VerseProcessor] = {
+  val vpLogger = org.apache.log4j.Logger.getLogger("VerseProcessor")
+
+  def createVerseProcessor(confTreeton: Config): Option[VerseProcessor] = {
     val treetonDataPath = Try { confTreeton.getString("treeton.data.path") }.toOption
     val stressRestrictionViolationWeight = confTreeton.getDouble("stress.restriction.violation.weight")
     val reaccentuationRestrictionViolationWeight = confTreeton.getDouble("reaccentuation.restriction.violation.weight")
@@ -46,13 +47,11 @@ object VectorsProcessorImpl {
     ContextConfiguration.registerConfigurationClass(classOf[ContextConfigurationSyntaxImpl])
     ContextConfiguration.createInstance()
 
-    Logger.getRootLogger.setLevel(Level.INFO)
-
     val processor = new VerseProcessor(metricGrammarPath, stressRestrictionViolationWeight,
       reaccentuationRestrictionViolationWeight, spacePerMeter, maxStressRestrictionViolations,
       maxReaccentuationRestrictionViolations, maxSyllablesPerVerse, false)
-    processor.setProgressListener(new LoggerProgressListener("Musimatix", logger))
-    processor.addLogListener(new LoggerLogListener(logger))
+    processor.setProgressListener(new LoggerProgressListener("Musimatix", vpLogger))
+    processor.addLogListener(new LoggerLogListener(vpLogger))
     processor.initialize()
 
     Some(processor)
@@ -62,7 +61,7 @@ object VectorsProcessorImpl {
 class VectorsProcessorImpl(confRoot: Config) extends VectorsProcessor {
   import VectorsProcessorImpl._
 
-  private[this] val logger = Logger.getLogger(classOf[VerseProcessingExample])
+  private[this] val logger = Logger.getLogger(classOf[VectorsProcessorImpl])
 
   private[this] var verseProcessor: Option[VerseProcessor] = None
   private[this] var connectionProvider: Option[ConnectionProvider] = None
@@ -219,7 +218,7 @@ class VectorsProcessorImpl(confRoot: Config) extends VectorsProcessor {
       confSongs <- Try { confRoot.getConfig(confSongsKey) }
     } yield (confMsmx, confTreeton, confSongs)) match {
       case Success((confMsmx, confTreeton, confSongs)) =>
-        verseProcessor = createVerseProcessor(confTreeton, logger)
+        verseProcessor = createVerseProcessor(confTreeton)
         connectionProvider = Some(new ConnectionProvider(confMsmx))
         buildVectorsTree()
         connectionProvider.foreach { cp =>
@@ -524,7 +523,7 @@ class VectorsProcessorImpl(confRoot: Config) extends VectorsProcessor {
 
   override def suggest(s: String, limit: Int): Seq[TitleBox] = {
     titleSuggestor match {
-      case Some(ts) => ts.suggest(s.toLowerCase, limit)
+      case Some(ts) => ts.suggest(s, limit)
       case _ => Seq.empty[TitleBox]
     }
   }
@@ -574,8 +573,8 @@ class VectorsProcessorImpl(confRoot: Config) extends VectorsProcessor {
     }
   }
 
-  def admitUserByEmail(email: String): Option[(MxUser, String)] = {
-    usersBox.flatMap(_.register(email))
+  def admitUserByEmail(email: String, pwd: Option[String]): Option[(MxUser, String)] = {
+    usersBox.flatMap(_.register(email, pwd))
   }
 
   def recognizeSession(session: String): Option[MxUser] =

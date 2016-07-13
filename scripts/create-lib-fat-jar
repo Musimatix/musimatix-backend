@@ -52,7 +52,7 @@ unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton
 unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/OntosUtil/Serializer.jar
 unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/OntosUtil/Utils.jar
 unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/junit/dist/junit-4.1.jar
-unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/log4j/dist/log4j-1.2.14.jar
+#unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/log4j/dist/log4j-1.2.14.jar
 unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/xerces/xercesImpl.jar
 unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/lib/xerces/xml-apis.jar
 unzip -n -d ../third-party/treeton/.lib-fat-jar/unzipped/ ../third-party/treeton/scape.jar

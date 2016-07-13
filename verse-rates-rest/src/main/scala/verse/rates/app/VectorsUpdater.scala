@@ -12,7 +12,8 @@ import treeton.core.config.context.{ContextConfigurationSyntaxImpl, ContextConfi
 import treeton.core.util.LoggerProgressListener
 import treeton.prosody.musimatix.SyllableInfo.StressStatus
 import treeton.prosody.musimatix.{SyllableInfo, VerseProcessor, VerseProcessingExample}
-import verse.rates.app.ConfigHelper._
+import verse.rates.env.ConfigHelper
+import ConfigHelper._
 import verse.rates.app.VectorsUpdater.Song
 import verse.rates.model.VerseMetrics._
 import verse.rates.processor.{VectorsProcessor, TitleSuggestor, ConnectionProvider}

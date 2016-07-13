@@ -16,12 +16,14 @@ object TitleSuggestor {
 }
 
 class TitleSuggestor(val cp: ConnectionProvider) {
-  val tail2Ids = mutable.Map.empty[String, IdsBucket]
-  val head2Ids = mutable.Map.empty[String, IdsBucket]
+
   val id2Title = mutable.Map.empty[Int, TitleBox]
 
   val treeTail: RadixTree[Set[Int]] = new ConcurrentRadixTree[Set[Int]](new DefaultCharArrayNodeFactory)
   val treeHead: RadixTree[Set[Int]] = new ConcurrentRadixTree[Set[Int]](new DefaultCharArrayNodeFactory)
+  val treeAll: RadixTree[Set[Int]] = new ConcurrentRadixTree[Set[Int]](new DefaultCharArrayNodeFactory)
+
+  val splitRegex = "[\\s.,!?:;()\"\'$%&\\[\\]\\{\\}]+"
 
   locally {
     buildTree()
@@ -33,14 +35,20 @@ class TitleSuggestor(val cp: ConnectionProvider) {
   }
 
   def buildTree(): Unit = {
-//    cp.select("SELECT s.id, s.title_rus, s.title_eng FROM songs s").foreach { st =>
-      cp.select(
-        """SELECT s.id, s.title_rus, s.title_eng, a.id, a.name_rus, a.name_eng
-          |FROM songs s
-          |LEFT OUTER JOIN song_author sa ON sa.song_id = s.id
-          |LEFT OUTER JOIN authors a ON sa.author_id = a.id
-          |WHERE s.vector IS NOT NULL
-        """.stripMargin).foreach { st =>
+
+    val tail2Ids = mutable.Map.empty[String, IdsBucket]
+    val head2Ids = mutable.Map.empty[String, IdsBucket]
+    val all2Ids = mutable.Map.empty[String, IdsBucket]
+
+    //    cp.select("SELECT s.id, s.title_rus, s.title_eng FROM songs s").foreach { st =>
+    cp.select(
+      """SELECT s.id, s.title_rus, s.title_eng, a.id, a.name_rus, a.name_eng
+        |FROM songs s
+        |LEFT OUTER JOIN song_author sa ON sa.song_id = s.id
+        |LEFT OUTER JOIN authors a ON sa.author_id = a.id
+        |WHERE s.vector IS NOT NULL
+      """.stripMargin).foreach { st =>
+
       val rs = st.executeQuery()
       Try {
         @tailrec
@@ -52,12 +60,13 @@ class TitleSuggestor(val cp: ConnectionProvider) {
             val author = Option(rs.getString(5)).orElse(Option(rs.getString(6)))
             titleOpt.foreach { title =>
               id2Title += id -> TitleBox(id, title, author.map(_.trim))
-              val words = title.split("[\\s.,!?:;()\"\'$%&\\[\\]\\{\\}]")
+              val words = title.split(splitRegex)
                 .filter( w => w.nonEmpty && w != "-")
                 .map(_.toLowerCase)
 
               words.headOption.foreach(w => addToMap(w, id, head2Ids))
-              if(words.size > 1) words.tail.foreach(w => addToMap(w, id, tail2Ids))
+              if(words.length > 1) words.tail.foreach(w => addToMap(w, id, tail2Ids))
+              words.foreach(w => addToMap(w, id, all2Ids))
             }
             nextTitle()
           }
@@ -74,11 +83,90 @@ class TitleSuggestor(val cp: ConnectionProvider) {
 
     head2Ids.foreach { case (word, ids) => treeHead.put(word, ids) }
     tail2Ids.foreach { case (word, ids) => treeTail.put(word, ids) }
+    all2Ids.foreach { case (word, ids) => treeAll.put(word, ids) }
 
     println(s"Suggests: id2Title:${id2Title.size} head2Ids:${head2Ids.size} tail2Ids:${tail2Ids.size}")
   }
 
   def suggest(s: String, limit: Int): Seq[TitleBox] = {
+    suggestByAllWords(s.toLowerCase, limit)
+  }
+
+  case class SongWithIdWords(id: Int, words: Seq[String], found: Seq[Int])
+
+  private[this] def suggestByAllWords(s: String, limit: Int): Seq[TitleBox] = {
+
+    def idsForWord(w: String): Set[Int] = {
+      val builder = Set.newBuilder[Int]
+      treeAll
+        .getValuesForKeysStartingWith(w).asScala
+        .foreach(ids => ids.foreach(id => builder += id))
+      builder.result()
+    }
+
+    def substituteFrom(s: String, words: IndexedSeq[String], idx: Int): Option[Int] = {
+      words.view.zipWithIndex
+        .drop(idx)
+        .find { case (w, i) => w.startsWith(s) }
+        .map(_._2)
+    }
+
+    val words = s.split("\\s+").toVector
+    if (words.nonEmpty) {
+      var idsInitial = idsForWord(words.head)
+
+      val idsIntersect = words.foldLeft(idsInitial) { case (ids, w) =>
+        ids.intersect(idsForWord(w))
+      }
+
+      val songs = idsIntersect.flatMap { id =>
+        val tb = id2Title(id)
+        val splittedTitle = tb.title.split(splitRegex)
+          .filterNot(_.isEmpty).map(_.toLowerCase)
+
+        @tailrec
+        def subst(wi: Int, from: Int, indices: Seq[Int]): Seq[Int] = {
+          if (words.size < wi) {
+            val found = substituteFrom(words(wi), splittedTitle, from)
+            found match {
+              case Some(i) => subst(wi + 1, i + 1, indices :+ i)
+              case _ => Seq.empty[Int]
+            }
+          } else {
+            indices
+          }
+        }
+
+        val indices = subst(0, 0, Seq.empty[Int])
+
+        None
+      }
+
+//      val initialSongs = idsSet.toVector.flatMap { id =>
+//        val tb = id2Title(id)
+//        val splittedTitle = tb.title.split(splitRegex)
+//          .filterNot(_.isEmpty).map(_.toLowerCase)
+//
+//
+//
+//        val song = splittedTitle.zipWithIndex
+//          .find(_._1.startsWith(firstWords))
+//          .map(_._2)
+//          .map(idx => SongWithIdWords(id, title.split(splitRegex), Vector(idx)))
+//
+//        song
+//      }
+
+//      val filteredSongs = words.zipWithIndex.drop(1).foldLeft(initialSongs) { case (songs, (word, idx)) =>
+
+
+      songs
+      Vector.empty[TitleBox]
+    } else
+      Vector.empty[TitleBox]
+  }
+
+  private[this] def suggestByOneWord(s: String, limit: Int): Seq[TitleBox] = {
     var idsSet = Set.empty[Int]
     var idsVec = Vector.empty[Int]
     def addIds(tree: RadixTree[Set[Int]]): Unit = {
@@ -99,4 +187,5 @@ class TitleSuggestor(val cp: ConnectionProvider) {
     if (idsVec.size < limit) addIds(treeTail)
     idsVec.take(limit).map(id2Title)
   }
+
 }

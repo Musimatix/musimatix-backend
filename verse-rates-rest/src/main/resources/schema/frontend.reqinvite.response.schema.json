@@ -1,9 +1,9 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description": "Request invite by email",
+  "description": "Response for invite request",
   "self": {
     "vendor": "com.musimatix",
-    "name": "reqinvite_request",
+    "name": "reqinvite_response",
     "format": "jsonschema",
     "version": "1-0-0"
   },
@@ -15,19 +15,23 @@
     "version": {
       "type": "string"
     },
-    "reqInvite" : {
+    "respInvite" : {
       "type": "object",
-      "description": "Request properties",
+      "description": "Response properties",
       "properties": {
-        "email":  {
+        "status":  {
+          "type": "integer",
+          "description": "Status code: 0 is Ok"
+        },
+        "message":  {
           "type": "string",
-          "description": "e-mail of person who wants to get access"
+          "description": "Description of result (optional)"
         }
       },
-      "required": ["email"],
+      "required": ["status"],
       "additionalProperties": false
     }
   },
-  "required": ["object", "reqInvite"],
+  "required": ["object", "respInvite"],
   "additionalProperties": false
 }

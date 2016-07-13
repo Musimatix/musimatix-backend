@@ -102,7 +102,7 @@ trait VectorsProcessor {
 
   def saveFeedback(rawForm: String): Unit
 
-  def admitUserByEmail(email: String): Option[(MxUser, String)]
+  def admitUserByEmail(email: String, pwd: Option[String]): Option[(MxUser, String)]
 
   def recognizeSession(session: String): Option[MxUser]
 

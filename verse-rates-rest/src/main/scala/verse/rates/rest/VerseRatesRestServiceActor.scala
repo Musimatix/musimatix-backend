@@ -13,11 +13,8 @@ import spray.http.MediaTypes._
 import spray.http._
 import spray.httpx.SprayJsonSupport
 import spray.json.DefaultJsonProtocol
-import spray.routing._
-import scala.io.Source
-import verse.rates.processor.VectorsProcessor.{ErrorMessage => EM, TitleBox}
-
-import scala.util.{Failure, Try}
+import verse.rates.processor.VectorsProcessor.{ErrorMessage => EM}
+import org.log4s._
 
 
 class VerseRatesRestServiceActor (override val vectorsProcessor: VectorsProcessor)
@@ -32,8 +29,6 @@ object VerseRatesRestService {
 
   val schemaPath = "/schema/"
 
-  val metaResourceName = schemaPath + "meta.json"
-  val errorResourceName = schemaPath + "error.json"
   val songsResourceName = schemaPath + "frontend.songs.response.sample.json"
   val tagsResourceName = schemaPath + "frontend.tags.response.sample.json"
   val suggestTitleResourceName = schemaPath + "frontend.suggest.title.response.sample.json"
@@ -49,6 +44,8 @@ abstract class VerseRatesRestService
   import VerseRatesRestService._
 
   import language.postfixOps
+
+  private[this] val logger = getLogger
 
   case class VerseRows(rows: Seq[String])
 
@@ -163,7 +160,9 @@ abstract class VerseRatesRestService
           }
         } ~
         path("auth") {
-          parameters("email")(respAuth)
+          parameters("email", "password" ?) { (email, pwd) =>
+            respAuth(email, pwd)
+          }
         } ~
         path("recognize") {
           parameters("session")(respRecognize)

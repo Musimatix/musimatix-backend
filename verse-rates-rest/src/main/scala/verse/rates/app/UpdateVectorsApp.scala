@@ -3,6 +3,7 @@ package verse.rates.app
 import UpdateVectorsApp._
 import com.typesafe.config.ConfigFactory
 import org.apache.log4j.{Level, Logger}
+import verse.rates.env.ConfigHelper
 import verse.rates.processor.VectorsProcessor$
 import verse.rates.processor.VectorsProcessor.{VerseRates, ErrorCode}
 

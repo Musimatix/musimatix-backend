@@ -1,0 +1,7 @@
+{
+  "object": "frontend.reqinvite.request",
+  "version": "1.0",
+  "reqInvite": {
+    "email": "anybody@anyserver.com"
+  }
+}

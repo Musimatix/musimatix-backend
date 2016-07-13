@@ -2,7 +2,6 @@
   "object": "frontend.reqinvite.response",
   "version": "1.0",
   "respInvite": {
-    "status": -1,
-    "message": "User is already registered"
+    "status": 0
   }
 }

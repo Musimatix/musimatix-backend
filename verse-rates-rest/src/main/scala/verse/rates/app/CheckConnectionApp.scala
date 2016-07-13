@@ -5,6 +5,7 @@ import org.json4s.NoTypeHints
 import org.json4s.jackson.Serialization
 import org.json4s.jackson.Serialization.writePretty
 import com.typesafe.config.ConfigFactory
+import verse.rates.env.ConfigHelper
 import verse.rates.model.VerseMetrics.LangTag
 import verse.rates.processor.{SongsBox, ConnectionProvider}
 
