@@ -92,7 +92,7 @@ class TitleSuggestor(val cp: ConnectionProvider) {
     suggestByAllWords(s.toLowerCase, limit)
   }
 
-  case class SongWithIdWords(id: Int, words: Seq[String], found: Seq[Int])
+  case class SongIdWithIndices(id: Int, found: IndexedSeq[Int])
 
   private[this] def suggestByAllWords(s: String, limit: Int): Seq[TitleBox] = {
 
@@ -125,43 +125,41 @@ class TitleSuggestor(val cp: ConnectionProvider) {
           .filterNot(_.isEmpty).map(_.toLowerCase)
 
         @tailrec
-        def subst(wi: Int, from: Int, indices: Seq[Int]): Seq[Int] = {
-          if (words.size < wi) {
+        def subst(wi: Int, from: Int, indices: IndexedSeq[Int]): IndexedSeq[Int] = {
+          if (wi < words.size) {
             val found = substituteFrom(words(wi), splittedTitle, from)
             found match {
               case Some(i) => subst(wi + 1, i + 1, indices :+ i)
-              case _ => Seq.empty[Int]
+              case _ => Vector.empty[Int]
             }
-          } else {
+          } else
             indices
-          }
         }
 
-        val indices = subst(0, 0, Seq.empty[Int])
+        val indices = subst(0, 0, Vector.empty[Int])
 
-        None
+        if (indices.nonEmpty) Some(SongIdWithIndices(id, indices))
+        else None
       }
 
-//      val initialSongs = idsSet.toVector.flatMap { id =>
-//        val tb = id2Title(id)
-//        val splittedTitle = tb.title.split(splitRegex)
-//          .filterNot(_.isEmpty).map(_.toLowerCase)
-//
-//
-//
-//        val song = splittedTitle.zipWithIndex
-//          .find(_._1.startsWith(firstWords))
-//          .map(_._2)
-//          .map(idx => SongWithIdWords(id, title.split(splitRegex), Vector(idx)))
-//
-//        song
-//      }
+      val intSeqOrdering: Ordering[IndexedSeq[Int]] = new Ordering[IndexedSeq[Int]] {
+        override def compare(x: IndexedSeq[Int], y: IndexedSeq[Int]): Int = {
+          val z = x.zipAll(y, -1, -1)
+          @tailrec
+          def cmp(i: Int): Int = {
+            if (z.isDefinedAt(i)) {
+              val (v1, v2) = z(i)
+              math.signum(v1 - v2) match {
+                case 0 => cmp(i + 1)
+                case sg => sg
+              }
+            } else 0
+          }
+          cmp(0)
+        }
+      }
 
-//      val filteredSongs = words.zipWithIndex.drop(1).foldLeft(initialSongs) { case (songs, (word, idx)) =>
-
-
-      songs
-      Vector.empty[TitleBox]
+      songs.toVector.sortBy(_.found)(intSeqOrdering).map(sng => id2Title(sng.id))
     } else
       Vector.empty[TitleBox]
   }

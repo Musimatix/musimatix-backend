@@ -8,6 +8,7 @@ import com.typesafe.config.{ConfigFactory, Config}
 import net.sf.javaml.core.kdtree.KDTree
 import org.apache.commons.io.IOUtils
 import org.apache.log4j.{Level, Logger}
+import org.slf4j.LoggerFactory
 import treeton.core.config.BasicConfiguration
 import treeton.core.config.context.resources.LoggerLogListener
 import treeton.core.config.context.{ContextConfigurationSyntaxImpl, ContextConfiguration}
@@ -61,7 +62,7 @@ object VectorsProcessorImpl {
 class VectorsProcessorImpl(confRoot: Config) extends VectorsProcessor {
   import VectorsProcessorImpl._
 
-  private[this] val logger = Logger.getLogger(classOf[VectorsProcessorImpl])
+  val logger = LoggerFactory.getLogger(classOf[VectorsProcessorImpl])
 
   private[this] var verseProcessor: Option[VerseProcessor] = None
   private[this] var connectionProvider: Option[ConnectionProvider] = None
