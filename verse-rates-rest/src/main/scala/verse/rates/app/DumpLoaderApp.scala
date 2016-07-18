@@ -339,7 +339,8 @@ object DumpLoaderApp {
     (for {
       fld <- Try { args.head }
       confRoot <- Try { ConfigFactory.load().getConfig(confRootKey) }
-      confDb <- Try { confRoot.getConfig(confMsmxKey) }
+      dbContext <- Try { confRoot.getString(dbContextKey) }
+      confDb <- Try { confRoot.getConfig(dbContext) }
       confTreeton <- Try { confRoot.getConfig(confTreetonKey) }
     } yield (fld, confDb, confTreeton)) match {
       case Success((folder, confDb, confTreeton)) =>

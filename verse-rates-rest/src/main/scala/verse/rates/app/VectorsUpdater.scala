@@ -43,7 +43,8 @@ class VectorsUpdater(start: Option[Int] = None) {
   def init(): Unit = {
     (for {
       confRoot <- Try { ConfigFactory.load().getConfig(confRootKey) }
-      confMsmx <- Try { confRoot.getConfig(confMsmxKey) }
+      dbContext <- Try { confRoot.getString(dbContextKey) }
+      confMsmx <- Try { confRoot.getConfig(dbContext) }
       confTreeton <- Try { confRoot.getConfig(confTreetonKey) }
     } yield (confMsmx, confTreeton)) match {
       case Success((confMsmx, confTreeton)) =>

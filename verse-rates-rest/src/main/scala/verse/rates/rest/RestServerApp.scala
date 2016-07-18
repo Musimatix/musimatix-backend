@@ -10,12 +10,13 @@ import org.slf4j.LoggerFactory
 import spray.can.Http
 import verse.rates.env.ConfigHelper
 import ConfigHelper._
+import verse.rates.face.{WebFaceServiceActor, WebFaceService}
 import verse.rates.processor.VectorsProcessorImpl
 import scala.concurrent.duration._
 
 
 object RestServerApp {
-  val appName = "Musimatix-REST"
+  val appName = "Musimatix-Server"
 
   val logger = LoggerFactory.getLogger(this.getClass)
 
@@ -28,18 +29,29 @@ object RestServerApp {
     val conf = rootConf.getConfig(confRootKey)
 
     implicit val system = ActorSystem(appName)
+
+    val dbContext = conf.getString("db.context")
+
     val vectorsProcessor = new VectorsProcessorImpl(conf)
-    val service = system.actorOf(Props(classOf[VerseRatesRestServiceActor], vectorsProcessor), "rest-service")
+    val restService = system.actorOf(Props(classOf[VerseRatesRestServiceActor], vectorsProcessor), "rest-service")
+    val faceService = system.actorOf(Props(classOf[WebFaceServiceActor], vectorsProcessor), "face-service")
 
     implicit val timeout = Timeout(5.seconds)
 
-    val serverConf = conf.getConfig(confRestKey)
-    val listenAt = serverConf.getInt("port")
-    val ifc = serverConf.getString("interface")
+    val restConf = conf.getConfig(confRestKey)
+    val restListenAt = restConf.getInt("port")
+    val restIfc = restConf.getString("interface")
 
-    logger.info(s"App $appName started at port $listenAt.")
-    println(s"App $appName started at port $listenAt.")
+    val faceConf = conf.getConfig(confFaceKey)
+    val faceListenAt = faceConf.getInt("port")
+    val faceIfc = faceConf.getString("interface")
 
-    IO(Http) ? Http.Bind(service, interface = ifc, port = listenAt)
+    val startedMsg = s"$appName started REST $restIfc:$restListenAt and Web $faceIfc:$faceListenAt with DB context '$dbContext'."
+
+    IO(Http) ? Http.Bind(restService, interface = restIfc, port = restListenAt)
+    IO(Http) ? Http.Bind(faceService, interface = faceIfc, port = faceListenAt)
+
+    logger.info(startedMsg)
+    println(startedMsg)
   }
 }

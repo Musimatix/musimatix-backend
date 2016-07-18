@@ -191,7 +191,7 @@ class VectorsProcessorImpl(confRoot: Config) extends VectorsProcessor {
           }
         }
       }
-      println(s"Mix roots. Songs: ${mixForSong.size}   Texts: $textsCount")
+      println(s"Mix roots. Songs: ${mixForSong.size}    Texts: $textsCount")
     }
   }
 
@@ -214,7 +214,8 @@ class VectorsProcessorImpl(confRoot: Config) extends VectorsProcessor {
   def init(): Unit = {
     (for {
       confRoot <- Try { ConfigFactory.load().getConfig(confRootKey) }
-      confMsmx <- Try { confRoot.getConfig(confMsmxKey) }
+      dbContext <- Try { confRoot.getString(dbContextKey) }
+      confMsmx <- Try { confRoot.getConfig(dbContext) }
       confTreeton <- Try { confRoot.getConfig(confTreetonKey) }
       confSongs <- Try { confRoot.getConfig(confSongsKey) }
     } yield (confMsmx, confTreeton, confSongs)) match {
@@ -341,10 +342,15 @@ class VectorsProcessorImpl(confRoot: Config) extends VectorsProcessor {
       st <- cp.select("SELECT vector FROM songs WHERE id = ?")
     } yield {
 
-      var mixIds = mixForSong(id).filterNot(id.==)
+      val tagsSet = tags.toSet
 
+      var mixIds = mixForSong(id).filterNot(id.==)
       var mixSongs = sb.getSongsByIds(mixIds)
-          .map(song => song.copy(similarity = Some(1.0)))
+        .map(song => song.copy(similarity = Some(1.0)))
+        .filter { sn =>
+          val snTags = sn.tags.map(_.id).toSet
+          tagsSet.subsetOf(snTags)
+        }
       val restToFind = math.max(0, limit - mixSongs.size)
 
       var excludeIds = mixIds.toSet + id
@@ -454,6 +460,8 @@ class VectorsProcessorImpl(confRoot: Config) extends VectorsProcessor {
 
       if (baseVec.nonEmpty) {
 
+        val tagsSet = tags.toSet
+
         val mixIds = mixForText match {
           case Some(kdt) =>
             val mixText = kdt.nearest(baseVec.toArray).asInstanceOf[MixText]
@@ -465,9 +473,13 @@ class VectorsProcessorImpl(confRoot: Config) extends VectorsProcessor {
           case _ =>
             Vector.empty[Int]
         }
-
         var mixSongs = sb.getSongsByIds(mixIds)
           .map(song => song.copy(similarity = Some(1.0)))
+          .filter { sn =>
+            val snTags = sn.tags.map(_.id).toSet
+            tagsSet.subsetOf(snTags)
+          }
+
         val restToFind = math.max(0, limit - mixSongs.size)
 
         var excludeIds = mixIds.toSet

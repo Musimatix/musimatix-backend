@@ -38,5 +38,5 @@ INSERT INTO tag_groups (name_rus, name_eng) VALUES ('Язык', 'Language');
 INSERT INTO tags (group_id, name_rus, name_eng) VALUES (1, 'Англ.', 'Eng');
 INSERT INTO tags (group_id, name_rus, name_eng) VALUES (1, 'Рус.', 'Rus');
 INSERT INTO tags (group_id, name_rus, name_eng) VALUES (1, 'Поэзия', 'Poetry');
-INSERT INTO tags (group_id, name_rus, name_eng) VALUES (1, 'Срамота', 'Оbscene');
+INSERT INTO tags (group_id, name_rus, name_eng) VALUES (1, 'Срамота', 'Obscene');
 

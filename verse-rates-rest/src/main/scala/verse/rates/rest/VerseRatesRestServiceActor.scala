@@ -8,7 +8,7 @@ import org.json4s.jackson.Serialization.writePretty
 import org.json4s.jackson.JsonMethods._
 import org.json4s.JsonDSL._
 import spray.http.HttpHeaders.RawHeader
-import verse.rates.processor.{VerseResponses, VectorsProcessor}
+import verse.rates.processor.{VerseResponses, WebFaceResponses$, VectorsProcessor}
 import spray.http.MediaTypes._
 import spray.http._
 import spray.httpx.SprayJsonSupport
